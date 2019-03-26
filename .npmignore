@@ -1,0 +1,16 @@
+*-old.js
+*.bak
+*.gz
+*.ipynb
+*.log
+*.test.js
+*.tsv
+*.tsv.gz
+*.zip
+.DS_Store
+.ipynb_checkpoints
+data
+docs
+src
+tmp
+notebook

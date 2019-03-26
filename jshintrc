@@ -1,0 +1,14 @@
+{
+  "undef": true,
+  "unused": true,
+  "esversion": 6,
+  "noarg": true,
+  "lastsemic": true,
+  "globals": {
+    "console": false,
+    "window": false,
+    "document": false,
+    "module" : false,
+    "exports": false
+  }
+}

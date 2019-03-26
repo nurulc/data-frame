@@ -1,0 +1,7 @@
+{
+  "source": "./src",
+  "destination": "./docs",
+  "plugins": [{"name": "esdoc-standard-plugin", "option": {"typeInference": {"enable": false}} },
+  	          {"name": "esdoc-jsx-plugin", "option": {"enable": true}}, 
+  	          {"name": "esdoc-ecmascript-proposal-plugin", "option": {"all": true}} ]
+}
