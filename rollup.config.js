@@ -6,7 +6,8 @@ export default {
 	input: "src/index.js",
 	output: {
 		file: "dist/bundle.js",
-		format: "cjs"
+		format: "umd",
+		name: "DataFrame"
 	},
 	plugins: [
 	    minify( 
@@ -23,15 +24,4 @@ export default {
 	]
 }
 
-//var rollup = require("rollup");
-
-// rollup.rollup({
-//   entry: "src/main.js",
-//   plugins: [ babel() ]
-// }).then(function (bundle) {
-//   bundle.write({
-//     dest: "dist/bundle.js",
-//     format: "umd"
-//   });
-// });
 
