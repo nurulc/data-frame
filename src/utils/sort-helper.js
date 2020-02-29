@@ -6,7 +6,7 @@
 
 const  isString = (s) =>  (typeof s) === 'string';
 const  isNum = (a) =>  (typeof a) === 'number' && a !== Infinity;//isNum = (a) =>  (typeof a) === 'number';
-function toNumber(str) {
+export function toNumber(str) {
 	if(!str) return undefined;
 	let len = str.length,negate = 1;
 	let res = +str;

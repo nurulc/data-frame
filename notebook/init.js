@@ -18,16 +18,14 @@ var PATH = '../';
 var dfr = require(`${PATH}./lib`);
 
 // var scu = require(PATH+'../script-utils')
-var {NOT,OR,AND, K, TRUE, FALSE} = fn_u;
+var {NOT,OR,AND, K, TRUE, FALSE} = dfr;
 
 
 
 var TEST_NEW = true;
 
-var {Frame, range, newArray,  csvLine, tsvLine, psvLine, Frame, flatten,
-     zipToDict, flatten,arrConcat,addDedup, tsvLine, csvLine
- 
-    }  = frame.Frame;
+var {range, newArray,  csvLine, tsvLine, psvLine, Frame, flatten, gb
+    }  = dfr;
 var fs = require('fs');
 var zlib = require('zlib');
 var { Readable } = require('stream');
@@ -101,6 +99,7 @@ function round2(v) { return isNaN(+v) ? '' : Math.round(v * 100.0) / 100.0; }
 function convertFilter(filter, ignore) {
   if (ignore) return filter;
   const _map = new Map();
+//console.log('filter',filter);
   function C(s) {
     const _s = _map.get(s);
     if (_s !== undefined) return _s;
@@ -175,7 +174,8 @@ var Li = class {
     let data;
     const res = [];
     let pos = this.pos,
-      ix = this.ix;
+    ix = this.ix;
+//console.log({fn: fn, str: (fn||'').toString()});
     for (let i = ix + 1; (data = this._next()) !== undefined; i++) {
       res.push(fn(data, i));
     }
@@ -194,6 +194,7 @@ var Li = class {
       fn = count;
       count = 2000000;
     }
+//console.log({fn: fn, str: (fn||'').toString()});
     let ix = this.ix;
     let pos = 0,
       len = this.str.length;
@@ -251,14 +252,15 @@ function readFrame(fileName, filter, noDedup) {
 }
 
 function readZipFrame(fileName, filter, noDedup) {
-  filter = convertFilter((filter || tsvLine), noDedup);
+ //console.log(convertFilter.toString());
 
-  const buffer = readZipData(fileName); // Read from file
-  // console.log("bytes read", buffer.length)
-  const dataDetail = new Li(buffer.toString('ascii')).mapLineStr(filter);
-  // console.log("Lines: ", dataDetail.length);
-  const columns = dataDetail.splice(0, 1)[0];
-  const res = (new Frame(dataDetail, columns));
+    filter = convertFilter((filter || tsvLine), noDedup);
+    const buffer = readZipData(fileName); // Read from file
+  console.log("bytes read", buffer.length)
+    const dataDetail = new Li(buffer.toString('ascii')).mapLineStr(filter);
+  console.log("Lines: ", dataDetail.length);
+    const columns = dataDetail.splice(0, 1)[0];
+    const res = (new Frame(dataDetail, columns));
   // console.log("LEN:", res.length);
   return res;
 }
@@ -361,6 +363,14 @@ function writeJson(fileName, obj) {
 
 // ===============================================
 // =============== HTML HELPER ===================
+function zipToDict(aListOfPairs) {
+	return aListOfPairs.reduce( (dict, [k,v]) => { 
+		if(dict[k] !== undefined) throw new Error('duplicate key: '+k);
+		dict[k] = v; 
+		return dict;
+	}, {});
+}
+
 const htmlGen = function () {
   function mapper(name) {
     switch (name) {
@@ -478,7 +488,7 @@ function isCodesKey(key) {
 }
 
 
-var { cmpStrNum, combineCmp, revCmp } = fh;
+var { cmpStrNum, combineCmp, revCmp } = dfr;
 var CC = (a, b) => { const res = cmpStrNum(a, b); console.log('CC', a, b, res); return res; };
 var cmpNumOrStrBy = getData => (row1, row2) => cmpStrNum(getData(row1), getData(row2));
 // var cmpNumOrStrBy =  (getData) => (row1,row2) => CC(getData(row1),getData(row2));

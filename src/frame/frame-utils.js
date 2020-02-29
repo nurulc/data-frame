@@ -4,7 +4,7 @@ import {Frame} from './frame';
 import {arrEqual, zipToDict, arrDedup, range} from '../array';
 import getColIx from './getColIx';
 import haveFrame from './haveFrame';
-import {dataSplitter} from '../string/csv';
+import {dataSplit} from '../string/csv';
 
 
 
@@ -30,7 +30,7 @@ export function frameFromBuffer(buffer,frameName,splitter) {
  * @return {[type]}        [description]
  */
 export function frameWithIndex(aFrame, atEnd) {
-	if( ! aFrame ) return new Frame([],[]);
+	if( ! aFrame ) return new aFrame.constructor([],[]);
 	aFrame = haveFrame(aFrame);
 	let cols;
 	if(atEnd) 	cols = [...aFrame.columns.filter(n => n !== '_INDEX'),'_INDEX']

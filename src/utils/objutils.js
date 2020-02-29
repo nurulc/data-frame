@@ -1,6 +1,8 @@
 //objutils.js
 // import {memoize,access,setKey, timeIt,toKeyValueList, fromKeyValueList} from './objutils'
-import {newArray, flatten} from '../array';
+import {newArray} from '../array/arrayutils';
+import {flatten} from '../array/flatten';
+
 export const isA = {
 	array: function isArray(arr) {
 		if( !arr) return null;
@@ -90,7 +92,8 @@ export const access = memoize(
  * @param {[type]} v   [description]
  */
 export function setKey(obj,key,v) {
-	if(arguments.length == 1) 
+	if(arguments.length === 1) throw new Error("too few arguments");
+	if(arguments.length === 2) 
 		return obj[key];
 	else {
 		obj[key] = v;

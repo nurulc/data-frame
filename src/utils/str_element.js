@@ -1,4 +1,4 @@
-/**
+ /**
  *
  *. This is a class file generator for DataFrame row object ( this object can access the columns by column name)
  *  So if the a DataFrame, frame, has columns 'NAME', "ADDRESS"
@@ -49,7 +49,7 @@ let access = [
 	function () { return this.__get(18); },
 	function () { return this.__get(19); },
 	function () { return this.__get(20); },
-	function () { return this.__get(21); },
+/*	function () { return this.__get(21); },
 	function () { return this.__get(22); },
 	function () { return this.__get(23); },
 	function () { return this.__get(24); },
@@ -127,7 +127,7 @@ let access = [
 	function () { return this.__get(96); },
 	function () { return this.__get(97); },
 	function () { return this.__get(98); },
-	function () { return this.__get(99); }
+	function () { return this.__get(99); } */
 ];
 
 

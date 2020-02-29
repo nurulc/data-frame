@@ -24,8 +24,12 @@
  * 
  */
 
+// function mapn(n,fn,arr) { 
+// 	for(let i=0; i<n; i++) arr.push(fn(i));
+// 	return arr;
+// }
 
-
+// let access = eval(`[${mapn(101,i => `function () { return this.__data[${i}]; }`,[]).join(',')}]`);
 
 
 let access = [

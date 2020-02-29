@@ -9,7 +9,7 @@ import { dataSplit } from '../string/csv';
 import sortFrameBy from './sortframe';
 import {groupBy} from './groupby';
 import {frameWithIndex} from './frame-utils';
-import haveFrame from './haveFrame';
+//import haveFrame from './haveFrame';
 import { flatten, arrRemove, arrDedup, arrEqual, newArray, vecAdd, arrHash} from '../array';
 import { isA } from '../utils/objutils';
 import {EMPTY_ARRAY} from '../utils/constants';
@@ -56,7 +56,16 @@ export function arrToCol(arr) {
 	return arr.map(x => [x] );
 }
 
+export function haveFrame(aFrame) {
+	if(!aFrame) throw new Error('Frame expected - but undefined supplied');
+	if( ! (aFrame instanceof Frame) ) throw new Error('Frame expected - but supplied: '+objName(aFrame));
+	return aFrame;
+}
 
+function objName(o) {
+	if(typeof o === 'object' ) return o.constructor.name;
+	return typeof o;
+}
 
 // *
 //  * [description]
@@ -845,13 +854,14 @@ export class Frame {
 		return (
 			//`<style> table.ftable {border-collapse: collapse; border-spacing: 0;  border: 2px solid #CCC; } \n</style>\n`+
 			`<style> 
-				table .ftable  { font-family: arial, sans-serif; color: blue } 
+				.ftable  { font-family: arial, sans-serif; color: blue !important; } 
 				td, th, tr { border: 1px solid #000000; text-align: left; } 
+				th {color: red !important}
 				tr:nth-child(even) { background-color: #dddddd; } }
 			</style>\n`+
 			'<p>Length: ' + this.length + '</p>' +
 			'<table class="ftable" style="border-collapse: collapse; border-spacing: 0;  border: 2px solid #000; font-size: 1rem"><thead style="background-color: lightgrey">' +
-			'<tr style="border: 2px solid #000"><td style="border: 2px solid #000">Ix</td>' + columns.map(c => '<td style="border: 2px solid #000">' + c.replace(/_/g, ' ') + '</td>').join('') + '</tr></thead><tbody>' +
+			'<tr style="border: 2px solid #000"><th style="border: 2px solid #000; color: blue">Ix</th>' + columns.map(c => '<th style="border: 2px solid #000; color: blue">' + c.replace(/_/g, ' ') + '</th>').join('') + '</tr></thead><tbody>' +
 			this.data.slice(0, Math.min(this.length, this.showLen)).map(showRow).join('') +
 			'</tbody></table>'
 		);

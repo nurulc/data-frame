@@ -1,13 +1,13 @@
 import {primeAround} from '../utils/primes';
 
-import {flatten} from '../array';
+import {flatten} from '../array/flatten';
 import {EMPTY_ARRAY} from '../utils/constants';
 
 
-// Bunch of str utilities
+// Bunch of str 
 
 // String reverse, looks to be the 
-// import {getLine,getCol}   from '../bundle/claimutils';
+// import {getLie,getCol}   from '../bundle/claimutils';
 
 /**
  * join an array of strings ignoring empty values

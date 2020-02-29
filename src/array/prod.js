@@ -10,7 +10,7 @@ import {flatten} from './flatten';
  * @param  {...[type]} list [description]
  * @return {[type]}         [description]
  */
-export function arrProd(...list) { 
+export default function arrProd(...list) { 
 	if(list.length === 0) return [];
 	if(list.length === 1) return [list[0]];
 	let len = list.length;
@@ -40,15 +40,3 @@ function xprod(list,ix, row, res) {
 	}
 }
 
-// export function arrProd2(s,list) { 
-// 	if(Array.isArray(s)) {
-// 		return flatten(s.map(x => arrProd(x,list)),1);
-// 	}
-// 	else if(list.length == 0) return [s,undefined];
-// 	else return list.map( x => Array.isArray(x)? arrConcat([s],x): [s,x]); 
-// }
-
-
-
-
-export const arrProd2 = arrProd; 

@@ -1,5 +1,8 @@
+dist
 data
 lib
 .ipynb_checkpoints
 node_modules
 runit.sh
+*.bak
+*.gz

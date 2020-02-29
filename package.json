@@ -1,21 +1,13 @@
 {
-  "name": "matcher",
-  "version": "0.5.0",
-  "description": "Utiltities to handle metadata",
+  "name": "data-frame",
+  "version": "0.1.0",
+  "description": "Utiltities to handle pandas like data frames",
   "main": "lib/index.js",
   "scripts": {
     "build": "babel src -d lib",
-    "build:scripts": "babel scripts -d lib-scripts",
-    "build:all": "babel src -d lib && babel scripts -d lib-scripts",
-    "build:matcher": "babel src -d lib",
-    "pkg": "babel src -d lib && npm pack && mv matcher-*.tgz ../npmlocal",
+    "rollup": "rollup -c",
+    "pkg": "babel src -d lib && npm pack && mv data-frame-*.tgz ../npmlocal",
     "test": "mocha --compilers js:babel-core/register ./src/*.test.js ./src/**/*.test.js",
-    "start": "babel scripts -d lib-scripts && node  --max-old-space-size=8192",
-    "bundle": "node  --max-old-space-size=8192 lib-scripts/bundler",
-    "debug": "node --inspect --debug-brk --max-old-space-size=8192 ",
-    "aggregate": "node  --max-old-space-size=8192 lib-scripts/EPI-aggregateEpisodes",
-    "summarize": "node  --max-old-space-size=8192 lib-scripts/EPI-summaryGen",
-    "tally": "node  --max-old-space-size=8192 scripts/talyProcessClaimBin",
     "gen:doc": "esdoc",
     "docs": "open docs/index.html",
     "watch-build": "npm-watch build"
@@ -23,21 +15,13 @@
   "author": "nurul choudhury",
   "license": "ISC",
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.24.1",
-    "babel-eslint": "^3.1.30",
-    "babel-loader": "^6.4.1",
-    "babel-plugin-loop-optimizer": "^1.2.3",
-    "babel-plugin-minify-constant-folding": "0.0.4",
-    "babel-plugin-minify-dead-code-elimination": "^0.1.4",
-    "babel-plugin-transform-es2015-modules-simple-commonjs": "^0.3.0",
-    "babel-plugin-transform-inline-functions": "^1.0.4",
-    "babel-preset-env": "^1.1.8",
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/traverse": "^7.4.0",
+    "ajv": "^5.0.0",
+    "babel-plugin-loop-optimizer": "^1.4.1",
     "babel-preset-minify": "^0.2.0",
-    "babel-preset-stage-0": "^6.24.1",
-    "babel-watch": "^2.0.7",
-    "bayes-classifier": "0.0.5",
-    "byline": "^5.0.0",
     "chai": "^4.2.0",
     "esdoc": "^1.0.1",
     "esdoc-ecmascript-proposal-plugin": "^1.0.0",
@@ -50,11 +34,11 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^7.7.0",
     "eslint-plugin-standard": "^3.0.1",
-    "jest": "^19.0.2",
     "mocha": "^3.5.3",
-    "npm-watch": "^0.4.0",
-    "plotly": "^1.0.6",
-    "regenerator-runtime": "^0.10.5"
+    "rollup": "^1.7.3",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-babel-minify": "^8.0.0",
+    "rollup-plugin-node-resolve": "^4.0.1"
   },
   "repository": {
     "type": "git",
@@ -68,5 +52,9 @@
       "extensions": "js,html,scss",
       "quiet": false
     }
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.4.0",
+    "babel-minify": "^0.5.0"
   }
 }
