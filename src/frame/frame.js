@@ -4,30 +4,22 @@
 // jshint unused:true
 
 //import { getFreq } from './frequency';
+import BaseFrame from './BaseFrame';
 import { createAccesClass } from './frame_element';
 import { dataSplit } from '../string/csv';
 import sortFrameBy from './sortframe';
 import {groupBy} from './groupby';
-import {frameWithIndex} from './frame-utils';
-//import haveFrame from './haveFrame';
-import { flatten, arrRemove, arrDedup, arrEqual, newArray, vecAdd, arrHash} from '../array';
+import frameWithIndex from './frame-utils/frameWithIndex';
+import { flatten, arrRemove, arrDedup, newArray, vecAdd, arrHash} from '../array';
 import { isA } from '../utils/objutils';
 import {EMPTY_ARRAY} from '../utils/constants';
 import {innerJoin, leftJoin, outerJoin} from './join-utils';
+import {combineCmp, cmpNumOrStrBy, toNumber, revCmp} from '../utils/sort-helper';
+import genColIxFunc from './genColIxFunc';
+import haveFrame from './haveFrame';
+import arrEqual from '../array/arrEQ';
+import toHTML from './toHTML';
 
-
-export function arrayEqual(a,b, eq) {
-	if( a === undefined || b === undefined) return false;
-	if( a === b ) return true;
-	if( a.length !== b.length ) return false;
-	if( eq ) {
-		for(let i= 0; i< a.length; i++ ) if( !eq(a[i],b[i] ) ) return false;
-	}
-	else {
-		for(let i= 0; i< a.length; i++ ) if( a[i] !== b[i] ) return false;
-	}
-	return true;
-}
 
 
 function isString(aStr) { return typeof aStr === 'string'; }
@@ -47,20 +39,8 @@ function strCmp(a,b) {
 const cmpStrBy = (colIX) => (row1,row2) => (strCmp(row1[colIX],row2[colIX]));
 
 
-/**
- * [arrToCol description]
- * @param  {[type]} arr [description]
- * @return {[type]}     [description]
- */
-export function arrToCol(arr) {
-	return arr.map(x => [x] );
-}
 
-export function haveFrame(aFrame) {
-	if(!aFrame) throw new Error('Frame expected - but undefined supplied');
-	if( ! (aFrame instanceof Frame) ) throw new Error('Frame expected - but supplied: '+objName(aFrame));
-	return aFrame;
-}
+
 
 function objName(o) {
 	if(typeof o === 'object' ) return o.constructor.name;
@@ -125,19 +105,12 @@ function _makeUnique(listOfRows,colIx) {
 	return dict;
 }
 
-function colorDefault(r,i) {
-	switch(r.RULE_TYPE) {
-	case 'TRIGGER': return (i & 1) ?'#b0ffb0':'lightgreen';
-	case 'ENABLER': return 'skyblue';
-	case 'POTENTIAL_INCLUSION': return (i & 1) ? '#fbd3da' :'#ffcdd5';
-	}
-	return (i & 1) ? 'white' :'#fffaff';		
-}
+
 
 /**
  * 
  */
-export class Frame {
+export class Frame extends BaseFrame {
 	/**
 	 * [constructor description]
 	 * @param  {[type]} data    [description]
@@ -147,6 +120,7 @@ export class Frame {
 	 * @return {[type]}         [description]
 	 */
 	constructor(data,columns,name,keyFunc) {
+		super(data,columns,name,keyFunc);
 		name = name || '';
 		this.keyFunc = keyFunc || this._getKey;
 		this.data = data||[];
@@ -157,7 +131,6 @@ export class Frame {
 		this._row = undefined;
 		this.AccessClass = columns?createAccesClass(this._columns):undefined;
 		this.showLen = 400;
-		this.rowColor = colorDefault;
 		this._hash = -1;
 	}
 
@@ -409,12 +382,17 @@ export class Frame {
 	 * @return {[type]}              [description]
 	 */
 	trProject(colsMapping,mappingObj,flag=false) {
-		if( !colsMapping || colsMapping.length === 0 ) return this; //someCols = this.columns.slice(0);
+		if( !colsMapping || colsMapping.length === 0 ) return (inrow,row) => []; //nothing to map
 		let mappedCols = colsMapping.map(n => n.split('=')).map( ([a,b]) => [a, b||a] );
 
 		//check if we are only renaming the columns, then the data does can stay the same, just the columns are renamed
 		if( mappingObj === undefined && arrEqual(this.columns,mappedCols.map(([a,b]) => a)) ) {
-			return new Frame(this.data,mappedCols.map(([a,b]) => b), this.name + '1');
+			//return new Frame(this.data,mappedCols.map(([a,b]) => b), this.name + '1');
+			return (inrow,row) => {
+				if(!row) return inrow.slice(0);
+				for(let i =0; inrow.length; i++) row[i] = inrow[i];
+				return row;
+			};
 		}
 
 		let ixList = mappedCols.map( ([name]) => this.colIx(name));//.filter( x => x != -1);
@@ -848,34 +826,11 @@ export class Frame {
 	
 
 	_toHtml() {
-		let columns = this.columns;
-		let TX = columns.indexOf('RULE_TYPE');
-		let self = this;
-		return (
-			//`<style> table.ftable {border-collapse: collapse; border-spacing: 0;  border: 2px solid #CCC; } \n</style>\n`+
-			`<style> 
-				.ftable  { font-family: arial, sans-serif; color: blue !important; } 
-				td, th, tr { border: 1px solid #000000; text-align: left; } 
-				th {color: red !important}
-				tr:nth-child(even) { background-color: #dddddd; } }
-			</style>\n`+
-			'<p>Length: ' + this.length + '</p>' +
-			'<table class="ftable" style="border-collapse: collapse; border-spacing: 0;  border: 2px solid #000; font-size: 1rem"><thead style="background-color: lightgrey">' +
-			'<tr style="border: 2px solid #000"><th style="border: 2px solid #000; color: blue">Ix</th>' + columns.map(c => '<th style="border: 2px solid #000; color: blue">' + c.replace(/_/g, ' ') + '</th>').join('') + '</tr></thead><tbody>' +
-			this.data.slice(0, Math.min(this.length, this.showLen)).map(showRow).join('') +
-			'</tbody></table>'
-		);
-		function showRow(r, i) {
-			let rowColor = self.rowColor(self._rowObj(r),i);
-			return ('<tr style="background-color: ' + rowColor + '"><td style="border: 2px solid #000">' + i + '</td>' + r.map(c => '<td style="border: 2px solid #000">' + (ns(c)) + '</td>').join('') + '</tr>');
-		}
-		function ns(s) {
-			if (typeof s !== 'string') return (s === undefined ? '' : '' + s) || '';
-			if (s.indexOf('<') !== -1) s = s.replace(/</g, '&lt;');
-			if (s.indexOf('>') !== -1) s = s.replace(/>/g, '&gt;');
-			return (s === undefined ? '' : '' + s) === 'NON' ? 'NS' : s;
-		}
+		return toHTML(this);
 	}
 
 
 }
+
+
+

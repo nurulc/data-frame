@@ -1,4 +1,4 @@
-import {memoize} from './objutils';
+import memoize from './objutils/memoize';
 
 export const EMPTY_ARRAY = Object.freeze([]);
 export const EMPTY_STR = '';

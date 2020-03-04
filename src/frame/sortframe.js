@@ -1,9 +1,9 @@
 // jshint undef:true
 // jshint unused:true
-//import {Frame} from './frame';
-import {arrEqual} from '../array';
-import {combineCmp, cmpNumOrStrBy, toNumber, revCmp} from '../utils/sort-helper';
+
 import haveFrame from './haveFrame';
+import { arrEQ } from '../array';
+import {combineCmp, cmpNumOrStrBy,  revCmp} from '../utils/sort-helper';
 import genColIxFunc from './genColIxFunc';
 
 
@@ -17,11 +17,11 @@ import genColIxFunc from './genColIxFunc';
  * @param  {[type]} cmpFn       [description]
  * @return {[type]}             [description]
  */
-export default function sortFrame(columnNames,aFrame,cmpFn=cmpNumOrStrBy) {
+export default function sortFrameBy(columnNames,aFrame,cmpFn=cmpNumOrStrBy) {
 	aFrame = haveFrame(aFrame);
 	// function to get the index of the column given a name
 	
-	if(!columnNames || !columnNames.length || arrEqual((aFrame.sorted||[]), columnNames)) return aFrame;
+	if(!columnNames || !columnNames.length || arrEQ((aFrame.sorted||[]), columnNames)) return aFrame;
 	let colIx = genColIxFunc(aFrame);
 	//create a comparison function give an column name
 	// -name (sort acending) +name or name, to sort descending	                

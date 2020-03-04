@@ -16,7 +16,11 @@ function sIx(elem, mp, subIx, ret) {
 	ret[elem] = pos;
 	return pos;
 }
-
+/**
+ * @param  {[type]}
+ * @param  {[type]}
+ * @return {[type]}
+ */
 export default function reord(subListWithNewOrder,fullList) {
 	var mp = idx(subListWithNewOrder||[],fullList.length);
 	//	console.log(mp);

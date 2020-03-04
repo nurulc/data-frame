@@ -1,6 +1,18 @@
-// Use with a reducer
+
+/**
+ * Use with a reducer
+ * @param  {Array}
+ * @param  {[type]}
+ * @return {[type]}
+ */
 export const FLATTEN = (res=[],arr) => Array.isArray(arr)?res.concat(arr):(res.push(arr), res);
 
+/**
+ * Flatten an array to a depth of level, for example if level = 1, only flatten at the top level (depath1)
+ * @param  {[with_inner_arra]} arr
+ * @param  {integer} level - depth the given or undefined the flatten to the bottom
+ * @return {[type]}
+ */
 export function flatten(arr, level) {
 	if (!isArray(arr)) {
 		throw new TypeError('Invalid argument, Please pass proper array argument');

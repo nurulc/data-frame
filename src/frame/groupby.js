@@ -1,6 +1,5 @@
 // jshint undef:true
 // jshint unused:true
-import {arrEqual, range} from '../array';
 import {toNumber} from '../utils/sort-helper';
 import haveFrame from './haveFrame';
 import genColIxFunc from './genColIxFunc';

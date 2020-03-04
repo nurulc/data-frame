@@ -49,7 +49,7 @@ const EMPTY_STR = '';
  * String Dictionary implememtation that minimizes the garbage created
  * 
  */
-class StrDict {
+export class StrDict {
 	/**
 	 * [constructor description]
 	 * @param  {[type]} maxLen [description]
