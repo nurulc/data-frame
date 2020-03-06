@@ -20,3 +20,4 @@ jshintrc
 nodemon.json
 str-data-frame*
 tests
+*.tgz
