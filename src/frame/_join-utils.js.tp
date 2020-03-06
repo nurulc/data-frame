@@ -1,0 +1,572 @@
+//join-utils.js
+// Helpers fro frame
+
+//import {Frame} from './frame';
+import haveFrame from './haveFrame';
+import {EMPTY_ARRAY} from '../utils/constants';
+import {TRUE, NOT} from '../utils/constants';
+
+//@@
+export default const EMPTY_KEY = '@#$-EMPTY-$#@';
+
+//@@
+/**
+ * changeNameTo takes a change name description array of two elements containing the old names and the new names
+ * e.g oldName=newName 'a name change descriptor' where '=' is the seperator
+ * return an array of 2 strings [oldName, newName]
+ * @param  {string} name old name to new name descriptor, 'OLD=NEW'
+ * @param  {string} sep  string that seperates the old name from the new
+ * @return {[oldName, newName]}      and ar
+ */
+export default function changeNameTo(name, sep) {
+	 let res = name.split(sep);
+	 if( res.length === 1) res.push(name);
+	 return res;
+}
+
+//@@
+//##import changeNameTo from './changeNameTo';
+/**
+ * colName(['1.DX=DX1', '2.DX=DX2', '1.FX=F1', ...], ['DX','FX',...],['DX',...])
+ * 
+ * returns [ [new-col-list], [ col-mapping]]
+ * where <col-mapping> =         [<frame number>{0,1}, <old-col-index>, <new-col-index>] 
+ * result od the code above
+ * [ [ 'DX1', 'DX2', 'F1', ...], [ [ 0, 0, 0 ], [ 1, 0, 1 ], [ 0, 1, 2 ], ...] ]
+ *
+ * Note: 
+ * @param  {[string]} list  resulting column map
+ * @param  {[string]} colsNameList1 [description]
+ * @param  {[string]} colsNameList2 [description]
+ * @return {[[string],[string]]}       [ [new-col-list], [ col-mapping]]
+ */
+export default function colName(list, colsNameList1, colsNameList2) { /*local*/
+	let res = list.map(s => splitName(s,colsNameList1,colsNameList2));
+	return [newCols(res), newColMapping(res,[colsNameList1,colsNameList2])];
+}
+
+/**
+ * [newCols description]
+ * @param  {[type]} list [description]
+ * @return {[type]}      [description]
+ */
+function newCols(list)  { 
+	var l = list.map( ([_,[old,newS]]) => newS);
+	return l.reduce(([list,dict],name) => convert(dict,list,name), [[],{}])[0];
+		
+	function convert(dict,list,name) {
+		let newName = name;
+
+		// make sure newName is a name not in the dictionary(of existing column names)
+		// keep on generating names until we find a uniqie one.
+		for(let i=1; dict[newName]; i++) {
+			newName = name + '' +i;
+		}
+		dict[newName] = true; // name is in the list of columns names
+		list.push(newName);   // we are building this list of column names
+		return [list,dict];
+	} 
+		
+}
+
+/**
+ * [newColMapping description]
+ * @param  {Array} list    [ ...[tableIx, [oldColName,newColName]]]
+ * @param  {[colsFronTablw1,colsFromTable2]} mapping [description]
+ * @return {[type]}         [description]
+ */
+function newColMapping(list, mapping) {
+	return list.map(([tableIx, [oldColName,newColName]]) => [ tableIx, oldToNew(tableIx, oldColName)]);
+	//===
+	function oldToNew(tableIx, name) {
+		let i = mapping[tableIx].indexOf(name);
+		if( i === -1) throw new Error('column: '+name+' not found in frame'+ix + ' '+mapping[ix].map(s => `"${s}"`).join(','));
+		return i;
+	}
+}                              
+
+/**
+ * Categorize the a column description in a join operation, i.e we are joining two tables 
+ * exanples.  
+ * 		'city' - column city is only in one table
+ * 		'1.city' - use the city column from table1 (optional if city is only in table1 but compulsory if city is in bolh tables)
+ * 		'2.population'  
+ * 		'2.st=state'
+ *
+ * 
+ * 	1. Which table it comes from - e.g. '1.name' - column 'name' from first table; or '2.desc' - column 'desc' from second table 
+ * 	2. What name should it be given in the result table i.e.   '1.name=FullName' 
+ * 	3. Can the table, for a column name, be identified unambigiously or must we be explicit; e.g. 'desc' is the same as '2.desc' if table1 does not have a  'desc' column 
+ * 	4. Be forgiving and allow disambiguation even if it is unneeded
+ * 	5. If we do not give an explicit new name for the target column, use the originam name e.g.  '2.city' the target name is also 'city'
+ *
+ * 
+ * @param  {string} str   Column selection string e.g. '1.name,2.name=newName'
+ * @param  {[string]} cols1 arra of columns names
+ * @param  {[string]} cols2 [description]
+ * @return {[tableIX, [oldColName, finalColName]]}   -     
+ */
+function splitName(str,cols1,cols2) {
+	let res;
+	let tables = [cols1,cols2];
+	if( /[12]\./.test(str)) {
+		res = str.split('.');
+	} else {
+		let [oldName,newName] = changeNameTo(str, '=');
+		let pos1 = cols1.indexOf(oldName);
+		let pos2 = cols2.indexOf(oldName);
+		if( pos1 === -1 && pos2 === -1) throw new Error('column: '+oldName+ ' not found in table: '+(pos1 === -1?cols1:cols2));
+		if( pos1 !== -1 && pos2 !== -1) throw new Error('column: '+oldName+ ' is ambigious');
+		res = [pos1===-1?2:1,str];
+	}
+		
+	res[0] = +res[0]-1;
+	res[1] = changeNameTo(res[1], '=');
+	let [tableId, [oldName, newName]] = res;
+	if( tables[tableId].indexOf(oldName) === -1 ) throw new Error('column: '+oldName+ ' not found in table'+(tableId+1) + ' '+tables[tableId]);
+	return res;
+}
+
+
+//@@/*local*/
+export default function project(mappingList) {
+	return function (array1, array2) {
+		let data = [array1,array2];
+		return mappingList.map(([frameIx, oldIx, newIx]) => oldIx === -1? '':data[frameIx][oldIx]);
+	};
+}
+
+//@@
+//##import project from './project';
+//##import colName from './colName';
+/**
+ * Takes two column list (or one) and a mapping list and returns a transform function
+ * That will create a new row taking columns from each of the lists 
+ * @param  {[string]} projectList example ['1.DX=DX1', '2.DX=DX2', '1.FX=F1', ...], ['DX','FX',...],['DX',...]
+ * @param  {[string]} cols1       example ['DX','FX',...]
+ * @param  {[string]} cols2       example 'DX',...]
+ * @return {Object}             return an object of the form {transform, newColumnNames, mapingArray}
+ *                              the mapping array = [ ...[<frame number>{0,1}, <old-col-index>, <new-col-index>]]
+ */
+export default function getTransform(projectList, cols1,cols2) { /*local*/
+	let [newColNames, mapping] = colName(projectList, cols1, (cols2 || []));
+	let transform = project(mapping); 
+	return {transform,newColNames,mapping};
+}
+
+//@@
+//##import {TRUE} from '../utils/constants';
+/**
+ * returns a function that will perform an innet joint test
+ * @param  {Frame} frame1 left frame
+ * @param  {Frame} frame2 right frame
+ * @param  {string} col1   column name 1
+ * @param  {string} col2   column name 2
+ * @param  {function} filter optional filter function
+ * @return {function}        boolean function given two rows returns true if the should be joined
+ */
+export default function joinOp(frame1, frame2, col1, col2, filter) {
+	let c1 = frame1.colIx(col1);
+	let c2 = frame2.colIx(col2);
+	filter = filter || TRUE;
+	return function (row1, row2) {
+		return (row1[c1] === row2[c2]) && filter(row1,row2);
+	};
+}
+
+
+//@@
+//##import haveFrame from './haveFrame';
+//##import getTransform from './getTransform';
+//##import changeNameTo from './changeNameTo';
+//##import joinOp from './joinOp';
+//##import project from './project';
+/**
+ *		 example of a join
+ *
+ *		 innerJoin(frame1,frame2, [list-of-cols in resulting table], "join-col1==join-col2")
+ *		 
+ * @param  {Frame} frame1      [description]
+ * @param  {Frame} frame2      [description]
+ * @param  {[string]} projectList the list of final column names
+ * @param  {string} joinOn      either a common column name, or a ttring of the form 'col1==col2'
+ * @param  {function} filter    filter function
+ * @return {Frame}             a Frame resulting from the inner join
+ */
+export default function fullInnerJoin(frame1, frame2, projectList, joinOn,filter) {
+	frame1 = haveFrame(frame1);
+	frame2 = haveFrame(frame2);
+	
+	let {newColNames, transform, mapping} = getTransform(projectList, frame1.columns, frame2.columns);
+	//console.log(mapping);
+	let [col1, col2] = changeNameTo(joinOn, '==');
+	let cmp = joinOp(frame1,frame2, col1, col2,filter);
+	//let transform = project(mapping);         // reansform function
+	let res = [];
+	return new frame1.constructor(frame1.data.reduce((res, row1) => matchIt(res,row1),[]), newColNames);
+
+	//============
+	function matchIt(res,row1) {
+		frame2.data.filter( row2 => cmp(row1,row2)).forEach( r => res.push(transform(row1, r)));
+		return res;
+	}
+}
+
+//@@
+//##import EMPTY_KEY from './EMPTY_KEY';
+//##import {EMPTY_ARRAY} from '../utils/constants';
+export default function getDict(dict, key, noEmpty) { /*local*/
+	if(noEmpty && !key) return EMPTY_ARRAY;
+	key = key || EMPTY_KEY;
+	return dict[key] || EMPTY_ARRAY;
+}
+
+//@@
+//##import haveFrame from './haveFrame';
+//##import colName from './colName';
+//##import localGroupBy from './localGroupBy';
+//##import changeNameTo from './changeNameTo';
+//##import joinOp from './joinOp';
+//##import project from './project';
+//##import getDict from './getDict';
+
+/**
+ * innerJoin works like an SQL inner join, not quite as flexible, 
+ *     select a as A, b, frame1.x from frame1, frame2
+ *         where frame1.colName1 = frame2.colName2 and {filter} 
+ *
+ * 
+ * @param  {Frame} frame1      [description]
+ * @param  {Frame} frame2      [description]
+ * @param  {Array<string>} projectList Array of column name mapping example ""
+ * @param  {String} joinOn      column name to join on, either "colName" (same name exists on both frame) or "colName1=colName2" (colName1 - column from frame1, colName2 - column from frame2)
+ * @param  {function} filter    *optional filter function - filter(row1,row2)
+ * @return {Frame}             resulting frame
+ */
+export function innerJoin(frame1, frame2, projectList, joinOn, filter) {
+	frame1 = haveFrame(frame1);
+	frame2 = haveFrame(frame2);
+	let [newColNames, mapping] = colName(projectList, frame1.columns, frame2.columns);
+	// if( 1.5*frame1.length < frame2.length) {
+	//   console.log(`Warning: fastJoin - frame1(${frame1.length}) should be longer that frame2(${frame2.length})`);
+	// } 
+	let [col1, col2] = changeNameTo(joinOn, '==');
+	let cmp = joinOp(frame1,frame2, col1, col2,filter); // returns a function that performs the join test
+	let [ix1,ix2] = [frame1.colIx(col1), frame2.colIx(col2)];  // get the idex of col1 => ix1 and col2 => ix2
+	let transform = project(mapping);         // returns function to perform the projection
+
+	if(frame1.length > frame2.length ){
+		let index = localGroupBy(frame2.data, ix2,true); // create an index on col2 values
+
+		let data = frame1.data;
+		// 
+		//let res = frame1.data.reduce( (res,row)=> matchIt1(res,row,getDict(index,row[ix1]),cmp,transform),[]);
+		//
+		// Not as clean as to code above but faster
+		// 
+		
+		let len = data.length;
+		let res = [];                             // Note 'res' array is mutated during this operation
+		for(let i=0; i<len; i++) {
+			let row = data[i];
+			matchIt1(res,row,getDict(index,row[ix1]),cmp,transform); // note index is a dictionary indexed on col2
+		}
+		return new frame1.constructor(res, newColNames,frame1.name+'-'+frame2.name);
+	} else {
+	
+		let index = localGroupBy(frame1.data, ix1,true); // create an index on col1 values
+		//
+		
+		//let res = frame2.data.reduce( (res,row)=> matchIt2(res,row,getDict(index,row[ix2]),cmp,transform),[]);
+		let data = frame2.data;
+		let len = data.length;
+		let res = [];
+
+		for(let i=0; i<len; i++) {
+			let row = data[i];
+			matchIt2(res,row,getDict(index,row[ix2]),cmp,transform);
+		}
+
+		return new frame1.constructor(res, newColNames,frame1.name+'-'+frame2.name);
+	}
+
+}
+
+/**
+ * Match row1 (master row) against all elements of arr, using the cmp function, and return an array of matching rows by using the transform function
+ * @param  {Array<string>} res       this array is mutatated (done purely for performance reasons)
+ * @param  {[string]} row1      a master row
+ * @param  {[[string]]} arr     array of rows
+ * @param  {function} cmp       comparison finction that compares row1 with the array of rows (join operation)
+ * @param  {function} transform function to transform the to the final rows
+ * @return {[string]}           returning array of rows
+ */
+function matchIt1(res/*modified*/,row1,arr, cmp, transform) {
+	let len = arr.length;
+	for(let i=0; i< len; i++) {
+		let row2 = arr[i];
+		if(cmp(row1,row2)) res.push(transform(row1,row2));
+	}
+	return res;
+}
+
+
+
+/**
+ * Match row2 (master row) against all elements of arr, using the cmp function, and return an array of matching rows by using the transform function
+ * @param  {Array<string>} res       this array is mutatated (done purely for performance reasons)
+ * @param  {[string]} row2      [description]
+ * @param  {[[string]]} arr     array of rows
+ * @param  {function} cmp       comparison finction that compares row1 with the array of rows (join operation)
+ * @param  {function} transform function to transform the to the final rows
+ * @return {[string]}           returning array of rows
+
+ */
+function matchIt2(res,row2,arr, cmp, transform) {
+	let len = arr.length;
+	for(let i=0; i< len; i++) {
+		let row1 = arr[i];
+		if(cmp(row1,row2)) res.push(transform(row1,row2));
+	}
+	return res;
+}
+
+
+//@@
+//##import EMPTY_KEY from './EMPTY_KEY';
+export default function localGroupBy(data,ix,noNull=false,dict={}) {
+	data.forEach(r => addDict(dict, r[ix],r,noNull));
+	return dict;
+}
+
+
+function addDict(dict, key, val,noEmpty) {
+	if( noEmpty && !key) return dict;
+	key = key || EMPTY_KEY;
+	let list = dict[key];
+	if( !list ) {
+		dict[key] = [val];
+	} else {
+		if(val !== undefined)
+			list.push(val);
+	}
+	return dict;
+}
+
+//@@
+//##import haveFrame from './haveFrame';
+//##import localGroupBy from './localGroupBy';
+/**
+ * Creates a index for a column (dictionary)
+ * @param  {Frame}   aFrame  Fram to index
+ * @param  {String}  colName name of the column to index
+ * @param  {boolean} noNull  Optional (false) if false, null is added to the dictionary
+ * @param  {Object}  dict    Optional
+ * @return {Dict}            Dict[key] --> array of columns that contain the key in column(colName). Note a row is an array of columns
+ */
+export default const indexFrameColumn = (aFrame,colName,noNull=false,dict={}) => {
+	aFrame = haveFrame(aFrame);
+ 
+	let ix = aFrame.colIx(colName);
+	return localGroupBy(aFrame.data,ix,noNull,dict);
+};
+
+
+//@@
+//##import haveFrame from './haveFrame';
+//##import getTransform from './getTransform';
+//##import localGroupBy from './localGroupBy';
+//##import changeNameTo from './changeNameTo';
+//##import joinOp from './joinOp';
+//##import project from './project';
+//##import getDict from './getDict';
+//##import matchIt from './matchIt';
+//##import {reverseProjectList1} from './reverseProjectList1';
+
+/**
+ * leftJoin works like an SQL inner join, not quite as flexible, 
+ *     select a as A, b, frame1.x from frame1, frame2
+ *         where frame1.colName1 = frame2.colName2 and {filter} 
+ *
+ * 
+ * @param  {Frame} frame1      [description]
+ * @param  {Frame} frame2      [description]
+ * @param  {Array<string>} projectList Array of column name mapping example ""
+ * @param  {String} joinOn      column name to join on, either "colName" (same name exists on both frame) or "colName1=colName2" (colName1 - column from frame1, colName2 - column from frame2)
+ * @param  {function} filter    *optional filter function - filter(row1,row2)
+ * @return {Frame}             resulting frame
+ */
+export function leftJoin(frame1, frame2, projectList, joinOn,filter) {
+	frame1 = haveFrame(frame1);
+	frame2 = haveFrame(frame2);
+
+	let {transform, newColNames, mapping} = getTransform(projectList, frame1.columns, frame2.columns);
+	let pL = reverseProjectList1(projectList, col1,col2, frame1.columns, frame2.columns);
+	let transformR = getTransform(pL, frame1.columns, frame2.columns).transform;  // if( 1.5*frame1.length < frame2.length) {
+	//   console.log(`Warning: fastJoin - frame1(${frame1.length}) should be longer that frame2(${frame2.length})`);
+	// } 
+	let [col1, col2] = changeNameTo(joinOn, '==');
+	let cmp = joinOp(frame1,frame2, col1, col2,filter);
+	let [ix1,ix2] = [frame1.colIx(col1), frame2.colIx(col2)];
+	//let transform = project(mapping);         // reansform function
+	
+	let res = [];
+	let index = localGroupBy(frame2.data, ix2,true);
+	let data = frame1.data;
+	//data.reduce( (res,row)=> matchIt(res,row,getDict(index,row[ix1])),res);
+	let tr = [transform,transformR];
+	let len = data.length;
+	for(let i=0; i< len; i++) {
+		let row = data[i];
+		matchIt(res,row,getDict(index,row[ix1]),cmp,tr);
+	}
+
+	return new frame1.constructor(res, newColNames);
+	
+}
+
+//@@/*local*/ 
+/**
+ * leftJoin on one row from left and arr from right
+ * @param  {[type]} res
+ * @param  {[type]} row1
+ * @param  {[type]} arr
+ * @param  {[type]} cmp
+ * @param  {[type]} tr
+ * @return {[[row-element]} 
+ */
+export default function matchIt(res,row1,arr, cmp, tr) {
+	let len,  cnt =0;
+	if( !arr || arr.length === 0 ) len = 0;
+	else len = arr.length;
+	let transform = tr[0];
+	
+	for(let i=0; i< len; i++) {
+		let row2 = arr[i];
+		if(cmp(row1,row2)) {
+			res.push(transform(row1,row2));
+			cnt++;
+		}
+	}
+	if( cnt === 0 ) {
+		transform = tr[1];
+		res.push(transform(row1,[]));
+	}
+	return res;
+}
+
+//@@
+//##import haveFrame from './haveFrame';
+//##import colName from './colName';
+//##import getTransform from './getTransform';
+//##import localGroupBy from './localGroupBy';
+//##import changeNameTo from './changeNameTo';
+//##import joinOp from './joinOp';
+//##import project from './project';
+//##import getDict from './getDict';
+//##import matchIt from './matchIt';
+//##import {reverseProjectList1, reverseProjectList2} from './reverseProjectList1';
+
+
+/**
+ * [outerJoin description]
+ * @param  {[type]} frame1      [description]
+ * @param  {[type]} frame2      [description]
+ * @param  {[type]} projectList [description]
+ * @param  {[type]} joinOn      [description]
+ * @param  {[type]} filter      [description]
+ * @return {[type]}             [description]
+ */
+export function outerJoin(frame1, frame2, projectList, joinOn,filter) {
+	frame1 = haveFrame(frame1);
+	frame2 = haveFrame(frame2);
+	//console.log("projectList1:", projectList);
+	let {transform, newColNames, mapping} = getTransform(projectList, frame1.columns, frame2.columns);
+	let pL = reverseProjectList1(projectList, col1,col2, frame1.columns, frame2.columns);
+	//    console.log("projectList3:", pL);
+	let transformR = getTransform(pL, frame1.columns, frame2.columns).transform;
+	// if( 1.5*frame1.length < frame2.length) {
+	//   console.log(`Warning: fastJoin - frame1(${frame1.length}) should be longer that frame2(${frame2.length})`);
+	// } 
+	let [col1, col2] = changeNameTo(joinOn, '==');
+	let cmp = joinOp(frame1,frame2, col1, col2,filter);
+	let [ix1,ix2] = [frame1.colIx(col1), frame2.colIx(col2)];
+	//let transform = project(mapping);         // reansform function
+	
+	let res = [];
+	let index = localGroupBy(frame2.data, ix2,true);
+	let data = frame1.data;
+	let used = {};
+	//data.reduce( (res,row)=> matchIt(res,row,getDict(index,row[ix1])),res);
+	let len = data.length;
+	let tr = [transform,transformR];
+	for(let i=0; i< len; i++) {
+		let row = data[i];
+		matchIt(res,row,getDict(index,row[ix1]),cmp,tr);
+		used[row[ix1]] = true;
+	}
+
+	//now process all elements in frame2 that did not match
+	let unused = frame2.data.filter(r => used[r[ix2]] === undefined);
+	//console.log("unused", unused)
+	//matchIt(res,[], unused,cmp, transform);
+	len = unused.length;
+	if( len > 0) {
+		//console.log("projectList2:", projectList);
+		let pL = reverseProjectList2(projectList, col1,col2, frame1.columns, frame2.columns);
+		//  console.log("projectList3:", pL);
+		let {transform, newColNames, mapping} = getTransform(pL, frame1.columns, frame2.columns);
+		for(let i=0; i<len; i++) res.push(transform([],unused[i]));
+	}
+
+	return new frame1.constructor(res, newColNames);
+	
+}
+
+//@@/*local*/
+export function reverseProjectList1(pL, col1, col2, f1Cols, f2Cols) {
+
+	//console.log("PL0:", pL);
+	let c = pL.map(s => s.split('='));
+	//console.log("PL1:",  c);
+	
+	let len = c.length;
+	for(let i=0; i<len; i++) {
+		let col = c[i];
+		if( col[0] === '2.'+col2 || col[0] === col2) col[0] = '1.'+col1;
+		else  if( col[0] === col2) col[0] = '1.'+col1;
+		else if( col[0].substr(0,2) === '2.' ) {
+			if( f1Cols.indexOf(col[0].substr(2)) !== -1 ) col[0] = '1.'+col[0].substr(2);
+		}
+		else if(col[0].substr(0,2) === '1.') col[0] = col[0];
+		else if( f1Cols.indexOf(col[0].substr(2)) !== -1 ) col[0] = '1.'+col[0];
+	}
+	return c.map( v => v.join('='));
+}
+
+export function reverseProjectList2(pL, col1, col2, f1Cols, f2Cols) {
+
+	//console.log("PL0:", pL);
+	let c = pL.map(s => s.split('='));
+	//console.log("PL1:",  c);
+	
+	let len = c.length;
+	for(let i=0; i<len; i++) {
+		let col = c[i];
+		if( col[0] === '1.'+col1 || col[0] === col1) col[0] = '2.'+col2;
+		else  if( col[0] === col2) col[0] = '2.'+col2;
+		else if( col[0].substr(0,2) === '1.' ) {
+			if( f2Cols.indexOf(col[0].substr(2)) !== -1 ) col[0] = '2.'+col[0].substr(2);
+		}
+		else if(col[0].substr(0,2) === '2.') col[0] = col[0];
+		else if( f2Cols.indexOf(col[0].substr(2)) !== -1 ) col[0] = '2.'+col[0];
+	}
+	return c.map( v => v.join('='));
+}
+
+
+
+
+
+
+
