@@ -29,7 +29,7 @@ const EMPTY_STR = '';
  * @param  {[type]} colIx 	The column to make unique
  * @return {dict}   returns an object representing mapping of unique values where key and value are the same
  */
-function _makeUnique(listOfRows,colIx) {
+export function _makeUnique(listOfRows,colIx) {
 
 	let dict = {};
 	if( colIx === undefined) {
