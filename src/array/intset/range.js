@@ -1,5 +1,5 @@
 
-import {newArray} from '../arrayutils'
+import newArray from '../arrayutils/newArray';
 /**
  * Creates a set (array) of numbers [start ... (end-1)]
  * @param  {[int32]} start start value

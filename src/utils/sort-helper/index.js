@@ -7,4 +7,6 @@ export const cmpNumOrStrBy = _cmpNumOrStrBy;
 import _revCmp from './revCmp';
 export const revCmp = _revCmp;
 
-export * from './combineCmp';
+import _combineCmp from './combineCmp';
+export const combineCmp = _combineCmp;
+

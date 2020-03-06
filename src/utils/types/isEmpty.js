@@ -1,4 +1,5 @@
  
+import isArray from './isArray';
 /**
  * Check if an array is empty or an object has no attributes
  * @param  {[Any]} arrOrObj

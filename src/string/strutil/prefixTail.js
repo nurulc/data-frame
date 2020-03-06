@@ -1,5 +1,5 @@
 
-import {prefixLen} from './prefixLen';
+import prefixLen from './prefixLen';
 /**
  * Gets the non-prefix string of 'a' and 'n', for example a = 'asset', b = 'assess', the return will be ['t', 'ss']
  * @param  {String} a [description]

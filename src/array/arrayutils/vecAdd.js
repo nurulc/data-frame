@@ -1,5 +1,5 @@
 
-import isArray from './isArray';
+import isArray from '../../utils/types/isArray';
 
 /**
  * Add two vectors

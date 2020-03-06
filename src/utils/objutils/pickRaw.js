@@ -1,4 +1,4 @@
-
+/*local*/
 import {isA} from './isA';
 /**
  * [pickRaw description]

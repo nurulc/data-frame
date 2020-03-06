@@ -1,5 +1,5 @@
 
-import isArray from './isArray';
+import isArray from '../../utils/types/isArray';
 
 /**
  * THis decorates and array function so that it can have one of two forms

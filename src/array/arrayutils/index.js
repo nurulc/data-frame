@@ -1,9 +1,3 @@
-import _isArray from './isArray';
-export const isArray = _isArray;
-
-import _isEmpty from './isEmpty';
-export const isEmpty = _isEmpty;
-
 import _newArray from './newArray';
 export const newArray = _newArray;
 

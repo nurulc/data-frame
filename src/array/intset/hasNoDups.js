@@ -1,4 +1,5 @@
 
+
 /**
  * checks if sorted array has no dups, pure function - does not modify the input
  * @param  {[Array]}  arr - sorted set of values

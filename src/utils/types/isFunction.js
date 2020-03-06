@@ -5,6 +5,7 @@
  * @return {boolean} - true if it is a function, false otherwise
  */
 export default function isFunction(fun) {
-	return (typeof fun === 'function')?fun:null;
+	if(typeof fun === 'function') return fun;
+	return !!(fun && fun.call && fun.apply)?fun:null;
 }
 

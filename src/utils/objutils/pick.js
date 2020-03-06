@@ -1,5 +1,6 @@
 
 import memoize from './memoize';
+import pickRaw from './pickRaw'
 /**
  * extract elements of an object, or from a list of elements
  * 	pick(key) => returns a function that takes an object and returns an elemnt 

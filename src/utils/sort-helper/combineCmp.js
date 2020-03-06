@@ -4,7 +4,7 @@
  * @param  {...[type]} funcs [description]
  * @return {[type]}          [description]
  */
-export function combineCmp(...funcs) {
+export default function combineCmp(...funcs) {
 	let len = funcs.length;
 	//funcs.find(f => (res=f(a,b))!==0); // clean but not so fast, below is fater
 	switch(len){

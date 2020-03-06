@@ -1,8 +1,8 @@
 
-import getColIx from './getColIx';
+import getColIx from '../../frame/getColIx';
 import {MultiDict} from './MultiDict'
 import haveFrame from '../../frame/haveFrame';
-import {Frame} from './frame';
+import {Frame} from '../../frame';
 
 /**
  * Returns an array of Frames, for each group

@@ -10,3 +10,4 @@ export const reord = _r,
  			 arrProd=_ap,
  			 arrEQ = _arrEQ,
  			 arrCMP = _arrCMP;
+export const __ARRAY__ ['arrayutils', 'intset']; // inner parts

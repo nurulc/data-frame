@@ -3,6 +3,7 @@ import haveFrame from '../haveFrame';
 import getTransform from './getTransform';
 import changeNameTo from './changeNameTo';
 import joinOp from './joinOp';
+import project from './project';
 /**
  *		 example of a join
  *

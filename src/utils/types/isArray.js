@@ -5,7 +5,8 @@
  * @return {Boolean}
  */
 export default function isArray(arr) {
-	if( !arr) return undefined;
-	return (arr.constructor === Array || ArrayBuffer.isView(arr))?arr:undefined;
+	if( !arr) return null;
+	if(Array.isArray(arr)) return arr;
+	return (arr.constructor === Array || ArrayBuffer.isView(arr))?arr:null;
 }
 

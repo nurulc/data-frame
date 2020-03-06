@@ -1,4 +1,4 @@
-
+/*local*/
 export default function project(mappingList) {
 	return function (array1, array2) {
 		let data = [array1,array2];

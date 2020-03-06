@@ -1,4 +1,5 @@
 
+import memoize from './memoize';
 // Builds an accessor function for obj element key
 // akey = access('akey);  then akey(obj) same as obj.akey,   
 //                      akey(obj,value) same as obj.akey = value, ,

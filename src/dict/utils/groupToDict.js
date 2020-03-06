@@ -1,8 +1,8 @@
 
 import haveFrame from '../../frame/haveFrame';
-import getColIx from './getColIx';
+import getColIx from '../../frame/getColIx';
 import {MultiDict} from './MultiDict'
-import {Frame} from './frame';
+import {Frame} from '../../frame';
 
 /**
  * [groupToDict description]

@@ -1,4 +1,5 @@
 
+import {flatten} from '../../array/flatten';
 /**
  * [toKeyValueListV description]
  * @param  {[type]} obj [description]

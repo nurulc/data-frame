@@ -22,6 +22,7 @@
     "ajv": "^5.0.0",
     "babel-plugin-loop-optimizer": "^1.4.1",
     "babel-preset-minify": "^0.2.0",
+    "braces": ">=2.3.1",
     "chai": "^4.2.0",
     "esdoc": "^1.0.1",
     "esdoc-ecmascript-proposal-plugin": "^1.0.0",
@@ -34,15 +35,15 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-standard": "^3.0.1",
+    "glob": "^7.1.6",
     "mocha": "^3.5.3",
-    "rollup": "^1.32.0",
-    "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-babel-minify": "^8.0.0",
-    "rollup-plugin-node-resolve": "^4.2.4",
     "npm-watch": "^0.4.0",
     "plotly": "^1.0.6",
     "regenerator-runtime": "^0.10.5",
-    "braces": ">=2.3.1"
+    "rollup": "^1.32.0",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-babel-minify": "^8.0.0",
+    "rollup-plugin-node-resolve": "^4.2.4"
   },
   "repository": {
     "type": "git",

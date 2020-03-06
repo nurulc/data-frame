@@ -4,6 +4,9 @@ import colName from './colName';
 import localGroupBy from './localGroupBy';
 import changeNameTo from './changeNameTo';
 import joinOp from './joinOp';
+import project from './project';
+import getDict from './getDict';
+
 /**
  * innerJoin works like an SQL inner join, not quite as flexible, 
  *     select a as A, b, frame1.x from frame1, frame2

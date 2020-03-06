@@ -30,4 +30,8 @@ import _indexFrameColumn from './indexFrameColumn';
 export const indexFrameColumn = _indexFrameColumn;
 
 export * from './leftJoin';
+import _matchIt from './matchIt';
+export const matchIt = _matchIt;
+
 export * from './outerJoin';
+export * from './reverseProjectList1';

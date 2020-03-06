@@ -7,6 +7,6 @@ import intersectL from './intersectL';
  * @return {[Array]}         sorted array with no duplicates (a set)
  */
 export default function intersect(sortedL/*list od sets*/) {
-	return intersectL(Array.prototype.slice.call(arguments));
+	return intersectL(...sortedL);
 }
 

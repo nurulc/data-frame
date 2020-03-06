@@ -1,5 +1,5 @@
 
-import {prefixLen} from './prefixLen';
+import prefixLen from './prefixLen';
 /**
  * gets the prefix string of 'a' and 'n', for example a = 'asset', b = 'assess', the return will be 'asse'
  * @param  {string} a first string

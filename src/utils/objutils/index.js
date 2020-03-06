@@ -38,7 +38,6 @@ export const genObjMapper = _genObjMapper;
 import _mapOver from './mapOver';
 export const mapOver = _mapOver;
 
-export * from './timeIt';
 import _shallow from './shallow';
 export const shallow = _shallow;
 

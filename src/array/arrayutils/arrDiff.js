@@ -1,5 +1,5 @@
 
-import isArray from './isArray';
+import isArray from '../../utils/types/isArray';
 
 // return the difference of two arrays same as arr1 xor arr2
 /**

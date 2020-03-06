@@ -1,11 +1,11 @@
-
+import isArray from '../utils/types/isArray';
 /**
  * Use with a reducer
  * @param  {Array}
  * @param  {[type]}
  * @return {[type]}
  */
-export const FLATTEN = (res=[],arr) => Array.isArray(arr)?res.concat(arr):(res.push(arr), res);
+export const FLATTEN = (res=[],arr) => isArray(arr)?res.concat(arr):(res.push(arr), res);
 
 /**
  * Flatten an array to a depth of level, for example if level = 1, only flatten at the top level (depath1)

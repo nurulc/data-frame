@@ -1,4 +1,5 @@
 
+import newArray from '../../array/arrayutils/newArray'
 /**
  * [genObjMapper description]
  * @param  {[type]} obj [description]

@@ -3,9 +3,62 @@
 import {toNumber} from '../utils/sort-helper';
 import haveFrame from './haveFrame';
 import genColIxFunc from './genColIxFunc';
+import isFunction from '../utils/types/isFunction';
 
 const  isString = (s) =>  (typeof s) === 'string';
 
+
+/*
+
+		
+
+*/
+/**
+ * The frame should already be sorted by the groupBy order, or
+ * @param  {[type]} groupColsOrig [description]
+ * @param  {[type]} aFrame        [description]
+ * @param  {[type]} accumList     [description]
+ * @return {[type]}               [description]
+ */
+export function groupBy(groupColsOrig,aFrame, accumList) {
+	aFrame = haveFrame(aFrame);
+	accumList = accumList || [];
+	
+	let groupCols = groupColsOrig.map( (name,i) => isString(name)? name: genAccFunc(name,aFrame,i) );
+	let change = genChange(groupCols,aFrame);
+	let plen = groupCols.length;
+	//groupCols = groupCols.filter(v => v);
+	let accList = accumList.map( (fn,ix) => genAccFunc(fn,aFrame,plen+ix) );
+	let crResult = fillResult(groupCols,accList);
+	//console.log('groupCols/accList', groupCols, accList.length)
+	let colNames = groupCols.map(getColName).concat(accList.map(f => f()));
+	//console.log('colNames',colNames)
+	accList = groupCols.filter(v => isFunction(v)).concat(accList);
+	//console.log(colNames);
+	let data = aFrame.data;
+	let len = aFrame.length;
+	let dataRes = [];
+	let accLen = accList.length;
+	for(let i=0; i<len; i++) {
+		let row = data[i];
+		let [transition,prev] = change(row,i);
+		//console.log('Trans/prev',transition, prev)
+		let result;
+		if( transition === 2) {
+			result = crResult(prev);
+			//console.log('crResult', prev, result);
+			dataRes.push(result);
+		} else if( transition === 0 ) {
+			for(let j=0; j<accLen; j++) accList[j](0,row);
+		} 
+		for(let j=0; j<accLen; j++) accList[j](1,row); 
+	} 
+	if( len >0 ) { 
+		let prev = change([],-1)[1];
+		dataRes.push(crResult(prev));
+	}
+	return new aFrame.constructor(dataRes,colNames,aFrame.name+'grouped');
+}
 
 
 
@@ -85,67 +138,9 @@ function fillResult(groupCols, compList) {
 
 
 
-
-
-function isFunction(f) {
-		 return !!(f && f.constructor && f.call && f.apply);
-}
-
 function getColName(name) {
 	if(isString(name)) return name;
-	//if(isFunction(name)) return name();
-	return name();
+	if(isFunction(name)) return name();
+	//return name();
 	throw new Error('String or function expected - but got '+name);
 }
-/*
-
-		
-
-*/
-/**
- * The frame should already be sorted by the groupBy order, or
- * @param  {[type]} groupColsOrig [description]
- * @param  {[type]} aFrame        [description]
- * @param  {[type]} accumList     [description]
- * @return {[type]}               [description]
- */
-export function groupBy(groupColsOrig,aFrame, accumList) {
-	aFrame = haveFrame(aFrame);
-	accumList = accumList || [];
-	
-	let groupCols = groupColsOrig.map( (name,i) => isString(name)? name: genAccFunc(name,aFrame,i) );
-	let change = genChange(groupCols,aFrame);
-	let plen = groupCols.length;
-	//groupCols = groupCols.filter(v => v);
-	let accList = accumList.map( (fn,ix) => genAccFunc(fn,aFrame,plen+ix) );
-	let crResult = fillResult(groupCols,accList);
-	//console.log('groupCols/accList', groupCols, accList.length)
-	let colNames = groupCols.map(getColName).concat(accList.map(f => f()));
-	//console.log('colNames',colNames)
-	accList = groupCols.filter(v => isFunction(v)).concat(accList);
-	//console.log(colNames);
-	let data = aFrame.data;
-	let len = aFrame.length;
-	let dataRes = [];
-	let accLen = accList.length;
-	for(let i=0; i<len; i++) {
-		let row = data[i];
-		let [transition,prev] = change(row,i);
-		//console.log('Trans/prev',transition, prev)
-		let result;
-		if( transition === 2) {
-			result = crResult(prev);
-			//console.log('crResult', prev, result);
-			dataRes.push(result);
-		} else if( transition === 0 ) {
-			for(let j=0; j<accLen; j++) accList[j](0,row);
-		} 
-		for(let j=0; j<accLen; j++) accList[j](1,row); 
-	} 
-	if( len >0 ) { 
-		let prev = change([],-1)[1];
-		dataRes.push(crResult(prev));
-	}
-	return new aFrame.constructor(dataRes,colNames,aFrame.name+'grouped');
-}
-

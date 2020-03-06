@@ -28,9 +28,6 @@ export const max = _max;
 import _unionL from './unionL';
 export const unionL = _unionL;
 
-import _arrSplit from './arrSplit';
-export const arrSplit = _arrSplit;
-
 import _subtract from './subtract';
 export const subtract = _subtract;
 

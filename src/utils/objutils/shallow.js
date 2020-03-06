@@ -44,7 +44,7 @@ function shallowObject(a, b, compare) {
 		for (var key in a) {
 			if (
 				a.hasOwnProperty(key) &&
-        !compare(a[key], b[key])
+        		!compare(a[key], b[key])
 			) return false;
 
 			ka++;
