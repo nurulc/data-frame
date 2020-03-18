@@ -13,7 +13,11 @@ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
-export * from './frame'; // innerJoin,fullInnerJoin, leftJoin
+// export {Frame} from './frame/frame'; // innerJoin,fullInnerJoin, leftJoin
+// import _haveFrame from './frame/haveFrame';
+// export const haveFrame = _haveFrame;
+
+export * from './frame';
 export * from './array';
 export * from './dict';
 export * from './string';

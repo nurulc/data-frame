@@ -477,7 +477,8 @@ export class Frame extends BaseFrame {
 		if(!this) throw new TypeError('Filter cannot be use as a raw function');
 		if ( typeof fnOrArray === 'function')  {
 			let fn = fnOrArray;
-			return new this.constructor(this.data.filter( (x,ix,arr) => fn(this._rowObj(x),ix,arr)), this._columns, this._name, this.keyFunc); 
+			let row = this._rowObj([]);
+			return new this.constructor(this.data.filter( (x,ix,arr) => fn((row.__data=x,row),ix,arr)), this._columns, this._name, this.keyFunc); 
 		}
 		else if( Array.isArray(fnOrArray) ) { // expects an array of integer index into the frame return s teh values for all valid index
 			let elements = fnOrArray;
