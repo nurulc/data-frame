@@ -51,7 +51,7 @@ function strCmp(a,b) {
 }
 const cmpStrBy = (colIX) => (row1,row2) => (strCmp(row1[colIX],row2[colIX]));
 
-
+function Identity(x) { return x; }
 
 
 
@@ -340,16 +340,15 @@ export class Frame extends BaseFrame {
 	 */
 	numericColumns(aFrame) {
 		let threshold = Math.trunc(this.length*0.9);
-		let a = this.data.map(row => row.map(v => (isNum(v)|| !v)?1:0));
+		let a = this.data.map(row => row.map(v => (isNum(v))?1:(v === '' || v === undefined )? 0.5 : 0));
 		let sums = a.reduce(vecAdd,undefined); 
 		//console.log({threshold, sums});
 		return this.columns.map((c,i) => (sums[i]>threshold) ? c :undefined).filter(x => x);
-   
 	}
 
 
 	/**
-	 * [withIndex description]
+	 * [withIndex description] ()
 	 * @return {[type]} [description]
 	 */
 	withIndex(atEnd) {
@@ -381,7 +380,7 @@ export class Frame extends BaseFrame {
 	 * @param  {function} fn	f(rowObject, )
 	 * @return {Array}     [description]
 	 */
-	map(fn) { return this.data.map( (x,ix,arr) => fn(this._rowObj(x),ix,arr)); }
+	map(fn=Identity) { return this.data.map( (x,ix,arr) => fn(this._rowObj(x),ix,arr)); }
 
 	/**
 	 * [description]
@@ -542,7 +541,7 @@ export class Frame extends BaseFrame {
 	 *			
 	 *			// Note the names if mapper are the new column names
 	 *			var mapper = {
-	 *				 nurul: (v,i,row, rowObj) => "123",
+	 *				 nurul: (v, rowObj, i,row) => "123",
 	 *				 weekday: (v) => v.toUpperCase(),
 	 *				 v1: (v) => v===undefined?0:v
 	 *			};
@@ -613,13 +612,13 @@ export class Frame extends BaseFrame {
 					let v = pos === -1?'': inrow[pos];
 
 					if(tester) {
-						if(!tester(ro) ) row.push(v);
+						if(!tester(ro)) row.push(v);
 						else {
-							if( (fn = colMapFn[j]) !== undefined) v = ( flag?fn(ro):fn(v, i, inrow, ro) );
+							if( (fn = colMapFn[j]) !== undefined) v = ( flag?fn(ro):fn(v, ro, i, inrow) );
 							row.push(v);
 						}
 					} else {
-						if( (fn = colMapFn[j]) !== undefined) v = ( flag?fn(ro):fn(v, i, inrow, ro) );
+						if( (fn = colMapFn[j]) !== undefined) v = ( flag?fn(ro):fn(v, ro, i, inrow) );
 						row.push(v);
 					}
 				}
@@ -646,7 +645,7 @@ export class Frame extends BaseFrame {
 		return new Frame( result, newCols, this._name, this.keyFunc);
 	}
 
-	update(tester,mapper,flag=false) {
+	update(mapper,tester, flag=false) {
 		return this.project(undefined,mapper,flag,tester);
 	}
 
@@ -684,33 +683,26 @@ export class Frame extends BaseFrame {
 		//element mapping function supplied
 		if( mappingObj !== undefined){
 			let colMapFn = newCols.map(name => mappingObj[name]);
-			let _row = this._rowObj([]);  // create a temp row object
-			return (inrow, row) => {
-				let fn;
-				if( row === undefined) {
-					row = [];
-					for(let j=0; j<len2; j++) {
-						let pos = ixList[j]|0;
-						let v = pos === -1?'': inrow[pos];
-						if( (fn = colMapFn[j]) !== undefined) {
-							//_row.__data = inrow;
-							v = ( flag?fn(this._rowObj(inrow)):fn(v, 0, inrow, this._rowObj(inrow)) );
-						}
-						row.push(v);
+			//let _row = this._rowObj([]);  // create a temp row object
+			return (
+				(inrow, row) => {
+							let fn;
+							const push = ( row === undefined) ? 
+									( (v,j) => row.push(v)) :
+									( (v,j) => row[j] = v );
+							row = row || [];
+							for(let j=0; j<len2; j++) {
+								let pos = ixList[j]|0;
+								let v = pos === -1?'': inrow[pos];
+								if( (fn = colMapFn[j]) !== undefined) {
+									//_row.__data = inrow;
+									v = ( flag?fn(this._rowObj(inrow)):fn(v, 0, inrow, this._rowObj(inrow)) );
+								}
+								push(v,j);
+							}
+							return row;
 					}
-				} else {
-					for(let j=0; j<len2; j++) {
-						let pos = ixList[j]|0;
-						let v = pos === -1?'': inrow[pos];
-						if( (fn = colMapFn[j]) !== undefined) {
-							//_row.__data = inrow;
-							v = ( flag?fn(this._rowObj(inrow)):fn(v, 0, inrow, this._rowObj(inrow)) );
-						}
-						row[j] = v;
-					}
-				}
-				return row;
-			};
+			);
 
 		}
 		else { // no

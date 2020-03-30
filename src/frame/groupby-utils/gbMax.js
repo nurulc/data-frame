@@ -32,7 +32,7 @@ export default function gbMax(name,newName,fn) {
 	newName = newName || name;
 	fn = fn || maxOp;
 	function max(action,accum,count, val) {
-		if( accum === undefined ) accum = fn(val,'');
+		if( accum === undefined ) accum = fn(val,val);
 		return (isEmpty(val) || action !== 1)?[accum,count]:[fn(val,accum),count+1];	
 	}
 	return [max,name,[() => undefined,0],newName];

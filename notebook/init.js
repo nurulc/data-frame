@@ -15,17 +15,17 @@ Define a bunch of utilities
 
 
 var PATH = '../';
-var dfr = require(`${PATH}./lib`);
+var DataFrame = require(`${PATH}./lib`);
 
 // var scu = require(PATH+'../script-utils')
-var {NOT,OR,AND, K, TRUE, FALSE} = dfr;
+var {NOT,OR,AND, K, TRUE, FALSE} = DataFrame;
 
 
 
 var TEST_NEW = true;
 
-var {range, newArray,  csvLine, tsvLine, psvLine, Frame, flatten, gb
-    }  = dfr;
+var {range, newArray,  csvLine, tsvLine, psvLine, Frame, flatten, gb,
+     frameFromBuffer, arrProd, arrRemove}  = DataFrame;
 var fs = require('fs');
 var zlib = require('zlib');
 var { Readable } = require('stream');
@@ -488,7 +488,7 @@ function isCodesKey(key) {
 }
 
 
-var { cmpStrNum, combineCmp, revCmp } = dfr;
+var { cmpStrNum, combineCmp, revCmp } = DataFrame;
 var CC = (a, b) => { const res = cmpStrNum(a, b); console.log('CC', a, b, res); return res; };
 var cmpNumOrStrBy = getData => (row1, row2) => cmpStrNum(getData(row1), getData(row2));
 // var cmpNumOrStrBy =  (getData) => (row1,row2) => CC(getData(row1),getData(row2));
@@ -841,20 +841,40 @@ function graphDraw(graph) {
     }
 */
 
+function frameBarChart(aFrame, opts) {
+  let {key,value} = opts;
+  if(!key || !value) {
+    let numerics = frameNumericColumns(aFrame);
+    let nonNums = arrRemove(aFrame.columns, numerics);
+    key = opts.key || nonNums[0];
+    value = value || numerics[0];
+  }
+  if(aFrame.columns.indexOf(key) === -1) throw new Error('Key column not found: "'+key+'"')
+  if(aFrame.columns.indexOf(value) === -1) throw new Error('Value column not found: "'+value+'"');
+  let data = aFrame.map( row => ({key: row[key], value: row[value]}));
+  barChart(data, opts)
+
+}
+
+
+
 function barChart(data, {
-  height, width, title, axisX, axisY, source,
+  height, width, title, axisX, axisY, source, isLog, offset
 }) {
   const sData = JSON.stringify(data);
   const id = genID();
-
+  const au = DataFrame;
+  const OFFSET = offset || 30;
   height = height || 600;
-  width = width || 1000;
+  width = width || 800;
   axisX = axisX || 'Keys';
   axisY = axisY || 'Values';
   source = source || '';
   const values = data.map(d => d.value);
   const maxV = au.arrMax(values);
   const minV = au.arrMin(values);
+  isLog = !!isLog;
+  const _base = isLog?1:0;
   $$.html(`
     <style>
     div#${id}barlayout {
@@ -945,6 +965,10 @@ function barChart(data, {
         const width = ${width} - 2 * margin;
         const height = ${height} - 2 * margin;
         
+        function pos(y, ybase, delta) {
+          if(Math.abs(ybase - y) < 1.5*delta) return ybase+delta;
+          return y+delta;
+        }
         const chart = svg.append('g')
           .attr('transform', \`translate(\${margin}, \${margin})\`);
 
@@ -953,7 +977,7 @@ function barChart(data, {
           .domain(sample.map((s) => s.key))
           .padding(0.4)
 
-        const yScale = d3.scaleLinear()
+        const yScale = ${!isLog?'d3.scaleLinear()':'d3.scaleLog()'}
           .range([height, 0])
           .domain([0, ${maxV * 1.15}]);
 
@@ -987,7 +1011,7 @@ function barChart(data, {
           .attr('class', '${id}bar')
           .attr('x', (g) => xScale(g.key))
           .attr('y', (g) => yScale(g.value))
-          .attr('height', (g) => (console.log('height',g),height - yScale(g.value)))
+          .attr('height', (g) => (height - yScale(g.value)))
           .attr('width', xScale.bandwidth())
           .on('mouseenter', function (actual, i) {
             d3.selectAll('.${id}value')
@@ -1012,7 +1036,7 @@ function barChart(data, {
             barGroups.append('text')
               .attr('class', '${id}divergence')
               .attr('x', (a) => xScale(a.key) + xScale.bandwidth() / 2)
-              .attr('y', (a) => yScale(a.value) + 30)
+              .attr('y', (a) => pos(yScale(a.value), yScale(${_base}), ${OFFSET}))
               .attr('fill', 'white')
               .attr('text-anchor', 'middle')
               .text((a, idx) => {
@@ -1045,7 +1069,7 @@ function barChart(data, {
           .append('text')
           .attr('class', '${id}value')
           .attr('x', (a) => xScale(a.key) + xScale.bandwidth() / 2)
-          .attr('y', (a) => yScale(a.value) + 30)
+          .attr('y', (a) => pos(yScale(a.value), yScale(${_base}), ${OFFSET}))
           .attr('text-anchor', 'middle')
           .text((a) => \`\${a.value}\`)
 
@@ -1053,7 +1077,7 @@ function barChart(data, {
           .append('text')
           .attr('class', 'label')
           .attr('x', -(height / 2) - margin)
-          .attr('y', margin / 2.4)
+          .attr('y', margin / 2.4 - 10)       // FIX ME
           .attr('transform', 'rotate(-90)')
           .attr('text-anchor', 'middle')
           .text('${axisY}')
@@ -1165,7 +1189,7 @@ function frameChart(aFrame, props) {
 
     .axisx {
         font-size: 1em;
-        fill: gray;
+        fill: darkgray;
     }
 
     .legend {
@@ -1184,7 +1208,7 @@ function frameChart(aFrame, props) {
     }
 
     </style>
-    <div class="large" style="background-color: #e0e0e0">
+    <div class="large" style="background-color: #505080">
       <svg id="${id}svg" width="${width}" height="${height}">
           <defs>
             <filter x="0" y="0" width="1" height="1" id="solid">
@@ -1201,13 +1225,13 @@ function frameChart(aFrame, props) {
         var columns = ${columns};
 
         var svg = d3.select("#${id}svg"),
-            margin = {top: 30, right: 30, bottom: 50, left: 50},
+            margin = {top: 30, right: 30, bottom: 50, left: 80},
             width = +svg.attr("width") - margin.left - margin.right,
             height = +svg.attr("height") - margin.top - margin.bottom,
             g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
         var x0 = d3.scaleBand()
-            .rangeRound([0, width])
+            .rangeRound([0, width-50])
             .paddingInner(0.1);
 
         var x1 = d3.scaleBand()
@@ -1252,7 +1276,7 @@ function frameChart(aFrame, props) {
             .append("text")
               .attr("class", "legend")
               //.attr("filter", "url(#solid)")
-              .attr("x", 2)
+              .attr("x", 4)
               .attr("y", y(y.ticks().pop()) + 0.5)
               .attr("dy", "0.32em")
               .attr("fill", "#000")
@@ -1264,13 +1288,14 @@ function frameChart(aFrame, props) {
               .attr("font-family", "sans-serif")
               .attr("font-size", 10)
               .attr("text-anchor", "end")
-              //.attr("class", "legend")
+              .attr("class", "legend")
             .selectAll("g")
             .data(keys.slice().reverse())
             .enter().append("g")
               .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
           legend.append("rect")
+              //.attr("x", width - 19)
               .attr("x", width - 19)
               .attr("width", 19)
               .attr("height", 19)
@@ -1294,7 +1319,7 @@ function frameChart(aFrame, props) {
           .append('text')
           .attr('class', 'axisx')
           .attr('x', -(height / 2) - margin.top)
-          .attr('y', -4+margin.left / 2.4)
+          .attr('y', -10+margin.left / 2.4)
           .attr('transform', 'rotate(-90)')
           .attr('text-anchor', 'middle')
           .text(${J(axisY)})

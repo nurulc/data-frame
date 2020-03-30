@@ -31,7 +31,7 @@ export default function gbMin(name,newName,fn) {
 	newName = newName || name;
 	fn = fn || minOp;
 	function min(action,accum,count, val) {
-		if( accum === undefined ) accum = fn(val,'');
+		if( accum === undefined ) accum = fn(val,val);
 		return (isEmpty(val) || action !== 1)?[accum,count]:[fn(val,accum)<0?val:accum,count+1];
 	}
 	return [min,name,[() => undefined,0],newName];

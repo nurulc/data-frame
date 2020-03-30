@@ -41,7 +41,7 @@ export default function frameFromBuffer(buffer,frameName,splitter) {
 function cleanData(columns, array) {
 	if( !hasNoEmptyElem(columns) ) throw new Error("Invalid frame column");
 	let n = columns.length;
-	return [columns, array.map(_cleanData).filter(s => s)];
+	return [columns, array.map(_cleanData(n)).filter(s => s)];
 }
 
 

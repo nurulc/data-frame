@@ -24,12 +24,51 @@ import {dataSplit} from '../../string/csv';
  * @return {[type]}           [description]
  */
 export default function frameFromBuffer(buffer,frameName,splitter) {
-	let arr = buffer.split('\n');
+	let arr = buffer.replace(/\r/g, '').split('\n').filter(s => s);
 	let columns = splitter(arr[0]);
 	let array = dataSplit(arr.splice(1),splitter);
+	[columns, array] = cleanData(columns, array);
 	return new Frame(array,columns,frameName);
-
 }
 
+function cleanData(columns, array) {
+	if( !hasNoEmptyElem(columns) ) throw new Error("Invalid frame column");
+	let n = columns.length;
+	return [columns, array.map(_cleanData(n)).filter(s => s)];
+}
+
+
+function hasNoEmptyElem(arr, v) {
+	if( arguments.length === 1 ){
+		for(let i=0; i< arr.length; i++) 
+			if(!arr[i]) return undefined;
+	} else {
+		for(let i=0; i< arr.length; i++) 
+			if(arr[i] === v ) return undefined;
+	}
+	return arr;
+}
+
+function arrRemUndef(arr) {
+	for(let i=0; i< arr.length; i++) 
+		if(arr[i] === undefined) return arr.filter(v => v !== undefined);
+	return arr;
+}
+
+function _cleanData(n) {
+	return arr => {
+		arr = arrRemUndef(arr);
+		if(n !== arr.length) {
+			if(n > arr.length) {
+				arr = arr.slice(0);
+				while(arr.length < n) arr.push('');
+			} else {
+	            if(n === arr.length) return arr;
+				if(n < arr.length) return arr.slice(0,n);
+			}
+		}
+		return hasNoEmptyElem(arr, undefined);
+	}
+}
 
 

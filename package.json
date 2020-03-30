@@ -1,12 +1,13 @@
 {
   "name": "str-data-frame",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "description": "Utiltities to handle pandas like data frames",
   "main": "lib/index.js",
   "scripts": {
-    "build": "babel src -d lib && rollup -c && npm pack",
+    "build": "node code_spliter.node.js && babel src -d lib && rollup -c && npm pack",
+    "split": "node code_spliter.node.js",
     "rollup": "rollup -c",
-    "pkg": "babel src -d lib && npm pack && mv data-frame-*.tgz ../npmlocal",
+    "pkg": "babel src -d lib && rollup -c && npm pack && mv data-frame-*.tgz ../npmlocal",
     "test": "mocha --compilers js:babel-core/register ./src/*.test.js ./src/**/*.test.js",
     "gen:doc": "esdoc",
     "docs": "open docs/index.html",
