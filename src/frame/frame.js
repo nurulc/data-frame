@@ -320,7 +320,7 @@ export class Frame extends BaseFrame {
 	 * @return {[type]} [description]
 	 */
 	asObjList() {
-		return this.data.map(x => this._rawObj(x));
+		return this.data.map(x => this._rowObj(x));
 	}
 	/**
 	 * [_rowObj description]
@@ -328,9 +328,7 @@ export class Frame extends BaseFrame {
 	 * @return {[type]}      [description]
 	 */
 	_rowObj(elem) {
-		//console.log("**************** make raw ********************");
 		return new this.AccessClass(elem);
-		//return this._columns.reduce((obj, k, ix) => { obj[k] = elem[ix]; return obj; }, {});
 	}
 
 	/**
@@ -342,7 +340,6 @@ export class Frame extends BaseFrame {
 		let threshold = Math.trunc(this.length*0.9);
 		let a = this.data.map(row => row.map(v => (isNum(v))?1:(v === '' || v === undefined )? 0.5 : 0));
 		let sums = a.reduce(vecAdd,undefined); 
-		//console.log({threshold, sums});
 		return this.columns.map((c,i) => (sums[i]>threshold) ? c :undefined).filter(x => x);
 	}
 
@@ -380,14 +377,14 @@ export class Frame extends BaseFrame {
 	 * @param  {function} fn	f(rowObject, )
 	 * @return {Array}     [description]
 	 */
-	map(fn=Identity) { return this.data.map( (x,ix,arr) => fn(this._rowObj(x),ix,arr)); }
+	map(fn) { return this.mapF(fn); }
 
 	/**
 	 * [description]
 	 * @param  {function} fn	f(rowObject, )
 	 * @return {Array}     [description]
 	 */
-	mapF(fn) { return this.data.map( (x,ix,arr) => fn(this._rowObj(x),ix,arr)); }
+	mapF(fn) { return fn !== undefined ? this.data.map( (x,ix,arr) => fn(this._rowObj(x),ix,arr)) : this.asObjList(); }
 	
 	/**
 	 * Similar to arry reduce except it works on frames
