@@ -112,5 +112,5 @@ export default function unionFrame(frame1, frame2, notSorted) {
 		if(!isSorted(data2)) data2 = data2.slice(0).sort(colCMP);
 	}
 	let arr = _union2(data1, data2);
-	return new Frame(arr, frame1.columns, 'union');
+	return new frame1.constructor(arr, frame1.columns, 'union');
 }
