@@ -3,7 +3,9 @@
 
 This is a utility library providing the following category of functionality
 
-* Pandas like data frame 
+* Pandas (python) like data frame 
+   * This allows you CSV like tabular data like an in memory databse table
+   
 * Loading and and initializing data from CSV and tsv files
 * Filtering and sorting data
 * Array processing utilities
