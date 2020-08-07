@@ -1,4 +1,4 @@
-# Matcher
+# Pandas like data-frame
 
 
 This is a utility library providing the following category of functionality
@@ -8,6 +8,15 @@ This is a utility library providing the following category of functionality
 * Filtering and sorting data
 * Array processing utilities
 * Frame processing
+   * Group by functionality (on multiple columns)
+       * Aggrigation functions supported
+           * max - maximun value from the aggridated list
+           * min - minumum value from the aggridated list
+           * sum - sum of the numeric values in the aggrigated list
+           * mean - mean of the numeric values
+           * StdDev - standard deviation of the numeric values
+           *
+       
 * Some general string processing and onject utilities
 
 
