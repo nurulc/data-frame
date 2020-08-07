@@ -1,6 +1,18 @@
 # Pandas like data-frame
 
+This is an NPM package (Javascript), package name **str-data-frame**
 
+# Installation
+
+npm install --save str-data-frame
+
+## in your code import or require the package
+const ff = require("str-data-frame")
+
+
+
+
+## Package Functionalty
 This is a utility library providing the following category of functionality
 
 * Pandas (python) like data frame 
