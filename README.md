@@ -16,7 +16,10 @@ This is a utility library providing the following category of functionality
            * mean - mean of the numeric values
            * StdDev - standard deviation of the numeric values
            *
-       
+    * SQL like Equality join of two frames  
+        * Inner join
+        * Left join
+        * Right join
 * Some general string processing and onject utilities
 
 
