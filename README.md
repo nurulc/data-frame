@@ -1,7 +1,22 @@
 # Pandas like data-frame
 
+This is an NPM package (Javascript), package name **str-data-frame**
+
 <a href="https://https://nurulc.github.io/data-frame-examples.html">Link to interactive data frame totorial</a>
 
+>>>>>>> 58065f23223e6f7a6c2603bf3cb987381f86e4ab
+
+# Installation
+
+npm install --save str-data-frame
+
+## in your code import or require the package
+const ff = require("str-data-frame")
+
+
+
+
+## Package Functionalty
 This is a utility library providing the following category of functionality
 
 * Pandas (python) like data frame 
