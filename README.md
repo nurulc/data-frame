@@ -4,7 +4,7 @@ This is an NPM package (Javascript), package name **str-data-frame**
 
 <a href="https://https://nurulc.github.io/data-frame-examples.html">Link to interactive data frame totorial</a>
 
->>>>>>> 58065f23223e6f7a6c2603bf3cb987381f86e4ab
+
 
 # Installation
 

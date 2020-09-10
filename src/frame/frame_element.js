@@ -184,7 +184,7 @@ function getAccess(i) {
 let cache = {};
 
 function maker() {
-	return function(d) { this.__data = d; };
+	return function(d, index=-1) { this.__data = d; this.__index$ = index; return this; };
 }
 
 function htmlEncode(s) {
@@ -198,6 +198,8 @@ function toHTML$(self,columns) {
 	let list = columns.map(c => `<tr><td style="background-color: lightgrey">${htmlEncode(c)}</td><td>${htmlEncode(self[c])}</td></tr>`);
 	return (`<table>${list.join('')}</table>`);
 }
+
+
 
 /**
  * [createAccesClass description]
@@ -217,6 +219,7 @@ export function createAccesClass(columns) {
 		return toHTML$(this,columns);
 	};
 	aClass.prototype.__columns___ = columns;
+	aClass.prototype.__unsafeSet = _constructor;
 	return aClass;
 }
 
