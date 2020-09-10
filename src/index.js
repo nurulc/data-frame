@@ -24,3 +24,5 @@ export * from './string';
 export * from './utils/objutils';
 export * from './utils/types';
 export * from './utils/constants';
+export * from './utils/sort-helper';
+

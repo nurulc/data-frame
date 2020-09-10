@@ -21,3 +21,9 @@ nodemon.json
 str-data-frame*
 tests
 *.tgz
+runit.sh
+.eslintrc.json
+.eslintrc.js
+code_spliter.node.js
+pnpm-lock.yaml
+rollup.config.js

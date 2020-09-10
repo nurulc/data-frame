@@ -16,7 +16,10 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 import isEmpty from '../../utils/types/isEmpty';
 /**
- * [gbCount description]
+ * gbCount  count elemnts (non empty) in a group, bases on sql group by operation  
+ * e.g.   'select state, quater, count(sale_price) as items_sold from annual_sales groupby state, quater'
+ *        in frame operation
+ *        summary = frame.groupBy(['state', 'quater', gbCount('sale_price', 'items_sold')]);
  * @param  {[type]} name    [description]
  * @param  {[type]} newName [description]
  * @return {[type]}         [description]

@@ -1,0 +1,644 @@
+[
+  {
+    "name": "redim",
+    "filePath": "src/array/arrayutils/redim.js",
+    "lines": [
+      {
+        "lineNumber": 18,
+        "line": "/**"
+      },
+      {
+        "lineNumber": 19,
+        "line": " * @param  {[type]}"
+      },
+      {
+        "lineNumber": 20,
+        "line": " * @param  {[type]}"
+      },
+      {
+        "lineNumber": 21,
+        "line": " * @return {[type]}"
+      },
+      {
+        "lineNumber": 22,
+        "line": " */"
+      },
+      {
+        "lineNumber": 23,
+        "line": "export default  function redim(arr, n) {"
+      }
+    ],
+    "codeParams": [
+      "arr",
+      "n"
+    ],
+    "docParams": []
+  },
+  {
+    "name": "vecAdd",
+    "filePath": "src/array/arrayutils/vecAdd.js",
+    "lines": [
+      {
+        "lineNumber": 18,
+        "line": "/**"
+      },
+      {
+        "lineNumber": 19,
+        "line": " * Add two vectors"
+      },
+      {
+        "lineNumber": 20,
+        "line": " * @param  {[type]}"
+      },
+      {
+        "lineNumber": 21,
+        "line": " * @param  {[type]}"
+      },
+      {
+        "lineNumber": 22,
+        "line": " * @return {[type]}"
+      },
+      {
+        "lineNumber": 23,
+        "line": " */"
+      },
+      {
+        "lineNumber": 24,
+        "line": "export default  function vecAdd(a1,a2) {"
+      }
+    ],
+    "codeParams": [
+      "a1",
+      "a2"
+    ],
+    "docParams": []
+  },
+  {
+    "name": "xor",
+    "filePath": "src/array/arrayutils/xor.js",
+    "lines": [
+      {
+        "lineNumber": 18,
+        "line": "/**"
+      },
+      {
+        "lineNumber": 19,
+        "line": " * @param  {[type]}"
+      },
+      {
+        "lineNumber": 20,
+        "line": " * @param  {[type]}"
+      },
+      {
+        "lineNumber": 21,
+        "line": " * @return {[type]}"
+      },
+      {
+        "lineNumber": 22,
+        "line": " */"
+      },
+      {
+        "lineNumber": 23,
+        "line": "export default  function xor(array1, array2) {"
+      }
+    ],
+    "codeParams": [
+      "array1",
+      "array2"
+    ],
+    "docParams": []
+  },
+  {
+    "name": "zipToDict",
+    "filePath": "src/array/arrayutils/zipToDict.js",
+    "lines": [
+      {
+        "lineNumber": 16,
+        "line": "/**"
+      },
+      {
+        "lineNumber": 17,
+        "line": " * @param  {[type]}"
+      },
+      {
+        "lineNumber": 18,
+        "line": " * @return {[type]}"
+      },
+      {
+        "lineNumber": 19,
+        "line": " */"
+      },
+      {
+        "lineNumber": 20,
+        "line": "export function zipToDict(aListOfPairs) {"
+      }
+    ],
+    "codeParams": [
+      "aListOfPairs"
+    ],
+    "docParams": []
+  },
+  {
+    "name": "arrEQ",
+    "filePath": "src/array/arrEQ.js",
+    "lines": [
+      {
+        "lineNumber": 0,
+        "line": "/**\r"
+      },
+      {
+        "lineNumber": 1,
+        "line": " * Tests array for equality\r"
+      },
+      {
+        "lineNumber": 2,
+        "line": " * @param  {[elements]} arr1\r"
+      },
+      {
+        "lineNumber": 3,
+        "line": " * @param  {[elements]} arr2\r"
+      },
+      {
+        "lineNumber": 4,
+        "line": " * @return {boolean}\r"
+      },
+      {
+        "lineNumber": 5,
+        "line": " */\r"
+      },
+      {
+        "lineNumber": 6,
+        "line": "export default   function arrEQ(arr1,arr2, eqFn) {\r"
+      }
+    ],
+    "codeParams": [
+      "arr1",
+      "arr2",
+      "eqFn"
+    ],
+    "docParams": [
+      "arr1",
+      "arr2"
+    ]
+  },
+  {
+    "name": "FLATTEN",
+    "filePath": "src/array/flatten.js",
+    "lines": [
+      {
+        "lineNumber": 1,
+        "line": "/**\r"
+      },
+      {
+        "lineNumber": 2,
+        "line": " * Use with a reducer\r"
+      },
+      {
+        "lineNumber": 3,
+        "line": " * @param  {Array}\r"
+      },
+      {
+        "lineNumber": 4,
+        "line": " * @param  {[type]}\r"
+      },
+      {
+        "lineNumber": 5,
+        "line": " * @return {[type]}\r"
+      },
+      {
+        "lineNumber": 6,
+        "line": " */\r"
+      },
+      {
+        "lineNumber": 7,
+        "line": "export const FLATTEN = (res=[],arr) => isArray(arr)?res.concat(arr):(res.push(arr), res);\r"
+      }
+    ],
+    "codeParams": [
+      "res",
+      "arr"
+    ],
+    "docParams": []
+  },
+  {
+    "name": "max",
+    "filePath": "src/array/intset/max.js",
+    "lines": [
+      {
+        "lineNumber": 16,
+        "line": "/**"
+      },
+      {
+        "lineNumber": 17,
+        "line": " * maximum of a sorted array"
+      },
+      {
+        "lineNumber": 18,
+        "line": " * @param  {[type]}"
+      },
+      {
+        "lineNumber": 19,
+        "line": " * @return {[type]}"
+      },
+      {
+        "lineNumber": 20,
+        "line": " */"
+      },
+      {
+        "lineNumber": 21,
+        "line": "export default function max(list) { return (!list || list.length == 0) ? undefined : list[list.length-1];}"
+      }
+    ],
+    "codeParams": [
+      "list"
+    ],
+    "docParams": []
+  },
+  {
+    "name": "arrSplit2",
+    "filePath": "src/array/intset/unionL.js",
+    "lines": [
+      {
+        "lineNumber": 94,
+        "line": "/**"
+      },
+      {
+        "lineNumber": 95,
+        "line": " * Split an array into an array of arrays each with equal parts, expect possibly for the last element"
+      },
+      {
+        "lineNumber": 96,
+        "line": " * @param  {[type]}"
+      },
+      {
+        "lineNumber": 97,
+        "line": " * @return {[type]}"
+      },
+      {
+        "lineNumber": 98,
+        "line": " */"
+      },
+      {
+        "lineNumber": 99,
+        "line": "function arrSplit2(list) {"
+      }
+    ],
+    "codeParams": [
+      "list"
+    ],
+    "docParams": []
+  },
+  {
+    "name": "reord",
+    "filePath": "src/array/reord.js",
+    "lines": [
+      {
+        "lineNumber": 18,
+        "line": "/**\r"
+      },
+      {
+        "lineNumber": 19,
+        "line": " * @param  {[type]}\r"
+      },
+      {
+        "lineNumber": 20,
+        "line": " * @param  {[type]}\r"
+      },
+      {
+        "lineNumber": 21,
+        "line": " * @return {[type]}\r"
+      },
+      {
+        "lineNumber": 22,
+        "line": " */\r"
+      },
+      {
+        "lineNumber": 23,
+        "line": "export default function reord(subListWithNewOrder,fullList) {\r"
+      }
+    ],
+    "codeParams": [
+      "subListWithNewOrder",
+      "fullList"
+    ],
+    "docParams": []
+  },
+  {
+    "name": "frameFromBuffer",
+    "filePath": "src/frame/frame-utils/frameFromBuffer.js",
+    "lines": [
+      {
+        "lineNumber": 18,
+        "line": "/**"
+      },
+      {
+        "lineNumber": 19,
+        "line": " * default splitter is pipe seperated values"
+      },
+      {
+        "lineNumber": 20,
+        "line": " * @param  {[type]} buffer    [description]"
+      },
+      {
+        "lineNumber": 21,
+        "line": " * @param  {[type]} frameName [description]"
+      },
+      {
+        "lineNumber": 22,
+        "line": " * @param  {[type]} splitter  [description]"
+      },
+      {
+        "lineNumber": 23,
+        "line": " * @return {[type]}           [description]"
+      },
+      {
+        "lineNumber": 24,
+        "line": " */"
+      },
+      {
+        "lineNumber": 25,
+        "line": "export default function frameFromBuffer(buffer,frameName,splitter,Fr) {"
+      }
+    ],
+    "codeParams": [
+      "buffer",
+      "frameName",
+      "splitter",
+      "Fr"
+    ],
+    "docParams": [
+      "buffer",
+      "frameName",
+      "splitter"
+    ]
+  },
+  {
+    "name": "frameWithIndex",
+    "filePath": "src/frame/frame-utils/frameWithIndex.js",
+    "lines": [
+      {
+        "lineNumber": 18,
+        "line": "/**"
+      },
+      {
+        "lineNumber": 19,
+        "line": " * [frameWithIndex description]"
+      },
+      {
+        "lineNumber": 20,
+        "line": " * @param  {Frame} aFrame The frame to add the index to"
+      },
+      {
+        "lineNumber": 21,
+        "line": " * @return {Frame}        new frame with an index column (remove and previous index column)"
+      },
+      {
+        "lineNumber": 22,
+        "line": " */"
+      },
+      {
+        "lineNumber": 23,
+        "line": "export default function frameWithIndex(aFrame, atEnd) {"
+      }
+    ],
+    "codeParams": [
+      "aFrame",
+      "atEnd"
+    ],
+    "docParams": [
+      "aFrame"
+    ]
+  },
+  {
+    "name": "Frame#withIndex",
+    "filePath": "src/frame/frame.js",
+    "lines": [
+      {
+        "lineNumber": 148,
+        "line": "\t/**"
+      },
+      {
+        "lineNumber": 149,
+        "line": "\t * [withIndex description] ()"
+      },
+      {
+        "lineNumber": 150,
+        "line": "\t * @return {[type]} [description]"
+      },
+      {
+        "lineNumber": 151,
+        "line": "\t */"
+      },
+      {
+        "lineNumber": 152,
+        "line": "\twithIndex(atEnd) {"
+      }
+    ],
+    "codeParams": [
+      "atEnd"
+    ],
+    "docParams": []
+  },
+  {
+    "name": "Frame#_genAuxJoinFilter",
+    "filePath": "src/frame/frame.js",
+    "lines": [
+      {
+        "lineNumber": 498,
+        "line": "\t/**"
+      },
+      {
+        "lineNumber": 499,
+        "line": "\t * Creates a filter function the for the additional join checck"
+      },
+      {
+        "lineNumber": 500,
+        "line": "\t * Note the primary joining action (primary criterion) is the joinOp which look like this"
+      },
+      {
+        "lineNumber": 501,
+        "line": "\t * joinOp => 'commonColumnNameInBothFrames' or 'colFram1==colFrame2'"
+      },
+      {
+        "lineNumber": 502,
+        "line": "\t * "
+      },
+      {
+        "lineNumber": 503,
+        "line": "\t * @param  {Function} function to compare 2 rows a and b "
+      },
+      {
+        "lineNumber": 504,
+        "line": "\t * @param  {[type]}   "
+      },
+      {
+        "lineNumber": 505,
+        "line": "\t * @return {[type]}"
+      },
+      {
+        "lineNumber": 506,
+        "line": "\t */"
+      },
+      {
+        "lineNumber": 507,
+        "line": "\t_genAuxJoinFilter(fn,aFrame) {"
+      }
+    ],
+    "codeParams": [
+      "fn",
+      "aFrame"
+    ],
+    "docParams": [
+      "function"
+    ]
+  },
+  {
+    "name": "gbMean",
+    "filePath": "src/frame/groupby-utils/gbMean.js",
+    "lines": [
+      {
+        "lineNumber": 18,
+        "line": "/**"
+      },
+      {
+        "lineNumber": 19,
+        "line": " * gbMean average (mean) value of a group - see gbMin"
+      },
+      {
+        "lineNumber": 20,
+        "line": " * @param  {[type]} name    [description]"
+      },
+      {
+        "lineNumber": 21,
+        "line": " * @param  {[type]} newName [description]"
+      },
+      {
+        "lineNumber": 22,
+        "line": " * @return {[type]}         [description]"
+      },
+      {
+        "lineNumber": 23,
+        "line": " */"
+      },
+      {
+        "lineNumber": 24,
+        "line": "export default function gbMean(name,newName, fn=isEmpty) {"
+      }
+    ],
+    "codeParams": [
+      "name",
+      "newName",
+      "fn"
+    ],
+    "docParams": [
+      "name",
+      "newName"
+    ]
+  },
+  {
+    "name": "countCh",
+    "filePath": "src/string/strutil/countCh.js",
+    "lines": [
+      {
+        "lineNumber": 16,
+        "line": "/**"
+      },
+      {
+        "lineNumber": 17,
+        "line": " * count the number of occurences of char in the string"
+      },
+      {
+        "lineNumber": 18,
+        "line": " * @param  {string} data  [description]"
+      },
+      {
+        "lineNumber": 19,
+        "line": " * @param  {char} char  [description]"
+      },
+      {
+        "lineNumber": 20,
+        "line": " * @param  {[int32]} arr   optional array to place the index of char in string"
+      },
+      {
+        "lineNumber": 21,
+        "line": " * @param  {int32} optional start start index of the string"
+      },
+      {
+        "lineNumber": 22,
+        "line": " * @param  {int32} end   optional last index of the string"
+      },
+      {
+        "lineNumber": 23,
+        "line": " * @return {int32}       number of occurences of the char in the string"
+      },
+      {
+        "lineNumber": 24,
+        "line": " */"
+      },
+      {
+        "lineNumber": 25,
+        "line": "export default  function countCh(data, char, arr, start, end) {"
+      }
+    ],
+    "codeParams": [
+      "data",
+      "char",
+      "arr",
+      "start",
+      "end"
+    ],
+    "docParams": [
+      "data",
+      "char",
+      "arr",
+      "optional",
+      "end"
+    ]
+  },
+  {
+    "name": "genFilterFunction",
+    "filePath": "src/utils/objutils/genFilterFunction.js",
+    "lines": [
+      {
+        "lineNumber": 17,
+        "line": "/**"
+      },
+      {
+        "lineNumber": 18,
+        "line": " * create a function that tests for elements in aListOrStringOrEmpty"
+      },
+      {
+        "lineNumber": 19,
+        "line": " *   aListOrStringOrEmpty => undefined - allows everything"
+      },
+      {
+        "lineNumber": 20,
+        "line": " *   aListOrStringOrEmpty => [... names ] - allow only the elelemnts in the list "
+      },
+      {
+        "lineNumber": 21,
+        "line": " *   aListOrStringOrEmpty => <single string Name> (string) - allow only single name "
+      },
+      {
+        "lineNumber": 22,
+        "line": " * @param  {[type]}"
+      },
+      {
+        "lineNumber": 23,
+        "line": " * @return {[type]}"
+      },
+      {
+        "lineNumber": 24,
+        "line": " */"
+      },
+      {
+        "lineNumber": 25,
+        "line": "export default function genFilterFunction(aListOrStringOrEmpty) {"
+      }
+    ],
+    "codeParams": [
+      "aListOrStringOrEmpty"
+    ],
+    "docParams": []
+  }
+]

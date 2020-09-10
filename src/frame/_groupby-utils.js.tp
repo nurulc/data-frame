@@ -20,7 +20,11 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 //@
 //##import {toNumber} from '../utils/sort-helper';
 /**
- * [gbSum description]
+ * gbSum  sum eelemnts in a group, bases on sql group by operation  
+ * e.g.   'select state, quater, sum(sale_price) as sales from annual_sales groupby state, quater'
+ *        in frame operation
+ *        summary = frame.groupBy(['state', 'quater', gbSum('sale_price', 'sales')]);
+ *        
  * @param  {[type]} name    [description]
  * @param  {[type]} newName [description]
  * @return {[type]}         [description]
@@ -42,7 +46,10 @@ export default function gbSum(name,newName) {
 //@@
 //##import isEmpty from '../utils/types/isEmpty';
 /**
- * [gbCount description]
+ * gbCount  count elemnts (non empty) in a group, bases on sql group by operation  
+ * e.g.   'select state, quater, count(sale_price) as items_sold from annual_sales groupby state, quater'
+ *        in frame operation
+ *        summary = frame.groupBy(['state', 'quater', gbCount('sale_price', 'items_sold')]);
  * @param  {[type]} name    [description]
  * @param  {[type]} newName [description]
  * @return {[type]}         [description]
@@ -61,7 +68,10 @@ export default function gbCount(name,newName) {
 //##import isEmpty from '../utils/types/isEmpty';
 //##import {cmpStrNum} from '../utils/sort-helper/cmpStrNum';
 /**
- * [gbMin description]
+ * gbMin  minimum elemnts value (non empty) in a group, bases on sql group by operation  
+ * e.g.   'select state, quater, product_id, min(sale_price) as min_prod_price from annual_sales groupby state, quater'
+ *        in frame operation
+ *        summary = frame.groupBy(['state', 'quater', 'product_id", gbMin('sale_price', 'min_prod_price')]);
  * @param  {[type]}   name    [description]
  * @param  {[type]}   newName [description]
  * @param  {Function} fn      [description]
@@ -90,7 +100,7 @@ function minOp(a,b) { return cmpStrNum(a,b)<0?a:b; }
 //##import {cmpStrNum} from '../utils/sort-helper/cmpStrNum';
 
 /**
- * [gbMax description]
+ * gbMax max value in a group, see gbMin
  * @param  {[type]}   name    [description]
  * @param  {[type]}   newName [description]
  * @param  {Function} fn      [description]
@@ -115,12 +125,12 @@ function maxOp(a,b) { return cmpStrNum(a,b)>0?a:b; }
 //##import isEmpty from '../utils/types/isEmpty';
 //##import {toNumber} from '../utils/sort-helper';
 /**
- * [gbMean description]
+ * gbMean average (mean) value of a group - see gbMin
  * @param  {[type]} name    [description]
  * @param  {[type]} newName [description]
  * @return {[type]}         [description]
  */
-export default function gbMean(name,newName) {
+export default function gbMean(name,newName, fn=isEmpty) {
 	newName = newName || name;
 	function mean(action,accum,count, val) {
 		if( accum === undefined ) accum = 0;
@@ -134,7 +144,7 @@ export default function gbMean(name,newName) {
 //##import isEmpty from '../utils/types/isEmpty';
 //##import {toNumber} from '../utils/sort-helper';
 /**
- * [gbStdDiv description]
+ * gbStdDiv standard deviation - see gbMin
  * @param  {[type]} name    [description]
  * @param  {[type]} newName [description]
  * @return {[type]}         [description]
@@ -160,7 +170,7 @@ export default function gbStdDiv(name, newName) {
 //##import accStr from './accStr';
 
 /**
- * [gbMerge description]
+ * gbMerge merge the values grouped rows onto a single comma seperated value
  * @param  {[type]} name    [description]
  * @param  {[type]} newName [description]
  * @param  {[type]} sep     [description]

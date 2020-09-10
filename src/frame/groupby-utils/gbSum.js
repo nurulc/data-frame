@@ -16,7 +16,11 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 import {toNumber} from '../../utils/sort-helper';
 /**
- * [gbSum description]
+ * gbSum  sum eelemnts in a group, bases on sql group by operation  
+ * e.g.   'select state, quater, sum(sale_price) as sales from annual_sales groupby state, quater'
+ *        in frame operation
+ *        summary = frame.groupBy(['state', 'quater', gbSum('sale_price', 'sales')]);
+ *        
  * @param  {[type]} name    [description]
  * @param  {[type]} newName [description]
  * @return {[type]}         [description]

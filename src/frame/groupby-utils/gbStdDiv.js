@@ -17,7 +17,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 import isEmpty from '../../utils/types/isEmpty';
 import {toNumber} from '../../utils/sort-helper';
 /**
- * [gbStdDiv description]
+ * gbStdDiv standard deviation - see gbMin
  * @param  {[type]} name    [description]
  * @param  {[type]} newName [description]
  * @return {[type]}         [description]

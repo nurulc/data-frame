@@ -133,6 +133,8 @@ export default function toKeyValueList(obj) {
 	return Object.keys(obj).map( k => [k, obj[k]]);
 }
 
+Object.entries || (Object.entries = toKeyValueList);
+
 //@@
 //##import setKey from './setKey';
 /**
@@ -144,15 +146,17 @@ export default function fromKeyValueList(list) {
 	return list.reduce( (tab,[k,v]) => setKey(tab, k, v),{});
 }
 
+Object.fromEntries || (Object.fromEntries = fromKeyValueList);
+
 //@@
 /**
- * [setKeyV description]
+ * setKeyV - set object's key (multiple) value, if there is no value argument is present get the value list for the  key 
  * @param {[type]} obj [description]
  * @param {[type]} key [description]
  * @param {[type]} v   [description]
  */
 export default function setKeyV(obj,key,v) {
-	if(arguments.length == 1) 
+	if(arguments.length == 2) 
 		return obj[key];
 	else if( v === undefined) return obj;
 	else {
@@ -175,6 +179,7 @@ export default function toKeyValueListV(obj) {
 	return flatten(expand,1);
 	function doExpand(k) {
 		let v = obj[k];
+		assert(Array.isArray(v), 'value must be an array')
 		if( v.length == 1) {
 			let res = [k, v[0]];
 			return [res];
@@ -196,11 +201,13 @@ export default function fromKeyValueListV(list) {
 
 
 //@@
-//##import newArray from '../array/arrayutils/newArray'
+//##import newArray from '../array/arrayutils/newArray';
+//##import setKey from './setKey';
 /**
- * [genObjMapper description]
+ * genObjMapper generates a function to map object to an array
+ * this is useful to convert an array of object to the data of a frame
  * @param  {[type]} obj [description]
- * @return {[type]}     [description]
+ * @return {[mapperFunction, [keys]]}     returns an array first element that function to convert the object to an array, and the secont element is an array of column names
  */
 export default function genObjMapper(obj) {
 	let keys = Object.keys(obj);

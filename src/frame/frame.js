@@ -18,110 +18,44 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 //import { getFreq } from './frequency';
 import BaseFrame from './BaseFrame';
 import { createAccesClass } from './frame_element';
-import { dataSplit } from '../string/csv';
 import sortFrameBy from './sortframe';
 import {groupBy} from './groupby';
 import frameWithIndex from './frame-utils/frameWithIndex';
-import { flatten, arrRemove, arrDedup, newArray, vecAdd, arrHash} from '../array';
-import { isA } from '../utils/objutils';
+import { arrRemove, arrDedup, newArray } from '../array';
 import {EMPTY_ARRAY} from '../utils/constants';
+import {K} from '../utils';
+import {toNumber} from '../utils/sort-helper';
 import {innerJoin, leftJoin, outerJoin} from './join-utils';
-import {combineCmp, cmpNumOrStrBy, toNumber, revCmp} from '../utils/sort-helper';
-import genColIxFunc from './genColIxFunc';
+//import {combineCmp, cmpNumOrStrBy, toNumber, revCmp} from '../utils/sort-helper';
+//import genColIxFunc from './genColIxFunc';
 import haveFrame from './haveFrame';
 import arrEqual from '../array/arrEQ';
 import toHTML from './toHTML';
-import {arrayUniq, _makeUnique} from './makeUnique';
+//import {arrayUniq, _makeUnique} from './makeUnique';
+import {_makeUnique} from './makeUnique';
+import {vecAdd,zipToDict} from '../array/arrayutils';
 
 
 
 function isString(aStr) { return typeof aStr === 'string'; }
 function isFunc(f) { return typeof f === 'function'; }
-function isNum(v) {
-	let nv = +v;
-	if(isNaN(nv)) {
-		return false;
-	}
-	return true;
-}
+function isNum(v) {return v !== '' && !isNaN(+v); }
 
-function strCmp(a,b) {
-	if(a === b) return 0;
-	return a<b?-1:1;
-}
-const cmpStrBy = (colIX) => (row1,row2) => (strCmp(row1[colIX],row2[colIX]));
+// function strCmp(a,b) {
+// 	if(a === b) return 0;
+// 	return a<b?-1:1;
+// }
+// const cmpStrBy = (colIX) => (row1,row2) => (strCmp(row1[colIX],row2[colIX]));
 
 function Identity(x) { return x; }
 
 
 
-function objName(o) {
-	if(typeof o === 'object' ) return o.constructor.name;
-	return typeof o;
-}
-
-// *
-//  * [description]
-//  * @param  {[type]} list [description]
-//  * @return {[type]}      [description]
- 
-// export const arrayTallySorted = (list) => arrayTally(list);//.sort( (a,b) => a.count < b.count);
-
-// /**
-//  * [description]
-//  * @param  {[type]} list [description]
-//  * @return {[type]}      [description]
-//  */
-// export const arrayUniq = (list)  => Object.keys(_makeUnique(list)).sort();
-
-
-
-// const EMPTY_STR = '';
-// /**
-//  * @param  {[[column_elements...]...]} listOfRows 
-//  * @param  {[type]} colIx 	The column to make unique
-//  * @return {dict}   returns an object representing mapping of unique values where key and value are the same
-//  */
-// function _makeUnique(listOfRows,colIx) {
-
-// 	let dict = {};
-// 	if( colIx === undefined) {
-// 		let list = listOfRows; // the list just has data
-// 		let len = list.length;
-// 		for(let i = 0; i<len;i++) { 
-// 			let row = list[i];
-// 			let rlen = row.length;
-// 			for(let k=0; k< rlen; k++){
-// 				let x = row[k];
-// 				if( typeof x === 'string' || x === undefined) {
-// 					x = x===undefined ? EMPTY_STR :x;
-// 					let nv = dict[x];
-// 					if(nv === undefined) dict[v] = nv = x;
-// 					row[k] = nv;
-// 				}
-// 			}
-// 		} 
-// 	}
-// 	else {
-// 		let len = listOfRows.length;
-// 		let cnt = len<5000? len: Math.max(5000, Math.trunc(len/3));
-// 		for(let i = 0; i<len;i++) {
-// 			let row = listOfRows[i];
-// 			let v = row[colIx];
-// 			if( v === undefined || typeof v === 'string'  ) {
-// 				if( !v ) {
-// 					row[colIx] = EMPTY_STR;
-// 				} else {
-// 					let nv = dict[v];
-// 					if(nv === undefined && cnt-- > 0) dict[v] = nv = v;
-// 					else nv = v;
-// 					row[colIx] = nv;
-// 				}
-// 			}
-// 		} 
-// 	}
-// 	return dict;
+// function objName(o) {
+// 	if(typeof o === 'object' ) return o.constructor.name;
+// 	return typeof o;
 // }
+
 
 
 
@@ -139,11 +73,6 @@ export class Frame extends BaseFrame {
 	 */
 	constructor(data,columns,name,keyFunc) {
 		super(data,columns,name,keyFunc);
-		name = name || '';
-		this.keyFunc = keyFunc || this._getKey;
-		this.data = data||[];
-		this._columns = columns||[];
-		this._name = name;
 		this._unique = undefined;
 		this._sortCols = EMPTY_ARRAY;
 		this._row = undefined;
@@ -152,45 +81,11 @@ export class Frame extends BaseFrame {
 		this._hash = -1;
 	}
 
-	/**
-	 * Create a new frame based of this frame but with new data
-	 * @param {[[string]]} d    new data for the frame (but with the same columns
-	 * @param {String} name optional ne name
-	 */
-	setData(d,name) {
-		return new this.constructor(d, this.columns, name || this.name, this.keyFunc);
-	}
+	
 
-	_getKey(i) {
-		return this.data[i][0];
-	}
+// ======================================================================
 
-	/**
-	 * [getKey description]
-	 * @param  {[type]} i [description]
-	 * @return {[type]}   [description]
-	 */
-	getKey(i) {
-		return this.keyFunc(i);
-	}
-
-	/**
-	 * [columns description]
-	 * @return {[type]} [description]
-	 */
-	get columns() { return this._columns||EMPTY_ARRAY; }
-	set columns(columns) {
-		return new this.constructor(this.data, this.columns, this.name, this.keyFunc);
-	}
-	get length() { return (this.data || EMPTY_ARRAY).length; }
-	get name() { return this._name; }
-	set name(aName) {
-		return new this.constructor(this.data, this.columns, aName, this.keyFunc);
-	}
-	get hash() {
-		if( this._hash !== -1 ) return this._hash;
-		return this._hash = this.data.reduce((h,arr) => (h*17|0)+arrHash(arr), 0);
-	}
+	asObj(ix) { return this._rowObj(this.data[ix]); }
 
 	get rows() { 
 		if(this._rows === undefined) 
@@ -198,67 +93,6 @@ export class Frame extends BaseFrame {
 		return this._rows; 
 	}
 
-
-	equal(aFrame) {
-		if(!aFrame) return false;
-		if(this === aFrame) return true;
-		if(this.length !== aFrame.length ) return false;
-		if(!arrEqual(this.columns, aFrame.columns)) return false;
-		let len = this.length;
-		let d1 = this.data, d2 = aFrame.data;
-		for(let i=0; i<len; i++) {
-			let a1 = d1[i], a2 = d2[i];
-			if( a1 === a2 ) continue;
-			let ln = a1.length;
-			if( ln !== a2.length ) return false;
-			
-			for(let j=0; j<ln; j++) {
-				if( a1[j] !== a2[j]) return false;
-			}
-		}
-		return true;
-	}
-	/**
-	 * [colIx description]
-	 * @param  {[type]} name [description]
-	 * @return {[type]}      [description]
-	 */
-	colIx(name) {
-		return this._columns.indexOf(name);
-	}
-
-
-
-	/**
-	 * Simple version of project to create a frame with only one column
-	 * @param  {[type]} colName [description]
-	 * @return {[type]}         [description]
-	 */
-	column(colName) {
-		const ix = this._columns.indexOf(colName);
-		if( ix == -1 ) return [];
-		return new Frame(this.data.map( v => [v[ix]]), [this._columns[ix]], this._name, this.keyFunc);
-	}
-
-	/**
-	 * [rawColumn description]
-	 * @param  {[type]} colName [description]
-	 * @return {[type]}         [description]
-	 */
-	rawColumn(colName) {
-		const ix = this._columns.indexOf(colName);
-		if( ix == -1 ) return [];
-		return this.data.map( v => v[ix]);
-	}
-
-	/**
-	 * [row description]
-	 * @param  {[type]} ix [description]
-	 * @return {[type]}    [description]
-	 */
-	row(ix) { return this.data[ix]; }
-
-	asObj(ix) { return this._rowObj(this.data[ix]); }
 
 
 	/**
@@ -299,23 +133,6 @@ export class Frame extends BaseFrame {
 	}
 
 	/**
-	 * Similar functionality to array slice
-	 * @param  {[type]} first [description]
-	 * @param  {[type]} last  [description]
-	 * @return {[type]}       [description]
-	 */
-	slice(first,last) {
-		return new Frame(this.data.slice(first,last), this.columns, this._name, this.keyFunc);
-	}
-
-	/**
-	 * [asStrList description]
-	 * @return {[type]} [description]
-	 */
-	asStrList() {
-		return this.data.map(x => x.join('\t'));
-	}
-	/**
 	 * [asObjList description]
 	 * @return {[type]} [description]
 	 */
@@ -330,19 +147,6 @@ export class Frame extends BaseFrame {
 	_rowObj(elem) {
 		return new this.AccessClass(elem);
 	}
-
-	/**
-	 * [numericColumns description]
-	 * @param  {[type]} aFrame [description]
-	 * @return {[type]}        [description]
-	 */
-	numericColumns(aFrame) {
-		let threshold = Math.trunc(this.length*0.9);
-		let a = this.data.map(row => row.map(v => (isNum(v))?1:(v === '' || v === undefined )? 0.5 : 0));
-		let sums = a.reduce(vecAdd,undefined); 
-		return this.columns.map((c,i) => (sums[i]>threshold) ? c :undefined).filter(x => x);
-	}
-
 
 	/**
 	 * [withIndex description] ()
@@ -362,14 +166,6 @@ export class Frame extends BaseFrame {
 		let v = this.data.find((x,i) => fn(this._rowObj(x),i,x));
 		return v ? this._rowObj(v): undefined;
 	}
-	/**
-	 * [description]
-	 * @param  {Function} fn   [description]
-	 * @param  {[type]}   ini  [description]
-	 * @return {[type]}        [description]
-	 */
-	reduceRaw(fn, ini) { return this.data.reduce( fn, ini); }
-	
 
 
 	/**
@@ -423,28 +219,6 @@ export class Frame extends BaseFrame {
 	 * @return {[type]}     [description]
 	 */
 	forEachF(fn) { this.data.forEach((row, ix, arr) => fn(this._rowObj(row), ix, arr)); }
-	/**
-	 * [description]
-	 * @param  {function} fn 	takes function(row:array, ix, array)
-	 * @return {[type]}     [description]
-	 */
-	forEachRaw(fn) { this.data.forEach( (row,ix,arr) => fn(row,ix,arr)); }
-
-	/**
-	 * [description]
-	 * @param  {Function} fn       [description]
-	 * @param  {[string]}   newCols [description]
-	 * @return {Frame}            [description]
-	 */
-	
-	mapRaw(fn,newCols) { return new this.constructor(this.data.map(fn), newCols || this._columns, this._name, this.keyFunc); }
-	
-	/**
-	 * [description]
-	 * @param  {[type]} fn 	[description]
-	 * @return {[type]}     [description]
-	 */
-	filterRaw(fn) { return new this.constructor(this.data.filter(fn),this._columns, this._name, this.keyFunc); }
 
 	/**
 	 * same as filter but returns the index of the filtered lines
@@ -483,18 +257,15 @@ export class Frame extends BaseFrame {
 			let data = this.data;
 			let dlen = data.length;
 			let i = -1;
+			let newColName = fnOrArray.map(i => this._columns[i] || 'COL_'+i)
 			while(++i !== len) {
 				let ix = elements[i];
 				if(typeof ix !== 'number') continue;
 				if(ix <0 || ix >= dlen) continue;
 				let r = data[ix];
-				if(r) res.push(r);
-			}
-			// I do not know who added the  two commented out line but that is incorrect code
-			
-			//let tempFilter = xor(data, res);
-			//return new Frame(tempFilter, this._columns, this._name, this.keyFunc); 
-			return new this.constructor(res, this._columns, this._name, this.keyFunc); 
+				if(r !== undefined) res.push(r);
+			} 
+			return new this.constructor(res, newColName, this._name, this.keyFunc); 
 		}
 	}
 
@@ -573,73 +344,110 @@ export class Frame extends BaseFrame {
 	 * @param  {[type]}  tester      [description]
 	 * @return {[type]}              [description]
 	 */
-	project(colsMapping,mappingObj,flag=false, tester=undefined) {
+	project(colsMapping,mappingObj,filter=undefined,flag=false, tester=undefined) {
 		if( (!colsMapping || colsMapping.length === 0) && !mappingObj ) return this; //someCols = this.columns.slice(0);
 		if(!colsMapping) colsMapping = this.columns;
-		let mappedCols = colsMapping.map(n => n.split('=')).map( ([a,b]) => [a, b||a] );
-
+		if( filter && !isFunc(filter)) throw new TypeError('Filter: '+filter+' must be a function');
+		let mappedCols = colsMapping
+			.map(n => n.split('=')) // convert 'original column name' and 'new column name' pair 
+			.map(([originalName,newName]) => [originalName, newName||originalName] );
 		//check if we are only renaming the columns, then the data does can stay the same, just the columns are renamed
-		if( mappingObj === undefined && arrEqual(this.columns,mappedCols.map(([a,b]) => a)) ) {
-			return new Frame(this.data,mappedCols.map(([a,b]) => b), this.name + '1');
+		if( mappingObj === undefined && filter === undefined && arrEqual(this.columns,mappedCols.map(([a]) => a)) ) {
+			return new this.constructor(this.data,mappedCols.map(([,b]) => b), this.name + '1');
 		}
 
-		let ixList = mappedCols.map( ([name]) => this.colIx(name));//.filter( x => x != -1);
-		//let someCols = mappedCols.map(([name]) => name);
-		let newCols = mappedCols.map(([name,newName]) => newName);
-		let nc = arrDedup(newCols);
-		if( nc.length !== newCols.length) {
+		let ixList = mappedCols.map( ([name]) => this.colIx(name));// get index of column in the original data
+
+		let newCols = mappedCols.map(([,newName]) => newName);
+		if( arrDedup(newCols).length !== newCols.length) {
 			throw new Error('project - new column names must be uinque ['+ newCols.join(',')+']');
 		}
 		const len = this.data.length;
 		const data = this.data;
-		let result = newArray(len,[]);
+		let result = filter?[]:newArray(len,[]);
 		
 		
 		let len2 = ixList.length;
 		let fn;
-		//const dummy = [];
-		if( mappingObj !== undefined){
+
+		if( mappingObj ){
 			let colMapFn = newCols.map(name => mappingObj[name]);
+
 			for(let i=0; i<len; i++) {
 				let row = [];//newArray(len2,dummy);
 				let inrow = data[i];
-				let ro = (tester || mappingObj) ? this._rowObj(inrow): undefined;
+				let ro = (tester || mappingObj || filter) ? this._rowObj(inrow): undefined;
+				if(filter && !filter(ro)) continue;
 				for(let j=0; j<len2; j++) {
 					let pos = ixList[j];
 					let v = pos === -1?'': inrow[pos];
 
 					if(tester) {
-						if(!tester(ro)) row.push(v);
+						if(!tester(ro, newCols[i])) row.push(v);
 						else {
 							if( (fn = colMapFn[j]) !== undefined) v = ( flag?fn(ro):fn(v, ro, i, inrow) );
-							row.push(v);
+							row.push(v!==undefined?v:'');
 						}
 					} else {
 						if( (fn = colMapFn[j]) !== undefined) v = ( flag?fn(ro):fn(v, ro, i, inrow) );
-						row.push(v);
+						row.push(v!==undefined?v:'');
 					}
 				}
-				result[i] = row;
+				if(filter) result.push(row); 
+				else result[i] = row;
 			}
 
 		}
 		else {
 			for(let i=0; i<len; i++) {
-				let row =[]; //new Array(len2);
+				let row =[];
 				let inrow = data[i];
+				if(filter) {
+					let ro = this._rowObj(inrow);
+					if(!filter(ro) ) continue;
+				}
 				for(let j=0; j<len2; j++) {
-					let pos = ixList[j];
+					let pos = ixList[j]; // get position (index) in origimal data
 					let v = pos === -1?'': inrow[pos];
 					row.push(v);
 				}	
-				result[i] = row;			
+				if(filter) result.push(row); 
+				else result[i] = row;			
 			}
 				
 		}
 
 		
 		//result = this.data.map(row => projectRow(row, ixList));
-		return new Frame( result, newCols, this._name, this.keyFunc);
+		return new this.constructor( result, newCols, this._name, this.keyFunc);
+	}
+
+	select(columns, where) {
+		let cols = columns.map( name => {
+			let nameStr = name;
+			let func;
+
+			if(Array.isArray(name)) [nameStr,func] = name;
+			
+			if( !isString(nameStr)) throw new TypeError('expected a column name');
+			let [oldName, newName] = nameStr.split('=');
+			return [oldName, (newName|| oldName), func];
+		});
+
+		function toFunc(v) {
+			if(isFunc(v)) return v;
+			return K(v);
+		}
+		let mapper = cols.filter(([ , ,fn]) => fn !== undefined)
+			.map(([ ,nn,fn]) => [nn, toFunc(fn)]);
+		let colMap = undefined;
+		if(mapper.length) colMap = zipToDict(mapper);
+		
+		return this.project(
+			cols.map(([oldName, newName]) => oldName+'='+newName),
+			colMap, 
+			where);
+
 	}
 
 	update(mapper,tester, flag=false) {
@@ -654,12 +462,14 @@ export class Frame extends BaseFrame {
 	 * @return {[type]}              [description]
 	 */
 	trProject(colsMapping,mappingObj,flag=false) {
-		if( !colsMapping || colsMapping.length === 0 ) return (inrow,row) => []; //nothing to map
-		let mappedCols = colsMapping.map(n => n.split('=')).map( ([a,b]) => [a, b||a] );
+		if( !colsMapping || colsMapping.length === 0 ) return () => []; //nothing to maporiginalName
+		let mappedCols = colsMapping
+			.map(n => n.split('=')) // convert 'original column name' and 'new column name' pair 
+			.map(([originalName,newName]) => [originalName, newName||originalName] );
+
 
 		//check if we are only renaming the columns, then the data does can stay the same, just the columns are renamed
-		if( mappingObj === undefined && arrEqual(this.columns,mappedCols.map(([a,b]) => a)) ) {
-			//return new Frame(this.data,mappedCols.map(([a,b]) => b), this.name + '1');
+		if( mappingObj === undefined && arrEqual(this.columns,mappedCols.map(([originalName,newName]) => originalName)) ) {
 			return (inrow,row) => {
 				if(!row) return inrow.slice(0);
 				for(let i =0; inrow.length; i++) row[i] = inrow[i];
@@ -669,7 +479,7 @@ export class Frame extends BaseFrame {
 
 		let ixList = mappedCols.map( ([name]) => this.colIx(name));//.filter( x => x != -1);
 		//let someCols = mappedCols.map(([name]) => name);
-		let newCols = mappedCols.map(([name,newName]) => newName);
+		let newCols = mappedCols.map(([,newName]) => newName);
 		let nc = arrDedup(newCols);
 		if( nc.length !== newCols.length) {
 			throw new Error('project - new column names must be uinque ['+ newCols.join(',')+']');
@@ -680,25 +490,23 @@ export class Frame extends BaseFrame {
 		//element mapping function supplied
 		if( mappingObj !== undefined){
 			let colMapFn = newCols.map(name => mappingObj[name]);
-			//let _row = this._rowObj([]);  // create a temp row object
 			return (
 				(inrow, row) => {
-							let fn;
-							const push = ( row === undefined) ? 
-									( (v,j) => row.push(v)) :
-									( (v,j) => row[j] = v );
-							row = row || [];
-							for(let j=0; j<len2; j++) {
-								let pos = ixList[j]|0;
-								let v = pos === -1?'': inrow[pos];
-								if( (fn = colMapFn[j]) !== undefined) {
-									//_row.__data = inrow;
-									v = ( flag?fn(this._rowObj(inrow)):fn(v, 0, inrow, this._rowObj(inrow)) );
-								}
-								push(v,j);
-							}
-							return row;
+					let fn;
+					const push = ( row === undefined) ? 
+						( v => row.push(v)) :
+						( (v,j) => row[j] = v );
+					row = row || [];
+					for(let j=0; j<len2; j++) {
+						let pos = ixList[j]|0;
+						let v = pos === -1?'': inrow[pos];
+						if( (fn = colMapFn[j]) !== undefined) {
+							v = ( flag?fn(this._rowObj(inrow)):fn(v, 0, inrow, this._rowObj(inrow)) );
+						}
+						push(v,j);
 					}
+					return row;
+				}
 			);
 
 		}
@@ -797,7 +605,6 @@ export class Frame extends BaseFrame {
 		let aFrame = this;
 		if(toSort === undefined || toSort === true) {
 			aFrame.sorted = undefined;
-			//aFrame = aFrame.sort(groupCols.filter(name => isString(name), cmpStrBy));
 			aFrame = aFrame.sort(groupCols.filter(name => isString(name)));
 		}
 		return groupBy(groupCols, aFrame, listOfAccumulatorFunctions);
@@ -820,12 +627,66 @@ export class Frame extends BaseFrame {
 		return this._unique;
 	}
 
+	get numericColumns() {
+		const threshold = Math.trunc(this.length * 0.9);
+		const a = this.data.map(row => row.map(v => ((isNum(v) || !v) ? 1 : 0)));
+		const sums = a.reduce(vecAdd);
 
-	/**
-	 * remove duplicate rows,
+		return this.columns.map((c, i) => ((sums[i] > threshold) ? c : undefined)).filter(Identity);
+	}
+
+	convertData(convList) {
+		let _data = newArray(this.length, []);
+		if(convList === undefined || convList.length === 0) {
+			let len = this.length;
+			let data = this.data;
+			for(let i = 0; i<len; i++) {
+				let row = data[i];
+				if( row.some(x => typeof x === 'string' && isNum(x)) ) {
+					row = row.map(v => isNum(v) ?toNumber(v): v);
+				}
+				_data[i] = row;
+			}
+		} else {
+			//throw new Error('custom conversion is not supported');
+			
+			let len = this.length;
+			let data = this.data;
+			let dummy = data.length?data[0].slice(0):[];
+			let rlen = this.columns.length;
+
+			let cLen = convList.length;
+			for(let i = 0; i<len; i++) {
+				let row = data[i];
+				let changed = false;
+				for(let col=0; col<rlen; col++) {
+					dummy[col] = row[col];
+					for(let k=0; k<cLen; k++) {
+						if(convList[k][0](row[col])) {
+							dummy[col] = convList[k][1](row[col]);
+							changed = true;
+							break;	
+						} 
+					}
+				}
+				if(changed) _data[i] = dummy.slice(0);
+				else _data[i] = row;
+			}
+
+		}
+		if(arrEqual(this.data,_data)) {
+			// nothing changed
+			return this;
+		}
+		return this.constructor(_data,this.columns,this.name,this.keyFunc);
+	}
+
+	
+	/*
+	 * return a frame where all rows are unique, i.e. remove duplicate rows,
 	 * @return {Frame} returns a sorted frame with no duplicates
 	 */
-	dedup() {
+	distinct() {
 		return this.groupBy(this.columns,undefined,true);
 	}
 	
@@ -838,5 +699,12 @@ export class Frame extends BaseFrame {
 
 }
 
+function toString(x) {
+	return x.toString();
+}
 
+Frame.HTMLFormat = {
+	number: toString,
+	other: toString
+};
 

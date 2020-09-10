@@ -21,7 +21,7 @@ import isArray from './isArray';
  * @return {[Boolean]} - true if empty array or empty object
  */
 export default function isEmpty(arrOrObj) {
-	if(!arrOrObj) return true;
+	if(arrOrObj === '' || arrOrObj === undefined || arrOrObj === null) return true;
 	if(isArray(arrOrObj) && arrOrObj.length === 0) return true;
 	if(typeof arrOrObj === 'object' && 
 			Object.keys(arrOrObj).length === 0 ) return true;

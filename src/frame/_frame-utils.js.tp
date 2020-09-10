@@ -15,10 +15,9 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
 import {Frame} from './frame';
-import haveFrame from './haveFrame';
-import {range} from '../array';
-import getColIx from './getColIx';
 import {dataSplit} from '../string/csv';
+// import {range} from '../array';
+// import getColIx from './getColIx';
 
 //@@
 //##import {Frame} from './frame';
@@ -26,16 +25,19 @@ import {dataSplit} from '../string/csv';
 /**
  * default splitter is pipe seperated values
  * @param  {[type]} buffer    [description]
- * @param  {[type]} frameName [description]
- * @param  {[type]} splitter  [description]
+ * @param  {{ noConvert: boolen,name: string, Fr: SomeFrameClass}} options
  * @return {[type]}           [description]
  */
-export default function frameFromBuffer(buffer,frameName,splitter) {
+export default function frameFromBuffer(buffer,splitter,options={}) {
+    let {Fr, name, noConvert} = options;
+	Fr = Fr || Frame;
 	let arr = buffer.replace(/\r/g, '').split('\n').filter(s => s);
 	let columns = splitter(arr[0]);
 	let array = dataSplit(arr.splice(1),splitter);
 	[columns, array] = cleanData(columns, array);
-	return new Frame(array,columns,frameName);
+	var newFrame = new Fr(array,columns,frameName)
+	if(!noConvert) newFrame = newFrame.convertData();
+	return newFrame; 
 }
 
 function cleanData(columns, array) {
@@ -97,11 +99,9 @@ export default function frameWithIndex(aFrame, atEnd) {
 }
 
 //@
-//##import {Frame} from './frame';
 //##import haveFrame from './haveFrame';
-//##import {range} from '../array';
 //##import getColIx from './getColIx';
-//##import {dataSplit} from '../string/csv';
+
 
 /**
  * [frameSum description]
@@ -122,11 +122,8 @@ export default function frameSum(aFrame, colName, convName, convValue) {
 }
 
 //@@
-//##import {Frame} from './frame';
 //##import haveFrame from './haveFrame';
-//##import {range} from '../array';
 //##import getColIx from './getColIx';
-//##import {dataSplit} from '../string/csv';
 
 /**
  * [frameCount description]
@@ -145,12 +142,8 @@ export default function frameCount(aFrame, colName, convName) {
 	return [name, sum];
 }
 //@@
-//##import {Frame} from './frame';
-//##import haveFrame from './haveFrame';
-//##import {range} from '../array';
-//##import getColIx from './getColIx';
-//##import {dataSplit} from '../string/csv';
-
+//## import haveFrame from './haveFrame';
+//## import {range} from '../../array'
 /**
  * [transpose description]
  * @param  {[type]} frame [description]
@@ -158,10 +151,13 @@ export default function frameCount(aFrame, colName, convName) {
  * @return {[type]}       [description]
  */
 export default function transpose(frame, pivot) {
+    frame = haveFrame(frame);
 	let len = frame.length;
 	let columns = frame.columns;
 	let data = columns.filter(c => c !== pivot).map((c,ix) => [c, ...frame.rawColumn(c)]);
 	let newColumns = (columns.indexOf(pivot) !== -1? frame.rawColumn(pivot):range(len)).map(v => ''+v);
+	if(pivot && newColumns.indexOf(pivot) !== -1) pivot = undefined;
+	newColumns = [(pivot?pivot:"__ROW"), ...newColumns];
 	return new frame.constructor(data, newColumns, 'transpose-'+(frame.name||'frame'));
 }
 
@@ -181,13 +177,12 @@ export default function frameToString(aFrame) {
 
 //@@unionFrame.js
 
-//##import {Frame} from './frame';
 //##import haveFrame from './haveFrame';
-//##import {range} from '../array';
-//##import getColIx from './getColIx';
-//##import {dataSplit} from '../string/csv';
 //##import colEQ from '../array/arrEQ';
 //##import colCMP from '../array/arrCMP';
+
+// //##import getColIx from './getColIx';
+// //##import {range} from '../../array';
 // =============================
 // tuned for frame array
 // 

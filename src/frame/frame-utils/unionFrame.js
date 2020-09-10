@@ -15,13 +15,12 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 unionFrame.js
 
-import {Frame} from '../frame';
 import haveFrame from '../haveFrame';
-import {range} from '../../array';
-import getColIx from '../getColIx';
-import {dataSplit} from '../../string/csv';
 import colEQ from '../../array/arrEQ';
 import colCMP from '../../array/arrCMP';
+
+// import getColIx from '../getColIx';
+// import {range} from '../../array';
 // =============================
 // tuned for frame array
 // 

@@ -19,7 +19,7 @@ import {arrDedup } from '../../array';
 import accStr from './accStr';
 
 /**
- * [gbMerge description]
+ * gbMerge merge the values grouped rows onto a single comma seperated value
  * @param  {[type]} name    [description]
  * @param  {[type]} newName [description]
  * @param  {[type]} sep     [description]

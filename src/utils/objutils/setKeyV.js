@@ -15,13 +15,13 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
 /**
- * [setKeyV description]
+ * setKeyV - set object's key (multiple) value, if there is no value argument is present get the value list for the  key 
  * @param {[type]} obj [description]
  * @param {[type]} key [description]
  * @param {[type]} v   [description]
  */
 export default function setKeyV(obj,key,v) {
-	if(arguments.length == 1) 
+	if(arguments.length == 2) 
 		return obj[key];
 	else if( v === undefined) return obj;
 	else {

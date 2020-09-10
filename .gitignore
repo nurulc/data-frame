@@ -7,3 +7,5 @@ runit.sh
 *.bak
 *.gz
 *.tgz
+pnpm-lock.yaml
+notebook/frame-test-Copy1.ipynb

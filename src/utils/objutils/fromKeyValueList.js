@@ -24,3 +24,5 @@ export default function fromKeyValueList(list) {
 	return list.reduce( (tab,[k,v]) => setKey(tab, k, v),{});
 }
 
+Object.fromEntries || (Object.fromEntries = fromKeyValueList);
+

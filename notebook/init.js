@@ -1118,24 +1118,15 @@ function frameNumericColumns(aFrame) {
 }
 
 
-function isNum(v) {
-  const nv = +v;
-  if (isNaN(nv)) {
-    return false;
-  }
-  return true;
-}
+function isNum(v) {return v !== '' && !isNaN(+v); }
 
 function asNum(v) {
   const nv = +v;
-  if (isNaN(nv)) {
-    return v;
-  }
-  return nv;
+  return (isNaN(nv))?nv:v;
 }
 
 function asObj(cols) {
-  return arr => arr.reduce((obj, v, i) => (obj[cols[i]] = asNum(v), obj), {});
+  return arr => arr.reduce((obj, v, i) => Object.assign(obj, {[cols[i]]: asNum(v)}), {});
 }
 
 /*

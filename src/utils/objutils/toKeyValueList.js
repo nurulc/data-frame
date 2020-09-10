@@ -23,3 +23,5 @@ export default function toKeyValueList(obj) {
 	return Object.keys(obj).map( k => [k, obj[k]]);
 }
 
+Object.entries || (Object.entries = toKeyValueList);
+

@@ -14,6 +14,13 @@ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
+function isNumber(x) {
+	if(x === 0) return true;
+	if( !x ) return false;
+	let v = +x;
+	return !(isNaN(v));
+}
+
 const defaultStyle = `<style> 
 	.ftable  { 
 		font-family: arial, sans-serif; 
@@ -41,27 +48,34 @@ const defaultStyle = `<style>
 </style>\n`;
 
 export default function toHTML(aFrame, myStyle, rowColor=colorDefault) {
-		let columns = aFrame.columns;
-		if(myStyle === '*') myStyle = defaultStyle;
-		myStyle = myStyle || '';
-		return (
-			myStyle +
-			'<table class="ftable"><thead>' +
-			'<tr><th>Ix</th>' + columns.map(c => '<th>' + c.replace(/_/g, ' ') + '</th>').join('') + '</tr></thead><tbody>' +
-			aFrame.data.slice(0, Math.min(aFrame.length, (aFrame.showLen|| 200))).map(showRow).join('') +
-			'</tbody></table>'
-		);
-		function showRow(r, i) {
-			let rowColorV = rowColor(aFrame._rowObj(r),i); 
-			let style = rowColorV ? 'style="background-color: ' + rowColorV + '"' : ''; 
-			return ('<tr'+style+'><td>' + i + '</td>' + r.map(c => '<td>' + (ns(c)) + '</td>').join('') + '</tr>');
-		}
-		function ns(s) {
-			if (typeof s !== 'string') return (s === undefined ? '' : '' + s) || '';
-			if (s.indexOf('<') !== -1) s = s.replace(/</g, '&lt;');
-			if (s.indexOf('>') !== -1) s = s.replace(/>/g, '&gt;');
-			return (s === undefined ? '' : '' + s) === 'NON' ? 'NS' : s;
-		}
+	let columns = aFrame.columns;
+	const HTMLformat = aFrame.constructor.HTMLFormat;
+	if(myStyle === '*') myStyle = defaultStyle;
+	myStyle = myStyle || '';
+	return (
+		myStyle +
+		'<table class="ftable"><thead>' +
+		'<tr><th>Ix</th>' + columns.map(c => '<th>' + c.replace(/_/g, ' ') + '</th>').join('') + '</tr></thead><tbody>' +
+		aFrame.data.slice(0, Math.min(aFrame.length, (aFrame.showLen|| 200))).map(showRow).join('') +
+		'</tbody></table>'
+	);
+	function showRow(r, i) {
+		let rowColorV = rowColor(aFrame._rowObj(r),i); 
+		let style = rowColorV ? 'style="background-color: ' + rowColorV + '"' : ''; 
+		return ('<tr'+style+'><td>' + i + '</td>' + r.map((c,j) => '<td>' + (ns(c,j)) + '</td>').join('') + '</tr>');
+	}
+	function ns(s,i) {
+		if (typeof s !== 'string') return (s === undefined ? '' : render(s,i)) || '';
+	
+		if (s.indexOf('<') !== -1) s = s.replace(/</g, '&lt;');
+		if (s.indexOf('>') !== -1) s = s.replace(/>/g, '&gt;');
+		return (s === undefined ? '' : render(s,i));
+	}
+	function render(s,i) {
+
+		if(isNumber(s))  return HTMLformat.number(s,i,aFrame);
+		else return HTMLformat.other(s,i,aFrame);
+	}
 }
 
 function colorDefault(r,i) { return undefined; }

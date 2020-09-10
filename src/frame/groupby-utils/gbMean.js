@@ -17,12 +17,12 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 import isEmpty from '../../utils/types/isEmpty';
 import {toNumber} from '../../utils/sort-helper';
 /**
- * [gbMean description]
+ * gbMean average (mean) value of a group - see gbMin
  * @param  {[type]} name    [description]
  * @param  {[type]} newName [description]
  * @return {[type]}         [description]
  */
-export default function gbMean(name,newName) {
+export default function gbMean(name,newName, fn=isEmpty) {
 	newName = newName || name;
 	function mean(action,accum,count, val) {
 		if( accum === undefined ) accum = 0;

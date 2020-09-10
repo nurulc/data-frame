@@ -23,12 +23,13 @@ import {dataSplit} from '../../string/csv';
  * @param  {[type]} splitter  [description]
  * @return {[type]}           [description]
  */
-export default function frameFromBuffer(buffer,frameName,splitter) {
+export default function frameFromBuffer(buffer,frameName,splitter,Fr) {
+	Fr = Fr || Frame;
 	let arr = buffer.replace(/\r/g, '').split('\n').filter(s => s);
 	let columns = splitter(arr[0]);
 	let array = dataSplit(arr.splice(1),splitter);
 	[columns, array] = cleanData(columns, array);
-	return new Frame(array,columns,frameName);
+	return new Fr(array,columns,frameName).convertData();
 }
 
 function cleanData(columns, array) {

@@ -25,6 +25,7 @@ export default function toKeyValueListV(obj) {
 	return flatten(expand,1);
 	function doExpand(k) {
 		let v = obj[k];
+		assert(Array.isArray(v), 'value must be an array')
 		if( v.length == 1) {
 			let res = [k, v[0]];
 			return [res];

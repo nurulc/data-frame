@@ -18,7 +18,7 @@ import isEmpty from '../../utils/types/isEmpty';
 import {cmpStrNum} from '../../utils/sort-helper/cmpStrNum';
 
 /**
- * [gbMax description]
+ * gbMax max value in a group, see gbMin
  * @param  {[type]}   name    [description]
  * @param  {[type]}   newName [description]
  * @param  {Function} fn      [description]

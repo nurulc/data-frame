@@ -14,11 +14,8 @@ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
-import {Frame} from '../frame';
 import haveFrame from '../haveFrame';
-import {range} from '../../array';
 import getColIx from '../getColIx';
-import {dataSplit} from '../../string/csv';
 
 /**
  * [frameCount description]

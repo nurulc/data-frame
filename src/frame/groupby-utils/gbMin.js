@@ -17,7 +17,10 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 import isEmpty from '../../utils/types/isEmpty';
 import {cmpStrNum} from '../../utils/sort-helper/cmpStrNum';
 /**
- * [gbMin description]
+ * gbMin  minimum elemnts value (non empty) in a group, bases on sql group by operation  
+ * e.g.   'select state, quater, product_id, min(sale_price) as min_prod_price from annual_sales groupby state, quater'
+ *        in frame operation
+ *        summary = frame.groupBy(['state', 'quater', 'product_id", gbMin('sale_price', 'min_prod_price')]);
  * @param  {[type]}   name    [description]
  * @param  {[type]}   newName [description]
  * @param  {Function} fn      [description]

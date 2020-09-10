@@ -16,7 +16,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 
 export function toNumber(str) {
-	if(!str) return undefined;
+	if(str === '' || str === undefined) return undefined;
 	let len = str.length,negate = 1;
 	let res = +str;
 	if(!isNaN(res)) return res;
