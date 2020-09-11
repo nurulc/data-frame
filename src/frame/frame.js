@@ -83,13 +83,13 @@ export class Frame extends BaseFrame {
 
 	
 
-// ======================================================================
+	// ======================================================================
 
-	asObj(ix) { return this._rowObj(this.data[ix]); }
+	asObj(ix) { return this._rowObj(this.data[ix], ix); }
 
 	get rows() { 
 		if(this._rows === undefined) 
-			this._rows = this.data.map(r => this._rowObj(r));
+			this._rows = this.data.map((r,i) => this._rowObj(r,i));
 		return this._rows; 
 	}
 
@@ -122,10 +122,11 @@ export class Frame extends BaseFrame {
 		let nf = this.project(cols);
 		let mergeCols = this.project(someColsToMerge);
 		
-		return new Frame( nf.data.map((row,ix) => row.concat(joinColsAt(ix)) ),	
-						 cols.concat([newNameForMergerCol]),
-						 this._name, 
-						 this.keyFunc );
+		return new Frame( 
+			nf.data.map((row,ix) => row.concat(joinColsAt(ix)) ),	
+			cols.concat([newNameForMergerCol]),
+			this._name, 
+			this.keyFunc );
 		// =======
 		function joinColsAt(ix) {
 			return [mergeFunc(mergeCols.data[ix].filter(x => x))];
@@ -137,23 +138,24 @@ export class Frame extends BaseFrame {
 	 * @return {[type]} [description]
 	 */
 	asObjList() {
-		return this.data.map(x => this._rowObj(x));
+		return this.data.map((x,i) => this._rowObj(x,i));
 	}
 	/**
 	 * [_rowObj description]
 	 * @param  {[type]} elem [description]
 	 * @return {[type]}      [description]
 	 */
-	_rowObj(elem) {
-		return new this.AccessClass(elem);
+	_rowObj(elem,ix) {
+		return new this.AccessClass(elem,ix);
 	}
 
 	/**
 	 * [withIndex description] ()
+	 * @param  {boolean} atEnd if true the index is placed on the last column, otherwise it is the first column
 	 * @return {[type]} [description]
 	 */
-	withIndex(atEnd) {
-		return frameWithIndex(this,atEnd);
+	withIndex(indexName='_INDEX',atEnd) {
+		return frameWithIndex(this,indexName,atEnd);
 	}
 
 
@@ -163,7 +165,8 @@ export class Frame extends BaseFrame {
 	 * @return {[type]}      [description]
 	 */
 	find(fn) {
-		let v = this.data.find((x,i) => fn(this._rowObj(x),i,x));
+		let row = this._rowObj();
+		let v = this.data.find((x,i) => fn(row.__unsafeSet(x,i),i));
 		return v ? this._rowObj(v): undefined;
 	}
 
@@ -180,7 +183,6 @@ export class Frame extends BaseFrame {
 	 * @param  {function} fn	f(rowObject, )
 	 * @return {Array}     [description]
 	 */
-	mapF(fn) { return fn !== undefined ? this.data.map( (x,ix,arr) => fn(this._rowObj(x),ix,arr)) : this.asObjList(); }
 	
 	/**
 	 * Similar to arry reduce except it works on frames
@@ -188,7 +190,7 @@ export class Frame extends BaseFrame {
 	 * @param  {T}   ini  initial value  of accumulator type T
 	 * @return {T}        return the accumulator
 	 */
-	reduce(fn, ini) { return this.data.reduce( (acc, x, ix, arr) => fn(acc, this._rowObj(x), ix, arr), ini); }
+	reduce(fn, ini) { return this.data.reduce( (acc, x, ix, arr) => fn(acc, this._rowObj(x,ix), ix, arr), ini); }
 	
 	/**
 	 * Concatinate frames and return a new frame (does not modify any of the input frames)
@@ -218,7 +220,7 @@ export class Frame extends BaseFrame {
 	 * @param  {function} fn 	takes function(row:array, ix, array)
 	 * @return {[type]}     [description]
 	 */
-	forEachF(fn) { this.data.forEach((row, ix, arr) => fn(this._rowObj(row), ix, arr)); }
+	forEachF(fn) { this.data.forEach((row, ix, arr) => fn(this._rowObj(row,ix), ix, this.data)); }
 
 	/**
 	 * same as filter but returns the index of the filtered lines
@@ -247,8 +249,11 @@ export class Frame extends BaseFrame {
 		if(!this) throw new TypeError('Filter cannot be use as a raw function');
 		if ( typeof fnOrArray === 'function')  {
 			let fn = fnOrArray;
-			let row = this._rowObj([]);
-			return new this.constructor(this.data.filter( (x,ix,arr) => fn((row.__data=x,row),ix,arr)), this._columns, this._name, this.keyFunc); 
+			let row = this._rowObj();
+			return new this.constructor(
+				this.data.filter( (x,ix,arr) => fn(row.__unsafeSet(x,ix),ix,arr)), 
+				this._columns, this._name, 
+				this.keyFunc); 
 		}
 		else if( Array.isArray(fnOrArray) ) { // expects an array of integer index into the frame return s teh values for all valid index
 			let elements = fnOrArray;
@@ -372,24 +377,19 @@ export class Frame extends BaseFrame {
 
 		if( mappingObj ){
 			let colMapFn = newCols.map(name => mappingObj[name]);
-
+			let roV = this._rowObj();
 			for(let i=0; i<len; i++) {
 				let row = [];//newArray(len2,dummy);
 				let inrow = data[i];
-				let ro = (tester || mappingObj || filter) ? this._rowObj(inrow): undefined;
+				let ro = (tester || mappingObj || filter) ? roV.__unsafeSet(inrow,i): undefined;
 				if(filter && !filter(ro)) continue;
 				for(let j=0; j<len2; j++) {
 					let pos = ixList[j];
 					let v = pos === -1?'': inrow[pos];
 
-					if(tester) {
-						if(!tester(ro, newCols[i])) row.push(v);
-						else {
-							if( (fn = colMapFn[j]) !== undefined) v = ( flag?fn(ro):fn(v, ro, i, inrow) );
-							row.push(v!==undefined?v:'');
-						}
-					} else {
-						if( (fn = colMapFn[j]) !== undefined) v = ( flag?fn(ro):fn(v, ro, i, inrow) );
+					if(tester && !tester(ro, newCols[j])) row.push(v);
+					else {
+						if( (fn = colMapFn[j]) !== undefined) v = ( flag?fn(ro,pos):fn(v, ro, pos, inrow) );
 						row.push(v!==undefined?v:'');
 					}
 				}
@@ -399,12 +399,13 @@ export class Frame extends BaseFrame {
 
 		}
 		else {
+			let ro = this._rowObj();
 			for(let i=0; i<len; i++) {
 				let row =[];
 				let inrow = data[i];
 				if(filter) {
-					let ro = this._rowObj(inrow);
-					if(!filter(ro) ) continue;
+					//ro = ro.__unsafeSet(inrow,i);
+					if(!filter(ro.__unsafeSet(inrow,i)) ) continue;
 				}
 				for(let j=0; j<len2; j++) {
 					let pos = ixList[j]; // get position (index) in origimal data
@@ -421,7 +422,23 @@ export class Frame extends BaseFrame {
 		//result = this.data.map(row => projectRow(row, ixList));
 		return new this.constructor( result, newCols, this._name, this.keyFunc);
 	}
-
+	/**
+	 * select a more convinient interface to project
+	 * The primary diffenrence is the setting of new columns or adding new columns has 
+	 * been made more convinient
+	 *
+	 *  Example of setting columns
+	 *   ['column', 
+	 *   	'oldColumn=newColumnName', 
+	 *   	['oldCol1=newColName1', (v,ro) => some-operation],
+	 *   	['newCol', someValue],
+	 *   	['newCol2', (v,ro) => someComputedValue]
+	 *   ]
+	 * 
+	 * @param  {[type]} columns [description]
+	 * @param  {[type]} where   this is a filter function similar to SQL select ... from table where expr
+	 * @return {[type]}         [description]
+	 */
 	select(columns, where) {
 		let cols = columns.map( name => {
 			let nameStr = name;
@@ -501,7 +518,7 @@ export class Frame extends BaseFrame {
 						let pos = ixList[j]|0;
 						let v = pos === -1?'': inrow[pos];
 						if( (fn = colMapFn[j]) !== undefined) {
-							v = ( flag?fn(this._rowObj(inrow)):fn(v, 0, inrow, this._rowObj(inrow)) );
+							v = ( flag?fn(this._rowObj(inrow)):fn(v, this._rowObj(inrow), 0, inrow) );
 						}
 						push(v,j);
 					}
@@ -537,16 +554,17 @@ export class Frame extends BaseFrame {
 	 * Note the primary joining action (primary criterion) is the joinOp which look like this
 	 * joinOp => 'commonColumnNameInBothFrames' or 'colFram1==colFrame2'
 	 * 
-	 * @param  {Function} function to compare 2 rows a and b 
-	 * @param  {[type]}   
+	 * @param  {Function} fn function to compare 2 rows a and b 
+	 * @param  {[type]}   aFrame
 	 * @return {[type]}
 	 */
 	_genAuxJoinFilter(fn,aFrame) {
 		let self = this;
 		if( fn === undefined ) return fn;
-
+		let roSelf = self._rowObj(),
+			roAFrame = aFrame._rowObj();
 		return function(a,b) {
-			if( Array.isArray(a) && Array.isArray(b) ) return fn(self._rowObj(a), aFrame._rowObj(b));
+			if( Array.isArray(a) && Array.isArray(b) ) return fn(roSelf.__unsafeSet(a), roAFrame.__unsafeSet(b));
 			return fn(a,b);
 		};
 	}
@@ -634,7 +652,22 @@ export class Frame extends BaseFrame {
 
 		return this.columns.map((c, i) => ((sums[i] > threshold) ? c : undefined)).filter(Identity);
 	}
-
+	/**
+	 * The default behavior of this method is to convert numeric strings into and return
+	 * a new frame will the converted data. It tries to reuse as much of the data as possible
+	 * 
+	 * If a conversion list is supplied, each element of the list consists of the following
+	 *    [ 
+	 *    	testFunc(aValue) -- This takes a value a returns true or false
+	 *    	convertFn(aValue) -- and returns the new value
+	 *    ]
+	 * for each cell we apply the testFunc if false then try the next testFunc in the list
+	 * if the testFunc return true, the apply the convertFn to the cell value to the new value
+	 * if non of the testFn succeeds then the cell remains unchanged
+	 * 
+	 * @param  {[[testFn, convertFn]...} convList this parameter is optional 
+	 * @return {Frame}          returns a new Frame with the converted values
+	 */
 	convertData(convList) {
 		let _data = newArray(this.length, []);
 		if(convList === undefined || convList.length === 0) {

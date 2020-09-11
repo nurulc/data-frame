@@ -19,7 +19,7 @@ import arrCurry from './arrCurry';
 /**
  * [description]
  * @param  {[type]} testFn [description]
- * @param  {[type]} arr)   {		let       len [description]
+ * @param  {[type]} arr   
  * @return {[type]}        [description]
  */
 export default  arrCurry(

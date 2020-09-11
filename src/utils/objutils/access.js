@@ -20,11 +20,7 @@ import memoize from './memoize';
 //                      akey(obj,value) same as obj.akey = value, ,
 //                      but returns the obj and not the value you assigned 
 
-/**
- * [description]
- * @param  {[type]} key) {		return    function(obj,v) {			if(arguments.length [description]
- * @return {[type]}      [description]
- */
+
 export default  memoize(
 	function (key) {
 		return function(obj,v) {

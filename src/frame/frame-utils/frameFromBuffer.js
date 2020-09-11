@@ -19,17 +19,19 @@ import {dataSplit} from '../../string/csv';
 /**
  * default splitter is pipe seperated values
  * @param  {[type]} buffer    [description]
- * @param  {[type]} frameName [description]
- * @param  {[type]} splitter  [description]
+ * @param  {{ noConvert: boolen,name: string, Fr: SomeFrameClass}} options
  * @return {[type]}           [description]
  */
-export default function frameFromBuffer(buffer,frameName,splitter,Fr) {
+export default function frameFromBuffer(buffer,splitter,options={}) {
+    let {Fr, name, noConvert} = options;
 	Fr = Fr || Frame;
 	let arr = buffer.replace(/\r/g, '').split('\n').filter(s => s);
 	let columns = splitter(arr[0]);
 	let array = dataSplit(arr.splice(1),splitter);
 	[columns, array] = cleanData(columns, array);
-	return new Fr(array,columns,frameName).convertData();
+	var newFrame = new Fr(array,columns,name);
+	if(!noConvert) newFrame = newFrame.convertData();
+	return newFrame; 
 }
 
 function cleanData(columns, array) {

@@ -89,11 +89,7 @@ export default function memoize(fn) {
 //                      akey(obj,value) same as obj.akey = value, ,
 //                      but returns the obj and not the value you assigned 
 
-/**
- * [description]
- * @param  {[type]} key) {		return    function(obj,v) {			if(arguments.length [description]
- * @return {[type]}      [description]
- */
+
 export default const access = memoize(
 	function (key) {
 		return function(obj,v) {
@@ -354,7 +350,7 @@ export default function filterDict(aDict, listOrFunc) {
  *   aListOrStringOrEmpty => undefined - allows everything
  *   aListOrStringOrEmpty => [... names ] - allow only the elelemnts in the list 
  *   aListOrStringOrEmpty => <single string Name> (string) - allow only single name 
- * @param  {[type]}
+ * @param  {[...string]} aListOrStringOrEmpty
  * @return {[type]}
  */
 export default function genFilterFunction(aListOrStringOrEmpty) {

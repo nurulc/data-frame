@@ -1,7 +1,7 @@
 {
-  "coverage": "39.54%",
-  "expectCount": 435,
-  "actualCount": 172,
+  "coverage": "39.39%",
+  "expectCount": 429,
+  "actualCount": 169,
   "files": {
     "src/array/arrayutils/arrConcat.js": {
       "expectCount": 1,
@@ -387,10 +387,10 @@
       "expectCount": 5,
       "actualCount": 1,
       "undocumentLines": [
-        35,
-        42,
-        53,
-        59
+        37,
+        44,
+        55,
+        61
       ]
     },
     "src/frame/frame-utils/frameSum.js": {
@@ -435,8 +435,8 @@
       ]
     },
     "src/frame/frame.js": {
-      "expectCount": 41,
-      "actualCount": 24,
+      "expectCount": 43,
+      "actualCount": 23,
       "undocumentLines": [
         40,
         41,
@@ -448,13 +448,16 @@
         79,
         80,
         81,
-        86,
         88,
         90,
-        417,
-        587,
-        594,
-        613
+        92,
+        426,
+        454,
+        625,
+        632,
+        706,
+        712,
+        719
       ]
     },
     "src/frame/frame_element.js": {
@@ -687,12 +690,13 @@
       "undocumentLines": []
     },
     "src/frame/toHTML.js": {
-      "expectCount": 3,
+      "expectCount": 4,
       "actualCount": 0,
       "undocumentLines": [
         17,
-        43,
-        67
+        24,
+        50,
+        81
       ]
     },
     "src/string/csv/csvLine.js": {
@@ -1025,19 +1029,6 @@
       "actualCount": 0,
       "undocumentLines": [
         18
-      ]
-    },
-    "src/utils/str_element.js": {
-      "expectCount": 9,
-      "actualCount": 2,
-      "undocumentLines": [
-        149,
-        211,
-        219,
-        221,
-        229,
-        236,
-        241
       ]
     },
     "src/utils/types/index.js": {

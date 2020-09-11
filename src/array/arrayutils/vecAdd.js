@@ -18,9 +18,9 @@ import isArray from '../../utils/types/isArray';
 
 /**
  * Add two vectors
- * @param  {[type]}
- * @param  {[type]}
- * @return {[type]}
+ * @param  {[number]} a1
+ * @param  {[number]} a2
+ * @return {[number]}
  */
 export default  function vecAdd(a1,a2) {
 	if(a1 === undefined ){

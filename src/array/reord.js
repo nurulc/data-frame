@@ -17,8 +17,8 @@ function sIx(elem, mp, subIx, ret) {
 	return pos;
 }
 /**
- * @param  {[type]}
- * @param  {[type]}
+ * @param  {[type]} subListWithNewOrder
+ * @param  {[type]} fullList
  * @return {[type]}
  */
 export default function reord(subListWithNewOrder,fullList) {

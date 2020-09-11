@@ -21,12 +21,12 @@ import haveFrame from '../haveFrame';
  * @param  {Frame} aFrame The frame to add the index to
  * @return {Frame}        new frame with an index column (remove and previous index column)
  */
-export default function frameWithIndex(aFrame, atEnd) {
+export default function frameWithIndex(aFrame, indexName='_INDEX', atEnd) {
 	if( ! aFrame ) return new aFrame.constructor([],[]);
 	aFrame = haveFrame(aFrame);
 	let cols;
-	if(atEnd) 	cols = [...aFrame.columns.filter(n => n !== '_INDEX'),'_INDEX']
-	else 		cols = ['_INDEX', ...aFrame.columns.filter(n => n !== '_INDEX')]
-	return aFrame.project(cols, {_INDEX: (_,ix) => ''+ix});
+	if(atEnd) 	cols = [...aFrame.columns.filter(n => n !== indexName),indexName]
+	else 		cols = ['_INDEX', ...aFrame.columns.filter(n => n !== indexName)]
+	return aFrame.project(cols, {[indexName]: (_,ro) => ro.__index$ });
 }
 

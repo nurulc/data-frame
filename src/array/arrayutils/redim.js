@@ -17,8 +17,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 import newArray from './newArray';
 
 /**
- * @param  {[type]}
- * @param  {[type]}
+ * @param  {[any]} arr
+ * @param  {number} n
  * @return {[type]}
  */
 export default  function redim(arr, n) {

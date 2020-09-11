@@ -235,8 +235,10 @@ export default  function arrIntersect(arr1, arr2) {
 //##import newArray from './newArray';
 
 /**
- * @param  {[type]}
- * @param  {[type]}
+ * remove all elements that are in both arrays
+ *
+ * @param  {[type]} array1
+ * @param  {[type]} array2
  * @return {[type]}
  */
 export default  function xor(array1, array2) {
@@ -267,8 +269,8 @@ export default  function xor(array1, array2) {
 //##import newArray from './newArray';
 
 /**
- * @param  {[type]}
- * @param  {[type]}
+ * @param  {[any]} arr
+ * @param  {number} n
  * @return {[type]}
  */
 export default  function redim(arr, n) {
@@ -293,9 +295,9 @@ export default  function redim(arr, n) {
 
 /**
  * Add two vectors
- * @param  {[type]}
- * @param  {[type]}
- * @return {[type]}
+ * @param  {[number]} a1
+ * @param  {[number]} a2
+ * @return {[number]}
  */
 export default  function vecAdd(a1,a2) {
 	if(a1 === undefined ){
@@ -360,8 +362,8 @@ function ID(x) { return x; }
 /**
  * [description]
  * @param  {Function} fn   [description]
- * @param  {Array}      arr) {	var        dict [description]
- * @return {Array}        [description]
+ * @param  {Array}    arr  [description]
+ * @return {Array}         [description]
  */
 export default const arrDedup = arrCurry(function(fn,arr) {
 	var dict = new Map();
@@ -400,7 +402,7 @@ export default  function safeDedup(list) {
 /**
  * Add all elements of an array, optionall apply a transform function fn to each element
  * @param  {Function} fn   [description]
- * @param  {[type]}   arr) {	if         (arr.length [description]
+ * @param  {[type]}   arr  [description]
  * @return {[type]}        [description]
  */
 export default const arrSum = arrCurry(function(fn,arr) {
@@ -418,7 +420,7 @@ export default const arrSum = arrCurry(function(fn,arr) {
 /**
  * [description]
  * @param  {Function} fn   [description]
- * @param  {[type]}   arr) {	var        min [description]
+ * @param  {[type]}   arr  [description]
  * @return {[type]}        [description]
  */
 export default const arrMin = arrCurry(function(fn,arr) {
@@ -436,7 +438,7 @@ export default const arrMin = arrCurry(function(fn,arr) {
 /**
  * [description]
  * @param  {Function} fn   [description]
- * @param  {[type]}   arr) {	var        min [description]
+ * @param  {[type]}   arr  [description]
  * @return {[type]}        [description]
  */
 export default const arrMax = arrCurry(function(fn,arr) {
@@ -454,7 +456,7 @@ export default const arrMax = arrCurry(function(fn,arr) {
 /**
  * [description]
  * @param  {[type]} testFn [description]
- * @param  {[type]} arr)   {		let       len [description]
+ * @param  {[type]} arr   
  * @return {[type]}        [description]
  */
 export default const arrCount = arrCurry(
@@ -473,7 +475,7 @@ export default const arrCount = arrCurry(
 /**
  * [description]
  * @param  {Function} fn   [description]
- * @param  {[type]}   arr) {	let        cnt [description]
+ * @param  {[type]}   arr  [description]
  * @return {[type]}        [description]
  */
 export default const arrMean = arrCurry(function(fn,arr) {
@@ -535,6 +537,7 @@ export function arrCountVal(list,v) {
 /**
  * function to take the hash of an array of integers
  * @param {[int]} arrOfInt array of integers
+ * @return {[type]}      [description]
  */
 export function setHash(arrOfInt) {
 	var hash = 5381,
@@ -553,7 +556,7 @@ export function setHash(arrOfInt) {
 
 //@@
 /**
- * @param  {[type]}
+ * @param  {[[string, any]]} aListOfPairs list of key value pairs
  * @return {[type]}
  */
 export function zipToDict(aListOfPairs) {

@@ -16,7 +16,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 /**
  * Union of a list of sets: assumes both sets are are represented by sorted array, and as per set definition there are no dups 
- * @param  {[Array]} lsa : array[ array{set}... ] - array{set} of sorted elements (ascending order) and no duplicated
+ * @param  {[Array]} lsa array[ array{set}... ] - array{set} of sorted elements (ascending order) and no duplicated
  * @return {[set]} a new set, where result = lsa[0] ∪ lsa[1] ∪ ...
  */
 export default function unionL(lsa /* array of sets */) {
@@ -94,8 +94,8 @@ function _union3(a,b,c) {
 
 /**
  * Split an array into an array of arrays each with equal parts, expect possibly for the last element
- * @param  {[type]}
- * @return {[type]}
+ * @param  {[any]} list
+ * @return {[[any],[any]]}
  */
 function arrSplit2(list) {
 	let len = list.length;

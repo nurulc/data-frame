@@ -1,144 +1,5 @@
 [
   {
-    "name": "redim",
-    "filePath": "src/array/arrayutils/redim.js",
-    "lines": [
-      {
-        "lineNumber": 18,
-        "line": "/**"
-      },
-      {
-        "lineNumber": 19,
-        "line": " * @param  {[type]}"
-      },
-      {
-        "lineNumber": 20,
-        "line": " * @param  {[type]}"
-      },
-      {
-        "lineNumber": 21,
-        "line": " * @return {[type]}"
-      },
-      {
-        "lineNumber": 22,
-        "line": " */"
-      },
-      {
-        "lineNumber": 23,
-        "line": "export default  function redim(arr, n) {"
-      }
-    ],
-    "codeParams": [
-      "arr",
-      "n"
-    ],
-    "docParams": []
-  },
-  {
-    "name": "vecAdd",
-    "filePath": "src/array/arrayutils/vecAdd.js",
-    "lines": [
-      {
-        "lineNumber": 18,
-        "line": "/**"
-      },
-      {
-        "lineNumber": 19,
-        "line": " * Add two vectors"
-      },
-      {
-        "lineNumber": 20,
-        "line": " * @param  {[type]}"
-      },
-      {
-        "lineNumber": 21,
-        "line": " * @param  {[type]}"
-      },
-      {
-        "lineNumber": 22,
-        "line": " * @return {[type]}"
-      },
-      {
-        "lineNumber": 23,
-        "line": " */"
-      },
-      {
-        "lineNumber": 24,
-        "line": "export default  function vecAdd(a1,a2) {"
-      }
-    ],
-    "codeParams": [
-      "a1",
-      "a2"
-    ],
-    "docParams": []
-  },
-  {
-    "name": "xor",
-    "filePath": "src/array/arrayutils/xor.js",
-    "lines": [
-      {
-        "lineNumber": 18,
-        "line": "/**"
-      },
-      {
-        "lineNumber": 19,
-        "line": " * @param  {[type]}"
-      },
-      {
-        "lineNumber": 20,
-        "line": " * @param  {[type]}"
-      },
-      {
-        "lineNumber": 21,
-        "line": " * @return {[type]}"
-      },
-      {
-        "lineNumber": 22,
-        "line": " */"
-      },
-      {
-        "lineNumber": 23,
-        "line": "export default  function xor(array1, array2) {"
-      }
-    ],
-    "codeParams": [
-      "array1",
-      "array2"
-    ],
-    "docParams": []
-  },
-  {
-    "name": "zipToDict",
-    "filePath": "src/array/arrayutils/zipToDict.js",
-    "lines": [
-      {
-        "lineNumber": 16,
-        "line": "/**"
-      },
-      {
-        "lineNumber": 17,
-        "line": " * @param  {[type]}"
-      },
-      {
-        "lineNumber": 18,
-        "line": " * @return {[type]}"
-      },
-      {
-        "lineNumber": 19,
-        "line": " */"
-      },
-      {
-        "lineNumber": 20,
-        "line": "export function zipToDict(aListOfPairs) {"
-      }
-    ],
-    "codeParams": [
-      "aListOfPairs"
-    ],
-    "docParams": []
-  },
-  {
     "name": "arrEQ",
     "filePath": "src/array/arrEQ.js",
     "lines": [
@@ -182,148 +43,6 @@
     ]
   },
   {
-    "name": "FLATTEN",
-    "filePath": "src/array/flatten.js",
-    "lines": [
-      {
-        "lineNumber": 1,
-        "line": "/**\r"
-      },
-      {
-        "lineNumber": 2,
-        "line": " * Use with a reducer\r"
-      },
-      {
-        "lineNumber": 3,
-        "line": " * @param  {Array}\r"
-      },
-      {
-        "lineNumber": 4,
-        "line": " * @param  {[type]}\r"
-      },
-      {
-        "lineNumber": 5,
-        "line": " * @return {[type]}\r"
-      },
-      {
-        "lineNumber": 6,
-        "line": " */\r"
-      },
-      {
-        "lineNumber": 7,
-        "line": "export const FLATTEN = (res=[],arr) => isArray(arr)?res.concat(arr):(res.push(arr), res);\r"
-      }
-    ],
-    "codeParams": [
-      "res",
-      "arr"
-    ],
-    "docParams": []
-  },
-  {
-    "name": "max",
-    "filePath": "src/array/intset/max.js",
-    "lines": [
-      {
-        "lineNumber": 16,
-        "line": "/**"
-      },
-      {
-        "lineNumber": 17,
-        "line": " * maximum of a sorted array"
-      },
-      {
-        "lineNumber": 18,
-        "line": " * @param  {[type]}"
-      },
-      {
-        "lineNumber": 19,
-        "line": " * @return {[type]}"
-      },
-      {
-        "lineNumber": 20,
-        "line": " */"
-      },
-      {
-        "lineNumber": 21,
-        "line": "export default function max(list) { return (!list || list.length == 0) ? undefined : list[list.length-1];}"
-      }
-    ],
-    "codeParams": [
-      "list"
-    ],
-    "docParams": []
-  },
-  {
-    "name": "arrSplit2",
-    "filePath": "src/array/intset/unionL.js",
-    "lines": [
-      {
-        "lineNumber": 94,
-        "line": "/**"
-      },
-      {
-        "lineNumber": 95,
-        "line": " * Split an array into an array of arrays each with equal parts, expect possibly for the last element"
-      },
-      {
-        "lineNumber": 96,
-        "line": " * @param  {[type]}"
-      },
-      {
-        "lineNumber": 97,
-        "line": " * @return {[type]}"
-      },
-      {
-        "lineNumber": 98,
-        "line": " */"
-      },
-      {
-        "lineNumber": 99,
-        "line": "function arrSplit2(list) {"
-      }
-    ],
-    "codeParams": [
-      "list"
-    ],
-    "docParams": []
-  },
-  {
-    "name": "reord",
-    "filePath": "src/array/reord.js",
-    "lines": [
-      {
-        "lineNumber": 18,
-        "line": "/**\r"
-      },
-      {
-        "lineNumber": 19,
-        "line": " * @param  {[type]}\r"
-      },
-      {
-        "lineNumber": 20,
-        "line": " * @param  {[type]}\r"
-      },
-      {
-        "lineNumber": 21,
-        "line": " * @return {[type]}\r"
-      },
-      {
-        "lineNumber": 22,
-        "line": " */\r"
-      },
-      {
-        "lineNumber": 23,
-        "line": "export default function reord(subListWithNewOrder,fullList) {\r"
-      }
-    ],
-    "codeParams": [
-      "subListWithNewOrder",
-      "fullList"
-    ],
-    "docParams": []
-  },
-  {
     "name": "frameFromBuffer",
     "filePath": "src/frame/frame-utils/frameFromBuffer.js",
     "lines": [
@@ -341,35 +60,29 @@
       },
       {
         "lineNumber": 21,
-        "line": " * @param  {[type]} frameName [description]"
+        "line": " * @param  {{ noConvert: boolen,name: string, Fr: SomeFrameClass}} options"
       },
       {
         "lineNumber": 22,
-        "line": " * @param  {[type]} splitter  [description]"
-      },
-      {
-        "lineNumber": 23,
         "line": " * @return {[type]}           [description]"
       },
       {
-        "lineNumber": 24,
+        "lineNumber": 23,
         "line": " */"
       },
       {
-        "lineNumber": 25,
-        "line": "export default function frameFromBuffer(buffer,frameName,splitter,Fr) {"
+        "lineNumber": 24,
+        "line": "export default function frameFromBuffer(buffer,splitter,options={}) {"
       }
     ],
     "codeParams": [
       "buffer",
-      "frameName",
       "splitter",
-      "Fr"
+      "options"
     ],
     "docParams": [
       "buffer",
-      "frameName",
-      "splitter"
+      "options"
     ]
   },
   {
@@ -398,11 +111,12 @@
       },
       {
         "lineNumber": 23,
-        "line": "export default function frameWithIndex(aFrame, atEnd) {"
+        "line": "export default function frameWithIndex(aFrame, indexName='_INDEX', atEnd) {"
       }
     ],
     "codeParams": [
       "aFrame",
+      "indexName",
       "atEnd"
     ],
     "docParams": [
@@ -410,86 +124,328 @@
     ]
   },
   {
+    "name": "Frame#_rowObj",
+    "filePath": "src/frame/frame.js",
+    "lines": [
+      {
+        "lineNumber": 142,
+        "line": "\t/**"
+      },
+      {
+        "lineNumber": 143,
+        "line": "\t * [_rowObj description]"
+      },
+      {
+        "lineNumber": 144,
+        "line": "\t * @param  {[type]} elem [description]"
+      },
+      {
+        "lineNumber": 145,
+        "line": "\t * @return {[type]}      [description]"
+      },
+      {
+        "lineNumber": 146,
+        "line": "\t */"
+      },
+      {
+        "lineNumber": 147,
+        "line": "\t_rowObj(elem,ix) {"
+      }
+    ],
+    "codeParams": [
+      "elem",
+      "ix"
+    ],
+    "docParams": [
+      "elem"
+    ]
+  },
+  {
     "name": "Frame#withIndex",
     "filePath": "src/frame/frame.js",
     "lines": [
       {
-        "lineNumber": 148,
-        "line": "\t/**"
-      },
-      {
-        "lineNumber": 149,
-        "line": "\t * [withIndex description] ()"
-      },
-      {
-        "lineNumber": 150,
-        "line": "\t * @return {[type]} [description]"
-      },
-      {
         "lineNumber": 151,
-        "line": "\t */"
+        "line": "\t/**"
       },
       {
         "lineNumber": 152,
-        "line": "\twithIndex(atEnd) {"
-      }
-    ],
-    "codeParams": [
-      "atEnd"
-    ],
-    "docParams": []
-  },
-  {
-    "name": "Frame#_genAuxJoinFilter",
-    "filePath": "src/frame/frame.js",
-    "lines": [
-      {
-        "lineNumber": 498,
-        "line": "\t/**"
+        "line": "\t * [withIndex description] ()"
       },
       {
-        "lineNumber": 499,
-        "line": "\t * Creates a filter function the for the additional join checck"
+        "lineNumber": 153,
+        "line": "\t * @param  {boolean} atEnd if true the index is placed on the last column, otherwise it is the first column"
       },
       {
-        "lineNumber": 500,
-        "line": "\t * Note the primary joining action (primary criterion) is the joinOp which look like this"
+        "lineNumber": 154,
+        "line": "\t * @return {[type]} [description]"
       },
       {
-        "lineNumber": 501,
-        "line": "\t * joinOp => 'commonColumnNameInBothFrames' or 'colFram1==colFrame2'"
-      },
-      {
-        "lineNumber": 502,
-        "line": "\t * "
-      },
-      {
-        "lineNumber": 503,
-        "line": "\t * @param  {Function} function to compare 2 rows a and b "
-      },
-      {
-        "lineNumber": 504,
-        "line": "\t * @param  {[type]}   "
-      },
-      {
-        "lineNumber": 505,
-        "line": "\t * @return {[type]}"
-      },
-      {
-        "lineNumber": 506,
+        "lineNumber": 155,
         "line": "\t */"
       },
       {
-        "lineNumber": 507,
-        "line": "\t_genAuxJoinFilter(fn,aFrame) {"
+        "lineNumber": 156,
+        "line": "\twithIndex(indexName='_INDEX',atEnd) {"
       }
     ],
     "codeParams": [
-      "fn",
-      "aFrame"
+      "indexName",
+      "atEnd"
     ],
     "docParams": [
-      "function"
+      "atEnd"
+    ]
+  },
+  {
+    "name": "Frame#project",
+    "filePath": "src/frame/frame.js",
+    "lines": [
+      {
+        "lineNumber": 294,
+        "line": "\t/**"
+      },
+      {
+        "lineNumber": 295,
+        "line": "\t * "
+      },
+      {
+        "lineNumber": 296,
+        "line": "\t *   colsMapping can be a "
+      },
+      {
+        "lineNumber": 297,
+        "line": "\t *   \t\t1. rearranged list of col names from the frame e.g [ 'B', 'A', 'F']"
+      },
+      {
+        "lineNumber": 298,
+        "line": "\t *   \t\t2. or rearranged list of col names ['oldName=newName', ...] if =t of the"
+      },
+      {
+        "lineNumber": 299,
+        "line": "\t *   \t\t   = is not there the col name does not change"
+      },
+      {
+        "lineNumber": 300,
+        "line": "\t *   example of usage:"
+      },
+      {
+        "lineNumber": 301,
+        "line": "\t *   list - Frame with list.data:"
+      },
+      {
+        "lineNumber": 302,
+        "line": "\t *"
+      },
+      {
+        "lineNumber": 303,
+        "line": "\t *\t\t\t   [ [ 'jan', 'mon', 1, 2 ],"
+      },
+      {
+        "lineNumber": 304,
+        "line": "\t *\t\t\t\t [ 'jan', 'tue', 2, 6 ],"
+      },
+      {
+        "lineNumber": 305,
+        "line": "\t *\t\t\t\t [ 'jan', 'wed', 3, 4 ],"
+      },
+      {
+        "lineNumber": 306,
+        "line": "\t *\t\t\t\t [ 'jan', 'thu', undefined, 1 ],"
+      },
+      {
+        "lineNumber": 307,
+        "line": "\t *\t\t\t\t ..."
+      },
+      {
+        "lineNumber": 308,
+        "line": "\t *"
+      },
+      {
+        "lineNumber": 309,
+        "line": "\t *"
+      },
+      {
+        "lineNumber": 310,
+        "line": "\t *\t\t\t  list.columns: [ 'mon', 'weekday', 'v1', 'v2' ],"
+      },
+      {
+        "lineNumber": 311,
+        "line": "\t *"
+      },
+      {
+        "lineNumber": 312,
+        "line": "\t *\tadd column 'nurul' with value 123, change 'weekday' to uppercase, 'v1' conver undefined to 0\t\t  "
+      },
+      {
+        "lineNumber": 313,
+        "line": "\t *\t\t\t"
+      },
+      {
+        "lineNumber": 314,
+        "line": "\t *\t\t\t// Note the names if mapper are the new column names"
+      },
+      {
+        "lineNumber": 315,
+        "line": "\t *\t\t\tvar mapper = {"
+      },
+      {
+        "lineNumber": 316,
+        "line": "\t *\t\t\t\t nurul: (v, rowObj, i,row) => \"123\","
+      },
+      {
+        "lineNumber": 317,
+        "line": "\t *\t\t\t\t weekday: (v) => v.toUpperCase(),"
+      },
+      {
+        "lineNumber": 318,
+        "line": "\t *\t\t\t\t v1: (v) => v===undefined?0:v"
+      },
+      {
+        "lineNumber": 319,
+        "line": "\t *\t\t\t};"
+      },
+      {
+        "lineNumber": 320,
+        "line": "\t *"
+      },
+      {
+        "lineNumber": 321,
+        "line": "\t *\t\t\tlist.project([ 'mon', 'weekday','nurul' , 'v1', 'v2' ], mapper);"
+      },
+      {
+        "lineNumber": 322,
+        "line": "\t *"
+      },
+      {
+        "lineNumber": 323,
+        "line": "\t *\tresult:"
+      },
+      {
+        "lineNumber": 324,
+        "line": "\t *\t"
+      },
+      {
+        "lineNumber": 325,
+        "line": "\t *\t\t\t [ \t[ 'jan', 'MON', '123', 1, 2 ],"
+      },
+      {
+        "lineNumber": 326,
+        "line": "\t *\t\t\t\t[ 'jan', 'TUE', '123', 2, 6 ],"
+      },
+      {
+        "lineNumber": 327,
+        "line": "\t *\t\t\t\t[ 'jan', 'WED', '123', 3, 4 ],"
+      },
+      {
+        "lineNumber": 328,
+        "line": "\t *\t\t\t\t  'jan', 'THU', '123', 0, 1 ],"
+      },
+      {
+        "lineNumber": 329,
+        "line": "\t *\t\t\t\t..."
+      },
+      {
+        "lineNumber": 330,
+        "line": "\t *"
+      },
+      {
+        "lineNumber": 331,
+        "line": "\t *    another expample:"
+      },
+      {
+        "lineNumber": 332,
+        "line": "\t *    "
+      },
+      {
+        "lineNumber": 333,
+        "line": "\t *            // Note the use. of the now column names"
+      },
+      {
+        "lineNumber": 334,
+        "line": "\t *            var mapper1 = {"
+      },
+      {
+        "lineNumber": 335,
+        "line": "\t *\t\t\t     nurul: (v,i,row) => \"123\","
+      },
+      {
+        "lineNumber": 336,
+        "line": "\t *\t\t\t     \"Week Day\": (v) => v.toUpperCase(),"
+      },
+      {
+        "lineNumber": 337,
+        "line": "\t *\t\t\t     v1: (v) => v===undefined?0:v"
+      },
+      {
+        "lineNumber": 338,
+        "line": "\t *\t\t      }; "
+      },
+      {
+        "lineNumber": 339,
+        "line": "\t *\t\t      list.project([ 'mon=Month', 'weekday=Week Day','nurul' , 'v1', 'v2' ], mapper);\t    "
+      },
+      {
+        "lineNumber": 340,
+        "line": "\t *"
+      },
+      {
+        "lineNumber": 341,
+        "line": "\t *\tthe result is the same as the previous example, but the columns names will now be"
+      },
+      {
+        "lineNumber": 342,
+        "line": "\t *\t\t\t['Month', 'Week Day', 'nurul', 'v1', 'v2' ]"
+      },
+      {
+        "lineNumber": 343,
+        "line": "\t * "
+      },
+      {
+        "lineNumber": 344,
+        "line": "\t * [project description]"
+      },
+      {
+        "lineNumber": 345,
+        "line": "\t * @param  {[type]}  colsMapping [description]"
+      },
+      {
+        "lineNumber": 346,
+        "line": "\t * @param  {[type]}  mappingObj  [description]"
+      },
+      {
+        "lineNumber": 347,
+        "line": "\t * @param  {Boolean} flag        [description]"
+      },
+      {
+        "lineNumber": 348,
+        "line": "\t * @param  {[type]}  tester      [description]"
+      },
+      {
+        "lineNumber": 349,
+        "line": "\t * @return {[type]}              [description]"
+      },
+      {
+        "lineNumber": 350,
+        "line": "\t */"
+      },
+      {
+        "lineNumber": 351,
+        "line": "\tproject(colsMapping,mappingObj,filter=undefined,flag=false, tester=undefined) {"
+      }
+    ],
+    "codeParams": [
+      "colsMapping",
+      "mappingObj",
+      "filter",
+      "flag",
+      "tester"
+    ],
+    "docParams": [
+      "colsMapping",
+      "mappingObj",
+      "flag",
+      "tester"
     ]
   },
   {
@@ -594,51 +550,5 @@
       "optional",
       "end"
     ]
-  },
-  {
-    "name": "genFilterFunction",
-    "filePath": "src/utils/objutils/genFilterFunction.js",
-    "lines": [
-      {
-        "lineNumber": 17,
-        "line": "/**"
-      },
-      {
-        "lineNumber": 18,
-        "line": " * create a function that tests for elements in aListOrStringOrEmpty"
-      },
-      {
-        "lineNumber": 19,
-        "line": " *   aListOrStringOrEmpty => undefined - allows everything"
-      },
-      {
-        "lineNumber": 20,
-        "line": " *   aListOrStringOrEmpty => [... names ] - allow only the elelemnts in the list "
-      },
-      {
-        "lineNumber": 21,
-        "line": " *   aListOrStringOrEmpty => <single string Name> (string) - allow only single name "
-      },
-      {
-        "lineNumber": 22,
-        "line": " * @param  {[type]}"
-      },
-      {
-        "lineNumber": 23,
-        "line": " * @return {[type]}"
-      },
-      {
-        "lineNumber": 24,
-        "line": " */"
-      },
-      {
-        "lineNumber": 25,
-        "line": "export default function genFilterFunction(aListOrStringOrEmpty) {"
-      }
-    ],
-    "codeParams": [
-      "aListOrStringOrEmpty"
-    ],
-    "docParams": []
   }
 ]

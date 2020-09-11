@@ -17,8 +17,10 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 import newArray from './newArray';
 
 /**
- * @param  {[type]}
- * @param  {[type]}
+ * remove all elements that are in both arrays
+ *
+ * @param  {[type]} array1
+ * @param  {[type]} array2
  * @return {[type]}
  */
 export default  function xor(array1, array2) {

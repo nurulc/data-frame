@@ -16,9 +16,11 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 /**
  * maximum of a sorted array
- * @param  {[type]}
- * @return {[type]}
+ * @param  {[any]} list 
+ * @return {any}
  */
-export default function max(list) { return (!list || list.length == 0) ? undefined : list[list.length-1];}
+export default function max(list) { 
+    return (!list || list.length == 0) ? undefined : list[list.length-1];
+}
 
 

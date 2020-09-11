@@ -4,6 +4,7 @@
 *.ipynb
 *.log
 *.test.js
+test
 *.tsv
 *.tsv.gz
 *.zip
@@ -14,6 +15,7 @@ docs
 src
 tmp
 notebook
+_notebook
 .babelrc
 .esdoc.json
 jshintrc
@@ -27,3 +29,5 @@ runit.sh
 code_spliter.node.js
 pnpm-lock.yaml
 rollup.config.js
+package-lock.json
+src.zip

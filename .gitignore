@@ -9,3 +9,4 @@ runit.sh
 *.tgz
 pnpm-lock.yaml
 notebook/frame-test-Copy1.ipynb
+_notebook/*

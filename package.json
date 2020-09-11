@@ -19,9 +19,9 @@
   "devDependencies": {
     "@babel/cli": "^7.10.5",
     "@babel/core": "^7.11.4",
+    "@babel/polyfill": "^7.10.4",
     "@babel/preset-env": "^7.11.0",
     "@babel/traverse": "^7.11.0",
-    "@babel/polyfill": "^7.10.4",
     "@rollup/plugin-babel": "^5.1.0",
     "@rollup/plugin-node-resolve": "^8.4.0",
     "@types/babel__core": "^7.1.9",
@@ -66,5 +66,7 @@
       "quiet": false
     }
   },
-  "dependencies": {}
+  "dependencies": {
+    "esprima": "^4.0.1"
+  }
 }

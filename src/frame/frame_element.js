@@ -195,8 +195,8 @@ function htmlEncode(s) {
 }
 
 function toHTML$(self,columns) {
-	let list = columns.map(c => `<tr><td style="background-color: lightgrey">${htmlEncode(c)}</td><td>${htmlEncode(self[c])}</td></tr>`);
-	return (`<table>${list.join('')}</table>`);
+	let list = columns.map(c => `<tr><td class="frame_row_label">${htmlEncode(c)}</td><td class="frame_row_data">${htmlEncode(self[c])}</td></tr>`);
+	return (`<table class="frame_row_table">${list.join('')}</table>`);
 }
 
 

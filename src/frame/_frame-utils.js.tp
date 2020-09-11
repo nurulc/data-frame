@@ -35,7 +35,7 @@ export default function frameFromBuffer(buffer,splitter,options={}) {
 	let columns = splitter(arr[0]);
 	let array = dataSplit(arr.splice(1),splitter);
 	[columns, array] = cleanData(columns, array);
-	var newFrame = new Fr(array,columns,frameName)
+	var newFrame = new Fr(array,columns,name);
 	if(!noConvert) newFrame = newFrame.convertData();
 	return newFrame; 
 }
@@ -89,13 +89,13 @@ function _cleanData(n) {
  * @param  {Frame} aFrame The frame to add the index to
  * @return {Frame}        new frame with an index column (remove and previous index column)
  */
-export default function frameWithIndex(aFrame, atEnd) {
+export default function frameWithIndex(aFrame, indexName='_INDEX', atEnd) {
 	if( ! aFrame ) return new aFrame.constructor([],[]);
 	aFrame = haveFrame(aFrame);
 	let cols;
-	if(atEnd) 	cols = [...aFrame.columns.filter(n => n !== '_INDEX'),'_INDEX']
-	else 		cols = ['_INDEX', ...aFrame.columns.filter(n => n !== '_INDEX')]
-	return aFrame.project(cols, {_INDEX: (_,ix) => ''+ix});
+	if(atEnd) 	cols = [...aFrame.columns.filter(n => n !== indexName),indexName]
+	else 		cols = ['_INDEX', ...aFrame.columns.filter(n => n !== indexName)]
+	return aFrame.project(cols, {[indexName]: (_,ro) => ro.__index$ });
 }
 
 //@
