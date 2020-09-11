@@ -25,6 +25,7 @@ import {dataSplit} from '../string/csv';
 /**
  * default splitter is pipe seperated values
  * @param  {[type]} buffer    [description]
+ * @param  {function} splitter    function to split a string representing a row to an array of strings
  * @param  {{ noConvert: boolen,name: string, Fr: SomeFrameClass}} options
  * @return {[type]}           [description]
  */
@@ -87,6 +88,8 @@ function _cleanData(n) {
 /**
  * [frameWithIndex description]
  * @param  {Frame} aFrame The frame to add the index to
+ * @param  {string} indexName Name of the index column
+ * @param  {boolean} atEnd if true the index is placed after the last column, otherwise it is the first column
  * @return {Frame}        new frame with an index column (remove and previous index column)
  */
 export default function frameWithIndex(aFrame, indexName='_INDEX', atEnd) {

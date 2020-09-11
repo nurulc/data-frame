@@ -31,3 +31,9 @@ pnpm-lock.yaml
 rollup.config.js
 package-lock.json
 src.zip
+_notebook/*
+dsrc
+ddoc
+.esdoc_bak.json
+data-frame.sublime-project
+data-frame.sublime-workspace

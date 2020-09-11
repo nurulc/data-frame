@@ -25,7 +25,7 @@ export const arrayUniq = (list)  => Object.keys(_makeUnique(list)).sort();
 
 const EMPTY_STR = '';
 /**
- * @param  {[[column_elements...]...]} listOfRows 
+ * @param  {[column_elements]} listOfRows 
  * @param  {[type]} colIx 	The column to make unique
  * @return {dict}   returns an object representing mapping of unique values where key and value are the same
  */

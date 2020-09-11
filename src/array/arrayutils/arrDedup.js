@@ -19,8 +19,8 @@ import arrCurry from './arrCurry';
 /**
  * [description]
  * @param  {Function} fn   [description]
- * @param  {Array}      arr) {	var        dict [description]
- * @return {Array}        [description]
+ * @param  {Array}    arr  [description]
+ * @return {Array}         [description]
  */
 export default  arrCurry(function(fn,arr) {
 	var dict = new Map();

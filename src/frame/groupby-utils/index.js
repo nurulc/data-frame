@@ -34,6 +34,9 @@ export const gbStdDiv = _gbStdDiv;
 import _gbMerge from './gbMerge';
 export const gbMerge = _gbMerge;
 
+import _gbVal from './gbVal';
+export const gbVal = _gbVal;
+
 import _gbMergeU from './gbMergeU';
 export const gbMergeU = _gbMergeU;
 

@@ -21,7 +21,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  * @param  {[type]} arr
  * @param  {[type]} cmp
  * @param  {[type]} tr
- * @return {[[row-element]} 
+ * @return {[[row_element]} 
  */
 export default function matchIt(res,row1,arr, cmp, tr) {
 	let len,  cnt =0;

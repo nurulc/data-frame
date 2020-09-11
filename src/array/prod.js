@@ -7,7 +7,7 @@ import {flatten} from './flatten';
  *
  * for diremsion n=3, z = 50
  * 
- * @param  {...[type]} list [description]
+ * @param  {[type]} list [description]
  * @return {[type]}         [description]
  */
 export default function arrProd(...list) { 

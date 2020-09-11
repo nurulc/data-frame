@@ -16,17 +16,20 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 export const isA = {
 	array: function isArray(arr) {
-		if( !arr) return null;
-		if(Array.isArray(arr)) return true;
+		if( !arr) return undefined;
+		if(Array.isArray(arr)) return arr;
 		return (arr.constructor === Array)?arr:undefined;
 	},
-
+	notNull: function notNull(obj) { return (obj !== null && obj !== undefined)?obj: undefined; },
 	func: function isFunc(fun) {return (typeof fun === 'function')?fun:undefined; },
 	str: function isStr(str) {return (typeof str === 'string')?str:undefined; },
 	num: function isNum(num) {return (typeof num === 'number')?num:undefined; },
 	bool: function isBool(val) {return (typeof val === 'boolean')?val:undefined; },
 	obj: function(obj) {return (!Array.isArray(obj) && typeof obj === 'object')?obj:undefined; },
 	map: function(aMap) {return (aMap instanceof Map)?aMap:undefined; },
-	set: function(aSet) {return (aSet instanceof Set)?aSet:undefined; }
+	set: function(aSet) {return (aSet instanceof Set)?aSet:undefined; },
+	arrayOf: function(contract=notNull) {
+		return (obj) => isArray(obj) && (obj.every(contract)?obj:undefined);
+	}
 };
 

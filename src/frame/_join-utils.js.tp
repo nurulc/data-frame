@@ -449,7 +449,7 @@ export function leftJoin(frame1, frame2, projectList, joinOn,filter) {
  * @param  {[type]} arr
  * @param  {[type]} cmp
  * @param  {[type]} tr
- * @return {[[row-element]} 
+ * @return {[[row_element]} 
  */
 export default function matchIt(res,row1,arr, cmp, tr) {
 	let len,  cnt =0;

@@ -10,3 +10,8 @@ runit.sh
 pnpm-lock.yaml
 notebook/frame-test-Copy1.ipynb
 _notebook/*
+dsrc
+ddocs
+.esdoc_bak.json
+data-frame.sublime-project
+data-frame.sublime-workspace

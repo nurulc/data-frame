@@ -18,8 +18,9 @@ import isEmpty from '../../utils/types/isEmpty';
 import {toNumber} from '../../utils/sort-helper';
 /**
  * gbMean average (mean) value of a group - see gbMin
- * @param  {[type]} name    [description]
- * @param  {[type]} newName [description]
+ * @param  {string} name    column name to group
+ * @param  {string} newName name to give to the grouping operation
+ * @param  {function} fn function to test for empty value
  * @return {[type]}         [description]
  */
 export default function gbMean(name,newName, fn=isEmpty) {

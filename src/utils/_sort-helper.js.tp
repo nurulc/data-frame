@@ -132,14 +132,16 @@ export function cmpStrNum(a,b) {
  * @param  {[type]} colIX column index
  * @return {function}        (row1, row2) => compares row1[columnIX] to row2[columnIX]
  */
-export default const cmpNumOrStrBy = (colIX) => (row1,row2) => (cmpStrNum(row1[colIX],row2[colIX]));
+export default function cmpNumOrStrBy(colIX) { 
+	return (row1,row2) => (cmpStrNum(row1[colIX],row2[colIX]));
+}
 //@@
 /**
  * [description]
  * @param  {function} cmp sort comparison function
  * @return {function}      new function what will do a reverse sort
  */
-export default const revCmp = (cmp) => (a,b) => cmp(b,a);
+export default function revCmp(cmp) { return (a,b) => cmp(b,a); }
 
 
 

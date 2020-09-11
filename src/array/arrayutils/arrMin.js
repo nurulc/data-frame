@@ -19,7 +19,7 @@ import arrCurry from './arrCurry';
 /**
  * [description]
  * @param  {Function} fn   [description]
- * @param  {[type]}   arr) {	var        min [description]
+ * @param  {[type]}   arr  [description]
  * @return {[type]}        [description]
  */
 export default  arrCurry(function(fn,arr) {

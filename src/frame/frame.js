@@ -23,7 +23,7 @@ import {groupBy} from './groupby';
 import frameWithIndex from './frame-utils/frameWithIndex';
 import { arrRemove, arrDedup, newArray } from '../array';
 import {EMPTY_ARRAY} from '../utils/constants';
-import {K} from '../utils';
+import {K,isA, isEmpty} from '../utils';
 import {toNumber} from '../utils/sort-helper';
 import {innerJoin, leftJoin, outerJoin} from './join-utils';
 //import {combineCmp, cmpNumOrStrBy, toNumber, revCmp} from '../utils/sort-helper';
@@ -37,16 +37,10 @@ import {vecAdd,zipToDict} from '../array/arrayutils';
 
 
 
-function isString(aStr) { return typeof aStr === 'string'; }
-function isFunc(f) { return typeof f === 'function'; }
+const isString = isA.str;
+const isFunc = isA.func;
+const arrOfStr = isA.arrayOf(isA.str);
 function isNum(v) {return v !== '' && !isNaN(+v); }
-
-// function strCmp(a,b) {
-// 	if(a === b) return 0;
-// 	return a<b?-1:1;
-// }
-// const cmpStrBy = (colIX) => (row1,row2) => (strCmp(row1[colIX],row2[colIX]));
-
 function Identity(x) { return x; }
 
 
@@ -60,16 +54,27 @@ function Identity(x) { return x; }
 
 
 /**
+ * This pure data structure represent a database like table
+ * internally it consists of rows and columns representing a generalized 2d matrix
+ * You can also think of this like a limited excel sheet.
+ * No operation will visibly modify the Frame, all operations create a new frame
+ * The class takes considerable effort to reuse as much of the internal data as possible
+ * to minimize the amount of garbage collection that is necessary.
+ *
+ * It easily handles large number of rows and columns and has been tested to work well
+ * with over 1 million rows with hundreds of columns. The real limitation is the amount of ram
+ * available to Javascript.
  * 
  */
 export class Frame extends BaseFrame {
 	/**
-	 * [constructor description]
-	 * @param  {[type]} data    [description]
-	 * @param  {[type]} columns [description]
-	 * @param  {[type]} name    [description]
-	 * @param  {[type]} keyFunc [description]
-	 * @return {[type]}         [description]
+	 * construct a new frame, Note once you have passed the data and column arguments, you no longer own those
+	 * two items and should not modify them or any of their content
+	 * 
+	 * @param  {Array} data    the data fot the frame is an array of rows and each row is an array of strings or numbers
+	 * @param  {Array} columns array of strings representing the column names
+	 * @param  {[type]} name    optional name for the frame
+	 * @param  {[type]} keyFunc optional function that is present will return the column represinting the unique key
 	 */
 	constructor(data,columns,name,keyFunc) {
 		super(data,columns,name,keyFunc);
@@ -84,12 +89,20 @@ export class Frame extends BaseFrame {
 	
 
 	// ======================================================================
-
+	/**
+	 * [asObj description]
+	 * @param  {[type]} ix [description]
+	 * @return {[type]}    [description]
+	 */
 	asObj(ix) { return this._rowObj(this.data[ix], ix); }
-
+	
+	/**
+	 * Get an array of row objects
+	 * @return {[RowObject]} array of row objects
+	 */
 	get rows() { 
 		if(this._rows === undefined) 
-			this._rows = this.data.map((r,i) => this._rowObj(r,i));
+			this._rows = this.asObjList();
 		return this._rows; 
 	}
 
@@ -141,16 +154,35 @@ export class Frame extends BaseFrame {
 		return this.data.map((x,i) => this._rowObj(x,i));
 	}
 	/**
-	 * [_rowObj description]
-	 * @param  {[type]} elem [description]
-	 * @return {[type]}      [description]
+	 * _rowObj This is an code efficient mathod of accessing the element of the 'rowLikeArray' 
+	 * using the columns names of the frame. The RowElement created is a facade to the rowLikeArray,
+	 * it does not actuall copy the elements of the array to itself. It is just a convinient way
+	 * of retrieving the elements of the array by name.
+	 *
+	 * e.g. if the this.columns : ['name', 'age', 'sex']
+	 *
+	 * let arr = ['Jane', 21, 'Female'];
+	 * let ro = this._rowObj(arr,5);
+	 *
+	 * ro.sex   is the same as arr[2] == 'Female'
+	 * ro.name  === arr[0]
+	 * ro._index$ === 5
+	 *
+	 * Finally:
+	 * arr[2] = 'Male';
+	 * ro.sex === 'Male'
+	 * 
+	 * @param  {row} rowLikeArray array representing the row, this array should have the same length as the rows in the frame
+	 * @param  {int32} ix row number
+	 * @return {RowObject}      row object representing the element
 	 */
-	_rowObj(elem,ix) {
-		return new this.AccessClass(elem,ix);
+	_rowObj(rowLikeArray,ix) {
+		return new this.AccessClass(rowLikeArray,ix);
 	}
 
 	/**
-	 * [withIndex description] ()
+	 * withIndex add an index column to the befining of the frame or at the end of the frame
+	 * @param  {boolean} indexName Name of the index defaults to _INDEX
 	 * @param  {boolean} atEnd if true the index is placed on the last column, otherwise it is the first column
 	 * @return {[type]} [description]
 	 */
@@ -160,9 +192,9 @@ export class Frame extends BaseFrame {
 
 
 	/**
-	 * [find description]
-	 * @param  {Function} fn [description]
-	 * @return {[type]}      [description]
+	 * find a row using the test function fn. The test function recieves a row ia s RowObject facade, see _rowObj method.
+	 * @param  {Function} fn function with a test criterion for the find operation 
+	 * @return {row_object}      undefined if nothing found or a RowObject for the row matching the test function
 	 */
 	find(fn) {
 		let row = this._rowObj();
@@ -179,11 +211,15 @@ export class Frame extends BaseFrame {
 	map(fn) { return this.mapF(fn); }
 
 	/**
-	 * [description]
-	 * @param  {function} fn	f(rowObject, )
+	 * Similar to Array.map
+	 * @param  {function} fn	takes fn(rowObject, index, this.data )
 	 * @return {Array}     [description]
 	 */
-	
+	mapF(fn) { 
+		let ro = this._rowObj();
+		return this.data.map((row,i,arr) => fn(ro._unsafeSet(row,i),i,arr)); 
+	}	
+
 	/**
 	 * Similar to arry reduce except it works on frames
 	 * @param  {function} fn   reduce function (acc:T, r:RowObject, index, array)
@@ -208,7 +244,7 @@ export class Frame extends BaseFrame {
 		let arrays = frames.map( 
 			f => arrEqual(this.columns, f.columns)? 
 				f.data : 
-				f.project(this.columns).data 
+				f.project(this.columns).data
 		);
 		let res = [].concat(...[this.data,...arrays]);
 		return new this.constructor(res, this._columns, this._name, this.keyFunc);
@@ -216,18 +252,17 @@ export class Frame extends BaseFrame {
 	
 
 	/**
-	 * [description]
+	 * similar to an array forEach
 	 * @param  {function} fn 	takes function(row:array, ix, array)
-	 * @return {[type]}     [description]
 	 */
-	forEachF(fn) { this.data.forEach((row, ix, arr) => fn(this._rowObj(row,ix), ix, this.data)); }
+	forEachF(fn) { this.data.forEach((row, ix, arr) => fn(this._rowObj(row,ix), ix, arr)); }
 
 	/**
 	 * same as filter but returns the index of the filtered lines
-	 * @param  {[type]} func [description]
-	 * @return {[type]}      [description]
+	 * @param  {function} func filter function
+	 * @return {[int32]}  returns an array of row indexes (indicies)
 	 */
-	filterIX(func) { 
+	filterIX(func) {  
 		if ( ! (typeof func === 'function') && this) 
 			throw new TypeError();
 		var data = this.data;
@@ -241,9 +276,9 @@ export class Frame extends BaseFrame {
 	}	
 
 	/**
-	 * [filter description]
+	 * Takes a filter function or an array of row indicies and returns a new Frame with the selected rows
 	 * @param  {function_array} fnOrArray filter function (r:RowObject,ix,array) or an array of index into the data
-	 * @return {[type]}           The filtered frame
+	 * @return {[type]}           A new frame with rows filtered out
 	 */
 	filter(fnOrArray) { 
 		if(!this) throw new TypeError('Filter cannot be use as a raw function');
@@ -262,7 +297,7 @@ export class Frame extends BaseFrame {
 			let data = this.data;
 			let dlen = data.length;
 			let i = -1;
-			let newColName = fnOrArray.map(i => this._columns[i] || 'COL_'+i)
+			let newColName = fnOrArray.map(i => this._columns[i] || 'COL_'+i);
 			while(++i !== len) {
 				let ix = elements[i];
 				if(typeof ix !== 'number') continue;
@@ -275,19 +310,19 @@ export class Frame extends BaseFrame {
 	}
 
 	/**
-	 * make all the data elements unique
-	 * @param  {[type]} retain [description]
+	 * remove all redundent copies of strings, this is the only destructive operation oan aframe
+	 * while still maintaining functional purity
 	 * @return {[type]}        [description]
 	 */
-	makeUnique(retain) {
-		if(this._unique) return this;
+	makeUnique() {
+		//if(this._unique) return this;
 		let len = this.columns.length;
 		let columns = this.columns, data = this.data;
 		let res = {};
 		for(let i=0; i<len; i++) {
 			res[columns[i]] = Object.keys(_makeUnique(data, i)).sort();
 		}
-		this._unique = retain?res:true;
+		//this._unique = retain?res:true;
 		return this;
 	}
 
@@ -296,8 +331,9 @@ export class Frame extends BaseFrame {
 	 * 
 	 *   colsMapping can be a 
 	 *   		1. rearranged list of col names from the frame e.g [ 'B', 'A', 'F']
-	 *   		2. or rearranged list of col names ['oldName=newName', ...] if =t of the
-	 *   		   = is not there the col name does not change
+	 *   		2. or rearranged list of col names [ 
+	 *   		   ...('columnName' | 'oldName=newName' | 'newColumnName')
+	 *   		   ] 
 	 *   example of usage:
 	 *   list - Frame with list.data:
 	 *
@@ -332,26 +368,39 @@ export class Frame extends BaseFrame {
 	 *    another expample:
 	 *    
 	 *            // Note the use. of the now column names
+	 *            function toNm(x) { x? (+x) : 0; }
 	 *            var mapper1 = {
-	 *			     nurul: (v,i,row) => "123",
-	 *			     "Week Day": (v) => v.toUpperCase(),
-	 *			     v1: (v) => v===undefined?0:v
+	 *			     nurul: () => "123",
+	 *			     "Week Day": v => v?v.toUpperCase(): '',
+	 *			     v1: (v) => v===undefined?0:v,
+	 *			     v3: (v, rowObj) => toNm(rowObj.v1) + toNm(rowObj.v2) // sum of v1 and v2
 	 *		      }; 
-	 *		      list.project([ 'mon=Month', 'weekday=Week Day','nurul' , 'v1', 'v2' ], mapper);	    
+	 *		      list.project([ 'mon=Month', 'weekday=Week Day','nurul' , 'v1', 'v2', 'v3' ], mapper);	    
 	 *
 	 *	the result is the same as the previous example, but the columns names will now be
-	 *			['Month', 'Week Day', 'nurul', 'v1', 'v2' ]
+	 *			['Month', 'Week Day', 'nurul', 'v1', 'v2', 'v3' ]
 	 * 
 	 * [project description]
-	 * @param  {[type]}  colsMapping [description]
-	 * @param  {[type]}  mappingObj  [description]
-	 * @param  {Boolean} flag        [description]
-	 * @param  {[type]}  tester      [description]
-	 * @return {[type]}              [description]
+	 * @param  {selected_columns}  colsMapping array of strings
+	 * @param  {Object}  mappingObj  a mapping object with { newColumnNam: mappingFunction(oldCellValue, rowObj, rowNumber, rawRowArray)}
+	 * @param  {function}  filter    a filter function applied to the original row to determine if the row should be included
+	 * @param  {function}  tester    if a function to test if a column/row should have a mapping applied
+	 * @return {Frame}              a new Frame with the selected columns, mappings, and filters applied 
 	 */
-	project(colsMapping,mappingObj,filter=undefined,flag=false, tester=undefined) {
-		if( (!colsMapping || colsMapping.length === 0) && !mappingObj ) return this; //someCols = this.columns.slice(0);
-		if(!colsMapping) colsMapping = this.columns;
+	project(colsMapping,mappingObj,filter=undefined, tester=undefined) {
+		if(filter && !isA.func( filter ) ) throw new TypeError('filter must be a function');
+		if(tester && !isA.func(tester) ) throw new TypeError('tester must be a function');
+		if(mappingObj && !isA.obj(mappingObj)) throw new TypeError('mappingObj must be a object');
+		if(colsMapping !== undefined) {
+			if(isA.func(colsMapping)) {
+				colsMapping = colsMapping(this, mappingObj); // apply the function to get the actual mapping
+			}
+			if( !isEmpty(colsMapping) && !arrOfStr(colsMapping) ) {
+				throw new TypeError('colsMapping must be an array of strings or undefined');
+			}
+		}
+		if( isEmpty(colsMapping) && isEmpty(mappingObj) && isEmpty(filter) ) return this; //someCols = this.columns.slice(0);
+		if( isEmpty(colsMapping) ) colsMapping = this.columns;
 		if( filter && !isFunc(filter)) throw new TypeError('Filter: '+filter+' must be a function');
 		let mappedCols = colsMapping
 			.map(n => n.split('=')) // convert 'original column name' and 'new column name' pair 
@@ -389,7 +438,7 @@ export class Frame extends BaseFrame {
 
 					if(tester && !tester(ro, newCols[j])) row.push(v);
 					else {
-						if( (fn = colMapFn[j]) !== undefined) v = ( flag?fn(ro,pos):fn(v, ro, pos, inrow) );
+						if( (fn = colMapFn[j]) !== undefined) v = fn(v, ro, pos, inrow);
 						row.push(v!==undefined?v:'');
 					}
 				}
@@ -466,19 +515,25 @@ export class Frame extends BaseFrame {
 			where);
 
 	}
-
-	update(mapper,tester, flag=false) {
-		return this.project(undefined,mapper,flag,tester);
+	/**
+	 * Convinience method as an alias for the __project__ methos
+	 * @param  {[type]}  mapper [description]
+	 * @param  {[type]}  filter [description]
+	 * @param  {[type]}  tester [description]
+	 * @return {[type]}         [description]
+	 */
+	update(mapper,filter,tester) {
+		return this.project(undefined,mapper,filter,tester);
 	}
 
 	/**
-	 * returns a function that can be used iteratively to project one array to another
+	 * Returns a function that can be used iteratively to project one array to another.
+	 * This is 
 	 * @param  {[type]}  colsMapping [description]
 	 * @param  {[type]}  mappingObj  [description]
-	 * @param  {Boolean} flag        [description]
-	 * @return {[type]}              [description]
+	 * @return {function}            mapping function (inputArray, outputArray) rearranges the input array to the output array
 	 */
-	trProject(colsMapping,mappingObj,flag=false) {
+	trProject(colsMapping,mappingObj) {
 		if( !colsMapping || colsMapping.length === 0 ) return () => []; //nothing to maporiginalName
 		let mappedCols = colsMapping
 			.map(n => n.split('=')) // convert 'original column name' and 'new column name' pair 
@@ -508,7 +563,7 @@ export class Frame extends BaseFrame {
 		if( mappingObj !== undefined){
 			let colMapFn = newCols.map(name => mappingObj[name]);
 			return (
-				(inrow, row) => {
+				(inrow, row,ix=0) => {
 					let fn;
 					const push = ( row === undefined) ? 
 						( v => row.push(v)) :
@@ -518,7 +573,7 @@ export class Frame extends BaseFrame {
 						let pos = ixList[j]|0;
 						let v = pos === -1?'': inrow[pos];
 						if( (fn = colMapFn[j]) !== undefined) {
-							v = ( flag?fn(this._rowObj(inrow)):fn(v, this._rowObj(inrow), 0, inrow) );
+							v = fn(v, this._rowObj(inrow), ix, inrow);
 						}
 						push(v,j);
 					}
@@ -571,11 +626,11 @@ export class Frame extends BaseFrame {
 
 	/**
 	 * [innerJoin description]
-	 * @param  {[type]} aFrame    [description]
-	 * @param  {[type]} colsToMap [description]
-	 * @param  {[type]} joinOn    [description]
-	 * @param  {[type]} filter    [description]
-	 * @return {[type]}           [description]
+	 * @param  {Frame} aFrame    [description]
+	 * @param  {Array} colsToMap array of array of (strings) representing column names '1.colName' or '2.colName' 
+	 * @param  {string} joinOn    'colFromThis==colFrom_aFrame'
+	 * @param  {function} filter    [description]
+	 * @return {Frame}           [description]
 	 */
 	innerJoin(aFrame, colsToMap, joinOn, filter) {
 		return innerJoin(this,aFrame, colsToMap, joinOn, this._genAuxJoinFilter(filter,aFrame));
@@ -584,11 +639,11 @@ export class Frame extends BaseFrame {
 
 	/**
 	 * [leftJoin description]
-	 * @param  {[type]} aFrame    [description]
-	 * @param  {[type]} colsToMap [description]
-	 * @param  {[type]} joinOn    [description]
-	 * @param  {[type]} filter    [description]
-	 * @return {[type]}           [description]
+ 	 * @param  {Frame} aFrame    [description]
+	 * @param  {Array} colsToMap array of (strings) representing column names '1.colName' or '2.colName' 
+	 * @param  {string} joinOn    'colFromThis==colFrom_aFrame'
+	 * @param  {function} filter    [description]
+	 * @return {Frame}           [description]
 	 */
 	leftJoin(aFrame, colsToMap, joinOn, filter) {
 		return leftJoin(this,aFrame, colsToMap, joinOn, this._genAuxJoinFilter(filter,aFrame));
@@ -596,11 +651,11 @@ export class Frame extends BaseFrame {
 
 	/**
 	 * [outerJoin description]
-	 * @param  {[type]} aFrame    [description]
-	 * @param  {[type]} colsToMap [description]
-	 * @param  {[type]} joinOn    [description]
-	 * @param  {[type]} filter    [description]
-	 * @return {[type]}           [description]
+	 * @param  {Frame} aFrame    [description]
+	 * @param  {Array} colsToMap array of array of (strings) representing column names '1.colName' or '2.colName' 
+	 * @param  {string} joinOn    'colFromThis==colFrom_aFrame'
+	 * @param  {function} filter    [description]
+	 * @return {Frame}           [description]
 	 */
 	outerJoin(aFrame, colsToMap, joinOn, filter) {
 		return outerJoin(this,aFrame, colsToMap, joinOn, this._genAuxJoinFilter(filter,aFrame));
@@ -724,7 +779,10 @@ export class Frame extends BaseFrame {
 	}
 	
 
-
+	/**
+	 * Return a string represent of the frame formatted as an HTML table
+	 * @return {[type]} [description]
+	 */
 	_toHtml() {
 		return toHTML(this);
 	}
@@ -736,7 +794,7 @@ function toString(x) {
 	return x.toString();
 }
 
-Frame.HTMLFormat = {
+Frame.HTMLFormat = {	
 	number: toString,
 	other: toString
 };

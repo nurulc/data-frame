@@ -126,8 +126,9 @@ function maxOp(a,b) { return cmpStrNum(a,b)>0?a:b; }
 //##import {toNumber} from '../utils/sort-helper';
 /**
  * gbMean average (mean) value of a group - see gbMin
- * @param  {[type]} name    [description]
- * @param  {[type]} newName [description]
+ * @param  {string} name    column name to group
+ * @param  {string} newName name to give to the grouping operation
+ * @param  {function} fn function to test for empty value
  * @return {[type]}         [description]
  */
 export default function gbMean(name,newName, fn=isEmpty) {
@@ -191,6 +192,25 @@ export default function gbMerge(name,newName,sep) {
 //##import isEmpty from '../utils/types/isEmpty';
 //##import {arrDedup } from '../array';
 //##import accStr from './accStr';
+
+/**
+ * gbVal merge the values grouped rows onto a single comma seperated value
+ * @param  {[type]} newName [description]
+ * @param  {[type]} value     [description]
+ * @return {[type]}         [description]
+ */
+export default function gbVal(newName,value) {
+	newName = newName || '';
+	function getVal() {
+		return [value, 0];
+	}
+	return [getVal,undefined,[() => value,0],newName];
+}
+
+//@@
+//##import isEmpty from '../utils/types/isEmpty';
+//##import {arrDedup } from '../array';
+//##import accStr from './accStr';
 /**
  * [gbMergeU description]
  * @param  {[type]} name    [description]
@@ -227,5 +247,6 @@ export default function accStr(accum,val) {
 //##import gbMin from './gbMin';
 //##import gbMax from './gbMax';
 //##import gbMerge from './gbMerge';
+//##import gbVal from './gbVal';
 //##import gbMergeU from './gbMergeU';
-export default const gb = { stdDiv: gbStdDiv, mean: gbMean, count: gbCount, sum: gbSum, min: gbMin, max: gbMax, merge: gbMerge, mergeU: gbMergeU };
+export default const gb = { stdDiv: gbStdDiv, mean: gbMean, count: gbCount, sum: gbSum, min: gbMin, max: gbMax, merge: gbMerge, mergeU: gbMergeU, value: gbVal };

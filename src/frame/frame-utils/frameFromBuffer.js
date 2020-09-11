@@ -19,6 +19,7 @@ import {dataSplit} from '../../string/csv';
 /**
  * default splitter is pipe seperated values
  * @param  {[type]} buffer    [description]
+ * @param  {function} splitter    function to split a string representing a row to an array of strings
  * @param  {{ noConvert: boolen,name: string, Fr: SomeFrameClass}} options
  * @return {[type]}           [description]
  */

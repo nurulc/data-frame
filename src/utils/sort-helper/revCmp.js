@@ -19,7 +19,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  * @param  {function} cmp sort comparison function
  * @return {function}      new function what will do a reverse sort
  */
-export default  (cmp) => (a,b) => cmp(b,a);
+export default function revCmp(cmp) { return (a,b) => cmp(b,a); }
 
 
 

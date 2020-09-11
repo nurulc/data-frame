@@ -20,8 +20,8 @@ import isSorted from './isSorted';
 
 /**
  * converts an array to sorted set, pure function - does not modify the input
- * @param  {[string|number]} array  - the array to sorted and dedup
- * @return {[string|number]}          return a deduped sorted array
+ * @param  {[type]} array  - the array of (string|number) to sorted and dedup
+ * @return {[type]}          return a deduped sorted array of (string|number)
  */
 export default function asSortedSet(array) {
 	let arr;

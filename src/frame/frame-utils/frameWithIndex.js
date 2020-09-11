@@ -19,6 +19,8 @@ import haveFrame from '../haveFrame';
 /**
  * [frameWithIndex description]
  * @param  {Frame} aFrame The frame to add the index to
+ * @param  {string} indexName Name of the index column
+ * @param  {boolean} atEnd if true the index is placed after the last column, otherwise it is the first column
  * @return {Frame}        new frame with an index column (remove and previous index column)
  */
 export default function frameWithIndex(aFrame, indexName='_INDEX', atEnd) {

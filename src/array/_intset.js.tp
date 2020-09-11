@@ -8,8 +8,8 @@ import {newArray} from './arrayutils';
 
 /**
  * converts an array to sorted set, pure function - does not modify the input
- * @param  {[string|number]} array  - the array to sorted and dedup
- * @return {[string|number]}          return a deduped sorted array
+ * @param  {[type]} array  - the array of (string|number) to sorted and dedup
+ * @return {[type]}          return a deduped sorted array of (string|number)
  */
 export default function asSortedSet(array) {
 	let arr;
@@ -78,7 +78,7 @@ export default function hasNoDups(arr /*sorted*/) {
 //@@
 /**
  * checks if array is sorted, pure function - does not modify the input
- * @param  {[string|number]}  arr - Array of values
+ * @param  {[type]}  arr - Array of values (string|number)
  * @return {[boolean]}     - true if the array is sorted, false otherwise (undefined is not a sorted set)
  */
 export default function isSorted(arr /* may not be sorted sorted*/) {

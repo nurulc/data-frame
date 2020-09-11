@@ -19,7 +19,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  * @param  {string} data  [description]
  * @param  {char} char  [description]
  * @param  {[int32]} arr   optional array to place the index of char in string
- * @param  {int32} optional start start index of the string
+ * @param  {int32} start optional start start index of the string
  * @param  {int32} end   optional last index of the string
  * @return {int32}       number of occurences of the char in the string
  */

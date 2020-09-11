@@ -20,7 +20,7 @@ import {TRUE} from '../constants';
  *   aListOrStringOrEmpty => undefined - allows everything
  *   aListOrStringOrEmpty => [... names ] - allow only the elelemnts in the list 
  *   aListOrStringOrEmpty => <single string Name> (string) - allow only single name 
- * @param  {[...string]} aListOrStringOrEmpty
+ * @param  {[string]} aListOrStringOrEmpty
  * @return {[type]}
  */
 export default function genFilterFunction(aListOrStringOrEmpty) {

@@ -1732,7 +1732,7 @@
             },
             {
               "type": "CommentBlock",
-              "value": "*\n * leftJoin on one row from left and arr from right\n * @param  {[type]} res\n * @param  {[type]} row1\n * @param  {[type]} arr\n * @param  {[type]} cmp\n * @param  {[type]} tr\n * @return {[[row-element]} \n ",
+              "value": "*\n * leftJoin on one row from left and arr from right\n * @param  {[type]} res\n * @param  {[type]} row1\n * @param  {[type]} arr\n * @param  {[type]} cmp\n * @param  {[type]} tr\n * @return {[[row_element]} \n ",
               "start": 792,
               "end": 1000,
               "loc": {
@@ -1816,7 +1816,7 @@
           },
           {
             "type": "CommentBlock",
-            "value": "*\n * leftJoin on one row from left and arr from right\n * @param  {[type]} res\n * @param  {[type]} row1\n * @param  {[type]} arr\n * @param  {[type]} cmp\n * @param  {[type]} tr\n * @return {[[row-element]} \n ",
+            "value": "*\n * leftJoin on one row from left and arr from right\n * @param  {[type]} res\n * @param  {[type]} row1\n * @param  {[type]} arr\n * @param  {[type]} cmp\n * @param  {[type]} tr\n * @return {[[row_element]} \n ",
             "start": 792,
             "end": 1000,
             "loc": {
@@ -1902,7 +1902,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n * leftJoin on one row from left and arr from right\n * @param  {[type]} res\n * @param  {[type]} row1\n * @param  {[type]} arr\n * @param  {[type]} cmp\n * @param  {[type]} tr\n * @return {[[row-element]} \n ",
+      "value": "*\n * leftJoin on one row from left and arr from right\n * @param  {[type]} res\n * @param  {[type]} row1\n * @param  {[type]} arr\n * @param  {[type]} cmp\n * @param  {[type]} tr\n * @return {[[row_element]} \n ",
       "start": 792,
       "end": 1000,
       "loc": {
@@ -1984,7 +1984,7 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\n * leftJoin on one row from left and arr from right\n * @param  {[type]} res\n * @param  {[type]} row1\n * @param  {[type]} arr\n * @param  {[type]} cmp\n * @param  {[type]} tr\n * @return {[[row-element]} \n ",
+      "value": "*\n * leftJoin on one row from left and arr from right\n * @param  {[type]} res\n * @param  {[type]} row1\n * @param  {[type]} arr\n * @param  {[type]} cmp\n * @param  {[type]} tr\n * @return {[[row_element]} \n ",
       "start": 792,
       "end": 1000,
       "loc": {

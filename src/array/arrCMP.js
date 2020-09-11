@@ -2,8 +2,8 @@
 /**
  * Compare array, assumes the arry is sorted
  * returns -1, 0, +1  as required by a sotring compare function
- * @param  {[sorted elements]} arr1
- * @param  {[sorted elements]} arr2
+ * @param  {[sorted_elements]} arr1
+ * @param  {[sorted_elements]} arr2
  * @return {integer} -1 = less, 0 = equal, +1 = larger
  */
 export default function arrCMP(arr1,arr2) {

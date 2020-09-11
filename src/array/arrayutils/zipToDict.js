@@ -15,7 +15,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
 /**
- * @param  {[...[string, any]]} aListOfPairs list of key value pairs
+ * @param  {[[string, any]]} aListOfPairs list of key value pairs
  * @return {[type]}
  */
 export function zipToDict(aListOfPairs) {

@@ -20,4 +20,6 @@ import {cmpStrNum} from './cmpStrNum';
  * @param  {[type]} colIX column index
  * @return {function}        (row1, row2) => compares row1[columnIX] to row2[columnIX]
  */
-export default  (colIX) => (row1,row2) => (cmpStrNum(row1[colIX],row2[colIX]));
+export default function cmpNumOrStrBy(colIX) { 
+	return (row1,row2) => (cmpStrNum(row1[colIX],row2[colIX]));
+}
