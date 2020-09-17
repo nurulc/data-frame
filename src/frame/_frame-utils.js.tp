@@ -34,7 +34,7 @@ export default function frameFromBuffer(buffer,splitter,options={}) {
 	Fr = Fr || Frame;
 	let arr = buffer.replace(/\r/g, '').split('\n').filter(s => s);
 	let columns = splitter(arr[0]);
-	let array = dataSplit(arr.splice(1),splitter);
+	let array = dataSplit(arr.splice(1),splitter).filter(s => s);
 	[columns, array] = cleanData(columns, array);
 	var newFrame = new Fr(array,columns,name);
 	if(!noConvert) newFrame = newFrame.convertData();
