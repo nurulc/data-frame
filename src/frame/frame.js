@@ -198,8 +198,13 @@ export class Frame extends BaseFrame {
 	 */
 	find(fn) {
 		let row = this._rowObj();
-		let v = this.data.find((x,i) => fn(row.__unsafeSet(x,i),i));
-		return v ? this._rowObj(v): undefined;
+		let len = this.length;
+		let data = this.data;
+		for(let i=0; i<len; i++) {
+			let x = data[i];
+			if(fn(row.__unsafeSet(x,i),i)) return this._rowObj(x,i);
+		}
+		return undefined;
 	}
 
 
