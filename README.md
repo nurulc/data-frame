@@ -2,9 +2,9 @@
 
 This is an NPM package (Javascript), package name **str-data-frame**
 
-<a href="https://nurulc.github.io/data-frame-examples.html">Link to interactive data frame totorial</a>
+<a href="https://nurulc.github.io/data-frame-examples.html">Link to interactive data frame totorial
 ![](data-frame-live.PNG)
-
+</a>
 # Installation
 
 npm install --save str-data-frame
