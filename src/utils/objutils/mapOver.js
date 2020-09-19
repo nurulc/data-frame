@@ -14,24 +14,38 @@ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
-
+/**
+ * Apply a map function on array or object, if it is an object map over the vale for each object 'attribute/key'
+ * creating a new object that has had the same keys but the values mapped. 
+ *
+ * If the object has 
+ * @param  {Function} fn      [description]
+ * @param  {Object} object    [description]
+ * @return {[type]}           [description]
+ */
 export default  curry2(function (fn, object) {
 	if(!object) return object;
 	if(Array.isArray(object)) {
 		let list = object;
 		return list.map(fn);
-	}
-	else if( typeof object === 'object') {
-		return Object.keys(object).reduce((obj,k,ix) => (obj[k] = fn(object[k],ix), obj),{});
-	}
+	} 
 	else if(typeof object.map === 'function'){
 		// babel - do not transform map into array iteration
 		// O: KEEP
 		return object.map(fn);
 	}
+	else if( typeof object === 'object') {
+		return Object.keys(object).reduce((obj,k,ix) => (obj[k] = fn(object[k],ix), obj),{});
+	}
 	else return fn(object);
 });
 
+/**
+ * curry2 - curry a function that has two or more parameters. Currying allows us to produce a new function by 
+ * combining a function and one or more arguments.
+ * @param  {Function} fn [description]
+ * @return {[type]}      [description]
+ */
 function curry2(fn) {
 	if(typeof fn !== 'function') throw new Error('fn:('+fn+') function expected');
 	if( fn.length < 2 ) return fn;

@@ -15,7 +15,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
 /**
- * [description]
+ * Reverses a sort compare function so it sorts in descending order
  * @param  {function} cmp sort comparison function
  * @return {function}      new function what will do a reverse sort
  */

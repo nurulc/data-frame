@@ -17,9 +17,16 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 import memoize from './memoize';
 import pickRaw from './pickRaw'
 /**
- * extract elements of an object, or from a list of elements
+ * Returns a function that extract elements of an object, or from a list of elements
  * 	pick(key) => returns a function that takes an object and returns an elemnt 
  *  pick(keyList) => returns a function that takes an object and returns an array of element values
+ *
+ *  The pick function is memoized to make it memory efficient
+ *
+ *  example:
+ *    `let nameAddress = pick('name', 'street');`
+ *    `let obj = { name: 'Andrew', street: '1 Pine Street', city: 'New York', state: 'NY', zip: '10004' }`
+ *    `nameAddress(obj)`  returns `['Andrew', '1 Pine Street']`
  *
  * @param  {String} list   String or array of strings
  * @return {function}      function that takes an object and returns the key or an array of keys

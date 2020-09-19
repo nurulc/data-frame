@@ -15,6 +15,11 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
 
+/**
+ * Convert a string to a Javascript number, thakes into accont number string with commas (,) and numbers
+ * @param  {[type]} str [description]
+ * @return {[type]}     [description]
+ */
 export function toNumber(str) {
 	if(str === '' || str === undefined) return undefined;
 	let len = str.length,negate = 1;

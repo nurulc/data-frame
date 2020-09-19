@@ -16,9 +16,9 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 /*local*/
 import {isA} from './isA';
 /**
- * [pickRaw description]
- * @param  {[type]} list [description]
- * @return {[type]}      [description]
+ * Same as the `pick(...)` function withour memoizing
+ * @param  {String} list   String or array of strings
+ * @return {function}      function that takes an object and returns the key or an array of keys
  */
 export default function pickRaw(list) {
 	if(!list) return () => [];

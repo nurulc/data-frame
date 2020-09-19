@@ -50,7 +50,10 @@ function Identity(x) { return x; }
 // 	return typeof o;
 // }
 
-
+function eqaulRow(row1, row2) {
+	if( row1 === row2 ) return true;
+	return ( row1.length === row2.length && arrEqual(row1, row2));
+}
 
 
 /**
@@ -288,12 +291,13 @@ export class Frame extends BaseFrame {
 	filter(fnOrArray) { 
 		if(!this) throw new TypeError('Filter cannot be use as a raw function');
 		if ( typeof fnOrArray === 'function')  {
-			let fn = fnOrArray;
-			let row = this._rowObj();
-			return new this.constructor(
-				this.data.filter( (x,ix,arr) => fn(row.__unsafeSet(x,ix),ix,arr)), 
-				this._columns, this._name, 
-				this.keyFunc); 
+			return this.project(undefined, undefined, fnOrArray);
+			// let fn = fnOrArray;
+			// let row = this._rowObj();
+			// return new this.constructor(
+			// 	this.data.filter( (x,ix,arr) => fn(row.__unsafeSet(x,ix),ix,arr)), 
+			// 	this._columns, this._name, 
+			// 	this.keyFunc); 
 		}
 		else if( Array.isArray(fnOrArray) ) { // expects an array of integer index into the frame return s teh values for all valid index
 			let elements = fnOrArray;
@@ -411,8 +415,27 @@ export class Frame extends BaseFrame {
 			.map(n => n.split('=')) // convert 'original column name' and 'new column name' pair 
 			.map(([originalName,newName]) => [originalName, newName||originalName] );
 		//check if we are only renaming the columns, then the data does can stay the same, just the columns are renamed
-		if( mappingObj === undefined && filter === undefined && arrEqual(this.columns,mappedCols.map(([a]) => a)) ) {
-			return new this.constructor(this.data,mappedCols.map(([,b]) => b), this.name + '1');
+		
+		if( mappingObj === undefined &&  arrEqual(this.columns,mappedCols.map(([a]) => a)) ) {
+			// Note with no mappingObj - tester plays no part even if it is defined
+			// column order is unchanges, no value mapping, but column name may change and some rows may be filtered away
+			let data = this.data; // assume no filtering operation
+			if(filter !== undefined) {
+				// some filtering is potentially happening
+				let row = this._rowObj();
+				data = this.data.filter( (x,ix,arr) => fn(row.__unsafeSet(x,ix),ix,arr));
+			}
+			
+			let columns = mappedCols.map(([,b]) => b);
+			let name = (this.name||'')+'1';
+			if( arrEqual(this.columns, columns)) {
+				// no column name change
+				columns = this.columns;
+				name = this.name;
+			}
+
+			if( columns === this.columns && data === this.data) return this; // no change
+			return new this.constructor(data,columns, name);
 		}
 
 		let ixList = mappedCols.map( ([name]) => this.colIx(name));// get index of column in the original data
@@ -509,8 +532,10 @@ export class Frame extends BaseFrame {
 			if(isFunc(v)) return v;
 			return K(v);
 		}
-		let mapper = cols.filter(([ , ,fn]) => fn !== undefined)
+		let mapper = cols
+			.filter(([ , ,fn]) => fn !== undefined)
 			.map(([ ,nn,fn]) => [nn, toFunc(fn)]);
+			
 		let colMap = undefined;
 		if(mapper.length) colMap = zipToDict(mapper);
 		
@@ -521,11 +546,28 @@ export class Frame extends BaseFrame {
 
 	}
 	/**
-	 * Convinience method as an alias for the __project__ methos
-	 * @param  {[type]}  mapper [description]
-	 * @param  {[type]}  filter [description]
-	 * @param  {[type]}  tester [description]
-	 * @return {[type]}         [description]
+     * Rename columns, format for which [ 'oldColumnName=newColumnName' ...]
+     * @param  {[string]} list Array of strings
+     * @return {Frame}      A new Frame with the renamed columns, since these are immutable data structures all unmodified data are shared with the original frame
+     */
+	rename(list) {
+		if( !list || !arrOfStr(list)) {
+			throw new TypeError('Expected a list of strings');
+		}
+		let pairs = zipToDict(list.map(name => name.split('=')));
+		let notPresent = arrRemove(Object.keys(pairs), this.columns);
+		if(notPresent.length) {
+			throw new Error('These column name(s) not found in frame '+JSON.stringify(notPresent));
+		}
+		let cols = this.columns.map(name => pairs[name]? `${name}=${pairs[name]}`: name);
+		return this.select(cols);
+	}
+	/**
+	 * Convinience method as an alias for the __project__ method
+	 * @param  {Object}  mapper Is an object with the keys being the column name to and the value is an update function or a constant
+	 * @param  {function}  filter Optional filter function that will only keep rows if the filter function returns true, the filter operates on the original row not the result of the update
+	 * @param  {function}  tester Optional tester function on the original row, if it returns true the update is performed other no update is done to the row
+	 * @return {Frame}         A new Frame is created with the updated rows base on the mapper filter and tester
 	 */
 	update(mapper,filter,tester) {
 		return this.project(undefined,mapper,filter,tester);
@@ -534,9 +576,9 @@ export class Frame extends BaseFrame {
 	/**
 	 * Returns a function that can be used iteratively to project one array to another.
 	 * This is 
-	 * @param  {[type]}  colsMapping [description]
-	 * @param  {[type]}  mappingObj  [description]
-	 * @return {function}            mapping function (inputArray, outputArray) rearranges the input array to the output array
+	 * @param  {Array}  colsMapping [description]
+	 * @param  {Object}  mappingObj  [description]
+	 * @return {Function}            mapping function (inputArray, outputArray) rearranges the input array to the output array
 	 */
 	trProject(colsMapping,mappingObj) {
 		if( !colsMapping || colsMapping.length === 0 ) return () => []; //nothing to maporiginalName
@@ -630,40 +672,40 @@ export class Frame extends BaseFrame {
 	}
 
 	/**
-	 * [innerJoin description]
-	 * @param  {Frame} aFrame    [description]
+	 * This is like SQL innerJoin join the rows where value of colFromThis == 
+	 * @param  {Frame} rightFrame    the frame to join against
 	 * @param  {Array} colsToMap array of array of (strings) representing column names '1.colName' or '2.colName' 
 	 * @param  {string} joinOn    'colFromThis==colFrom_aFrame'
-	 * @param  {function} filter    [description]
+	 * @param  {Function} filter    filter(rowObjectFronLeftFtame, rowObjectFromRightFlame) if true the join is possible
 	 * @return {Frame}           [description]
 	 */
-	innerJoin(aFrame, colsToMap, joinOn, filter) {
-		return innerJoin(this,aFrame, colsToMap, joinOn, this._genAuxJoinFilter(filter,aFrame));
+	innerJoin(rightFrame, colsToMap, joinOn, filter) {
+		return innerJoin(this,rightFrame, colsToMap, joinOn, this._genAuxJoinFilter(filter,rightFrame));
 	}
 
 
 	/**
-	 * [leftJoin description]
- 	 * @param  {Frame} aFrame    [description]
+	 * leftJoin similar to sql left join, it is like innerJoin but all the rows of the 'this' are prensnt in the output
+ 	 * @param  {Frame} rightFrame    the frme to join against
 	 * @param  {Array} colsToMap array of (strings) representing column names '1.colName' or '2.colName' 
-	 * @param  {string} joinOn    'colFromThis==colFrom_aFrame'
+	 * @param  {string} joinOn    'colFromThis==colFrom_rightFrame'
 	 * @param  {function} filter    [description]
 	 * @return {Frame}           [description]
 	 */
-	leftJoin(aFrame, colsToMap, joinOn, filter) {
-		return leftJoin(this,aFrame, colsToMap, joinOn, this._genAuxJoinFilter(filter,aFrame));
+	leftJoin(rightFrame, colsToMap, joinOn, filter) {
+		return leftJoin(this,rightFrame, colsToMap, joinOn, this._genAuxJoinFilter(filter,rightFrame));
 	}
 
 	/**
-	 * [outerJoin description]
-	 * @param  {Frame} aFrame    [description]
+	 * Like leftJoin, but all th rows of both the left frame (this) and rightFrame ar present in the output
+	 * @param  {Frame} rightFrame    [description]
 	 * @param  {Array} colsToMap array of array of (strings) representing column names '1.colName' or '2.colName' 
 	 * @param  {string} joinOn    'colFromThis==colFrom_aFrame'
 	 * @param  {function} filter    [description]
 	 * @return {Frame}           [description]
 	 */
-	outerJoin(aFrame, colsToMap, joinOn, filter) {
-		return outerJoin(this,aFrame, colsToMap, joinOn, this._genAuxJoinFilter(filter,aFrame));
+	outerJoin(rightFrame, colsToMap, joinOn, filter) {
+		return outerJoin(this,rightFrame, colsToMap, joinOn, this._genAuxJoinFilter(filter,rightFrame));
 	}
 
 

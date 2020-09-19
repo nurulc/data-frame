@@ -28,15 +28,23 @@ function __rep(s) {
 	}
 	return '???';
 }
-
+/**
+ * converts a line representing comma separated values (CSV) into an array of strings
+ * @param  {string} line string representing a line of CSV data
+ * @return {[string]}      an array of strings
+ */
 export default function csvLine(line) {
 	const re = /"([^"]|"")*"/g;
 	return trimListElements(line.replace(re,__rep).replace(/,/g, '\x01').replace(_mat_escape_,',').split('\x01'));
-	//return line.replace(re,__rep).replace(/,/g, "\x01").replace(_mat_escape_,",").split('\x01').map(x=>x.trim());
 }
 
 //@@
-// modifies the input array
+// 
+/**
+ * Takes an array of strings and trims all the strings in the array,  modifies the input array and returns the same array with the trimed strings
+ * @param  {[string]} arr array of strings
+ * @return {[string]}     returns the same array with the stings trimmed
+ */
 export default function trimListElements(arr) {
 	let len = arr.length;
 	for(let i=0; i<len; i++) {
@@ -50,6 +58,11 @@ export default function trimListElements(arr) {
 //@@
 //## import trimListElements from './trimListElements';
 
+/**
+ * converts a line representing tab separated values (TSV) into an array of strings
+ * @param  {string} line string representing a line of TSV data
+ * @return {[string]}      an array of strings
+ */
 export default function tsvLine(line) {
 	return trimListElements(line.split('\t'));
 	//return line.split('\t').map(x=>x.trim()); // nicer code, but much slower
@@ -57,12 +70,26 @@ export default function tsvLine(line) {
 //@@
 //## import trimListElements from './trimListElements';
 
+/**
+ * converts a line representing pipe (|) separated values (PSV) into an array of strings. 
+ * This is a commely data representation in USA healthcare
+ * @param  {string} line string representing a line of PSV data
+ * @return {[string]}      an array of strings
+ */
 export default function psvLine(line) {
 	return trimListElements(line.split('|'));
 	//return line.split('|').map(x=>x.trim()); // nicer code but much slower
 }
 
 //@@
+/**
+ * Takes a array of string lines, representing a list of 'row' strings. and for 
+ * each row is split into column elements (each a string) using a splitter function.
+ * @param  {[string]}   data     array of string lines
+ * @param  {function}   splitter function to split a string representing a row into an array of strings representing column elements
+ * @param  {function} fn       optional function to apply to string line fn(line,line_number) before applying the splitter
+ * @return {[string]}          this is the same as buffer.map(fn|Idnetity).map(splitter)
+ */
 export default function dataSplit(data,splitter,fn) {
 	let len = data.length;
 	let res = [];

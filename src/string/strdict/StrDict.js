@@ -27,8 +27,7 @@ const EMPTY_STR = '';
 export class StrDict {
 	/**
 	 * [constructor description]
-	 * @param  {[type]} maxLen [description]
-	 * @return {[type]}        [description]
+	 * @param  {int32} maxLen [description]
 	 */
 	constructor(maxLen) {
 		let len = (maxLen || 1997)|0;

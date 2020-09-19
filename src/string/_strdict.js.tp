@@ -41,6 +41,14 @@ export default function strHash(str,start,end) {
 
 
 //@@
+/**
+ * strEq str.substring(strStart,strEnd) === otherStr
+ * @param  {string} str      str take str.substring(strStart,strEnd)
+ * @param  {int32} strStart start index for `str`
+ * @param  {int32} strEnd   end index for `str`
+ * @param  {string} otherStr other string in the compare
+ * @return {boolean}          true =equal, false = not equal
+ */
 export default function strEq(str, strStart, strEnd, otherStr) {
 	if( strEnd - strStart !== otherStr.length) return false;
 	for(let i=strStart, j=0; i<strEnd; i++, j++) if( str[i] !== otherStr[j]) return false;
@@ -62,8 +70,7 @@ const EMPTY_STR = '';
 export class StrDict {
 	/**
 	 * [constructor description]
-	 * @param  {[type]} maxLen [description]
-	 * @return {[type]}        [description]
+	 * @param  {int32} maxLen [description]
 	 */
 	constructor(maxLen) {
 		let len = (maxLen || 1997)|0;

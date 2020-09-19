@@ -14,6 +14,11 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 //@@
 
+/**
+ * Convert a string to a Javascript number, thakes into accont number string with commas (,) and numbers
+ * @param  {[type]} str [description]
+ * @return {[type]}     [description]
+ */
 export function toNumber(str) {
 	if(str === '' || str === undefined) return undefined;
 	let len = str.length,negate = 1;
@@ -70,10 +75,10 @@ export function toNumber(str) {
 }
 //@@
 /**
- * [cmpStr description]
- * @param  {[type]} a [description]
- * @param  {[type]} b [description]
- * @return {[type]}   [description]
+ * Compare two strings (for sorting) 0 == euqal, -1 a<b, 1 a>b
+ * @param  {string} a left string
+ * @param  {string} b right string
+ * @return {int32}   0 == euqal, -1 = a<b, 1 = a>b
  */
 export function cmpStr(a,b) {
 	if( a === b ) return 0;
@@ -85,10 +90,10 @@ export function cmpStr(a,b) {
 const  isString = (s) =>  (typeof s) === 'string';
 const  isNum = (a) =>  (typeof a) === 'number' && a !== Infinity;//isNum = (a) =>  (typeof a) === 'number';
 /**
- * [cmpStrNum compare (number, number), or (number, string-of-number) or (string-of-number, number) (string-of-number, string-of-number) , (string, string) 
- * @param  {[type]} a [description]
- * @param  {[type]} b [description]
- * @return {[type]}   [description]
+ * cmpStrNum compare (number, number), or (number, string-of-number) or (string-of-number, number) (string-of-number, string-of-number) , (string, string) 
+ * @param  {string|number} a string or number, if is a string that represents a number it is treated as a number
+ * @param  {string|number} b string or number, if is a string that represents a number it is treated as a number
+ * @return {int32}   0 == euqal, -1 = a<b, 1 = a>b
  */
 export function cmpStrNum(a,b) {
 	if( isNum(a) ) {
@@ -137,7 +142,7 @@ export default function cmpNumOrStrBy(colIX) {
 }
 //@@
 /**
- * [description]
+ * Reverses a sort compare function so it sorts in descending order
  * @param  {function} cmp sort comparison function
  * @return {function}      new function what will do a reverse sort
  */
@@ -148,7 +153,7 @@ export default function revCmp(cmp) { return (a,b) => cmp(b,a); }
 
 //@@ 
 /**
- * combine a set of sorting comparison functions
+ * combine a set of sorting comparison functions so tht the sort presidence is maintained
  * @param  {...[type]} funcs [description]
  * @return {[type]}          [description]
  */

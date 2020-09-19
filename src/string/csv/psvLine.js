@@ -16,6 +16,12 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 import trimListElements from './trimListElements';
 
+/**
+ * converts a line representing pipe (|) separated values (PSV) into an array of strings. 
+ * This is a commely data representation in USA healthcare
+ * @param  {string} line string representing a line of PSV data
+ * @return {[string]}      an array of strings
+ */
 export default function psvLine(line) {
 	return trimListElements(line.split('|'));
 	//return line.split('|').map(x=>x.trim()); // nicer code but much slower

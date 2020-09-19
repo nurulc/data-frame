@@ -309,9 +309,9 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
 /**
- * [memoize description]
- * @param  {Function} fn [description]
- * @return {[type]}      [description]
+ * Memoize a function (see https://en.wikipedia.org/wiki/Memoization)
+ * @param  {Function} fn function to memoize
+ * @return {Function}      memoizing version of the function
  */
 export default function memoize(fn) {
 	let memo = {};

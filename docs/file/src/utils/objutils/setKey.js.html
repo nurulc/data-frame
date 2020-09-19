@@ -309,10 +309,15 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
 /**
- * [setKey description]
- * @param {[type]} obj [description]
- * @param {[type]} key [description]
- * @param {[type]} v   [description]
+ * Set the vale of a key on an object and return the object
+ *
+ * `obj[key] = v` in Javascript the expression returns the javle of v rather than `obj`
+ * `setKey(Obj, &apos;someKey&apos;, aVal)`  returns obj
+ *
+ * @param {object} obj a Javascript object
+ * @param {string} key key to add to `obj`
+ * @param {any} v   value to set to the key
+ * @returns {object} the objct in the first parameter
  */
 export default function setKey(obj,key,v) {
 	if(arguments.length === 1) throw new Error(&quot;too few arguments&quot;);

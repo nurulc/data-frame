@@ -15,21 +15,56 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
 export const isA = {
-	array: function isArray(arr) {
+	array: isArray,
+	notNull,
+	func: isFunc,
+	str: isStr,
+	num: isNum,
+	bool: isBool,
+	obj: isObj,
+	map: isMap,
+	set: isSet,
+	arrayOf
+};
+
+/**
+ * [isArray description]
+ * @param  {[any]}  arr Javascript arry of any type
+ * @return {Boolean}     true of the item is an array
+ */
+function isArray(arr) {
 		if( !arr) return undefined;
 		if(Array.isArray(arr)) return arr;
 		return (arr.constructor === Array)?arr:undefined;
-	},
-	notNull: function notNull(obj) { return (obj !== null && obj !== undefined)?obj: undefined; },
-	func: function isFunc(fun) {return (typeof fun === 'function')?fun:undefined; },
-	str: function isStr(str) {return (typeof str === 'string')?str:undefined; },
-	num: function isNum(num) {return (typeof num === 'number')?num:undefined; },
-	bool: function isBool(val) {return (typeof val === 'boolean')?val:undefined; },
-	obj: function(obj) {return (!Array.isArray(obj) && typeof obj === 'object')?obj:undefined; },
-	map: function(aMap) {return (aMap instanceof Map)?aMap:undefined; },
-	set: function(aSet) {return (aSet instanceof Set)?aSet:undefined; },
-	arrayOf: function(contract=notNull) {
-		return (obj) => isArray(obj) && (obj.every(contract)?obj:undefined);
-	}
-};
+}
+
+function notNull(obj) { return (obj !== null && obj !== undefined)?obj: undefined; }
+function isFunc(fun) {return (typeof fun === 'function')?fun:undefined; }
+function isStr(str) {return (typeof str === 'string')?str:undefined; }
+function isNum(num) {return (typeof num === 'number')?num:undefined; }
+function isBool(val) {return (typeof val === 'boolean')?val:undefined; }
+function isObj(_obj) {return (!Array.isArray(_obj) && typeof _obj === 'object')?_obj:undefined; }
+function isMap(aMap) {return (aMap instanceof Map)?aMap:undefined; }
+function isSet(aSet) {return (aSet instanceof Set)?aSet:undefined; }
+
+/**
+ * Returns a function that check if the all the elements contains element the match a contract. Where a contract is a test
+ * function that returns true or false depending on if the contract is satisfied.
+ * 
+ * For example `let arrayOfStrings = arrayOf(isString)`
+ *
+ *  `let array1 = ["hello", "world"]` 
+ *  `arrayOfStrings(array1)` will return true
+ *
+ *  `let array2 = ["hello", 1]`
+ *  `arrayOfStrings(array2)` will return false
+ *
+ *  
+ * @param  {[type]} contract [description]
+ * @return {[type]}          [description]
+ */
+function arrayOf(contract=notNull) {
+		return arr => Array.isArray(arr) && (arr.every(contract)? arr : undefined);
+}
+
 

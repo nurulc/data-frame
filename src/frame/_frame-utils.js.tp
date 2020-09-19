@@ -23,18 +23,25 @@ import {dataSplit} from '../string/csv';
 //##import {Frame} from './frame';
 //##import {dataSplit} from '../string/csv';
 /**
- * default splitter is pipe seperated values
- * @param  {[type]} buffer    [description]
+ * Create a Frame from a string buffer (string reat from a file)
+ * * Lines are seperaed into columns using a 'splitter' supports
+ *    * TSV : tab seperated columns  - tsvLine
+ *    * CSV : comma seperated values - csvLine
+ *    * PSV : pipe (|) seperated values popular in healthcare - tsvLine
+ *  
+ *  Default splitter (tsvLine) is tab seperated values
+ *  
+ * @param  {string} buffer    [description]
  * @param  {function} splitter    function to split a string representing a row to an array of strings
  * @param  {{ noConvert: boolen,name: string, Fr: SomeFrameClass}} options
- * @return {[type]}           [description]
+ * @return {Frame}           Frame created from the buffer
  */
 export default function frameFromBuffer(buffer,splitter,options={}) {
     let {Fr, name, noConvert} = options;
 	Fr = Fr || Frame;
 	let arr = buffer.replace(/\r/g, '').split('\n').filter(s => s);
 	let columns = splitter(arr[0]);
-	let array = dataSplit(arr.splice(1),splitter).filter(s => s);
+	let array = dataSplit(arr.splice(1),splitter);
 	[columns, array] = cleanData(columns, array);
 	var newFrame = new Fr(array,columns,name);
 	if(!noConvert) newFrame = newFrame.convertData();
@@ -42,7 +49,7 @@ export default function frameFromBuffer(buffer,splitter,options={}) {
 }
 
 function cleanData(columns, array) {
-	if( !hasNoEmptyElem(columns) ) throw new Error("Invalid frame column");
+	if( !hasNoEmptyElem(columns) ) throw new Error('Invalid frame column');
 	let n = columns.length;
 	return [columns, array.map(_cleanData(n)).filter(s => s)];
 }

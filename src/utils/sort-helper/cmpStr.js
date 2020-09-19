@@ -15,10 +15,10 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
 /**
- * [cmpStr description]
- * @param  {[type]} a [description]
- * @param  {[type]} b [description]
- * @return {[type]}   [description]
+ * Compare two strings (for sorting) 0 == euqal, -1 a<b, 1 a>b
+ * @param  {string} a left string
+ * @param  {string} b right string
+ * @return {int32}   0 == euqal, -1 = a<b, 1 = a>b
  */
 export function cmpStr(a,b) {
 	if( a === b ) return 0;

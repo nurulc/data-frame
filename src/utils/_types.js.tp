@@ -32,7 +32,7 @@ export default function isEmpty(arrOrObj) {
 /**
  * is the arr/object an array
  * @param  {any} arr
- * @return {Boolean}
+ * @return {boolean}
  */
 export default function isArray(arr) {
 	if( !arr) return null;

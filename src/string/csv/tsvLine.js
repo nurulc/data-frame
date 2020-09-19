@@ -16,6 +16,11 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 import trimListElements from './trimListElements';
 
+/**
+ * converts a line representing tab separated values (TSV) into an array of strings
+ * @param  {string} line string representing a line of TSV data
+ * @return {[string]}      an array of strings
+ */
 export default function tsvLine(line) {
 	return trimListElements(line.split('\t'));
 	//return line.split('\t').map(x=>x.trim()); // nicer code, but much slower

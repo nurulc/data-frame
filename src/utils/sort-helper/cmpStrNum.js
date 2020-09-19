@@ -19,10 +19,10 @@ import {toNumber} from './toNumber';
 const  isString = (s) =>  (typeof s) === 'string';
 const  isNum = (a) =>  (typeof a) === 'number' && a !== Infinity;//isNum = (a) =>  (typeof a) === 'number';
 /**
- * [cmpStrNum compare (number, number), or (number, string-of-number) or (string-of-number, number) (string-of-number, string-of-number) , (string, string) 
- * @param  {[type]} a [description]
- * @param  {[type]} b [description]
- * @return {[type]}   [description]
+ * cmpStrNum compare (number, number), or (number, string-of-number) or (string-of-number, number) (string-of-number, string-of-number) , (string, string) 
+ * @param  {string|number} a string or number, if is a string that represents a number it is treated as a number
+ * @param  {string|number} b string or number, if is a string that represents a number it is treated as a number
+ * @return {int32}   0 == euqal, -1 = a<b, 1 = a>b
  */
 export function cmpStrNum(a,b) {
 	if( isNum(a) ) {

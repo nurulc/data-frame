@@ -311,9 +311,16 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 import memoize from &apos;./memoize&apos;;
 import pickRaw from &apos;./pickRaw&apos;
 /**
- * extract elements of an object, or from a list of elements
+ * Returns a function that extract elements of an object, or from a list of elements
  * 	pick(key) =&gt; returns a function that takes an object and returns an elemnt 
  *  pick(keyList) =&gt; returns a function that takes an object and returns an array of element values
+ *
+ *  The pick function is memoized to make it memory efficient
+ *
+ *  example:
+ *    `let nameAddress = pick(&apos;name&apos;, &apos;street&apos;);`
+ *    `let obj = { name: &apos;Andrew&apos;, street: &apos;1 Pine Street&apos;, city: &apos;New York&apos;, state: &apos;NY&apos;, zip: &apos;10004&apos; }`
+ *    `nameAddress(obj)`  returns `[&apos;Andrew&apos;, &apos;1 Pine Street&apos;]`
  *
  * @param  {String} list   String or array of strings
  * @return {function}      function that takes an object and returns the key or an array of keys

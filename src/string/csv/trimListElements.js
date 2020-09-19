@@ -14,7 +14,12 @@ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
-// modifies the input array
+// 
+/**
+ * Takes an array of strings and trims all the strings in the array,  modifies the input array and returns the same array with the trimed strings
+ * @param  {[string]} arr array of strings
+ * @return {[string]}     returns the same array with the stings trimmed
+ */
 export default function trimListElements(arr) {
 	let len = arr.length;
 	for(let i=0; i<len; i++) {

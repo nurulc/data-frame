@@ -344,11 +344,14 @@ const defaultStyle = `&lt;style&gt;
 export default function toHTML(aFrame, myStyle, rowColor=colorDefault) {
 	let columns = aFrame.columns;
 	const HTMLformat = aFrame.constructor.HTMLFormat;
+	let rows = aFrame.length;
+	let ncolumns = aFrame.columns.length;
+	let name = aFrame.name?` Name: ${aFrame.name}`:&apos;&apos;;
 	if(myStyle === &apos;*&apos;) myStyle = defaultStyle;
 	myStyle = myStyle || &apos;&apos;;
 	return (
 		myStyle +
-		&apos;&lt;table class=&quot;ftable&quot;&gt;&lt;thead&gt;&apos; +
+		&apos;&lt;table title=&quot;Frame rows: &apos;+rows+&apos; columns: &apos;+ncolumns+name+&apos;class=&quot;ftable&quot;&gt;&lt;thead&gt;&apos; +
 		&apos;&lt;tr&gt;&lt;th&gt;Ix&lt;/th&gt;&apos; + columns.map(c =&gt; &apos;&lt;th&gt;&apos; + c.replace(/_/g, &apos; &apos;) + &apos;&lt;/th&gt;&apos;).join(&apos;&apos;) + &apos;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&apos; +
 		aFrame.data.slice(0, Math.min(aFrame.length, (aFrame.showLen|| 200))).map(showRow).join(&apos;&apos;) +
 		&apos;&lt;/tbody&gt;&lt;/table&gt;&apos;

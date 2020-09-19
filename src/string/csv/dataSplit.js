@@ -14,6 +14,14 @@ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
+/**
+ * Takes a array of string lines, representing a list of 'row' strings. and for 
+ * each row is split into column elements (each a string) using a splitter function.
+ * @param  {[string]}   data     array of string lines
+ * @param  {function}   splitter function to split a string representing a row into an array of strings representing column elements
+ * @param  {function} fn       optional function to apply to string line fn(line,line_number) before applying the splitter
+ * @return {[string]}          this is the same as buffer.map(fn|Idnetity).map(splitter)
+ */
 export default function dataSplit(data,splitter,fn) {
 	let len = data.length;
 	let res = [];

@@ -26,10 +26,13 @@ function __rep(s) {
 	}
 	return '???';
 }
-
+/**
+ * converts a line representing comma separated values (CSV) into an array of strings
+ * @param  {string} line string representing a line of CSV data
+ * @return {[string]}      an array of strings
+ */
 export default function csvLine(line) {
 	const re = /"([^"]|"")*"/g;
 	return trimListElements(line.replace(re,__rep).replace(/,/g, '\x01').replace(_mat_escape_,',').split('\x01'));
-	//return line.replace(re,__rep).replace(/,/g, "\x01").replace(_mat_escape_,",").split('\x01').map(x=>x.trim());
 }
 

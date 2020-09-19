@@ -17,23 +17,58 @@ import {flatten} from '../array/flatten';
 
 //@@
 export const isA = {
-	array: function isArray(arr) {
+	array: isArray,
+	notNull,
+	func: isFunc,
+	str: isStr,
+	num: isNum,
+	bool: isBool,
+	obj: isObj,
+	map: isMap,
+	set: isSet,
+	arrayOf
+};
+
+/**
+ * [isArray description]
+ * @param  {[any]}  arr Javascript arry of any type
+ * @return {Boolean}     true of the item is an array
+ */
+function isArray(arr) {
 		if( !arr) return undefined;
 		if(Array.isArray(arr)) return arr;
 		return (arr.constructor === Array)?arr:undefined;
-	},
-	notNull: function notNull(obj) { return (obj !== null && obj !== undefined)?obj: undefined; },
-	func: function isFunc(fun) {return (typeof fun === 'function')?fun:undefined; },
-	str: function isStr(str) {return (typeof str === 'string')?str:undefined; },
-	num: function isNum(num) {return (typeof num === 'number')?num:undefined; },
-	bool: function isBool(val) {return (typeof val === 'boolean')?val:undefined; },
-	obj: function(obj) {return (!Array.isArray(obj) && typeof obj === 'object')?obj:undefined; },
-	map: function(aMap) {return (aMap instanceof Map)?aMap:undefined; },
-	set: function(aSet) {return (aSet instanceof Set)?aSet:undefined; },
-	arrayOf: function(contract=notNull) {
-		return (obj) => isArray(obj) && (obj.every(contract)?obj:undefined);
-	}
-};
+}
+
+function notNull(obj) { return (obj !== null && obj !== undefined)?obj: undefined; }
+function isFunc(fun) {return (typeof fun === 'function')?fun:undefined; }
+function isStr(str) {return (typeof str === 'string')?str:undefined; }
+function isNum(num) {return (typeof num === 'number')?num:undefined; }
+function isBool(val) {return (typeof val === 'boolean')?val:undefined; }
+function isObj(_obj) {return (!Array.isArray(_obj) && typeof _obj === 'object')?_obj:undefined; }
+function isMap(aMap) {return (aMap instanceof Map)?aMap:undefined; }
+function isSet(aSet) {return (aSet instanceof Set)?aSet:undefined; }
+
+/**
+ * Returns a function that check if the all the elements contains element the match a contract. Where a contract is a test
+ * function that returns true or false depending on if the contract is satisfied.
+ * 
+ * For example `let arrayOfStrings = arrayOf(isString)`
+ *
+ *  `let array1 = ["hello", "world"]` 
+ *  `arrayOfStrings(array1)` will return true
+ *
+ *  `let array2 = ["hello", 1]`
+ *  `arrayOfStrings(array2)` will return false
+ *
+ *  
+ * @param  {[type]} contract [description]
+ * @return {[type]}          [description]
+ */
+function arrayOf(contract=notNull) {
+		return arr => Array.isArray(arr) && (arr.every(contract)? arr : undefined);
+}
+
 
 //@@ 
 export default function keys(obj) {
@@ -44,9 +79,16 @@ export default function keys(obj) {
 //##import memoize from './memoize';
 //##import pickRaw from './pickRaw'
 /**
- * extract elements of an object, or from a list of elements
+ * Returns a function that extract elements of an object, or from a list of elements
  * 	pick(key) => returns a function that takes an object and returns an elemnt 
  *  pick(keyList) => returns a function that takes an object and returns an array of element values
+ *
+ *  The pick function is memoized to make it memory efficient
+ *
+ *  example:
+ *    `let nameAddress = pick('name', 'street');`
+ *    `let obj = { name: 'Andrew', street: '1 Pine Street', city: 'New York', state: 'NY', zip: '10004' }`
+ *    `nameAddress(obj)`  returns `['Andrew', '1 Pine Street']`
  *
  * @param  {String} list   String or array of strings
  * @return {function}      function that takes an object and returns the key or an array of keys
@@ -56,9 +98,9 @@ export default const pick = memoize(pickRaw);
 //@@/*local*/
 //##import {isA} from './isA';
 /**
- * [pickRaw description]
- * @param  {[type]} list [description]
- * @return {[type]}      [description]
+ * Same as the `pick(...)` function withour memoizing
+ * @param  {String} list   String or array of strings
+ * @return {function}      function that takes an object and returns the key or an array of keys
  */
 export default function pickRaw(list) {
 	if(!list) return () => [];
@@ -71,9 +113,9 @@ export default function pickRaw(list) {
 }
 //@@
 /**
- * [memoize description]
- * @param  {Function} fn [description]
- * @return {[type]}      [description]
+ * Memoize a function (see https://en.wikipedia.org/wiki/Memoization)
+ * @param  {Function} fn function to memoize
+ * @return {Function}      memoizing version of the function
  */
 export default function memoize(fn) {
 	let memo = {};
@@ -107,10 +149,15 @@ export default const access = memoize(
 
 //@@
 /**
- * [setKey description]
- * @param {[type]} obj [description]
- * @param {[type]} key [description]
- * @param {[type]} v   [description]
+ * Set the vale of a key on an object and return the object
+ *
+ * `obj[key] = v` in Javascript the expression returns the javle of v rather than `obj`
+ * `setKey(Obj, 'someKey', aVal)`  returns obj
+ *
+ * @param {object} obj a Javascript object
+ * @param {string} key key to add to `obj`
+ * @param {any} v   value to set to the key
+ * @returns {object} the objct in the first parameter
  */
 export default function setKey(obj,key,v) {
 	if(arguments.length === 1) throw new Error("too few arguments");
@@ -226,24 +273,38 @@ export default function genObjMapper(obj) {
 }
 
 //@@
-
+/**
+ * Apply a map function on array or object, if it is an object map over the vale for each object 'attribute/key'
+ * creating a new object that has had the same keys but the values mapped. 
+ *
+ * If the object has 
+ * @param  {Function} fn      [description]
+ * @param  {Object} object    [description]
+ * @return {[type]}           [description]
+ */
 export default const mapOver = curry2(function (fn, object) {
 	if(!object) return object;
 	if(Array.isArray(object)) {
 		let list = object;
 		return list.map(fn);
-	}
-	else if( typeof object === 'object') {
-		return Object.keys(object).reduce((obj,k,ix) => (obj[k] = fn(object[k],ix), obj),{});
-	}
+	} 
 	else if(typeof object.map === 'function'){
 		// babel - do not transform map into array iteration
 		// O: KEEP
 		return object.map(fn);
 	}
+	else if( typeof object === 'object') {
+		return Object.keys(object).reduce((obj,k,ix) => (obj[k] = fn(object[k],ix), obj),{});
+	}
 	else return fn(object);
 });
 
+/**
+ * curry2 - curry a function that has two or more parameters. Currying allows us to produce a new function by 
+ * combining a function and one or more arguments.
+ * @param  {Function} fn [description]
+ * @return {[type]}      [description]
+ */
 function curry2(fn) {
 	if(typeof fn !== 'function') throw new Error('fn:('+fn+') function expected');
 	if( fn.length < 2 ) return fn;
