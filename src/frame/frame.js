@@ -23,6 +23,7 @@ import {groupBy} from './groupby';
 import frameWithIndex from './frame-utils/frameWithIndex';
 import frameToString from './frame-utils/frameToString';
 import frameFromString from './frame-utils/frameFromBuffer';
+import unionFrame from './frame-utils/unionFrame';
 import { arrRemove, arrDedup, newArray } from '../array';
 import {EMPTY_ARRAY} from '../utils/constants';
 import {K,isA, isEmpty} from '../utils';
