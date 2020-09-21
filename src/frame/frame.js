@@ -21,6 +21,8 @@ import { createAccesClass } from './frame_element';
 import sortFrameBy from './sortframe';
 import {groupBy} from './groupby';
 import frameWithIndex from './frame-utils/frameWithIndex';
+import frameToString from './frame-utils/frameToString';
+import frameFromString from './frame-utils/frameFromBuffer';
 import { arrRemove, arrDedup, newArray } from '../array';
 import {EMPTY_ARRAY} from '../utils/constants';
 import {K,isA, isEmpty} from '../utils';
@@ -834,6 +836,10 @@ export class Frame extends BaseFrame {
 		return toHTML(this);
 	}
 
+	toString() {
+		return frameToString(this);
+	}
+
 
 }
 
@@ -846,3 +852,9 @@ Frame.HTMLFormat = {
 	other: toString
 };
 
+/**
+ * frameFromString - create a frame from a string buffer usually read in from a file representing 
+ * @type {[type]}
+ */
+Frame.frameFromString = frameFromString;
+Frame.union = unionFrame;
