@@ -15,7 +15,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
 import haveFrame from '../haveFrame';
-import {range} from '../../array'
+import {range} from '../../array';
+
 /**
  * [transpose description]
  * @param  {[type]} frame [description]
@@ -23,13 +24,34 @@ import {range} from '../../array'
  * @return {[type]}       [description]
  */
 export default function transpose(frame, pivot) {
-    frame = haveFrame(frame);
+	let actualPivot = pivot;
+	frame = haveFrame(frame);
 	let len = frame.length;
 	let columns = frame.columns;
-	let data = columns.filter(c => c !== pivot).map((c,ix) => [c, ...frame.rawColumn(c)]);
+	if(pivot === undefined) {
+		if(columns.indexOf('__ROW') !== -1) {
+			pivot = '__ROW';
+			actualPivot = undefined;
+			//console.log("HERE")
+		}
+		else {
+			pivot = frame.keyName();
+			if(typeof pivot === 'function') pivot = undefined;
+			actualPivot = pivot;
+			//console.log("THERE")
+
+		}
+	}
+	let data;
+	if(pivot === '__ROW')
+		data = columns.filter(c => c !== pivot).map((c) => frame.rawColumn(c));
+	else
+		data = columns.filter(c => c !== pivot).map((c) => [c, ...frame.rawColumn(c)]);
 	let newColumns = (columns.indexOf(pivot) !== -1? frame.rawColumn(pivot):range(len)).map(v => ''+v);
-	if(pivot && newColumns.indexOf(pivot) !== -1) pivot = undefined;
-	newColumns = [(pivot?pivot:"__ROW"), ...newColumns];
-	return new frame.constructor(data, newColumns, 'transpose-'+(frame.name||'frame'));
+	//if(pivot && newColumns.indexOf(pivot) !== -1) pivot = undefined;
+	if(pivot !== '__ROW')
+		newColumns = [(pivot?pivot:'__ROW'), ...newColumns];
+	//console.log({pivot,actualPivot, newColumns, index: columns.indexOf('__ROW')});
+	return new frame.constructor(data, newColumns, 'transpose-'+(frame.name||'frame'), actualPivot);
 }
 

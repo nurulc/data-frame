@@ -132,13 +132,15 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-__FRAME__">__FRAME__</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-arrToCol">arrToCol</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-haveFrame">haveFrame</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#frame-frame-utils">frame/frame-utils</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameCount">frameCount</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#frame-frame-utils">frame/frame-utils</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coreFrameFromBuffer">coreFrameFromBuffer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameCount">frameCount</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameFromBuffer">frameFromBuffer</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameSum">frameSum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameToString">frameToString</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameWithIndex">frameWithIndex</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-transpose">transpose</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-unionFrame">unionFrame</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-coreFrameFromBuffer">coreFrameFromBuffer</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frameCount">frameCount</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frameFromBuffer">frameFromBuffer</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frameSum">frameSum</a></span></span></li>
@@ -292,13 +294,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import BaseFrame from &apos;<span><a href="file/src/frame/BaseFrame.js.html#lineNumber25">str-data-frame/src/frame/BaseFrame.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import BaseFrame from &apos;<span><a href="file/src/frame/BaseFrame.js.html#lineNumber28">str-data-frame/src/frame/BaseFrame.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/frame/BaseFrame.js.html#lineNumber25">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/frame/BaseFrame.js.html#lineNumber28">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -390,7 +392,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-get-columns">columns</a></span></span><span class="code" data-ice="signature">: <span>[type]</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-get-columns">columns</a></span></span><span class="code" data-ice="signature">: <span>[type]</span>: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -409,34 +411,6 @@
     <td>
       <span class="access" data-ice="access">public</span>
       
-      <span class="kind" data-ice="kind">set</span>
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-set-columns">columns</a></span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
       
       
       <span class="override" data-ice="override"></span>
@@ -447,7 +421,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-member-data">data</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-member-data">data</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -475,7 +449,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-get-hash">hash</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-get-hash">hash</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -503,35 +477,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-member-keyFunc">keyFunc</a></span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      <span class="kind" data-ice="kind">get</span>
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-get-length">length</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-member-keyFunc">keyFunc</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -559,7 +505,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-get-name">name</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-get-length">length</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -577,7 +523,7 @@
     <td>
       <span class="access" data-ice="access">public</span>
       
-      <span class="kind" data-ice="kind">set</span>
+      <span class="kind" data-ice="kind">get</span>
       
       <span class="override" data-ice="override"></span>
     </td>
@@ -587,7 +533,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-set-name">name</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-get-name">name</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -621,7 +567,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-member-_columns">_columns</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-member-_columns">_columns</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -649,7 +595,63 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-member-_name">_name</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-member-_key">_key</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">private</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-member-_keyFunc">_keyFunc</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">private</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-member-_name">_name</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -684,13 +686,13 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-asStrList">asStrList</a></span></span><span class="code" data-ice="signature">(): <span>[type]</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-asStrList">asStrList</a></span></span><span class="code" data-ice="signature">(): <span>[string]</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>[asStrList description]</p>
+        <div data-ice="description"><p>An arry of strings, where the string the is a list of tab seperated column values</p>
 </div>
       </div>
     </td>
@@ -771,7 +773,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-equal">equal</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-equal">equal</a></span></span><span class="code" data-ice="signature">(aFrame: <span>*</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
         </p>
       </div>
       <div>
@@ -799,7 +801,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-filterRaw">filterRaw</a></span></span><span class="code" data-ice="signature">(fn: <span>[type]</span>): <span>[type]</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-filterRaw">filterRaw</a></span></span><span class="code" data-ice="signature">(fn: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span>, keyFunc: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span> | <span>function]</span>): <span>[type]</span></span>
         </p>
       </div>
       <div>
@@ -886,13 +888,41 @@
           
           
           
+          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-keyName">keyName</a></span></span><span class="code" data-ice="signature">(): <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
           <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-mapRaw">mapRaw</a></span></span><span class="code" data-ice="signature">(fn: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>, newCols: <span>[string]</span>): <span><a href="class/src/frame/frame.js~Frame.html">Frame</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>[description]</p>
+        <div data-ice="description"><p>This is the functional equivenent of Array.map for a Frame</p>
 </div>
       </div>
     </td>
@@ -915,13 +945,14 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-numericColumns">numericColumns</a></span></span><span class="code" data-ice="signature">(aFrame: <span>[type]</span>): <span>[type]</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-numericColumns">numericColumns</a></span></span><span class="code" data-ice="signature">(): <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>[numericColumns description]</p>
+        <div data-ice="description"><p>Array of column names the are predominantly numeric, the values may be number or number like staring
+\     * @return {[string]}        array of column names that are predominantly numeric</p>
 </div>
       </div>
     </td>
@@ -944,13 +975,13 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-rawColumn">rawColumn</a></span></span><span class="code" data-ice="signature">(colName: <span>[type]</span>): <span>[type]</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-rawColumn">rawColumn</a></span></span><span class="code" data-ice="signature">(colName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span>[any]</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>[rawColumn description]</p>
+        <div data-ice="description"><p>rawColumn get the column given by the &apos;colName&apos;</p>
 </div>
       </div>
     </td>
@@ -973,13 +1004,13 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-reduceRaw">reduceRaw</a></span></span><span class="code" data-ice="signature">(fn: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>, ini: <span>[type]</span>): <span>[type]</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-reduceRaw">reduceRaw</a></span></span><span class="code" data-ice="signature">(fn: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>, ini: <span>any</span>): <span>any</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>[description]</p>
+        <div data-ice="description"><p>Basically this is the equivelat to reduce performed on the data array, this is an array of rows as the elemnt passed to reduc</p>
 </div>
       </div>
     </td>
@@ -1002,13 +1033,13 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-row">row</a></span></span><span class="code" data-ice="signature">(ix: <span>[type]</span>): <span>[type]</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-row">row</a></span></span><span class="code" data-ice="signature">(ix: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>): <span>[any]</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>[row description]</p>
+        <div data-ice="description"><p>Get the row vector </p>
 </div>
       </div>
     </td>
@@ -1031,7 +1062,35 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-setData">setData</a></span></span><span class="code" data-ice="signature">(d: <span>[[string]]</span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>)</span>
+          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-setColumns">setColumns</a></span></span><span class="code" data-ice="signature">(columns: <span>*</span>): <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-setData">setData</a></span></span><span class="code" data-ice="signature">(d: <span>[[string]]</span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1060,7 +1119,63 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-slice">slice</a></span></span><span class="code" data-ice="signature">(first: <span>[type]</span>, last: <span>[type]</span>): <span>[type]</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-setKey">setKey</a></span></span><span class="code" data-ice="signature">(keyFunc: <span>*</span>): <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-setName">setName</a></span></span><span class="code" data-ice="signature">(aName: <span>*</span>): <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-slice">slice</a></span></span><span class="code" data-ice="signature">(first: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>, last: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>): <span><a href="class/src/frame/frame.js~Frame.html">Frame</a></span></span>
         </p>
       </div>
       <div>
@@ -1095,7 +1210,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-_getKey">_getKey</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="class/src/frame/BaseFrame.js~BaseFrame.html#instance-method-_getKey">_getKey</a></span></span><span class="code" data-ice="signature">(i: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1131,7 +1246,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber34">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber37">source</a></span></span>
     </span>
   </h3>
 
@@ -1225,11 +1340,11 @@
     
     
     
-    <span class="code" data-ice="name">columns</span><span class="code" data-ice="signature">: <span>[type]</span></span>
+    <span class="code" data-ice="name">columns</span><span class="code" data-ice="signature">: <span>[type]</span>: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber67">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber92">source</a></span></span>
     </span>
   </h3>
 
@@ -1275,49 +1390,6 @@
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-set-columns">
-    <span class="access" data-ice="access">public</span>
-    
-    <span class="kind" data-ice="kind">set</span>
-    
-    
-    
-    <span class="code" data-ice="name">columns</span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber68">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="instance-member-data">
     <span class="access" data-ice="access">public</span>
     
@@ -1325,11 +1397,11 @@
     
     
     
-    <span class="code" data-ice="name">data</span>
+    <span class="code" data-ice="name">data</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber36">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber38">source</a></span></span>
     </span>
   </h3>
 
@@ -1368,11 +1440,11 @@
     
     
     
-    <span class="code" data-ice="name">hash</span>
+    <span class="code" data-ice="name">hash</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber76">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber101">source</a></span></span>
     </span>
   </h3>
 
@@ -1411,11 +1483,11 @@
     
     
     
-    <span class="code" data-ice="name">keyFunc</span>
+    <span class="code" data-ice="name">keyFunc</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber35">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber46">source</a></span></span>
     </span>
   </h3>
 
@@ -1454,11 +1526,11 @@
     
     
     
-    <span class="code" data-ice="name">length</span>
+    <span class="code" data-ice="name">length</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber71">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber96">source</a></span></span>
     </span>
   </h3>
 
@@ -1497,54 +1569,11 @@
     
     
     
-    <span class="code" data-ice="name">name</span>
+    <span class="code" data-ice="name">name</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber72">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-set-name">
-    <span class="access" data-ice="access">public</span>
-    
-    <span class="kind" data-ice="kind">set</span>
-    
-    
-    
-    <span class="code" data-ice="name">name</span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber73">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber97">source</a></span></span>
     </span>
   </h3>
 
@@ -1585,11 +1614,97 @@
     
     
     
-    <span class="code" data-ice="name">_columns</span>
+    <span class="code" data-ice="name">_columns</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber37">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber39">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-_key">
+    <span class="access" data-ice="access">private</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">_key</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber43">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-_keyFunc">
+    <span class="access" data-ice="access">private</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">_keyFunc</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber41">source</a></span></span>
     </span>
   </h3>
 
@@ -1628,11 +1743,11 @@
     
     
     
-    <span class="code" data-ice="name">_name</span>
+    <span class="code" data-ice="name">_name</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber38">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber40">source</a></span></span>
     </span>
   </h3>
 
@@ -1674,18 +1789,18 @@
     
     
     
-    <span class="code" data-ice="name">asStrList</span><span class="code" data-ice="signature">(): <span>[type]</span></span>
+    <span class="code" data-ice="name">asStrList</span><span class="code" data-ice="signature">(): <span>[string]</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber167">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber192">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>[asStrList description]</p>
+  <div data-ice="description"><p>An arry of strings, where the string the is a list of tab seperated column values</p>
 </div>
 
   
@@ -1698,8 +1813,8 @@
     <table>
       <tbody>
         <tr>
-          <td class="return-type code" data-ice="returnType"><span>[type]</span></td>
-          <td class="return-desc" data-ice="returnDescription"><p>[description]</p>
+          <td class="return-type code" data-ice="returnType"><span>[string]</span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>each element of the array is an string represention of a corresponding row</p>
 </td>
         </tr>
       </tbody>
@@ -1735,7 +1850,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber105">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber130">source</a></span></span>
     </span>
   </h3>
 
@@ -1809,7 +1924,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber116">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber141">source</a></span></span>
     </span>
   </h3>
 
@@ -1879,11 +1994,11 @@
     
     
     
-    <span class="code" data-ice="name">equal</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">equal</span><span class="code" data-ice="signature">(aFrame: <span>*</span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber81">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber106">source</a></span></span>
     </span>
   </h3>
 
@@ -1894,10 +2009,38 @@
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">aFrame</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -1922,11 +2065,11 @@
     
     
     
-    <span class="code" data-ice="name">filterRaw</span><span class="code" data-ice="signature">(fn: <span>[type]</span>): <span>[type]</span></span>
+    <span class="code" data-ice="name">filterRaw</span><span class="code" data-ice="signature">(fn: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span>, keyFunc: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span> | <span>function]</span>): <span>[type]</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber192">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber217">source</a></span></span>
     </span>
   </h3>
 
@@ -1948,9 +2091,16 @@
     
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">fn</td>
-      <td data-ice="type" class="code"><span>[type]</span></td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>[description]</p>
+      <td data-ice="description"><p>filter function to apply to a row  if returns true keep the row otherwise discard the row</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">keyFunc</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span> | <span>function]</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>the key column name, or thekey computing function</p>
 </td>
     </tr>
 </tbody>
@@ -2000,7 +2150,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber176">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber201">source</a></span></span>
     </span>
   </h3>
 
@@ -2074,7 +2224,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber59">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber80">source</a></span></span>
     </span>
   </h3>
 
@@ -2137,6 +2287,61 @@
   
 </div>
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-keyName">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">keyName</span><span class="code" data-ice="signature">(): <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber70">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="instance-method-mapRaw">
     <span class="access" data-ice="access">public</span>
     
@@ -2148,14 +2353,14 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber185">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber209">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>[description]</p>
+  <div data-ice="description"><p>This is the functional equivenent of Array.map for a Frame</p>
 </div>
 
   
@@ -2193,7 +2398,7 @@
       <tbody>
         <tr>
           <td class="return-type code" data-ice="returnType"><span><a href="class/src/frame/frame.js~Frame.html">Frame</a></span></td>
-          <td class="return-desc" data-ice="returnDescription"><p>[description]</p>
+          <td class="return-desc" data-ice="returnDescription"><p>map each row of the frame through &apos;fn&apos; to get a new frame</p>
 </td>
         </tr>
       </tbody>
@@ -2225,40 +2430,24 @@
     
     
     
-    <span class="code" data-ice="name">numericColumns</span><span class="code" data-ice="signature">(aFrame: <span>[type]</span>): <span>[type]</span></span>
+    <span class="code" data-ice="name">numericColumns</span><span class="code" data-ice="signature">(): <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber156">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber181">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>[numericColumns description]</p>
+  <div data-ice="description"><p>Array of column names the are predominantly numeric, the values may be number or number like staring
+\     * @return {[string]}        array of column names that are predominantly numeric</p>
 </div>
 
   
 
-  <div data-ice="properties"><div data-ice="properties">
-  <h4 data-ice="title">Params:</h4>
-  <table class="params">
-    <thead>
-    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-    
-    <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">aFrame</td>
-      <td data-ice="type" class="code"><span>[type]</span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>[description]</p>
-</td>
-    </tr>
-</tbody>
-  </table>
-</div>
+  <div data-ice="properties">
 </div>
 
   <div class="return-params" data-ice="returnParams">
@@ -2266,9 +2455,8 @@
     <table>
       <tbody>
         <tr>
-          <td class="return-type code" data-ice="returnType"><span>[type]</span></td>
-          <td class="return-desc" data-ice="returnDescription"><p>[description]</p>
-</td>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
         </tr>
       </tbody>
     </table>
@@ -2299,18 +2487,18 @@
     
     
     
-    <span class="code" data-ice="name">rawColumn</span><span class="code" data-ice="signature">(colName: <span>[type]</span>): <span>[type]</span></span>
+    <span class="code" data-ice="name">rawColumn</span><span class="code" data-ice="signature">(colName: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span>[any]</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber127">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber153">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>[rawColumn description]</p>
+  <div data-ice="description"><p>rawColumn get the column given by the &apos;colName&apos;</p>
 </div>
 
   
@@ -2325,9 +2513,9 @@
     
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">colName</td>
-      <td data-ice="type" class="code"><span>[type]</span></td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>[description]</p>
+      <td data-ice="description"><p>name of a column of the frame;</p>
 </td>
     </tr>
 </tbody>
@@ -2340,8 +2528,8 @@
     <table>
       <tbody>
         <tr>
-          <td class="return-type code" data-ice="returnType"><span>[type]</span></td>
-          <td class="return-desc" data-ice="returnDescription"><p>[description]</p>
+          <td class="return-type code" data-ice="returnType"><span>[any]</span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>array representing the values of a column identified by colName</p>
 </td>
         </tr>
       </tbody>
@@ -2373,18 +2561,18 @@
     
     
     
-    <span class="code" data-ice="name">reduceRaw</span><span class="code" data-ice="signature">(fn: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>, ini: <span>[type]</span>): <span>[type]</span></span>
+    <span class="code" data-ice="name">reduceRaw</span><span class="code" data-ice="signature">(fn: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>, ini: <span>any</span>): <span>any</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber200">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber225">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>[description]</p>
+  <div data-ice="description"><p>Basically this is the equivelat to reduce performed on the data array, this is an array of rows as the elemnt passed to reduc</p>
 </div>
 
   
@@ -2406,9 +2594,9 @@
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">ini</td>
-      <td data-ice="type" class="code"><span>[type]</span></td>
+      <td data-ice="type" class="code"><span>any</span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>[description]</p>
+      <td data-ice="description"><p>the starting value for reduce</p>
 </td>
     </tr>
 </tbody>
@@ -2421,8 +2609,8 @@
     <table>
       <tbody>
         <tr>
-          <td class="return-type code" data-ice="returnType"><span>[type]</span></td>
-          <td class="return-desc" data-ice="returnDescription"><p>[description]</p>
+          <td class="return-type code" data-ice="returnType"><span>any</span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>the type is the return type of the fuction &apos;fn&apos;</p>
 </td>
         </tr>
       </tbody>
@@ -2454,18 +2642,18 @@
     
     
     
-    <span class="code" data-ice="name">row</span><span class="code" data-ice="signature">(ix: <span>[type]</span>): <span>[type]</span></span>
+    <span class="code" data-ice="name">row</span><span class="code" data-ice="signature">(ix: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>): <span>[any]</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber138">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber164">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>[row description]</p>
+  <div data-ice="description"><p>Get the row vector </p>
 </div>
 
   
@@ -2480,9 +2668,9 @@
     
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">ix</td>
-      <td data-ice="type" class="code"><span>[type]</span></td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>[description]</p>
+      <td data-ice="description"><p>the index number of a row</p>
 </td>
     </tr>
 </tbody>
@@ -2495,9 +2683,80 @@
     <table>
       <tbody>
         <tr>
-          <td class="return-type code" data-ice="returnType"><span>[type]</span></td>
-          <td class="return-desc" data-ice="returnDescription"><p>[description]</p>
+          <td class="return-type code" data-ice="returnType"><span>[any]</span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>the row aray for index &apos;ix&apos;</p>
 </td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-setColumns">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">setColumns</span><span class="code" data-ice="signature">(columns: <span>*</span>): <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber93">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">columns</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
         </tr>
       </tbody>
     </table>
@@ -2528,11 +2787,11 @@
     
     
     
-    <span class="code" data-ice="name">setData</span><span class="code" data-ice="signature">(d: <span>[[string]]</span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>)</span>
+    <span class="code" data-ice="name">setData</span><span class="code" data-ice="signature">(d: <span>[[string]]</span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber46">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber62">source</a></span></span>
     </span>
   </h3>
 
@@ -2571,7 +2830,161 @@
 </div>
 </div>
 
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-setKey">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">setKey</span><span class="code" data-ice="signature">(keyFunc: <span>*</span>): <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber84">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">keyFunc</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-setName">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">setName</span><span class="code" data-ice="signature">(aName: <span>*</span>): <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber98">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">aName</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -2596,11 +3009,11 @@
     
     
     
-    <span class="code" data-ice="name">slice</span><span class="code" data-ice="signature">(first: <span>[type]</span>, last: <span>[type]</span>): <span>[type]</span></span>
+    <span class="code" data-ice="name">slice</span><span class="code" data-ice="signature">(first: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>, last: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>): <span><a href="class/src/frame/frame.js~Frame.html">Frame</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber147">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber173">source</a></span></span>
     </span>
   </h3>
 
@@ -2622,16 +3035,16 @@
     
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">first</td>
-      <td data-ice="type" class="code"><span>[type]</span></td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>[description]</p>
+      <td data-ice="description"><p>start index</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">last</td>
-      <td data-ice="type" class="code"><span>[type]</span></td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>[description]</p>
+      <td data-ice="description"><p>the last index + 1 of the data</p>
 </td>
     </tr>
 </tbody>
@@ -2644,8 +3057,8 @@
     <table>
       <tbody>
         <tr>
-          <td class="return-type code" data-ice="returnType"><span>[type]</span></td>
-          <td class="return-desc" data-ice="returnDescription"><p>[description]</p>
+          <td class="return-type code" data-ice="returnType"><span><a href="class/src/frame/frame.js~Frame.html">Frame</a></span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>new frame representing the subset of the rows between firsr and last (excluding position last)</p>
 </td>
         </tr>
       </tbody>
@@ -2679,11 +3092,11 @@
     
     
     
-    <span class="code" data-ice="name">_getKey</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">_getKey</span><span class="code" data-ice="signature">(i: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber50">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/BaseFrame.js.html#lineNumber66">source</a></span></span>
     </span>
   </h3>
 
@@ -2694,10 +3107,38 @@
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">i</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 

@@ -132,13 +132,15 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-__FRAME__">__FRAME__</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-arrToCol">arrToCol</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-haveFrame">haveFrame</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#frame-frame-utils">frame/frame-utils</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameCount">frameCount</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#frame-frame-utils">frame/frame-utils</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coreFrameFromBuffer">coreFrameFromBuffer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameCount">frameCount</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameFromBuffer">frameFromBuffer</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameSum">frameSum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameToString">frameToString</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameWithIndex">frameWithIndex</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-transpose">transpose</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-unionFrame">unionFrame</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-coreFrameFromBuffer">coreFrameFromBuffer</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frameCount">frameCount</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frameFromBuffer">frameFromBuffer</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frameSum">frameSum</a></span></span></li>
@@ -310,7 +312,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-AND">AND</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-AND">AND</a></span></span><span class="code" data-ice="signature">(f1: <span>*</span>, f2: <span>*</span>)</span>
         </p>
       </div>
       <div>
@@ -395,7 +397,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-NOT">NOT</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-NOT">NOT</a></span></span><span class="code" data-ice="signature">(f: <span>*</span>)</span>
         </p>
       </div>
       <div>
@@ -423,7 +425,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-OR">OR</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-OR">OR</a></span></span><span class="code" data-ice="signature">(f1: <span>*</span>, f2: <span>*</span>)</span>
         </p>
       </div>
       <div>
@@ -479,7 +481,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-accStr">accStr</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-accStr">accStr</a></span></span><span class="code" data-ice="signature">(accum: <span>*</span>, val: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -712,7 +714,7 @@ returns -1, 0, +1  as required by a sotring compare function</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-arrHash">arrHash</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-arrHash">arrHash</a></span></span><span class="code" data-ice="signature">(arr: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1209,6 +1211,45 @@ return an array of 2 strings [oldName, newName]</p>
           
           
           
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-coreFrameFromBuffer">coreFrameFromBuffer</a></span></span><span class="code" data-ice="signature">(buffer: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, splitter: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span>, options: {noConvert: <span>boolen</span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, Fr: <span>SomeFrameClass</span>}): <span><a href="class/src/frame/frame.js~Frame.html">Frame</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Create a Frame from a string buffer (string reat from a file)</p>
+<ul>
+<li><p>Lines are seperaed into columns using a &apos;splitter&apos; supports</p>
+<ul>
+<li>TSV : tab seperated columns  - tsvLine</li>
+<li>CSV : comma seperated values - csvLine</li>
+<li>PSV : pipe (|) seperated values popular in healthcare - tsvLine</li>
+</ul>
+<p>Default splitter (tsvLine) is tab seperated values</p>
+</li>
+</ul>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
           <span class="code" data-ice="name"><span><a href="function/index.html#static-function-countCh">countCh</a></span></span><span class="code" data-ice="signature">(data: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, char: <span>char</span>, arr: <span>[int32]</span>, start: <span>int32</span>, end: <span>int32</span>): <span>int32</span></span>
         </p>
       </div>
@@ -1354,7 +1395,7 @@ return an array of 2 strings [oldName, newName]</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-dictToZip">dictToZip</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-dictToZip">dictToZip</a></span></span><span class="code" data-ice="signature">(aDict: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1382,7 +1423,7 @@ return an array of 2 strings [oldName, newName]</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-dictToZipB">dictToZipB</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-dictToZipB">dictToZipB</a></span></span><span class="code" data-ice="signature">(aDict: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2118,7 +2159,7 @@ this is useful to convert an array of object to the data of a frame</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-getColIx">getColIx</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-getColIx">getColIx</a></span></span><span class="code" data-ice="signature">(aFrame: <span>*</span>, colName: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2146,7 +2187,7 @@ this is useful to convert an array of object to the data of a frame</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-getDict">getDict</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-getDict">getDict</a></span></span><span class="code" data-ice="signature">(dict: <span>*</span>, key: <span>*</span>, noEmpty: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2321,7 +2362,7 @@ the name of the Frameis the value of the grouping</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-haveFrame">haveFrame</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-haveFrame">haveFrame</a></span></span><span class="code" data-ice="signature">(aFrame: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2642,7 +2683,7 @@ Intersects list sorted array sets (array that issorted and has no duplicates)</p
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-keys">keys</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-keys">keys</a></span></span><span class="code" data-ice="signature">(obj: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2730,7 +2771,7 @@ Intersects list sorted array sets (array that issorted and has no duplicates)</p
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-localGroupBy">localGroupBy</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-localGroupBy">localGroupBy</a></span></span><span class="code" data-ice="signature">(data: <span>*</span>, ix: <span>*</span>, noNull: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span>, dict: {}): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3050,7 +3091,7 @@ Intersects list sorted array sets (array that issorted and has no duplicates)</p
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-primeAround">primeAround</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-primeAround">primeAround</a></span></span><span class="code" data-ice="signature">(aNum: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3109,7 +3150,7 @@ and n is the length of the second vector</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-project">project</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-project">project</a></span></span><span class="code" data-ice="signature">(mappingList: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3223,7 +3264,7 @@ and n is the length of the second vector</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-renameColumns">renameColumns</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-renameColumns">renameColumns</a></span></span><span class="code" data-ice="signature">(frame: <span>*</span>, map: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3337,7 +3378,7 @@ and n is the length of the second vector</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-reverseProjectList1">reverseProjectList1</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-reverseProjectList1">reverseProjectList1</a></span></span><span class="code" data-ice="signature">(pL: <span>*</span>, col1: <span>*</span>, col2: <span>*</span>, f1Cols: <span>*</span>, f2Cols: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3365,7 +3406,7 @@ and n is the length of the second vector</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-reverseProjectList2">reverseProjectList2</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-reverseProjectList2">reverseProjectList2</a></span></span><span class="code" data-ice="signature">(pL: <span>*</span>, col1: <span>*</span>, col2: <span>*</span>, f1Cols: <span>*</span>, f2Cols: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3480,7 +3521,7 @@ and n is the length of the second vector</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-setKeyV">setKeyV</a></span></span><span class="code" data-ice="signature">(obj: <span>[type]</span>, key: <span>[type]</span>, v: <span>[type]</span>)</span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-setKeyV">setKeyV</a></span></span><span class="code" data-ice="signature">(obj: <span>[type]</span>, key: <span>[type]</span>, v: <span>[type]</span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3509,7 +3550,7 @@ and n is the length of the second vector</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-shallow">shallow</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-shallow">shallow</a></span></span><span class="code" data-ice="signature">(a: <span>*</span>, b: <span>*</span>, compare: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3717,7 +3758,7 @@ Too small to be worth is own module.</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-toHTML">toHTML</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-toHTML">toHTML</a></span></span><span class="code" data-ice="signature">(aFrame: <span>*</span>, myStyle: <span>*</span>, rowColor: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3919,15 +3960,13 @@ Too small to be worth is own module.</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-unionFrame">unionFrame</a></span></span><span class="code" data-ice="signature">(frame1: <span>[type]</span>, frame2: <span>[type]</span>, notSorted: <span>[type]</span>): <span>[type]</span></span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-unionFrame">unionFrame</a></span></span><span class="code" data-ice="signature">(frame1: <span><a href="class/src/frame/frame.js~Frame.html">Frame</a></span>, frame2: <span><a href="class/src/frame/frame.js~Frame.html">Frame</a></span>, notSorted: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span>): <span><a href="class/src/frame/frame.js~Frame.html">Frame</a></span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>assumes the frames are sorted, if notSorted is true, then the frames are sorted first;
-requirements:
-1.</p>
+        <div data-ice="description"><p>Creates a new frame from the union of the rows of the two frames, similar to s set union.</p>
 </div>
       </div>
     </td>
@@ -4037,7 +4076,7 @@ requirements:
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-zipTo">zipTo</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-zipTo">zipTo</a></span></span><span class="code" data-ice="signature">(aDictType: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -4126,7 +4165,7 @@ requirements:
     
     
     
-    <span class="code" data-ice="name">AND</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">AND</span><span class="code" data-ice="signature">(f1: <span>*</span>, f2: <span>*</span>)</span>
     <span class="right-info">
       
       
@@ -4141,7 +4180,29 @@ requirements:
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">f1</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">f2</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
   
@@ -4290,7 +4351,7 @@ requirements:
     
     
     
-    <span class="code" data-ice="name">NOT</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">NOT</span><span class="code" data-ice="signature">(f: <span>*</span>)</span>
     <span class="right-info">
       
       
@@ -4305,7 +4366,23 @@ requirements:
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">f</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
   
@@ -4333,7 +4410,7 @@ requirements:
     
     
     
-    <span class="code" data-ice="name">OR</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">OR</span><span class="code" data-ice="signature">(f1: <span>*</span>, f2: <span>*</span>)</span>
     <span class="right-info">
       
       
@@ -4348,7 +4425,29 @@ requirements:
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">f1</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">f2</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
   
@@ -4419,7 +4518,7 @@ requirements:
     
     
     
-    <span class="code" data-ice="name">accStr</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">accStr</span><span class="code" data-ice="signature">(accum: <span>*</span>, val: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
@@ -4434,10 +4533,44 @@ requirements:
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">accum</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">val</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -5024,7 +5157,7 @@ performs checks and currying for the functions below<br>acts on a function of th
     
     
     
-    <span class="code" data-ice="name">arrHash</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">arrHash</span><span class="code" data-ice="signature">(arr: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
@@ -5039,10 +5172,38 @@ performs checks and currying for the functions below<br>acts on a function of th
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">arr</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -6321,6 +6482,103 @@ result od the code above
   
 </div>
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-function-coreFrameFromBuffer">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">coreFrameFromBuffer</span><span class="code" data-ice="signature">(buffer: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, splitter: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span>, options: {noConvert: <span>boolen</span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, Fr: <span>SomeFrameClass</span>}): <span><a href="class/src/frame/frame.js~Frame.html">Frame</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/frame/frame-utils/coreFrameFromBuffer.js.html#lineNumber32">source</a></span></span>
+    </span>
+  </h3>
+
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import coreFrameFromBuffer from &apos;<span><a href="file/src/frame/frame-utils/coreFrameFromBuffer.js.html#lineNumber32">str-data-frame/src/frame/frame-utils/coreFrameFromBuffer.js</a></span>&apos;</code></pre></div>
+  
+  
+  <div data-ice="description"><p>Create a Frame from a string buffer (string reat from a file)</p>
+<ul>
+<li><p>Lines are seperaed into columns using a &apos;splitter&apos; supports</p>
+<ul>
+<li>TSV : tab seperated columns  - tsvLine</li>
+<li>CSV : comma seperated values - csvLine</li>
+<li>PSV : pipe (|) seperated values popular in healthcare - tsvLine</li>
+</ul>
+<p>Default splitter (tsvLine) is tab seperated values</p>
+</li>
+</ul>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">buffer</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>[description]</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">splitter</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>function to split a string representing a row to an array of strings</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">options</td>
+      <td data-ice="type" class="code">{noConvert: <span>boolen</span>, name: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, Fr: <span>SomeFrameClass</span>}</td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><a href="class/src/frame/frame.js~Frame.html">Frame</a></span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>Frame created from the buffer</p>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="static-function-countCh">
     <span class="access" data-ice="access">public</span>
     
@@ -6741,7 +6999,7 @@ each row is split into column elements (each a string) using a splitter function
     
     
     
-    <span class="code" data-ice="name">dictToZip</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">dictToZip</span><span class="code" data-ice="signature">(aDict: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
@@ -6756,10 +7014,38 @@ each row is split into column elements (each a string) using a splitter function
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">aDict</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -6784,7 +7070,7 @@ each row is split into column elements (each a string) using a splitter function
     
     
     
-    <span class="code" data-ice="name">dictToZipB</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">dictToZipB</span><span class="code" data-ice="signature">(aDict: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
@@ -6799,10 +7085,38 @@ each row is split into column elements (each a string) using a splitter function
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">aDict</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -8834,7 +9148,7 @@ this is useful to convert an array of object to the data of a frame</p>
     
     
     
-    <span class="code" data-ice="name">getColIx</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">getColIx</span><span class="code" data-ice="signature">(aFrame: <span>*</span>, colName: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
@@ -8849,10 +9163,44 @@ this is useful to convert an array of object to the data of a frame</p>
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">aFrame</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">colName</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -8877,7 +9225,7 @@ this is useful to convert an array of object to the data of a frame</p>
     
     
     
-    <span class="code" data-ice="name">getDict</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">getDict</span><span class="code" data-ice="signature">(dict: <span>*</span>, key: <span>*</span>, noEmpty: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
@@ -8892,10 +9240,50 @@ this is useful to convert an array of object to the data of a frame</p>
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">dict</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">key</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">noEmpty</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -9363,7 +9751,7 @@ the name of the Frameis the value of the grouping</p>
     
     
     
-    <span class="code" data-ice="name">haveFrame</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">haveFrame</span><span class="code" data-ice="signature">(aFrame: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
@@ -9378,10 +9766,38 @@ the name of the Frameis the value of the grouping</p>
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">aFrame</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -10222,7 +10638,7 @@ Intersects list sorted array sets (array that issorted and has no duplicates)</p
     
     
     
-    <span class="code" data-ice="name">keys</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">keys</span><span class="code" data-ice="signature">(obj: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
@@ -10237,10 +10653,38 @@ Intersects list sorted array sets (array that issorted and has no duplicates)</p
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">obj</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -10450,7 +10894,7 @@ Intersects list sorted array sets (array that issorted and has no duplicates)</p
     
     
     
-    <span class="code" data-ice="name">localGroupBy</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">localGroupBy</span><span class="code" data-ice="signature">(data: <span>*</span>, ix: <span>*</span>, noNull: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span>, dict: {}): <span>*</span></span>
     <span class="right-info">
       
       
@@ -10465,10 +10909,58 @@ Intersects list sorted array sets (array that issorted and has no duplicates)</p
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">data</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">ix</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">noNull</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></td>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: false</li></ul></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">dict</td>
+      <td data-ice="type" class="code">{}</td>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: {}</li></ul></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -11325,7 +11817,7 @@ Intersects list sorted array sets (array that issorted and has no duplicates)</p
     
     
     
-    <span class="code" data-ice="name">primeAround</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">primeAround</span><span class="code" data-ice="signature">(aNum: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
@@ -11340,10 +11832,38 @@ Intersects list sorted array sets (array that issorted and has no duplicates)</p
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">aNum</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -11454,7 +11974,7 @@ string concatination. Note if either array is a scalar string it is converted in
     
     
     
-    <span class="code" data-ice="name">project</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">project</span><span class="code" data-ice="signature">(mappingList: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
@@ -11469,10 +11989,38 @@ string concatination. Note if either array is a scalar string it is converted in
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">mappingList</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -11730,7 +12278,7 @@ This is a commely data representation in USA healthcare</p>
     
     
     
-    <span class="code" data-ice="name">renameColumns</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">renameColumns</span><span class="code" data-ice="signature">(frame: <span>*</span>, map: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
@@ -11745,10 +12293,44 @@ This is a commely data representation in USA healthcare</p>
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">frame</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">map</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -11998,7 +12580,7 @@ This is a commely data representation in USA healthcare</p>
     
     
     
-    <span class="code" data-ice="name">reverseProjectList1</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">reverseProjectList1</span><span class="code" data-ice="signature">(pL: <span>*</span>, col1: <span>*</span>, col2: <span>*</span>, f1Cols: <span>*</span>, f2Cols: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
@@ -12013,10 +12595,62 @@ This is a commely data representation in USA healthcare</p>
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">pL</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">col1</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">col2</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">f1Cols</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">f2Cols</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -12041,7 +12675,7 @@ This is a commely data representation in USA healthcare</p>
     
     
     
-    <span class="code" data-ice="name">reverseProjectList2</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">reverseProjectList2</span><span class="code" data-ice="signature">(pL: <span>*</span>, col1: <span>*</span>, col2: <span>*</span>, f1Cols: <span>*</span>, f2Cols: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
@@ -12056,10 +12690,62 @@ This is a commely data representation in USA healthcare</p>
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">pL</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">col1</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">col2</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">f1Cols</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">f2Cols</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -12322,7 +13008,7 @@ This is a commely data representation in USA healthcare</p>
     
     
     
-    <span class="code" data-ice="name">setKeyV</span><span class="code" data-ice="signature">(obj: <span>[type]</span>, key: <span>[type]</span>, v: <span>[type]</span>)</span>
+    <span class="code" data-ice="name">setKeyV</span><span class="code" data-ice="signature">(obj: <span>[type]</span>, key: <span>[type]</span>, v: <span>[type]</span>): <span>*</span></span>
     <span class="right-info">
       
       
@@ -12372,7 +13058,19 @@ This is a commely data representation in USA healthcare</p>
 </div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -12397,7 +13095,7 @@ This is a commely data representation in USA healthcare</p>
     
     
     
-    <span class="code" data-ice="name">shallow</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">shallow</span><span class="code" data-ice="signature">(a: <span>*</span>, b: <span>*</span>, compare: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
@@ -12412,10 +13110,50 @@ This is a commely data representation in USA healthcare</p>
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">a</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">b</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">compare</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -12960,7 +13698,7 @@ Too small to be worth is own module.</p>
     
     
     
-    <span class="code" data-ice="name">toHTML</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">toHTML</span><span class="code" data-ice="signature">(aFrame: <span>*</span>, myStyle: <span>*</span>, rowColor: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
@@ -12975,10 +13713,51 @@ Too small to be worth is own module.</p>
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">aFrame</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">myStyle</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">rowColor</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: colorDefault</li></ul></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -13229,11 +14008,11 @@ Too small to be worth is own module.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/frame-utils/transpose.js.html#lineNumber25">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/frame-utils/transpose.js.html#lineNumber26">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import transpose from &apos;<span><a href="file/src/frame/frame-utils/transpose.js.html#lineNumber25">str-data-frame/src/frame/frame-utils/transpose.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import transpose from &apos;<span><a href="file/src/frame/frame-utils/transpose.js.html#lineNumber26">str-data-frame/src/frame/frame-utils/transpose.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>[transpose description]</p>
@@ -13454,23 +14233,24 @@ Too small to be worth is own module.</p>
     
     
     
-    <span class="code" data-ice="name">unionFrame</span><span class="code" data-ice="signature">(frame1: <span>[type]</span>, frame2: <span>[type]</span>, notSorted: <span>[type]</span>): <span>[type]</span></span>
+    <span class="code" data-ice="name">unionFrame</span><span class="code" data-ice="signature">(frame1: <span><a href="class/src/frame/frame.js~Frame.html">Frame</a></span>, frame2: <span><a href="class/src/frame/frame.js~Frame.html">Frame</a></span>, notSorted: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span>): <span><a href="class/src/frame/frame.js~Frame.html">Frame</a></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/frame-utils/unionFrame.js.html#lineNumber103">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/frame-utils/unionFrame.js.html#lineNumber106">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import unionFrame from &apos;<span><a href="file/src/frame/frame-utils/unionFrame.js.html#lineNumber103">str-data-frame/src/frame/frame-utils/unionFrame.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import unionFrame from &apos;<span><a href="file/src/frame/frame-utils/unionFrame.js.html#lineNumber106">str-data-frame/src/frame/frame-utils/unionFrame.js</a></span>&apos;</code></pre></div>
   
   
-  <div data-ice="description"><p>assumes the frames are sorted, if notSorted is true, then the frames are sorted first;
-requirements:</p>
+  <div data-ice="description"><p>Creates a new frame from the union of the rows of the two frames, similar to s set union. There are no
+duplicate rows in the result. This is anologous to the SQL union operation
+assumes the frames are sorted, if notSorted is true, then the frames are sorted first;</p>
 <ol>
 <li>the frames must have the same columns names</li>
 <li>the sorting is done in columns order</li>
-<li>The original fames are not modified  * @param  {[type]} frame1    [description]</li>
+<li>The original frames are not modified</li>
 </ol>
 </div>
 
@@ -13486,21 +14266,21 @@ requirements:</p>
     
     <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">frame1</td>
-      <td data-ice="type" class="code"><span>[type]</span></td>
+      <td data-ice="type" class="code"><span><a href="class/src/frame/frame.js~Frame.html">Frame</a></span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>[description]</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">frame2</td>
-      <td data-ice="type" class="code"><span>[type]</span></td>
+      <td data-ice="type" class="code"><span><a href="class/src/frame/frame.js~Frame.html">Frame</a></span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>[description]</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">notSorted</td>
-      <td data-ice="type" class="code"><span>[type]</span></td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>[description]</p>
 </td>
@@ -13515,7 +14295,7 @@ requirements:</p>
     <table>
       <tbody>
         <tr>
-          <td class="return-type code" data-ice="returnType"><span>[type]</span></td>
+          <td class="return-type code" data-ice="returnType"><span><a href="class/src/frame/frame.js~Frame.html">Frame</a></span></td>
           <td class="return-desc" data-ice="returnDescription"><p>[description]</p>
 </td>
         </tr>
@@ -13778,7 +14558,7 @@ requirements:</p>
     
     
     
-    <span class="code" data-ice="name">zipTo</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">zipTo</span><span class="code" data-ice="signature">(aDictType: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
@@ -13793,10 +14573,38 @@ requirements:</p>
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">aDictType</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 

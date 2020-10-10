@@ -14,7 +14,10 @@ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
-import { vecAdd, arrHash} from '../array';
+import { vecAdd, arrHash } from '../array';
+import arrEqual from '../array/arrEQ';
+
+const EMPTY_ARRAY = [];
 /**
  *  Used to from the base class for a Frame,
  *  This is added to break circular import reference from hasFrame(aFrame) function
@@ -32,10 +35,23 @@ export default class BaseFrame {
 	 * @return {[type]}         [description]
 	 */
 	constructor(data,columns,name,keyFunc) {
-		this.keyFunc = keyFunc || this._getKey;
 		this.data = data||[];
 		this._columns = columns||[];
 		this._name = name || 'frame';
+		this._keyFunc = keyFunc;
+	
+		this._key = -1; 
+		if(keyFunc && !typeof keyFunc !== 'string' ) {
+			this._key = this._columns.indexOf(keyFunc);
+			this.keyFunc = this._getKey;
+		} else if(typeof keyfunc === 'function') {
+			this.keyFunc = keyFunc;
+			let keyName = this.keyFunc();
+			if(typeof keyName === 'string') {
+				this._key = this._columns.indexOf(keyName);
+			}
+		}
+		else  this.keyFunc = this._getKey;		
 	}
 
 	/**
@@ -44,11 +60,16 @@ export default class BaseFrame {
 	 * @param {String} name optional ne name
 	 */
 	setData(d,name) {
-		return new this.constructor(d, this.columns, name || this.name, this.keyFunc);
+		return new this.constructor(d, this.columns, name || this.name, this._keyFunc);
 	}
 
 	_getKey(i) {
-		return this.data[i][0];
+		return this.data[i][this._key <0 ?0: this._key];
+	}
+
+	keyName() {
+		if(this._key < 0 ) return undefined;
+		return this.columns[this._key];
 	}
 
 	/**
@@ -60,18 +81,22 @@ export default class BaseFrame {
 		return this.keyFunc(i);
 	}
 
+	setKey(keyFunc) {
+		return new this.constructor(this.data, this.columns, this.name, keyFunc);
+	}
+
 	/**
 	 * [columns description]
 	 * @return {[type]} [description]
 	 */
 	get columns() { return this._columns||EMPTY_ARRAY; }
-	set columns(columns) {
-		return new this.constructor(this.data, this.columns, this.name, this.keyFunc);
+	setColumns(columns) {
+		return new this.constructor(this.data, columns, this.name, this._keyFunc);
 	}
 	get length() { return (this.data || EMPTY_ARRAY).length; }
 	get name() { return this._name; }
-	set name(aName) {
-		return new this.constructor(this.data, this.columns, aName, this.keyFunc);
+	setName(aName) {
+		return new this.constructor(this.data, this.columns, aName, this._keyFunc);
 	}
 	get hash() {
 		if( this._hash !== -1 ) return this._hash;
@@ -116,13 +141,14 @@ export default class BaseFrame {
 	column(colName) {
 		const ix = this._columns.indexOf(colName);
 		if( ix == -1 ) return [];
-		return new this.constructor(this.data.map( v => [v[ix]]), [this._columns[ix]], this._name, this.keyFunc);
+		return new this.constructor(this.data.map( v => [v[ix]]), [this._columns[ix]], this._name, this._keyFunc);
 	}
 
 	/**
-	 * [rawColumn description]
-	 * @param  {[type]} colName [description]
-	 * @return {[type]}         [description]
+	 * rawColumn get the column given by the 'colName'
+	 * 
+	 * @param  {string} colName name of a column of the frame;
+	 * @return {[any]}         array representing the values of a column identified by colName
 	 */
 	rawColumn(colName) {
 		const ix = this._columns.indexOf(colName);
@@ -131,29 +157,28 @@ export default class BaseFrame {
 	}
 
 	/**
-	 * [row description]
-	 * @param  {[type]} ix [description]
-	 * @return {[type]}    [description]
+	 * Get the row vector 
+	 * @param  {number} ix the index number of a row
+	 * @return {[any]}    the row aray for index 'ix'
 	 */
 	row(ix) { return this.data[ix]; }
 
 
 	/**
 	 * Similar functionality to array slice
-	 * @param  {[type]} first [description]
-	 * @param  {[type]} last  [description]
-	 * @return {[type]}       [description]
+	 * @param  {number} first start index
+	 * @param  {number} last  the last index + 1 of the data
+	 * @return {Frame}       new frame representing the subset of the rows between firsr and last (excluding position last)
 	 */
 	slice(first,last) {
-		return new this.constructor(this.data.slice(first,last), this.columns, this._name, this.keyFunc);
+		return new this.constructor(this.data.slice(first,last), this.columns, this._name, this._keyFunc);
 	}
 
 	/**
-	 * [numericColumns description]
-	 * @param  {[type]} aFrame [description]
-	 * @return {[type]}        [description]
+	 * Array of column names the are predominantly numeric, the values may be number or number like staring
+\	 * @return {[string]}        array of column names that are predominantly numeric
 	 */
-	numericColumns(aFrame) {
+	numericColumns() {
 		let threshold = Math.trunc(this.length*0.9);
 		let a = this.data.map(row => row.map(v => (isNum(v))?1:(v === '' || v === undefined )? 0.5 : 0));
 		let sums = a.reduce(vecAdd,undefined); 
@@ -161,8 +186,8 @@ export default class BaseFrame {
 	}
  
 	/**
-	 * [asStrList description]
-	 * @return {[type]} [description]
+	 * An arry of strings, where the string the is a list of tab seperated column values
+	 * @return {[string]} each element of the array is an string represention of a corresponding row 
 	 */
 	asStrList() {
 		return this.data.map(x => x.join('\t'));
@@ -176,28 +201,26 @@ export default class BaseFrame {
 	forEachRaw(fn) { this.data.forEach( (row,ix,arr) => fn(row,ix,arr)); }
 
 	/**
-	 * [description]
+	 * This is the functional equivenent of Array.map for a Frame
 	 * @param  {Function} fn       [description]
 	 * @param  {[string]}   newCols [description]
-	 * @return {Frame}            [description]
+	 * @return {Frame}            map each row of the frame through 'fn' to get a new frame
 	 */
-	
-	mapRaw(fn,newCols) { return new this.constructor(this.data.map(fn), newCols || this._columns, this._name, this.keyFunc); }
+	mapRaw(fn,newCols) { return new this.constructor(this.data.map(fn), newCols || this._columns, this._name, this._keyFunc); }
 	
 	/**
 	 * [description]
-	 * @param  {[type]} fn 	[description]
+	 * @param  {function} fn 	filter function to apply to a row  if returns true keep the row otherwise discard the row
+	 * @param  {string|function]} keyFunc 	the key column name, or thekey computing function
 	 * @return {[type]}     [description]
 	 */
-	filterRaw(fn) { return new this.constructor(this.data.filter(fn),this._columns, this._name, this.keyFunc); }
+	filterRaw(fn,keyFunc) { return new this.constructor(this.data.filter(fn),this._columns, this._name, this._keyFunc); }
 
 	/**
-	 * [description]
+	 * Basically this is the equivelat to reduce performed on the data array, this is an array of rows as the elemnt passed to reduc
 	 * @param  {Function} fn   [description]
-	 * @param  {[type]}   ini  [description]
-	 * @return {[type]}        [description]
+	 * @param  {any}   ini  the starting value for reduce
+	 * @return {any}        the type is the return type of the fuction 'fn'
 	 */
 	reduceRaw(fn, ini) { return this.data.reduce( fn, ini); }
-	
-	
 }

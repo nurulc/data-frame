@@ -22,7 +22,7 @@ import sortFrameBy from './sortframe';
 import {groupBy} from './groupby';
 import frameWithIndex from './frame-utils/frameWithIndex';
 import frameToString from './frame-utils/frameToString';
-import frameFromString from './frame-utils/frameFromBuffer';
+import frameFromString from './frame-utils/coreFrameFromBuffer';
 import unionFrame from './frame-utils/unionFrame';
 import { arrRemove, arrDedup, newArray } from '../array';
 import {EMPTY_ARRAY} from '../utils/constants';
@@ -124,8 +124,8 @@ export class Frame extends BaseFrame {
 	 *
 	 *   newFrame = aFrame.mergeCols(null, ['street','city','state','zip'], 'address',  ", ");
 	 * 
-	 * @param  {array<string>} cols         columns to keep (may ne null or undefined)
-	 * @param  {array<string>} someColsToMerge     [description]
+	 * @param  {array} cols         columns to keep (may ne null or undefined)
+	 * @param  {array} someColsToMerge     [description]
 	 * @param  {String} newNameForMergerCol [description]
 	 * @param  {string|function} sepOrMergeFunc      [description]
 	 * @return {Frame}                     [description]
@@ -141,11 +141,11 @@ export class Frame extends BaseFrame {
 		let nf = this.project(cols);
 		let mergeCols = this.project(someColsToMerge);
 		
-		return new Frame( 
+		return new this.constructor( 
 			nf.data.map((row,ix) => row.concat(joinColsAt(ix)) ),	
 			cols.concat([newNameForMergerCol]),
 			this._name, 
-			this.keyFunc );
+			this._keyFunc );
 		// =======
 		function joinColsAt(ix) {
 			return [mergeFunc(mergeCols.data[ix].filter(x => x))];
@@ -153,8 +153,8 @@ export class Frame extends BaseFrame {
 	}
 
 	/**
-	 * [asObjList description]
-	 * @return {[type]} [description]
+	 * Return a list of RowObject from the frame
+	 * @return {[RowObject]} [description]
 	 */
 	asObjList() {
 		return this.data.map((x,i) => this._rowObj(x,i));
@@ -190,7 +190,7 @@ export class Frame extends BaseFrame {
 	 * withIndex add an index column to the befining of the frame or at the end of the frame
 	 * @param  {boolean} indexName Name of the index defaults to _INDEX
 	 * @param  {boolean} atEnd if true the index is placed on the last column, otherwise it is the first column
-	 * @return {[type]} [description]
+	 * @return {Frame} [description]
 	 */
 	withIndex(indexName='_INDEX',atEnd) {
 		return frameWithIndex(this,indexName,atEnd);
@@ -200,7 +200,7 @@ export class Frame extends BaseFrame {
 	/**
 	 * find a row using the test function fn. The test function recieves a row ia s RowObject facade, see _rowObj method.
 	 * @param  {Function} fn function with a test criterion for the find operation 
-	 * @return {row_object}      undefined if nothing found or a RowObject for the row matching the test function
+	 * @return {RowObject}      undefined if nothing found or a RowObject for the row matching the test function
 	 */
 	find(fn) {
 		let row = this._rowObj();
@@ -215,7 +215,8 @@ export class Frame extends BaseFrame {
 
 
 	/**
-	 * [description]
+	 * An alias for the Frame.mapF 
+	 * 
 	 * @param  {function} fn	f(rowObject, )
 	 * @return {Array}     [description]
 	 */
@@ -234,14 +235,14 @@ export class Frame extends BaseFrame {
 	/**
 	 * Similar to arry reduce except it works on frames
 	 * @param  {function} fn   reduce function (acc:T, r:RowObject, index, array)
-	 * @param  {T}   ini  initial value  of accumulator type T
-	 * @return {T}        return the accumulator
+	 * @param  {any}   ini  initial value  of accumulator type T
+	 * @return {any}        return the accumulator
 	 */
 	reduce(fn, ini) { return this.data.reduce( (acc, x, ix, arr) => fn(acc, this._rowObj(x,ix), ix, arr), ini); }
 	
 	/**
 	 * Concatinate frames and return a new frame (does not modify any of the input frames)
-	 * @param  {...Frame} frames list of frames
+	 * @param  {[Frame]} frames list of frames
 	 * @return {Frame}           concatination of all the frames
 	 */
 	concat(...frames) {
@@ -258,7 +259,7 @@ export class Frame extends BaseFrame {
 				f.project(this.columns).data
 		);
 		let res = [].concat(...[this.data,...arrays]);
-		return new this.constructor(res, this._columns, this._name, this.keyFunc);
+		return new this.constructor(res, this._columns, this._name, this._keyFunc);
 	}
 	
 
@@ -288,8 +289,8 @@ export class Frame extends BaseFrame {
 
 	/**
 	 * Takes a filter function or an array of row indicies and returns a new Frame with the selected rows
-	 * @param  {function_array} fnOrArray filter function (r:RowObject,ix,array) or an array of index into the data
-	 * @return {[type]}           A new frame with rows filtered out
+	 * @param  {function_array} fnOrArray This is an array or a filter function (r:RowObject,ix,array) or an array of index into the data
+	 * @return {Frame}           A new frame with rows filtered out
 	 */
 	filter(fnOrArray) { 
 		if(!this) throw new TypeError('Filter cannot be use as a raw function');
@@ -317,12 +318,12 @@ export class Frame extends BaseFrame {
 				let r = data[ix];
 				if(r !== undefined) res.push(r);
 			} 
-			return new this.constructor(res, newColName, this._name, this.keyFunc); 
+			return new this.constructor(res, newColName, this._name, this._keyFunc); 
 		}
 	}
 
 	/**
-	 * remove all redundent copies of strings, this is the only destructive operation oan aframe
+	 * Remove all redundent copies of strings, this is the only destructive operation oan aframe
 	 * while still maintaining functional purity
 	 * @return {[type]}        [description]
 	 */
@@ -426,7 +427,7 @@ export class Frame extends BaseFrame {
 			if(filter !== undefined) {
 				// some filtering is potentially happening
 				let row = this._rowObj();
-				data = this.data.filter( (x,ix,arr) => fn(row.__unsafeSet(x,ix),ix,arr));
+				data = this.data.filter( (x,ix,arr) => filter(row.__unsafeSet(x,ix),ix,arr));
 			}
 			
 			let columns = mappedCols.map(([,b]) => b);
@@ -500,24 +501,26 @@ export class Frame extends BaseFrame {
 
 		
 		//result = this.data.map(row => projectRow(row, ixList));
-		return new this.constructor( result, newCols, this._name, this.keyFunc);
+		return new this.constructor( result, newCols, this._name, this._keyFunc);
 	}
+
 	/**
-	 * select a more convinient interface to project
+	 * select a more convinient interface to project, an analog to sql select 
 	 * The primary diffenrence is the setting of new columns or adding new columns has 
 	 * been made more convinient
 	 *
 	 *  Example of setting columns
-	 *   ['column', 
+	 *   [  'oldColumn', 
 	 *   	'oldColumn=newColumnName', 
 	 *   	['oldCol1=newColName1', (v,ro) => some-operation],
+	 *   	['oldCol1=newColName1', someValue],
 	 *   	['newCol', someValue],
 	 *   	['newCol2', (v,ro) => someComputedValue]
 	 *   ]
 	 * 
-	 * @param  {[type]} columns [description]
-	 * @param  {[type]} where   this is a filter function similar to SQL select ... from table where expr
-	 * @return {[type]}         [description]
+	 * @param  {[col_desciptor]} columns [description]
+	 * @param  {function?} where   this is a filter function similar to SQL select ... from table where expr
+	 * @return {Frame}         new Frame
 	 */
 	select(columns, where) {
 		let cols = columns.map( name => {
@@ -816,7 +819,7 @@ export class Frame extends BaseFrame {
 			// nothing changed
 			return this;
 		}
-		return this.constructor(_data,this.columns,this.name,this.keyFunc);
+		return this.constructor(_data,this.columns,this.name,this._keyFunc);
 	}
 
 	
@@ -857,5 +860,7 @@ Frame.HTMLFormat = {
  * frameFromString - create a frame from a string buffer usually read in from a file representing 
  * @type {[type]}
  */
-Frame.frameFromString = frameFromString;
+Frame.frameFromString = function(buffer,splitter,options) { 
+	return frameFromString(buffer,splitter,Object.assign({Fr: Frame},options||{}));
+};
 Frame.union = unionFrame;

@@ -132,13 +132,15 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-__FRAME__">__FRAME__</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-arrToCol">arrToCol</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-haveFrame">haveFrame</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#frame-frame-utils">frame/frame-utils</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameCount">frameCount</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#frame-frame-utils">frame/frame-utils</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coreFrameFromBuffer">coreFrameFromBuffer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameCount">frameCount</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameFromBuffer">frameFromBuffer</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameSum">frameSum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameToString">frameToString</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameWithIndex">frameWithIndex</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-transpose">transpose</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-unionFrame">unionFrame</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-coreFrameFromBuffer">coreFrameFromBuffer</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frameCount">frameCount</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frameFromBuffer">frameFromBuffer</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frameSum">frameSum</a></span></span></li>
@@ -310,7 +312,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-EMPTY_ARRAY">EMPTY_ARRAY</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-EMPTY_ARRAY">EMPTY_ARRAY</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -338,7 +340,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-EMPTY_KEY">EMPTY_KEY</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-EMPTY_KEY">EMPTY_KEY</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -366,7 +368,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-EMPTY_STR">EMPTY_STR</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-EMPTY_STR">EMPTY_STR</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
         </p>
       </div>
       <div>
@@ -394,7 +396,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-K">K</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-K">K</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -422,7 +424,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-SEPARATOR_STRING">SEPARATOR_STRING</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-SEPARATOR_STRING">SEPARATOR_STRING</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
         </p>
       </div>
       <div>
@@ -450,7 +452,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-ZERO_DECIMAL">ZERO_DECIMAL</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-ZERO_DECIMAL">ZERO_DECIMAL</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
         </p>
       </div>
       <div>
@@ -478,7 +480,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-ZERO_STR">ZERO_STR</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-ZERO_STR">ZERO_STR</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
         </p>
       </div>
       <div>
@@ -506,7 +508,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-accStr">accStr</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-accStr">accStr</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -534,7 +536,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-access">access</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-access">access</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -562,7 +564,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrConcat">arrConcat</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrConcat">arrConcat</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -590,7 +592,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrCount">arrCount</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrCount">arrCount</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -618,7 +620,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrCurry">arrCurry</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrCurry">arrCurry</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -646,7 +648,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrDedup">arrDedup</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrDedup">arrDedup</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -674,7 +676,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrDiff">arrDiff</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrDiff">arrDiff</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -702,7 +704,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrHash">arrHash</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrHash">arrHash</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -730,7 +732,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrIntersect">arrIntersect</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrIntersect">arrIntersect</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -758,7 +760,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrMax">arrMax</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrMax">arrMax</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -786,7 +788,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrMean">arrMean</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrMean">arrMean</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -814,7 +816,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrMin">arrMin</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrMin">arrMin</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -842,7 +844,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrOf">arrOf</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrOf">arrOf</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -870,7 +872,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrRemove">arrRemove</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrRemove">arrRemove</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -898,7 +900,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrSplit">arrSplit</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrSplit">arrSplit</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -926,7 +928,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrSum">arrSum</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrSum">arrSum</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -954,7 +956,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrToCol">arrToCol</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrToCol">arrToCol</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -982,7 +984,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrUnion">arrUnion</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrUnion">arrUnion</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1010,7 +1012,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrZip">arrZip</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-arrZip">arrZip</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1038,7 +1040,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-asSortedSet">asSortedSet</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-asSortedSet">asSortedSet</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1066,7 +1068,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-changeNameTo">changeNameTo</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-changeNameTo">changeNameTo</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1094,7 +1096,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-cmpNumOrStrBy">cmpNumOrStrBy</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-cmpNumOrStrBy">cmpNumOrStrBy</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1122,7 +1124,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-colName">colName</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-colName">colName</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1150,7 +1152,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-combineCmp">combineCmp</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-combineCmp">combineCmp</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1178,7 +1180,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-countCh">countCh</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-coreFrameFromBuffer">coreFrameFromBuffer</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1206,7 +1208,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-csvLine">csvLine</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-countCh">countCh</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1234,7 +1236,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-dataSplit">dataSplit</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-csvLine">csvLine</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1262,7 +1264,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-dedupSortedArr">dedupSortedArr</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-dataSplit">dataSplit</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1290,7 +1292,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-filterDict">filterDict</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-dedupSortedArr">dedupSortedArr</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1318,7 +1320,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-findIndexOf">findIndexOf</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-filterDict">filterDict</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1346,7 +1348,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-frameCount">frameCount</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-findIndexOf">findIndexOf</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1374,7 +1376,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-frameFromBuffer">frameFromBuffer</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-frameCount">frameCount</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1402,7 +1404,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-frameSum">frameSum</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-frameFromBuffer">frameFromBuffer</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1430,7 +1432,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-frameToString">frameToString</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-frameSum">frameSum</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1458,7 +1460,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-frameWithIndex">frameWithIndex</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-frameToString">frameToString</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1486,7 +1488,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-fromKeyValueList">fromKeyValueList</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-frameWithIndex">frameWithIndex</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1514,7 +1516,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-fromKeyValueListV">fromKeyValueListV</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-fromKeyValueList">fromKeyValueList</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1542,7 +1544,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-fullInnerJoin">fullInnerJoin</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-fromKeyValueListV">fromKeyValueListV</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1570,7 +1572,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-gb">gb</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-fullInnerJoin">fullInnerJoin</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1598,7 +1600,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-gbCount">gbCount</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-gb">gb</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1626,7 +1628,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-gbMax">gbMax</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-gbCount">gbCount</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1654,7 +1656,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-gbMean">gbMean</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-gbMax">gbMax</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1682,7 +1684,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-gbMerge">gbMerge</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-gbMean">gbMean</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1710,7 +1712,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-gbMergeU">gbMergeU</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-gbMerge">gbMerge</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1738,7 +1740,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-gbMin">gbMin</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-gbMergeU">gbMergeU</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1766,7 +1768,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-gbStdDiv">gbStdDiv</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-gbMin">gbMin</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1794,7 +1796,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-gbSum">gbSum</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-gbStdDiv">gbStdDiv</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1822,7 +1824,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-gbVal">gbVal</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-gbSum">gbSum</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1850,7 +1852,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-genFilterFunction">genFilterFunction</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-gbVal">gbVal</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1878,7 +1880,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-genObjMapper">genObjMapper</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-genFilterFunction">genFilterFunction</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1906,7 +1908,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-getDict">getDict</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-genObjMapper">genObjMapper</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1934,7 +1936,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-getTransform">getTransform</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-getDict">getDict</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1962,7 +1964,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-groupByToDict">groupByToDict</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-getTransform">getTransform</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1990,7 +1992,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-groupToDict">groupToDict</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-groupByToDict">groupByToDict</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2018,7 +2020,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-hasNoDups">hasNoDups</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-groupToDict">groupToDict</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2046,7 +2048,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-haveFrame">haveFrame</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-hasNoDups">hasNoDups</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2074,7 +2076,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-indexFrameColumn">indexFrameColumn</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-haveFrame">haveFrame</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2102,7 +2104,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-intersect">intersect</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-indexFrameColumn">indexFrameColumn</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2130,7 +2132,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-intersectL">intersectL</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-intersect">intersect</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2158,7 +2160,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-isA">isA</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-intersectL">intersectL</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2186,7 +2188,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-isArray">isArray</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-isA">isA</a></span></span><span class="code" data-ice="signature">: {&quot;array&quot;: <span>*</span>, &quot;notNull&quot;: <span>*</span>, &quot;func&quot;: <span>*</span>, &quot;str&quot;: <span>*</span>, &quot;num&quot;: <span>*</span>, &quot;bool&quot;: <span>*</span>, &quot;obj&quot;: <span>*</span>, &quot;map&quot;: <span>*</span>, &quot;set&quot;: <span>*</span>, &quot;arrayOf&quot;: <span>*</span>}</span>
         </p>
       </div>
       <div>
@@ -2214,7 +2216,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-isEmpty">isEmpty</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-isArray">isArray</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2242,7 +2244,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-isFunction">isFunction</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-isEmpty">isEmpty</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2270,7 +2272,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-isSorted">isSorted</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-isFunction">isFunction</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2298,7 +2300,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-isString">isString</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-isSorted">isSorted</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2326,7 +2328,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-joinOp">joinOp</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-isString">isString</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2354,7 +2356,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-keys">keys</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-joinOp">joinOp</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2382,7 +2384,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-last">last</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-keys">keys</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2410,7 +2412,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-localGroupBy">localGroupBy</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-last">last</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2438,7 +2440,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-mapOver">mapOver</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-localGroupBy">localGroupBy</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2466,7 +2468,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-matchIt">matchIt</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-mapOver">mapOver</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2494,7 +2496,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-max">max</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-matchIt">matchIt</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2522,7 +2524,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-memoize">memoize</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-max">max</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2550,7 +2552,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-newArray">newArray</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-memoize">memoize</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2578,7 +2580,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-padTo">padTo</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-newArray">newArray</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2606,7 +2608,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-pick">pick</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-padTo">padTo</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2634,7 +2636,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-pickRaw">pickRaw</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-pick">pick</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2662,7 +2664,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-prefixHead">prefixHead</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-pickRaw">pickRaw</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2690,7 +2692,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-prefixLen">prefixLen</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-prefixHead">prefixHead</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2718,7 +2720,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-prefixTail">prefixTail</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-prefixLen">prefixLen</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2746,7 +2748,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-prod">prod</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-prefixTail">prefixTail</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2774,7 +2776,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-project">project</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-prod">prod</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2802,7 +2804,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-psvLine">psvLine</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-project">project</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2830,7 +2832,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-range">range</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-psvLine">psvLine</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2858,7 +2860,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-redim">redim</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-range">range</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2886,7 +2888,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-renameColumns">renameColumns</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-redim">redim</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2914,7 +2916,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-reord">reord</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-renameColumns">renameColumns</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2942,7 +2944,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-revCmp">revCmp</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-reord">reord</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2970,7 +2972,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-reverse">reverse</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-revCmp">revCmp</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -2998,7 +3000,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-safeDedup">safeDedup</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-reverse">reverse</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3026,7 +3028,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-setKey">setKey</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-safeDedup">safeDedup</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3054,7 +3056,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-setKeyV">setKeyV</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-setKey">setKey</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3082,7 +3084,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-shallow">shallow</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-setKeyV">setKeyV</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3110,7 +3112,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-similarity">similarity</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-shallow">shallow</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3138,7 +3140,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-strEq">strEq</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-similarity">similarity</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3166,7 +3168,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-strHash">strHash</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-strEq">strEq</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3194,7 +3196,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-strJoin">strJoin</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-strHash">strHash</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3222,7 +3224,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-subtract">subtract</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-strJoin">strJoin</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3250,7 +3252,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-toKeyValueList">toKeyValueList</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-subtract">subtract</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3278,7 +3280,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-toKeyValueListV">toKeyValueListV</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-toKeyValueList">toKeyValueList</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3306,7 +3308,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-transpose">transpose</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-toKeyValueListV">toKeyValueListV</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3334,7 +3336,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-trimListElements">trimListElements</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-transpose">transpose</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3362,7 +3364,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-tsvLine">tsvLine</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-trimListElements">trimListElements</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3390,7 +3392,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-unionFrame">unionFrame</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-tsvLine">tsvLine</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3418,7 +3420,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-unionL">unionL</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-unionFrame">unionFrame</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3446,7 +3448,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-vecAdd">vecAdd</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-unionL">unionL</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3474,7 +3476,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-xor">xor</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-vecAdd">vecAdd</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3502,7 +3504,35 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-zipTo">zipTo</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-xor">xor</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-zipTo">zipTo</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -3536,7 +3566,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-__ARRAY__">__ARRAY__</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-__ARRAY__">__ARRAY__</a></span></span><span class="code" data-ice="signature">: <span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span><span>[]</span></span></span>
         </p>
       </div>
       <div>
@@ -3564,7 +3594,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-__DICT__">__DICT__</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-__DICT__">__DICT__</a></span></span><span class="code" data-ice="signature">: <span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span><span>[]</span></span></span>
         </p>
       </div>
       <div>
@@ -3592,7 +3622,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-__FRAME__">__FRAME__</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-__FRAME__">__FRAME__</a></span></span><span class="code" data-ice="signature">: <span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span><span>[]</span></span></span>
         </p>
       </div>
       <div>
@@ -3620,7 +3650,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-__STRING__">__STRING__</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-__STRING__">__STRING__</a></span></span><span class="code" data-ice="signature">: <span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span><span>[]</span></span></span>
         </p>
       </div>
       <div>
@@ -3648,7 +3678,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-__UTILS__">__UTILS__</a></span></span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-__UTILS__">__UTILS__</a></span></span><span class="code" data-ice="signature">: <span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span><span>[]</span></span></span>
         </p>
       </div>
       <div>
@@ -3675,7 +3705,7 @@
     
     
     
-    <span class="code" data-ice="name">EMPTY_ARRAY</span>
+    <span class="code" data-ice="name">EMPTY_ARRAY</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -3718,7 +3748,7 @@
     
     
     
-    <span class="code" data-ice="name">EMPTY_KEY</span>
+    <span class="code" data-ice="name">EMPTY_KEY</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -3761,7 +3791,7 @@
     
     
     
-    <span class="code" data-ice="name">EMPTY_STR</span>
+    <span class="code" data-ice="name">EMPTY_STR</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
     <span class="right-info">
       
       
@@ -3804,7 +3834,7 @@
     
     
     
-    <span class="code" data-ice="name">K</span>
+    <span class="code" data-ice="name">K</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -3847,7 +3877,7 @@
     
     
     
-    <span class="code" data-ice="name">SEPARATOR_STRING</span>
+    <span class="code" data-ice="name">SEPARATOR_STRING</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
     <span class="right-info">
       
       
@@ -3890,7 +3920,7 @@
     
     
     
-    <span class="code" data-ice="name">ZERO_DECIMAL</span>
+    <span class="code" data-ice="name">ZERO_DECIMAL</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
     <span class="right-info">
       
       
@@ -3933,7 +3963,7 @@
     
     
     
-    <span class="code" data-ice="name">ZERO_STR</span>
+    <span class="code" data-ice="name">ZERO_STR</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></span>
     <span class="right-info">
       
       
@@ -3976,7 +4006,7 @@
     
     
     
-    <span class="code" data-ice="name">accStr</span>
+    <span class="code" data-ice="name">accStr</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -4019,7 +4049,7 @@
     
     
     
-    <span class="code" data-ice="name">access</span>
+    <span class="code" data-ice="name">access</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -4062,7 +4092,7 @@
     
     
     
-    <span class="code" data-ice="name">arrConcat</span>
+    <span class="code" data-ice="name">arrConcat</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -4105,7 +4135,7 @@
     
     
     
-    <span class="code" data-ice="name">arrCount</span>
+    <span class="code" data-ice="name">arrCount</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -4148,7 +4178,7 @@
     
     
     
-    <span class="code" data-ice="name">arrCurry</span>
+    <span class="code" data-ice="name">arrCurry</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -4191,7 +4221,7 @@
     
     
     
-    <span class="code" data-ice="name">arrDedup</span>
+    <span class="code" data-ice="name">arrDedup</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -4234,7 +4264,7 @@
     
     
     
-    <span class="code" data-ice="name">arrDiff</span>
+    <span class="code" data-ice="name">arrDiff</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -4277,7 +4307,7 @@
     
     
     
-    <span class="code" data-ice="name">arrHash</span>
+    <span class="code" data-ice="name">arrHash</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -4320,7 +4350,7 @@
     
     
     
-    <span class="code" data-ice="name">arrIntersect</span>
+    <span class="code" data-ice="name">arrIntersect</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -4363,7 +4393,7 @@
     
     
     
-    <span class="code" data-ice="name">arrMax</span>
+    <span class="code" data-ice="name">arrMax</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -4406,7 +4436,7 @@
     
     
     
-    <span class="code" data-ice="name">arrMean</span>
+    <span class="code" data-ice="name">arrMean</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -4449,7 +4479,7 @@
     
     
     
-    <span class="code" data-ice="name">arrMin</span>
+    <span class="code" data-ice="name">arrMin</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -4492,7 +4522,7 @@
     
     
     
-    <span class="code" data-ice="name">arrOf</span>
+    <span class="code" data-ice="name">arrOf</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -4535,7 +4565,7 @@
     
     
     
-    <span class="code" data-ice="name">arrRemove</span>
+    <span class="code" data-ice="name">arrRemove</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -4578,7 +4608,7 @@
     
     
     
-    <span class="code" data-ice="name">arrSplit</span>
+    <span class="code" data-ice="name">arrSplit</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -4621,7 +4651,7 @@
     
     
     
-    <span class="code" data-ice="name">arrSum</span>
+    <span class="code" data-ice="name">arrSum</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -4664,7 +4694,7 @@
     
     
     
-    <span class="code" data-ice="name">arrToCol</span>
+    <span class="code" data-ice="name">arrToCol</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -4707,7 +4737,7 @@
     
     
     
-    <span class="code" data-ice="name">arrUnion</span>
+    <span class="code" data-ice="name">arrUnion</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -4750,7 +4780,7 @@
     
     
     
-    <span class="code" data-ice="name">arrZip</span>
+    <span class="code" data-ice="name">arrZip</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -4793,7 +4823,7 @@
     
     
     
-    <span class="code" data-ice="name">asSortedSet</span>
+    <span class="code" data-ice="name">asSortedSet</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -4836,7 +4866,7 @@
     
     
     
-    <span class="code" data-ice="name">changeNameTo</span>
+    <span class="code" data-ice="name">changeNameTo</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -4879,7 +4909,7 @@
     
     
     
-    <span class="code" data-ice="name">cmpNumOrStrBy</span>
+    <span class="code" data-ice="name">cmpNumOrStrBy</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -4922,7 +4952,7 @@
     
     
     
-    <span class="code" data-ice="name">colName</span>
+    <span class="code" data-ice="name">colName</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -4965,7 +4995,7 @@
     
     
     
-    <span class="code" data-ice="name">combineCmp</span>
+    <span class="code" data-ice="name">combineCmp</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -5001,6 +5031,49 @@
   
 </div>
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-variable-coreFrameFromBuffer">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">coreFrameFromBuffer</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/frame/frame-utils/index.js.html#lineNumber20">source</a></span></span>
+    </span>
+  </h3>
+
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {coreFrameFromBuffer} from &apos;<span><a href="file/src/frame/frame-utils/index.js.html#lineNumber20">str-data-frame/src/frame/frame-utils/index.js</a></span>&apos;</code></pre></div>
+  
+  
+  
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="static-variable-countCh">
     <span class="access" data-ice="access">public</span>
     
@@ -5008,7 +5081,7 @@
     
     
     
-    <span class="code" data-ice="name">countCh</span>
+    <span class="code" data-ice="name">countCh</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -5051,7 +5124,7 @@
     
     
     
-    <span class="code" data-ice="name">csvLine</span>
+    <span class="code" data-ice="name">csvLine</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -5094,7 +5167,7 @@
     
     
     
-    <span class="code" data-ice="name">dataSplit</span>
+    <span class="code" data-ice="name">dataSplit</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -5137,7 +5210,7 @@
     
     
     
-    <span class="code" data-ice="name">dedupSortedArr</span>
+    <span class="code" data-ice="name">dedupSortedArr</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -5180,7 +5253,7 @@
     
     
     
-    <span class="code" data-ice="name">filterDict</span>
+    <span class="code" data-ice="name">filterDict</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -5223,7 +5296,7 @@
     
     
     
-    <span class="code" data-ice="name">findIndexOf</span>
+    <span class="code" data-ice="name">findIndexOf</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -5266,15 +5339,15 @@
     
     
     
-    <span class="code" data-ice="name">frameCount</span>
+    <span class="code" data-ice="name">frameCount</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/frame-utils/index.js.html#lineNumber26">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/frame-utils/index.js.html#lineNumber29">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {frameCount} from &apos;<span><a href="file/src/frame/frame-utils/index.js.html#lineNumber26">str-data-frame/src/frame/frame-utils/index.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {frameCount} from &apos;<span><a href="file/src/frame/frame-utils/index.js.html#lineNumber29">str-data-frame/src/frame/frame-utils/index.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -5309,7 +5382,7 @@
     
     
     
-    <span class="code" data-ice="name">frameFromBuffer</span>
+    <span class="code" data-ice="name">frameFromBuffer</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -5352,15 +5425,15 @@
     
     
     
-    <span class="code" data-ice="name">frameSum</span>
+    <span class="code" data-ice="name">frameSum</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/frame-utils/index.js.html#lineNumber23">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/frame-utils/index.js.html#lineNumber26">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {frameSum} from &apos;<span><a href="file/src/frame/frame-utils/index.js.html#lineNumber23">str-data-frame/src/frame/frame-utils/index.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {frameSum} from &apos;<span><a href="file/src/frame/frame-utils/index.js.html#lineNumber26">str-data-frame/src/frame/frame-utils/index.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -5395,15 +5468,15 @@
     
     
     
-    <span class="code" data-ice="name">frameToString</span>
+    <span class="code" data-ice="name">frameToString</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/frame-utils/index.js.html#lineNumber32">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/frame-utils/index.js.html#lineNumber35">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {frameToString} from &apos;<span><a href="file/src/frame/frame-utils/index.js.html#lineNumber32">str-data-frame/src/frame/frame-utils/index.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {frameToString} from &apos;<span><a href="file/src/frame/frame-utils/index.js.html#lineNumber35">str-data-frame/src/frame/frame-utils/index.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -5438,15 +5511,15 @@
     
     
     
-    <span class="code" data-ice="name">frameWithIndex</span>
+    <span class="code" data-ice="name">frameWithIndex</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/frame-utils/index.js.html#lineNumber20">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/frame-utils/index.js.html#lineNumber23">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {frameWithIndex} from &apos;<span><a href="file/src/frame/frame-utils/index.js.html#lineNumber20">str-data-frame/src/frame/frame-utils/index.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {frameWithIndex} from &apos;<span><a href="file/src/frame/frame-utils/index.js.html#lineNumber23">str-data-frame/src/frame/frame-utils/index.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -5481,7 +5554,7 @@
     
     
     
-    <span class="code" data-ice="name">fromKeyValueList</span>
+    <span class="code" data-ice="name">fromKeyValueList</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -5524,7 +5597,7 @@
     
     
     
-    <span class="code" data-ice="name">fromKeyValueListV</span>
+    <span class="code" data-ice="name">fromKeyValueListV</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -5567,7 +5640,7 @@
     
     
     
-    <span class="code" data-ice="name">fullInnerJoin</span>
+    <span class="code" data-ice="name">fullInnerJoin</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -5610,7 +5683,7 @@
     
     
     
-    <span class="code" data-ice="name">gb</span>
+    <span class="code" data-ice="name">gb</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -5653,7 +5726,7 @@
     
     
     
-    <span class="code" data-ice="name">gbCount</span>
+    <span class="code" data-ice="name">gbCount</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -5696,7 +5769,7 @@
     
     
     
-    <span class="code" data-ice="name">gbMax</span>
+    <span class="code" data-ice="name">gbMax</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -5739,7 +5812,7 @@
     
     
     
-    <span class="code" data-ice="name">gbMean</span>
+    <span class="code" data-ice="name">gbMean</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -5782,7 +5855,7 @@
     
     
     
-    <span class="code" data-ice="name">gbMerge</span>
+    <span class="code" data-ice="name">gbMerge</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -5825,7 +5898,7 @@
     
     
     
-    <span class="code" data-ice="name">gbMergeU</span>
+    <span class="code" data-ice="name">gbMergeU</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -5868,7 +5941,7 @@
     
     
     
-    <span class="code" data-ice="name">gbMin</span>
+    <span class="code" data-ice="name">gbMin</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -5911,7 +5984,7 @@
     
     
     
-    <span class="code" data-ice="name">gbStdDiv</span>
+    <span class="code" data-ice="name">gbStdDiv</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -5954,7 +6027,7 @@
     
     
     
-    <span class="code" data-ice="name">gbSum</span>
+    <span class="code" data-ice="name">gbSum</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -5997,7 +6070,7 @@
     
     
     
-    <span class="code" data-ice="name">gbVal</span>
+    <span class="code" data-ice="name">gbVal</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -6040,7 +6113,7 @@
     
     
     
-    <span class="code" data-ice="name">genFilterFunction</span>
+    <span class="code" data-ice="name">genFilterFunction</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -6083,7 +6156,7 @@
     
     
     
-    <span class="code" data-ice="name">genObjMapper</span>
+    <span class="code" data-ice="name">genObjMapper</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -6126,7 +6199,7 @@
     
     
     
-    <span class="code" data-ice="name">getDict</span>
+    <span class="code" data-ice="name">getDict</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -6169,7 +6242,7 @@
     
     
     
-    <span class="code" data-ice="name">getTransform</span>
+    <span class="code" data-ice="name">getTransform</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -6212,7 +6285,7 @@
     
     
     
-    <span class="code" data-ice="name">groupByToDict</span>
+    <span class="code" data-ice="name">groupByToDict</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -6255,7 +6328,7 @@
     
     
     
-    <span class="code" data-ice="name">groupToDict</span>
+    <span class="code" data-ice="name">groupToDict</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -6298,7 +6371,7 @@
     
     
     
-    <span class="code" data-ice="name">hasNoDups</span>
+    <span class="code" data-ice="name">hasNoDups</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -6341,7 +6414,7 @@
     
     
     
-    <span class="code" data-ice="name">haveFrame</span>
+    <span class="code" data-ice="name">haveFrame</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -6384,7 +6457,7 @@
     
     
     
-    <span class="code" data-ice="name">indexFrameColumn</span>
+    <span class="code" data-ice="name">indexFrameColumn</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -6427,7 +6500,7 @@
     
     
     
-    <span class="code" data-ice="name">intersect</span>
+    <span class="code" data-ice="name">intersect</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -6470,7 +6543,7 @@
     
     
     
-    <span class="code" data-ice="name">intersectL</span>
+    <span class="code" data-ice="name">intersectL</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -6513,7 +6586,7 @@
     
     
     
-    <span class="code" data-ice="name">isA</span>
+    <span class="code" data-ice="name">isA</span><span class="code" data-ice="signature">: {&quot;array&quot;: <span>*</span>, &quot;notNull&quot;: <span>*</span>, &quot;func&quot;: <span>*</span>, &quot;str&quot;: <span>*</span>, &quot;num&quot;: <span>*</span>, &quot;bool&quot;: <span>*</span>, &quot;obj&quot;: <span>*</span>, &quot;map&quot;: <span>*</span>, &quot;set&quot;: <span>*</span>, &quot;arrayOf&quot;: <span>*</span>}</span>
     <span class="right-info">
       
       
@@ -6556,7 +6629,7 @@
     
     
     
-    <span class="code" data-ice="name">isArray</span>
+    <span class="code" data-ice="name">isArray</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -6599,7 +6672,7 @@
     
     
     
-    <span class="code" data-ice="name">isEmpty</span>
+    <span class="code" data-ice="name">isEmpty</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -6642,7 +6715,7 @@
     
     
     
-    <span class="code" data-ice="name">isFunction</span>
+    <span class="code" data-ice="name">isFunction</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -6685,7 +6758,7 @@
     
     
     
-    <span class="code" data-ice="name">isSorted</span>
+    <span class="code" data-ice="name">isSorted</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -6728,7 +6801,7 @@
     
     
     
-    <span class="code" data-ice="name">isString</span>
+    <span class="code" data-ice="name">isString</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -6771,7 +6844,7 @@
     
     
     
-    <span class="code" data-ice="name">joinOp</span>
+    <span class="code" data-ice="name">joinOp</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -6814,7 +6887,7 @@
     
     
     
-    <span class="code" data-ice="name">keys</span>
+    <span class="code" data-ice="name">keys</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -6857,7 +6930,7 @@
     
     
     
-    <span class="code" data-ice="name">last</span>
+    <span class="code" data-ice="name">last</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -6900,7 +6973,7 @@
     
     
     
-    <span class="code" data-ice="name">localGroupBy</span>
+    <span class="code" data-ice="name">localGroupBy</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -6943,7 +7016,7 @@
     
     
     
-    <span class="code" data-ice="name">mapOver</span>
+    <span class="code" data-ice="name">mapOver</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -6986,7 +7059,7 @@
     
     
     
-    <span class="code" data-ice="name">matchIt</span>
+    <span class="code" data-ice="name">matchIt</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -7029,7 +7102,7 @@
     
     
     
-    <span class="code" data-ice="name">max</span>
+    <span class="code" data-ice="name">max</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -7072,7 +7145,7 @@
     
     
     
-    <span class="code" data-ice="name">memoize</span>
+    <span class="code" data-ice="name">memoize</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -7115,7 +7188,7 @@
     
     
     
-    <span class="code" data-ice="name">newArray</span>
+    <span class="code" data-ice="name">newArray</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -7158,7 +7231,7 @@
     
     
     
-    <span class="code" data-ice="name">padTo</span>
+    <span class="code" data-ice="name">padTo</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -7201,7 +7274,7 @@
     
     
     
-    <span class="code" data-ice="name">pick</span>
+    <span class="code" data-ice="name">pick</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -7244,7 +7317,7 @@
     
     
     
-    <span class="code" data-ice="name">pickRaw</span>
+    <span class="code" data-ice="name">pickRaw</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -7287,7 +7360,7 @@
     
     
     
-    <span class="code" data-ice="name">prefixHead</span>
+    <span class="code" data-ice="name">prefixHead</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -7330,7 +7403,7 @@
     
     
     
-    <span class="code" data-ice="name">prefixLen</span>
+    <span class="code" data-ice="name">prefixLen</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -7373,7 +7446,7 @@
     
     
     
-    <span class="code" data-ice="name">prefixTail</span>
+    <span class="code" data-ice="name">prefixTail</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -7416,7 +7489,7 @@
     
     
     
-    <span class="code" data-ice="name">prod</span>
+    <span class="code" data-ice="name">prod</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -7459,7 +7532,7 @@
     
     
     
-    <span class="code" data-ice="name">project</span>
+    <span class="code" data-ice="name">project</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -7502,7 +7575,7 @@
     
     
     
-    <span class="code" data-ice="name">psvLine</span>
+    <span class="code" data-ice="name">psvLine</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -7545,7 +7618,7 @@
     
     
     
-    <span class="code" data-ice="name">range</span>
+    <span class="code" data-ice="name">range</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -7588,7 +7661,7 @@
     
     
     
-    <span class="code" data-ice="name">redim</span>
+    <span class="code" data-ice="name">redim</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -7631,15 +7704,15 @@
     
     
     
-    <span class="code" data-ice="name">renameColumns</span>
+    <span class="code" data-ice="name">renameColumns</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/utils/index.js.html#lineNumber24">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/utils/index.js.html#lineNumber21">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {renameColumns} from &apos;<span><a href="file/src/utils/index.js.html#lineNumber24">str-data-frame/src/utils/index.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {renameColumns} from &apos;<span><a href="file/src/utils/index.js.html#lineNumber21">str-data-frame/src/utils/index.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -7674,7 +7747,7 @@
     
     
     
-    <span class="code" data-ice="name">reord</span>
+    <span class="code" data-ice="name">reord</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -7717,7 +7790,7 @@
     
     
     
-    <span class="code" data-ice="name">revCmp</span>
+    <span class="code" data-ice="name">revCmp</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -7760,7 +7833,7 @@
     
     
     
-    <span class="code" data-ice="name">reverse</span>
+    <span class="code" data-ice="name">reverse</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -7803,7 +7876,7 @@
     
     
     
-    <span class="code" data-ice="name">safeDedup</span>
+    <span class="code" data-ice="name">safeDedup</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -7846,7 +7919,7 @@
     
     
     
-    <span class="code" data-ice="name">setKey</span>
+    <span class="code" data-ice="name">setKey</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -7889,7 +7962,7 @@
     
     
     
-    <span class="code" data-ice="name">setKeyV</span>
+    <span class="code" data-ice="name">setKeyV</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -7932,7 +8005,7 @@
     
     
     
-    <span class="code" data-ice="name">shallow</span>
+    <span class="code" data-ice="name">shallow</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -7975,7 +8048,7 @@
     
     
     
-    <span class="code" data-ice="name">similarity</span>
+    <span class="code" data-ice="name">similarity</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -8018,7 +8091,7 @@
     
     
     
-    <span class="code" data-ice="name">strEq</span>
+    <span class="code" data-ice="name">strEq</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -8061,7 +8134,7 @@
     
     
     
-    <span class="code" data-ice="name">strHash</span>
+    <span class="code" data-ice="name">strHash</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -8104,7 +8177,7 @@
     
     
     
-    <span class="code" data-ice="name">strJoin</span>
+    <span class="code" data-ice="name">strJoin</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -8147,7 +8220,7 @@
     
     
     
-    <span class="code" data-ice="name">subtract</span>
+    <span class="code" data-ice="name">subtract</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -8190,7 +8263,7 @@
     
     
     
-    <span class="code" data-ice="name">toKeyValueList</span>
+    <span class="code" data-ice="name">toKeyValueList</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -8233,7 +8306,7 @@
     
     
     
-    <span class="code" data-ice="name">toKeyValueListV</span>
+    <span class="code" data-ice="name">toKeyValueListV</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -8276,15 +8349,15 @@
     
     
     
-    <span class="code" data-ice="name">transpose</span>
+    <span class="code" data-ice="name">transpose</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/frame-utils/index.js.html#lineNumber29">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/frame-utils/index.js.html#lineNumber32">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {transpose} from &apos;<span><a href="file/src/frame/frame-utils/index.js.html#lineNumber29">str-data-frame/src/frame/frame-utils/index.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {transpose} from &apos;<span><a href="file/src/frame/frame-utils/index.js.html#lineNumber32">str-data-frame/src/frame/frame-utils/index.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -8319,7 +8392,7 @@
     
     
     
-    <span class="code" data-ice="name">trimListElements</span>
+    <span class="code" data-ice="name">trimListElements</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -8362,7 +8435,7 @@
     
     
     
-    <span class="code" data-ice="name">tsvLine</span>
+    <span class="code" data-ice="name">tsvLine</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -8405,15 +8478,15 @@
     
     
     
-    <span class="code" data-ice="name">unionFrame</span>
+    <span class="code" data-ice="name">unionFrame</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/frame-utils/index.js.html#lineNumber35">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/frame-utils/index.js.html#lineNumber38">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {unionFrame} from &apos;<span><a href="file/src/frame/frame-utils/index.js.html#lineNumber35">str-data-frame/src/frame/frame-utils/index.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {unionFrame} from &apos;<span><a href="file/src/frame/frame-utils/index.js.html#lineNumber38">str-data-frame/src/frame/frame-utils/index.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -8448,7 +8521,7 @@
     
     
     
-    <span class="code" data-ice="name">unionL</span>
+    <span class="code" data-ice="name">unionL</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -8491,7 +8564,7 @@
     
     
     
-    <span class="code" data-ice="name">vecAdd</span>
+    <span class="code" data-ice="name">vecAdd</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -8534,7 +8607,7 @@
     
     
     
-    <span class="code" data-ice="name">xor</span>
+    <span class="code" data-ice="name">xor</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -8577,7 +8650,7 @@
     
     
     
-    <span class="code" data-ice="name">zipTo</span>
+    <span class="code" data-ice="name">zipTo</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
@@ -8622,7 +8695,7 @@
     
     
     
-    <span class="code" data-ice="name">__ARRAY__</span>
+    <span class="code" data-ice="name">__ARRAY__</span><span class="code" data-ice="signature">: <span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span><span>[]</span></span></span>
     <span class="right-info">
       
       
@@ -8665,7 +8738,7 @@
     
     
     
-    <span class="code" data-ice="name">__DICT__</span>
+    <span class="code" data-ice="name">__DICT__</span><span class="code" data-ice="signature">: <span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span><span>[]</span></span></span>
     <span class="right-info">
       
       
@@ -8708,7 +8781,7 @@
     
     
     
-    <span class="code" data-ice="name">__FRAME__</span>
+    <span class="code" data-ice="name">__FRAME__</span><span class="code" data-ice="signature">: <span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span><span>[]</span></span></span>
     <span class="right-info">
       
       
@@ -8751,7 +8824,7 @@
     
     
     
-    <span class="code" data-ice="name">__STRING__</span>
+    <span class="code" data-ice="name">__STRING__</span><span class="code" data-ice="signature">: <span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span><span>[]</span></span></span>
     <span class="right-info">
       
       
@@ -8794,15 +8867,15 @@
     
     
     
-    <span class="code" data-ice="name">__UTILS__</span>
+    <span class="code" data-ice="name">__UTILS__</span><span class="code" data-ice="signature">: <span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span><span>[]</span></span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/utils/index.js.html#lineNumber26">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/utils/index.js.html#lineNumber23">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {__UTILS__} from &apos;<span><a href="file/src/utils/index.js.html#lineNumber26">str-data-frame/src/utils/index.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {__UTILS__} from &apos;<span><a href="file/src/utils/index.js.html#lineNumber23">str-data-frame/src/utils/index.js</a></span>&apos;</code></pre></div>
   
   
   

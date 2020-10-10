@@ -20,7 +20,27 @@ import {dataSplit} from '../string/csv';
 // import getColIx from './getColIx';
 
 //@@
+//##import coreFrameFromBuffer from './coreFrameFromBuffer';
 //##import {Frame} from './frame';
+/**
+ * Create a Frame from a string buffer (string reat from a file)
+ * * Lines are seperaed into columns using a 'splitter' supports
+ *    * TSV : tab seperated columns  - tsvLine
+ *    * CSV : comma seperated values - csvLine
+ *    * PSV : pipe (|) seperated values popular in healthcare - tsvLine
+ *  
+ *  Default splitter (tsvLine) is tab seperated values
+ *  
+ * @param  {string} buffer    [description]
+ * @param  {function} splitter    function to split a string representing a row to an array of strings
+ * @param  {{ noConvert: boolen,name: string, Fr: SomeFrameClass}} options
+ * @return {Frame}           Frame created from the buffer
+ */
+export default function frameFromBuffer(buffer,splitter,options={})  {
+     return coreFrameFromBuffer(buffer,splitter, Object.assign({Fr:Frame}, options));
+}
+
+//@@
 //##import {dataSplit} from '../string/csv';
 /**
  * Create a Frame from a string buffer (string reat from a file)
@@ -36,9 +56,9 @@ import {dataSplit} from '../string/csv';
  * @param  {{ noConvert: boolen,name: string, Fr: SomeFrameClass}} options
  * @return {Frame}           Frame created from the buffer
  */
-export default function frameFromBuffer(buffer,splitter,options={}) {
+export default function coreFrameFromBuffer(buffer,splitter,options) {
     let {Fr, name, noConvert} = options;
-	Fr = Fr || Frame;
+	//Fr = Fr || Frame;
 	let arr = buffer.replace(/\r/g, '').split('\n').filter(s => s);
 	let columns = splitter(arr[0]);
 	let array = dataSplit(arr.splice(1),splitter);
@@ -140,7 +160,7 @@ export default function frameSum(aFrame, colName, convName, convValue) {
  * @param  {Frme} aFrame   [description]
  * @param  {string} colName  [description]
  * @param  {function} convName function to convert a name to a new name
- * @return {[name, count]}     a two element array with the name and count
+ * @return {[string, number]}     a two element array with the name and count [name, count]
  */
 export default function frameCount(aFrame, colName, convName) {
 	aFrame = haveFrame(aFrame);
@@ -153,7 +173,8 @@ export default function frameCount(aFrame, colName, convName) {
 }
 //@@
 //## import haveFrame from './haveFrame';
-//## import {range} from '../../array'
+//## import {range} from '../../array';
+
 /**
  * [transpose description]
  * @param  {[type]} frame [description]
@@ -161,14 +182,35 @@ export default function frameCount(aFrame, colName, convName) {
  * @return {[type]}       [description]
  */
 export default function transpose(frame, pivot) {
-    frame = haveFrame(frame);
+	let actualPivot = pivot;
+	frame = haveFrame(frame);
 	let len = frame.length;
 	let columns = frame.columns;
-	let data = columns.filter(c => c !== pivot).map((c,ix) => [c, ...frame.rawColumn(c)]);
+	if(pivot === undefined) {
+		if(columns.indexOf('__ROW') !== -1) {
+			pivot = '__ROW';
+			actualPivot = undefined;
+			//console.log("HERE")
+		}
+		else {
+			pivot = frame.keyName();
+			if(typeof pivot === 'function') pivot = undefined;
+			actualPivot = pivot;
+			//console.log("THERE")
+
+		}
+	}
+	let data;
+	if(pivot === '__ROW')
+		data = columns.filter(c => c !== pivot).map((c) => frame.rawColumn(c));
+	else
+		data = columns.filter(c => c !== pivot).map((c) => [c, ...frame.rawColumn(c)]);
 	let newColumns = (columns.indexOf(pivot) !== -1? frame.rawColumn(pivot):range(len)).map(v => ''+v);
-	if(pivot && newColumns.indexOf(pivot) !== -1) pivot = undefined;
-	newColumns = [(pivot?pivot:"__ROW"), ...newColumns];
-	return new frame.constructor(data, newColumns, 'transpose-'+(frame.name||'frame'));
+	//if(pivot && newColumns.indexOf(pivot) !== -1) pivot = undefined;
+	if(pivot !== '__ROW')
+		newColumns = [(pivot?pivot:'__ROW'), ...newColumns];
+	//console.log({pivot,actualPivot, newColumns, index: columns.indexOf('__ROW')});
+	return new frame.constructor(data, newColumns, 'transpose-'+(frame.name||'frame'), actualPivot);
 }
 
 //@@
@@ -261,18 +303,21 @@ function _union2(sortedA, sortedB) {
 
 
 
- /**
+/**
+ * Creates a new frame from the union of the rows of the two frames, similar to s set union. There are no
+ * duplicate rows in the result. This is anologous to the SQL union operation
  * assumes the frames are sorted, if notSorted is true, then the frames are sorted first;
- * requirements:
+ * 
  * 1. the frames must have the same columns names
  * 2. the sorting is done in columns order
- * 3. The original fames are not modified  * @param  {[type]} frame1    [description]
-  * @param  {[type]} frame1    [description]
-  * @param  {[type]} frame2    [description]
-  * @param  {[type]} notSorted [description]
-  * @return {[type]}           [description]
-  */
-export default function unionFrame(frame1, frame2, notSorted) {
+ * 3. The original frames are not modified
+ *   
+ * @param  {Frame} frame1    [description]
+ * @param  {Frame} frame2    [description]
+ * @param  {boolean} notSorted [description]
+ * @return {Frame}           [description]
+ */
+export default function unionFrame(frame1, frame2, notSorted=false) {
 	frame1 = haveFrame(frame1);
 	frame2 = haveFrame(frame2);
 	if( !colEQ(frame1.columns, frame2.columns) ) throw new Error('frames do not have the same columns: ('+frame1.comums.join(',')+')  ('+frame2.comums.join(',')+')');

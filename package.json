@@ -1,11 +1,11 @@
 {
   "name": "str-data-frame",
-  "version": "0.2.26",
+  "version": "0.2.29",
   "description": "Utiltities to handle pandas like data frames",
   "main": "lib/index.js",
   "unpkg": "dist/",
   "scripts": {
-    "build": "node code_spliter.node.js && babel src -d lib && rollup -c && npm pack",
+    "build": "node code_spliter.node.js && babel src -d lib && rollup -c",
     "split": "node code_spliter.node.js",
     "rollup": "rollup -c",
     "pkg": "babel src -d lib && rollup -c && npm pack && mv data-frame-*.tgz ../npmlocal",

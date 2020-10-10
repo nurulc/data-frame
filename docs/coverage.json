@@ -1,7 +1,7 @@
 {
-  "coverage": "42.02%",
-  "expectCount": 445,
-  "actualCount": 187,
+  "coverage": "41.62%",
+  "expectCount": 454,
+  "actualCount": 189,
   "files": {
     "src/array/arrayutils/arrConcat.js": {
       "expectCount": 1,
@@ -362,20 +362,35 @@
       "undocumentLines": []
     },
     "src/frame/BaseFrame.js": {
-      "expectCount": 27,
+      "expectCount": 32,
       "actualCount": 16,
       "undocumentLines": [
-        35,
-        36,
-        37,
+        20,
         38,
-        50,
-        68,
-        71,
-        72,
-        73,
-        76,
-        81
+        39,
+        40,
+        41,
+        43,
+        46,
+        66,
+        70,
+        84,
+        93,
+        96,
+        97,
+        98,
+        101,
+        106
+      ]
+    },
+    "src/frame/frame-utils/coreFrameFromBuffer.js": {
+      "expectCount": 5,
+      "actualCount": 1,
+      "undocumentLines": [
+        44,
+        51,
+        62,
+        68
       ]
     },
     "src/frame/frame-utils/frameCount.js": {
@@ -384,14 +399,9 @@
       "undocumentLines": []
     },
     "src/frame/frame-utils/frameFromBuffer.js": {
-      "expectCount": 5,
+      "expectCount": 1,
       "actualCount": 1,
-      "undocumentLines": [
-        45,
-        52,
-        63,
-        69
-      ]
+      "undocumentLines": []
     },
     "src/frame/frame-utils/frameSum.js": {
       "expectCount": 1,
@@ -409,7 +419,7 @@
       "undocumentLines": []
     },
     "src/frame/frame-utils/index.js": {
-      "expectCount": 7,
+      "expectCount": 8,
       "actualCount": 0,
       "undocumentLines": [
         17,
@@ -418,7 +428,8 @@
         26,
         29,
         32,
-        35
+        35,
+        38
       ]
     },
     "src/frame/frame-utils/transpose.js": {
@@ -435,26 +446,27 @@
       ]
     },
     "src/frame/frame.js": {
-      "expectCount": 47,
-      "actualCount": 30,
+      "expectCount": 49,
+      "actualCount": 31,
       "undocumentLines": [
-        40,
-        41,
-        42,
         43,
         44,
-        53,
-        84,
-        85,
-        86,
+        45,
+        46,
+        47,
+        56,
         87,
         88,
         89,
-        108,
-        743,
-        750,
-        824,
-        840
+        90,
+        91,
+        92,
+        111,
+        749,
+        756,
+        830,
+        843,
+        850
       ]
     },
     "src/frame/frame_element.js": {
@@ -852,8 +864,8 @@
       "expectCount": 2,
       "actualCount": 0,
       "undocumentLines": [
-        24,
-        26
+        21,
+        23
       ]
     },
     "src/utils/objutils/filterDict.js": {

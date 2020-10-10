@@ -46,10 +46,16 @@ function splitSourceFilesInDir(dir, toDelPrevData) {
 function readAllSplitableFilesInDir(dir) {
 	let list =fs.readdirSync(dir).filter(n => n.match(/\.js\.tp$/)).filter(name => name[0] === '_');
 	let files = list.map(name => name.replace(/\.js.tp$/,'').substr(1));
-	let usableFiles = files.filter(name =>!fs.existsSync('$dir/name'));
-	let existing = files.filter(name =>fs.existsSync('$dir/name'));
-	if(existing && existing.length > 0) clogX(2,'The following directories alreaddy exist', existing);
+	let usableFiles = files.filter(name =>!fs.existsSync(`${dir}/${name}`));
+	let existing = files.filter(name =>fs.existsSync(`${dir}/${name}`));
+	//if(existing && existing.length > 0) clogX(2,'The following directories alreaddy exist', existing);
 	return files.map(file => ({dir, file, getFileContents: getFileContents}));
+}
+
+function removeFirstLine(s) {
+	let ix = s.indexOf('\n');
+	if(ix <= 0) return s;
+	return s.substr(ix);
 }
 
 function getFileContents() {
@@ -58,7 +64,7 @@ function getFileContents() {
 	
 	let [first, ...blocks] = str.split(/\/\/@@?/);
 	this.first = first;
-	this.blocks = blocks;
+	this.blocks = blocks.map(removeFirstLine);
 	this.getImports = _getImports;
 	return this;
 }

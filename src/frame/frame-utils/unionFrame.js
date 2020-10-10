@@ -13,7 +13,7 @@ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
-unionFrame.js
+
 
 import haveFrame from '../haveFrame';
 import colEQ from '../../array/arrEQ';
@@ -89,18 +89,21 @@ function _union2(sortedA, sortedB) {
 
 
 
- /**
+/**
+ * Creates a new frame from the union of the rows of the two frames, similar to s set union. There are no
+ * duplicate rows in the result. This is anologous to the SQL union operation
  * assumes the frames are sorted, if notSorted is true, then the frames are sorted first;
- * requirements:
+ * 
  * 1. the frames must have the same columns names
  * 2. the sorting is done in columns order
- * 3. The original fames are not modified  * @param  {[type]} frame1    [description]
-  * @param  {[type]} frame1    [description]
-  * @param  {[type]} frame2    [description]
-  * @param  {[type]} notSorted [description]
-  * @return {[type]}           [description]
-  */
-export default function unionFrame(frame1, frame2, notSorted) {
+ * 3. The original frames are not modified
+ *   
+ * @param  {Frame} frame1    [description]
+ * @param  {Frame} frame2    [description]
+ * @param  {boolean} notSorted [description]
+ * @return {Frame}           [description]
+ */
+export default function unionFrame(frame1, frame2, notSorted=false) {
 	frame1 = haveFrame(frame1);
 	frame2 = haveFrame(frame2);
 	if( !colEQ(frame1.columns, frame2.columns) ) throw new Error('frames do not have the same columns: ('+frame1.comums.join(',')+')  ('+frame2.comums.join(',')+')');

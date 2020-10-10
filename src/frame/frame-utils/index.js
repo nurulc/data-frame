@@ -16,6 +16,9 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 import _frameFromBuffer from './frameFromBuffer';
 export const frameFromBuffer = _frameFromBuffer;
 
+import _coreFrameFromBuffer from './coreFrameFromBuffer';
+export const coreFrameFromBuffer = _coreFrameFromBuffer;
+
 import _frameWithIndex from './frameWithIndex';
 export const frameWithIndex = _frameWithIndex;
 

@@ -132,13 +132,15 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-__FRAME__">__FRAME__</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-arrToCol">arrToCol</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-haveFrame">haveFrame</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#frame-frame-utils">frame/frame-utils</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameCount">frameCount</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#frame-frame-utils">frame/frame-utils</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coreFrameFromBuffer">coreFrameFromBuffer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameCount">frameCount</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameFromBuffer">frameFromBuffer</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameSum">frameSum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameToString">frameToString</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameWithIndex">frameWithIndex</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-transpose">transpose</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-unionFrame">unionFrame</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-coreFrameFromBuffer">coreFrameFromBuffer</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frameCount">frameCount</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frameFromBuffer">frameFromBuffer</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frameSum">frameSum</a></span></span></li>
@@ -386,7 +388,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/dict/utils/MultiDict.js~MultiDict.html#instance-get-dict">dict</a></span></span><span class="code" data-ice="signature">: <span>[type]</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/dict/utils/MultiDict.js~MultiDict.html#instance-get-dict">dict</a></span></span><span class="code" data-ice="signature">: <span>[type]</span>: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -415,7 +417,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/dict/utils/MultiDict.js~MultiDict.html#instance-get-zip">zip</a></span></span><span class="code" data-ice="signature">(k: <span>[type]</span>): <span>[type]</span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/dict/utils/MultiDict.js~MultiDict.html#instance-get-zip">zip</a></span></span><span class="code" data-ice="signature">(k: <span>[type]</span>): <span>[type]</span>: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -450,7 +452,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/dict/utils/MultiDict.js~MultiDict.html#instance-member-_dict">_dict</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/dict/utils/MultiDict.js~MultiDict.html#instance-member-_dict">_dict</a></span></span><span class="code" data-ice="signature">: {}</span>
         </p>
       </div>
       <div>
@@ -485,7 +487,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/dict/utils/MultiDict.js~MultiDict.html#instance-method-add">add</a></span></span><span class="code" data-ice="signature">(key: <span>[type]</span>, value: <span>[type]</span>)</span>
+          <span class="code" data-ice="name"><span><a href="class/src/dict/utils/MultiDict.js~MultiDict.html#instance-method-add">add</a></span></span><span class="code" data-ice="signature">(key: <span>[type]</span>, value: <span>[type]</span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -543,7 +545,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/dict/utils/MultiDict.js~MultiDict.html#instance-method-getA">getA</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="class/src/dict/utils/MultiDict.js~MultiDict.html#instance-method-getA">getA</a></span></span><span class="code" data-ice="signature">(key: <span>*</span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -635,7 +637,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/dict/utils/MultiDict.js~MultiDict.html#instance-method-_elem">_elem</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="class/src/dict/utils/MultiDict.js~MultiDict.html#instance-method-_elem">_elem</a></span></span><span class="code" data-ice="signature">(): <span><span>*</span><span>[]</span></span></span>
         </p>
       </div>
       <div>
@@ -663,7 +665,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/dict/utils/MultiDict.js~MultiDict.html#instance-method-_toHtml">_toHtml</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="class/src/dict/utils/MultiDict.js~MultiDict.html#instance-method-_toHtml">_toHtml</a></span></span><span class="code" data-ice="signature">(): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -741,7 +743,7 @@
     
     
     
-    <span class="code" data-ice="name">dict</span><span class="code" data-ice="signature">: <span>[type]</span></span>
+    <span class="code" data-ice="name">dict</span><span class="code" data-ice="signature">: <span>[type]</span>: <span>*</span></span>
     <span class="right-info">
       
       
@@ -798,7 +800,7 @@
     
     
     
-    <span class="code" data-ice="name">zip</span><span class="code" data-ice="signature">(k: <span>[type]</span>): <span>[type]</span></span>
+    <span class="code" data-ice="name">zip</span><span class="code" data-ice="signature">(k: <span>[type]</span>): <span>[type]</span>: <span>*</span></span>
     <span class="right-info">
       
       
@@ -857,7 +859,7 @@
     
     
     
-    <span class="code" data-ice="name">_dict</span>
+    <span class="code" data-ice="name">_dict</span><span class="code" data-ice="signature">: {}</span>
     <span class="right-info">
       
       
@@ -903,7 +905,7 @@
     
     
     
-    <span class="code" data-ice="name">add</span><span class="code" data-ice="signature">(key: <span>[type]</span>, value: <span>[type]</span>)</span>
+    <span class="code" data-ice="name">add</span><span class="code" data-ice="signature">(key: <span>[type]</span>, value: <span>[type]</span>): <span>*</span></span>
     <span class="right-info">
       
       
@@ -946,7 +948,19 @@
 </div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -1045,7 +1059,7 @@
     
     
     
-    <span class="code" data-ice="name">getA</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">getA</span><span class="code" data-ice="signature">(key: <span>*</span>): <span>*</span></span>
     <span class="right-info">
       
       
@@ -1060,10 +1074,38 @@
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">key</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -1252,7 +1294,7 @@
     
     
     
-    <span class="code" data-ice="name">_elem</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">_elem</span><span class="code" data-ice="signature">(): <span><span>*</span><span>[]</span></span></span>
     <span class="right-info">
       
       
@@ -1270,7 +1312,19 @@
   <div data-ice="properties">
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><span>*</span><span>[]</span></span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -1295,7 +1349,7 @@
     
     
     
-    <span class="code" data-ice="name">_toHtml</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">_toHtml</span><span class="code" data-ice="signature">(): <span>*</span></span>
     <span class="right-info">
       
       
@@ -1313,7 +1367,19 @@
   <div data-ice="properties">
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
