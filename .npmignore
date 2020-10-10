@@ -3,8 +3,8 @@
 *.gz
 *.ipynb
 *.log
-*.test.js
-test
+*.tp
+tests
 *.tsv
 *.tsv.gz
 *.zip
@@ -35,5 +35,6 @@ _notebook/*
 dsrc
 ddoc
 .esdoc_bak.json
+nodemon.json
 data-frame.sublime-project
 data-frame.sublime-workspace
