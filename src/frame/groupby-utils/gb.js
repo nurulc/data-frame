@@ -15,6 +15,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
 import gbStdDiv from './gbStdDiv';
+import gbSampleStdDiv from './gbSampleStdDiv';
 import gbMean from './gbMean';
 import gbCount from './gbCount';
 import gbSum from './gbSum';

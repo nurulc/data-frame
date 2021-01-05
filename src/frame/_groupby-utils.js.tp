@@ -295,6 +295,7 @@ export default function accStr(accum,val) {
 
 //@@
 //##import gbStdDiv from './gbStdDiv';
+//##import gbSampleStdDiv from './gbSampleStdDiv';
 //##import gbMean from './gbMean';
 //##import gbCount from './gbCount';
 //##import gbSum from './gbSum';
