@@ -20,7 +20,7 @@ _notebook
 .esdoc.json
 jshintrc
 nodemon.json
-str-data-frame*
+str-data-frame-*
 tests
 *.tgz
 runit.sh
@@ -38,3 +38,4 @@ ddoc
 nodemon.json
 data-frame.sublime-project
 data-frame.sublime-workspace
+data-frame-live.PNG
