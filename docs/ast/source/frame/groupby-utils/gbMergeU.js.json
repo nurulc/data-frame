@@ -1,7 +1,7 @@
 {
   "type": "File",
   "start": 0,
-  "end": 1620,
+  "end": 1545,
   "loc": {
     "start": {
       "line": 1,
@@ -15,7 +15,7 @@
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 1620,
+    "end": 1545,
     "loc": {
       "start": {
         "line": 1,
@@ -1909,8 +1909,7 @@
                 }
               }
             ],
-            "directives": [],
-            "trailingComments": null
+            "directives": []
           },
           "leadingComments": [
             {
@@ -1930,24 +1929,7 @@
               }
             }
           ],
-          "trailingComments": [
-            {
-              "type": "CommentLine",
-              "value": "we should later add gbMode (most occuring value), gbMedian (middle value)",
-              "start": 1544,
-              "end": 1619,
-              "loc": {
-                "start": {
-                  "line": 41,
-                  "column": 0
-                },
-                "end": {
-                  "line": 41,
-                  "column": 75
-                }
-              }
-            }
-          ]
+          "trailingComments": []
         },
         "leadingComments": [
           {
@@ -1963,24 +1945,6 @@
               "end": {
                 "line": 26,
                 "column": 3
-              }
-            }
-          }
-        ],
-        "trailingComments": [
-          {
-            "type": "CommentLine",
-            "value": "we should later add gbMode (most occuring value), gbMedian (middle value)",
-            "start": 1544,
-            "end": 1619,
-            "loc": {
-              "start": {
-                "line": 41,
-                "column": 0
-              },
-              "end": {
-                "line": 41,
-                "column": 75
               }
             }
           }
@@ -2051,22 +2015,6 @@
         "end": {
           "line": 26,
           "column": 3
-        }
-      }
-    },
-    {
-      "type": "CommentLine",
-      "value": "we should later add gbMode (most occuring value), gbMedian (middle value)",
-      "start": 1544,
-      "end": 1619,
-      "loc": {
-        "start": {
-          "line": 41,
-          "column": 0
-        },
-        "end": {
-          "line": 41,
-          "column": 75
         }
       }
     }
@@ -6257,22 +6205,6 @@
       }
     },
     {
-      "type": "CommentLine",
-      "value": "we should later add gbMode (most occuring value), gbMedian (middle value)",
-      "start": 1544,
-      "end": 1619,
-      "loc": {
-        "start": {
-          "line": 41,
-          "column": 0
-        },
-        "end": {
-          "line": 41,
-          "column": 75
-        }
-      }
-    },
-    {
       "type": {
         "label": "eof",
         "beforeExpr": false,
@@ -6285,8 +6217,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1620,
-      "end": 1620,
+      "start": 1545,
+      "end": 1545,
       "loc": {
         "start": {
           "line": 42,

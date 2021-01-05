@@ -15,7 +15,6 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
 import isEmpty from '../../utils/types/isEmpty';
-import {arrDedup } from '../../array';
 import accStr from './accStr';
 
 /**

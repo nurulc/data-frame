@@ -127,25 +127,25 @@ export default function memoize(fn) {
 	};
 }
 
-//@@
-//##import memoize from './memoize';
-// Builds an accessor function for obj element key
-// akey = access('akey);  then akey(obj) same as obj.akey,   
-//                      akey(obj,value) same as obj.akey = value, ,
-//                      but returns the obj and not the value you assigned 
+// //@@
+// //##import memoize from './memoize';
+// // Builds an accessor function for obj element key
+// // akey = access('akey);  then akey(obj) same as obj.akey,   
+// //                      akey(obj,value) same as obj.akey = value, ,
+// //                      but returns the obj and not the value you assigned 
 
 
-export default const access = memoize(
-	function (key) {
-		return function(obj,v) {
-			if(arguments.length == 1) return obj[key];
-			else {
-				obj[key] = v;
-				return obj;
-			}
-		};  
-	}
-);
+// export default const access = memoize(
+// 	function (key) {
+// 		return function(obj,v) {
+// 			if(arguments.length == 1) return obj[key];
+// 			else {
+// 				obj[key] = v;
+// 				return obj;
+// 			}
+// 		};  
+// 	}
+// );
 
 //@@
 /**
@@ -249,14 +249,15 @@ export default function fromKeyValueListV(list) {
 //@@
 //##import newArray from '../array/arrayutils/newArray';
 //##import setKey from './setKey';
+//##import {isA} from './isA';
 /**
  * genObjMapper generates a function to map object to an array
  * this is useful to convert an array of object to the data of a frame
- * @param  {[type]} obj [description]
+ * @param  {Object|Array} obj provides a list of keys to use
  * @return {[mapperFunction, [keys]]}     returns an array first element that function to convert the object to an array, and the secont element is an array of column names
  */
 export default function genObjMapper(obj) {
-	let keys = Object.keys(obj);
+	let keys = iasA.array(obj) ? obj : Object.keys(obj);
 	let mapper = keys.reduce((o,v,ix) => setKey(o,v,ix), {});
 	let len = keys.length;
 	return [ //mapper func, colm array
@@ -272,32 +273,32 @@ export default function genObjMapper(obj) {
 	] ;
 }
 
-//@@
-/**
- * Apply a map function on array or object, if it is an object map over the vale for each object 'attribute/key'
- * creating a new object that has had the same keys but the values mapped. 
- *
- * If the object has 
- * @param  {Function} fn      [description]
- * @param  {Object} object    [description]
- * @return {[type]}           [description]
- */
-export default const mapOver = curry2(function (fn, object) {
-	if(!object) return object;
-	if(Array.isArray(object)) {
-		let list = object;
-		return list.map(fn);
-	} 
-	else if(typeof object.map === 'function'){
-		// babel - do not transform map into array iteration
-		// O: KEEP
-		return object.map(fn);
-	}
-	else if( typeof object === 'object') {
-		return Object.keys(object).reduce((obj,k,ix) => (obj[k] = fn(object[k],ix), obj),{});
-	}
-	else return fn(object);
-});
+// //@@
+// /**
+//  * Apply a map function on array or object, if it is an object map over the vale for each object 'attribute/key'
+//  * creating a new object that has had the same keys but the values mapped. 
+//  *
+//  * If the object has 
+//  * @param  {Function} fn      [description]
+//  * @param  {Object} object    [description]
+//  * @return {[type]}           [description]
+//  */
+// export default const mapOver = curry2(function (fn, object) {
+// 	if(!object) return object;
+// 	if(Array.isArray(object)) {
+// 		let list = object;
+// 		return list.map(fn);
+// 	} 
+// 	else if(typeof object.map === 'function'){
+// 		// babel - do not transform map into array iteration
+// 		// O: KEEP
+// 		return object.map(fn);
+// 	}
+// 	else if( typeof object === 'object') {
+// 		return Object.keys(object).reduce((obj,k,ix) => (obj[k] = fn(object[k],k,ix), obj),{});
+// 	}
+// 	else return fn(object);
+// });
 
 /**
  * curry2 - curry a function that has two or more parameters. Currying allows us to produce a new function by 
@@ -323,72 +324,72 @@ function curry2(fn) {
 	};
 }
 
-//@@
-// =============== shallow equality ===================
-export default function shallow(a, b, compare) {
-	var aIsNull = a === null;
-	var bIsNull = b === null;
+// //@@
+// // =============== shallow equality ===================
+// export default function shallow(a, b, compare) {
+// 	var aIsNull = a === null;
+// 	var bIsNull = b === null;
 
-	if (aIsNull !== bIsNull) return false;
+// 	if (aIsNull !== bIsNull) return false;
 
-	var aIsArray = Array.isArray(a);
-	var bIsArray = Array.isArray(b);
+// 	var aIsArray = Array.isArray(a);
+// 	var bIsArray = Array.isArray(b);
 
-	if (aIsArray !== bIsArray) return false;
+// 	if (aIsArray !== bIsArray) return false;
 
-	var aTypeof = typeof a;
-	var bTypeof = typeof b;
+// 	var aTypeof = typeof a;
+// 	var bTypeof = typeof b;
 
-	if (aTypeof !== bTypeof) return false;
-	if (flat(aTypeof)) return compare ? compare(a, b) : a === b;
+// 	if (aTypeof !== bTypeof) return false;
+// 	if (flat(aTypeof)) return compare ? compare(a, b) : a === b;
 
-	return aIsArray ? shallowArray(a, b, compare) : shallowObject(a, b, compare);
-}
+// 	return aIsArray ? shallowArray(a, b, compare) : shallowObject(a, b, compare);
+// }
 
-function shallowArray(a, b, compare) {
-	var l = a.length;
-	if (l !== b.length) return false;
+// function shallowArray(a, b, compare) {
+// 	var l = a.length;
+// 	if (l !== b.length) return false;
 
-	if (compare) {
-		for (let i = 0; i < l; i++)
-			if (!compare(a[i], b[i])) return false;
-	} else {
-		for (let i = 0; i < l; i++) {
-			if (a[i] !== b[i]) return false;
-		}
-	}
+// 	if (compare) {
+// 		for (let i = 0; i < l; i++)
+// 			if (!compare(a[i], b[i])) return false;
+// 	} else {
+// 		for (let i = 0; i < l; i++) {
+// 			if (a[i] !== b[i]) return false;
+// 		}
+// 	}
 
-	return true;
-}
+// 	return true;
+// }
 
-function shallowObject(a, b, compare) {
-	var ka = 0;
-	var kb = 0;
+// function shallowObject(a, b, compare) {
+// 	var ka = 0;
+// 	var kb = 0;
 
-	if (compare) {
-		for (var key in a) {
-			if (
-				a.hasOwnProperty(key) &&
-        		!compare(a[key], b[key])
-			) return false;
+// 	if (compare) {
+// 		for (var key in a) {
+// 			if (
+// 				a.hasOwnProperty(key) &&
+//         		!compare(a[key], b[key])
+// 			) return false;
 
-			ka++;
-		}
-	} else {
-		for (let key in a) {
-			if (a.hasOwnProperty(key) && a[key] !== b[key] ) return false;
-			ka++;
-		}
-	}
+// 			ka++;
+// 		}
+// 	} else {
+// 		for (let key in a) {
+// 			if (a.hasOwnProperty(key) && a[key] !== b[key] ) return false;
+// 			ka++;
+// 		}
+// 	}
 
-	for (let key in b) {
-		if (b.hasOwnProperty(key)) kb++;
-	}
+// 	for (let key in b) {
+// 		if (b.hasOwnProperty(key)) kb++;
+// 	}
 
-	return ka === kb;
-}
+// 	return ka === kb;
+// }
 
-function flat(type) { return (type !== 'function' && type !== 'object'); }
+// function flat(type) { return (type !== 'function' && type !== 'object'); }
 
 //@@
 //##import {isA} from './isA';

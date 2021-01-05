@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">frame-utils/unionFrame.js | str-data-frame</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Utiltities to handle pandas like data frames"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="str-data-frame"><meta property="twitter:description" content="Utiltities to handle pandas like data frames"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/nurulc/data-frame"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-coreFrameFromBuffer">coreFrameFromBuffer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameCount">frameCount</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameFromBuffer">frameFromBuffer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameSum">frameSum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameToString">frameToString</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frameWithIndex">frameWithIndex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-transpose">transpose</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-unionFrame">unionFrame</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-coreFrameFromBuffer">coreFrameFromBuffer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frameCount">frameCount</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frameFromBuffer">frameFromBuffer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frameSum">frameSum</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frameToString">frameToString</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frameWithIndex">frameWithIndex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-transpose">transpose</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-unionFrame">unionFrame</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">frame-utils/unionFrame.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">// jshint undef:true
+// jshint unused:true
+/*
+Copyright (c) 2020, Nurul Choudhury
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot; AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+*/
+
+
+import haveFrame from &apos;../haveFrame&apos;;
+import colEQ from &apos;../../array/arrEQ&apos;;
+import colCMP from &apos;../../array/arrCMP&apos;;
+
+// import getColIx from &apos;../getColIx&apos;;
+// import {range} from &apos;../../array&apos;;
+// =============================
+// tuned for frame array
+// 
+
+function isSorted(arr /* may not be sorted sorted*/) {
+	let len=arr.length-1;
+	for(let i=0;i&lt;len;i++){
+		if(colCMP(arr[i],arr[i+1]) &gt; 0 ){
+			return  undefined;
+		}
+	}
+	return true;
+}
+
+function _union2(sortedA, sortedB) {
+	let lenA = sortedA.length;
+	let lenB = sortedB.length;
+	if( lenA === 0 ) return sortedB;
+	if( lenB === 0 ) return sortedA;
+		
+	if( lenA === 1 &amp;&amp; lenB === 1) {
+		if(colEQ(sortedA[0], sortedB[0])) return sortedA;
+	}
+	else if( lenA === 1 ) return _union2(sortedB, sortedA);
+	else if( lenB === 1 ) {
+		let b0 = sortedB[0];
+		let a0 = sortedA[0];
+		if(lenA === 1 ) {
+			if(colEQ(a0, b0)) return sortedA;
+		} else {
+			if( colEQ(b0,a0) ) return sortedA;
+			if( colEQ(b0, sortedA[lenA-1])) return sortedA;
+		}
+	}
+	let res = [];
+	let j=0, i=0;
+	//let iA = sortedA[0];
+	for(; i&lt; lenA &amp;&amp; j&lt; lenB; i++) {
+		let iA = sortedA[i];
+		do {
+			let jB = sortedB[j]; 
+			//console.log(iA,jB);
+			let cmpRes = colCMP(iA,jB); // compare the values
+			if(/*iA &gt; jB*/ cmpRes &gt; 0) {
+				res.push(jB);
+				j++;
+				if( j &gt;= lenB) {
+					res.push(iA);
+					break;
+				}
+			} else if( /*iA === jB*/ cmpRes === 0 ){
+				res.push(iA); 
+				j++;
+				break;
+			} else {
+				res.push(iA);
+				break;
+			}
+		} while( j &lt; lenB );
+	}
+	while(j&lt;lenB) res.push(sortedB[j++]);
+	while(i&lt;lenA) res.push(sortedA[i++]);
+	return res;   
+}
+
+
+
+
+/**
+ * Creates a new frame from the union of the rows of the two frames, similar to s set union. There are no
+ * duplicate rows in the result. This is anologous to the SQL union operation
+ * assumes the frames are sorted, if notSorted is true, then the frames are sorted first;
+ * 
+ * 1. the frames must have the same columns names
+ * 2. the sorting is done in columns order
+ * 3. The original frames are not modified
+ *   
+ * @param  {Frame} frame1    [description]
+ * @param  {Frame} frame2    [description]
+ * @param  {boolean} notSorted [description]
+ * @return {Frame}           [description]
+ */
+export default function unionFrame(frame1, frame2, notSorted=false) {
+	frame1 = haveFrame(frame1);
+	frame2 = haveFrame(frame2);
+	if( !colEQ(frame1.columns, frame2.columns) ) throw new Error(&apos;frames do not have the same columns: (&apos;+frame1.comums.join(&apos;,&apos;)+&apos;)  (&apos;+frame2.comums.join(&apos;,&apos;)+&apos;)&apos;);
+	let data1 = frame1.data, data2 = frame2.data;
+
+	if(notSorted) {
+		if(!isSorted(data1)) data1 = data1.slice(0).sort(colCMP);
+		if(!isSorted(data2)) data2 = data2.slice(0).sort(colCMP);
+	}
+	let arr = _union2(data1, data2);
+	return new frame1.constructor(arr, frame1.columns, &apos;union&apos;);
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

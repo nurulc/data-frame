@@ -57,7 +57,7 @@ export default function toHTML(aFrame, myStyle, rowColor=colorDefault) {
 	myStyle = myStyle || '';
 	return (
 		myStyle +
-		'<table title="Frame rows: '+rows+' columns: '+ncolumns+name+'class="ftable"><thead>' +
+		'<table title="Frame rows: '+rows+' columns: '+ncolumns+name+'" class="ftable"><thead>' +
 		'<tr><th>Ix</th>' + columns.map(c => '<th>' + c.replace(/_/g, ' ') + '</th>').join('') + '</tr></thead><tbody>' +
 		aFrame.data.slice(0, Math.min(aFrame.length, (aFrame.showLen|| 200))).map(showRow).join('') +
 		'</tbody></table>'

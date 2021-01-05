@@ -26,9 +26,7 @@ export const pickRaw = _pickRaw;
 import _memoize from './memoize';
 export const memoize = _memoize;
 
-import _access from './access';
-export const access = _access;
-
+export * from './default';
 import _setKey from './setKey';
 export const setKey = _setKey;
 
@@ -50,12 +48,8 @@ export const fromKeyValueListV = _fromKeyValueListV;
 import _genObjMapper from './genObjMapper';
 export const genObjMapper = _genObjMapper;
 
-import _mapOver from './mapOver';
-export const mapOver = _mapOver;
-
-import _shallow from './shallow';
-export const shallow = _shallow;
-
+export * from './default';
+export * from './default';
 import _filterDict from './filterDict';
 export const filterDict = _filterDict;
 

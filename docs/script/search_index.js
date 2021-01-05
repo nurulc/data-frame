@@ -168,12 +168,6 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
-    "str-data-frame/src/utils/objutils/index.js~access",
-    "variable/index.html#static-variable-access",
-    "<span>access</span> <span class=\"search-result-import-path\">str-data-frame/src/utils/objutils/index.js</span>",
-    "variable"
-  ],
-  [
     "str-data-frame/src/array/arrcmp.js~arrcmp",
     "function/index.html#static-function-arrCMP",
     "<span>arrCMP</span> <span class=\"search-result-import-path\">str-data-frame/src/array/arrCMP.js</span>",
@@ -678,6 +672,18 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "str-data-frame/src/frame/groupby-utils/gbmake.js~gbmake",
+    "function/index.html#static-function-gbMake",
+    "<span>gbMake</span> <span class=\"search-result-import-path\">str-data-frame/src/frame/groupby-utils/gbMake.js</span>",
+    "function"
+  ],
+  [
+    "str-data-frame/src/frame/groupby-utils/index.js~gbmake",
+    "variable/index.html#static-variable-gbMake",
+    "<span>gbMake</span> <span class=\"search-result-import-path\">str-data-frame/src/frame/groupby-utils/index.js</span>",
+    "variable"
+  ],
+  [
     "str-data-frame/src/frame/groupby-utils/gbmax.js~gbmax",
     "function/index.html#static-function-gbMax",
     "<span>gbMax</span> <span class=\"search-result-import-path\">str-data-frame/src/frame/groupby-utils/gbMax.js</span>",
@@ -1050,12 +1056,6 @@ window.esdocSearchIndex = [
     "function"
   ],
   [
-    "str-data-frame/src/utils/objutils/index.js~mapover",
-    "variable/index.html#static-variable-mapOver",
-    "<span>mapOver</span> <span class=\"search-result-import-path\">str-data-frame/src/utils/objutils/index.js</span>",
-    "variable"
-  ],
-  [
     "str-data-frame/src/frame/join-utils/index.js~matchit",
     "variable/index.html#static-variable-matchIt",
     "<span>matchIt</span> <span class=\"search-result-import-path\">str-data-frame/src/frame/join-utils/index.js</span>",
@@ -1341,18 +1341,6 @@ window.esdocSearchIndex = [
     "str-data-frame/src/utils/objutils/setkeyv.js~setkeyv",
     "function/index.html#static-function-setKeyV",
     "<span>setKeyV</span> <span class=\"search-result-import-path\">str-data-frame/src/utils/objutils/setKeyV.js</span>",
-    "function"
-  ],
-  [
-    "str-data-frame/src/utils/objutils/index.js~shallow",
-    "variable/index.html#static-variable-shallow",
-    "<span>shallow</span> <span class=\"search-result-import-path\">str-data-frame/src/utils/objutils/index.js</span>",
-    "variable"
-  ],
-  [
-    "str-data-frame/src/utils/objutils/shallow.js~shallow",
-    "function/index.html#static-function-shallow",
-    "<span>shallow</span> <span class=\"search-result-import-path\">str-data-frame/src/utils/objutils/shallow.js</span>",
     "function"
   ],
   [
@@ -2922,6 +2910,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/frame/groupby-utils/gbmake.js",
+    "file/src/frame/groupby-utils/gbMake.js.html",
+    "src/frame/groupby-utils/gbMake.js",
+    "file"
+  ],
+  [
     "src/frame/groupby-utils/gbmax.js",
     "file/src/frame/groupby-utils/gbMax.js.html",
     "src/frame/groupby-utils/gbMax.js",
@@ -3294,9 +3288,9 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/utils/objutils/access.js",
-    "file/src/utils/objutils/access.js.html",
-    "src/utils/objutils/access.js",
+    "src/utils/objutils/default.js",
+    "file/src/utils/objutils/default.js.html",
+    "src/utils/objutils/default.js",
     "file"
   ],
   [
@@ -3348,12 +3342,6 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/utils/objutils/mapover.js",
-    "file/src/utils/objutils/mapOver.js.html",
-    "src/utils/objutils/mapOver.js",
-    "file"
-  ],
-  [
     "src/utils/objutils/memoize.js",
     "file/src/utils/objutils/memoize.js.html",
     "src/utils/objutils/memoize.js",
@@ -3381,12 +3369,6 @@ window.esdocSearchIndex = [
     "src/utils/objutils/setkeyv.js",
     "file/src/utils/objutils/setKeyV.js.html",
     "src/utils/objutils/setKeyV.js",
-    "file"
-  ],
-  [
-    "src/utils/objutils/shallow.js",
-    "file/src/utils/objutils/shallow.js.html",
-    "src/utils/objutils/shallow.js",
     "file"
   ],
   [

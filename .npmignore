@@ -3,7 +3,7 @@
 *.gz
 *.ipynb
 *.log
-*.tp
+*.tp 
 tests
 *.tsv
 *.tsv.gz

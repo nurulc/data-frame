@@ -1,7 +1,7 @@
 {
   "type": "File",
   "start": 0,
-  "end": 1141,
+  "end": 1144,
   "loc": {
     "start": {
       "line": 1,
@@ -9,13 +9,13 @@
     },
     "end": {
       "line": 32,
-      "column": 0
+      "column": 3
     }
   },
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 1141,
+    "end": 1144,
     "loc": {
       "start": {
         "line": 1,
@@ -23,7 +23,7 @@
       },
       "end": {
         "line": 32,
-        "column": 0
+        "column": 3
       }
     },
     "sourceType": "module",
@@ -644,7 +644,8 @@
                 }
               }
             ],
-            "directives": []
+            "directives": [],
+            "trailingComments": null
           },
           "leadingComments": [
             {
@@ -712,7 +713,24 @@
               }
             }
           ],
-          "trailingComments": []
+          "trailingComments": [
+            {
+              "type": "CommentLine",
+              "value": " ",
+              "start": 1141,
+              "end": 1144,
+              "loc": {
+                "start": {
+                  "line": 32,
+                  "column": 0
+                },
+                "end": {
+                  "line": 32,
+                  "column": 3
+                }
+              }
+            }
+          ]
         },
         "leadingComments": [
           {
@@ -775,6 +793,24 @@
               },
               "end": {
                 "line": 21,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": [
+          {
+            "type": "CommentLine",
+            "value": " ",
+            "start": 1141,
+            "end": 1144,
+            "loc": {
+              "start": {
+                "line": 32,
+                "column": 0
+              },
+              "end": {
+                "line": 32,
                 "column": 3
               }
             }
@@ -845,6 +881,22 @@
         },
         "end": {
           "line": 21,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "CommentLine",
+      "value": " ",
+      "start": 1141,
+      "end": 1144,
+      "loc": {
+        "start": {
+          "line": 32,
+          "column": 0
+        },
+        "end": {
+          "line": 32,
           "column": 3
         }
       }
@@ -2354,6 +2406,22 @@
       }
     },
     {
+      "type": "CommentLine",
+      "value": " ",
+      "start": 1141,
+      "end": 1144,
+      "loc": {
+        "start": {
+          "line": 32,
+          "column": 0
+        },
+        "end": {
+          "line": 32,
+          "column": 3
+        }
+      }
+    },
+    {
       "type": {
         "label": "eof",
         "beforeExpr": false,
@@ -2366,16 +2434,16 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 1141,
-      "end": 1141,
+      "start": 1144,
+      "end": 1144,
       "loc": {
         "start": {
           "line": 32,
-          "column": 0
+          "column": 3
         },
         "end": {
           "line": 32,
-          "column": 0
+          "column": 3
         }
       }
     }

@@ -24,7 +24,7 @@ import frameWithIndex from './frame-utils/frameWithIndex';
 import frameToString from './frame-utils/frameToString';
 import frameFromString from './frame-utils/coreFrameFromBuffer';
 import unionFrame from './frame-utils/unionFrame';
-import { arrRemove, arrDedup, newArray } from '../array';
+import { arrRemove, arrDedup, arrConcat, newArray } from '../array';
 import {EMPTY_ARRAY} from '../utils/constants';
 import {K,isA, isEmpty} from '../utils';
 import {toNumber} from '../utils/sort-helper';
@@ -47,16 +47,10 @@ function isNum(v) {return v !== '' && !isNaN(+v); }
 function Identity(x) { return x; }
 
 
-
-// function objName(o) {
-// 	if(typeof o === 'object' ) return o.constructor.name;
-// 	return typeof o;
+// function eqaulRow(row1, row2) {
+// 	if( row1 === row2 ) return true;
+// 	return ( row1.length === row2.length && arrEqual(row1, row2));
 // }
-
-function eqaulRow(row1, row2) {
-	if( row1 === row2 ) return true;
-	return ( row1.length === row2.length && arrEqual(row1, row2));
-}
 
 
 /**
@@ -229,7 +223,7 @@ export class Frame extends BaseFrame {
 	 */
 	mapF(fn) { 
 		let ro = this._rowObj();
-		return this.data.map((row,i,arr) => fn(ro._unsafeSet(row,i),i,arr)); 
+		return this.data.map((row,i,arr) => fn(ro.__unsafeSet(row,i),i,arr)); 
 	}	
 
 	/**
@@ -686,7 +680,7 @@ export class Frame extends BaseFrame {
 	 * @return {Frame}           [description]
 	 */
 	innerJoin(rightFrame, colsToMap, joinOn, filter) {
-		return innerJoin(this,rightFrame, colsToMap, joinOn, this._genAuxJoinFilter(filter,rightFrame));
+		return innerJoin(this,rightFrame, getJoinCols(this, rightFrame, colsToMap), joinOn, this._genAuxJoinFilter(filter,rightFrame));
 	}
 
 
@@ -699,7 +693,7 @@ export class Frame extends BaseFrame {
 	 * @return {Frame}           [description]
 	 */
 	leftJoin(rightFrame, colsToMap, joinOn, filter) {
-		return leftJoin(this,rightFrame, colsToMap, joinOn, this._genAuxJoinFilter(filter,rightFrame));
+		return leftJoin(this,rightFrame, getJoinCols(this, rightFrame, colsToMap), joinOn, this._genAuxJoinFilter(filter,rightFrame));
 	}
 
 	/**
@@ -711,7 +705,7 @@ export class Frame extends BaseFrame {
 	 * @return {Frame}           [description]
 	 */
 	outerJoin(rightFrame, colsToMap, joinOn, filter) {
-		return outerJoin(this,rightFrame, colsToMap, joinOn, this._genAuxJoinFilter(filter,rightFrame));
+		return outerJoin(this,rightFrame, getJoinCols(this, rightFrame, colsToMap), joinOn, this._genAuxJoinFilter(filter,rightFrame));
 	}
 
 
@@ -731,7 +725,7 @@ export class Frame extends BaseFrame {
 		let aFrame = this;
 		if(toSort === undefined || toSort === true) {
 			aFrame.sorted = undefined;
-			aFrame = aFrame.sort(groupCols.filter(name => isString(name)));
+			aFrame = aFrame.sort(groupCols.filter(name => isString(name)).map(name => name.split('=')[0]));
 		}
 		return groupBy(groupCols, aFrame, listOfAccumulatorFunctions);
 	}
@@ -856,11 +850,30 @@ Frame.HTMLFormat = {
 	other: toString
 };
 
+
 /**
- * frameFromString - create a frame from a string buffer usually read in from a file representing 
- * @type {[type]}
+ * frameFromString - create a frame from a string buffer usually read in from a file representing
+ * @param  {string} buffer   [description]
+ * @param  {function} splitter [description]
+ * @param  {object} options  [description]
+ * @return {Frame}          [description]
  */
 Frame.frameFromString = function(buffer,splitter,options) { 
 	return frameFromString(buffer,splitter,Object.assign({Fr: Frame},options||{}));
 };
 Frame.union = unionFrame;
+
+/**
+ * get the default columns for a join operation
+ * @param  {Frame} frame1 [description]
+ * @param  {Frame} frame2 [description]
+ * @param  {string[]} cols   array of columns, or undefined, or the string '*'
+ * @return {string[]}        a column list for the join operation
+ */
+function getJoinCols(frame1, frame2, cols) {
+	if(Array.isArray(cols)) return cols;
+	if(typeof cols === 'function') return cols(frame1,frame2);
+	if(cols !== undefined && cols !== '*') throw new Error('Column list must be an array of column names');
+	let fc2 = arrRemove(frame2.columns, frame1.columns).map(n => '2.'+n);
+	return arrConcat(frame1.columns.map(n => '1.'+n), fc2);
+}

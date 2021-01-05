@@ -86,11 +86,15 @@ function _getExports() {
 function _getExportsOfBlock(block) {
 	let lines = block.split('\n');
 	let exps = lines.filter(l => l.match(/export/));
-	let exports = exps.map(l => l.split(/\s+/));
+	let exports = exps.map(l => l.trim().split(/\s+/));
+
+	
 	let defaults = exports.filter(l => l[1]=== 'default').map(([_,__,type,name])=> ({type,name: strip(name)}));
 	exports = exports.filter(l => l[1] !== 'default').map(([_,type,name])=> ({type,name: strip(name)}));
+//if(exps.some(s => s.match('const')) ) console.log({block, exports, d: defaults});
 	
-	if(defaults.length > 1) throw new Error('too name defaaults'+ defaults.toString());
+	if(defaults.length > 1) throw new Error('too name defaults'+ defaults.toString());
+	if(exports.length === 0 && defaults.length === 0) throw new Error('no exports defined in section: '+ block);
 	return {block, exports, defaults};
 }
 
@@ -103,6 +107,7 @@ function strip(name) {
 function getName(dir,anExp) {
 	let {defaults, exports} = anExp;
 	let name = '';
+
 	let isDefault = !isEmpty(defaults);
 	if( isDefault ) name = defaults[0].name;
 	else name = exports[0].name;
@@ -158,6 +163,7 @@ function processFile(aFile,toDelDir) {
 	let dir = fdat.dir+'/'+fdat.file;
 	if(toDelDir) rmdir(dir);
 	createDir(dir,toDelDir);
+//console.log(fdat.exports.map(e => e.defaults));
 	let funcs = fdat.exports.map(e => writeBlock(dir, e,getName(dir,e)) );
 	let res = writeIndex(dir, funcs);
 	clog(res);

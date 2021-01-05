@@ -16,14 +16,15 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 import newArray from '../../array/arrayutils/newArray';
 import setKey from './setKey';
+import {isA} from './isA';
 /**
  * genObjMapper generates a function to map object to an array
  * this is useful to convert an array of object to the data of a frame
- * @param  {[type]} obj [description]
+ * @param  {Object|Array} obj provides a list of keys to use
  * @return {[mapperFunction, [keys]]}     returns an array first element that function to convert the object to an array, and the secont element is an array of column names
  */
 export default function genObjMapper(obj) {
-	let keys = Object.keys(obj);
+	let keys = iasA.array(obj) ? obj : Object.keys(obj);
 	let mapper = keys.reduce((o,v,ix) => setKey(o,v,ix), {});
 	let len = keys.length;
 	return [ //mapper func, colm array
@@ -39,3 +40,4 @@ export default function genObjMapper(obj) {
 	] ;
 }
 
+// 

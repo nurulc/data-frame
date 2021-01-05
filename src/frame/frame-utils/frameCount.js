@@ -22,7 +22,7 @@ import getColIx from '../getColIx';
  * @param  {Frme} aFrame   [description]
  * @param  {string} colName  [description]
  * @param  {function} convName function to convert a name to a new name
- * @return {[name, count]}     a two element array with the name and count
+ * @return {[string, number]}     a two element array with the name and count [name, count]
  */
 export default function frameCount(aFrame, colName, convName) {
 	aFrame = haveFrame(aFrame);

@@ -38,4 +38,4 @@ export default function gbMergeU(name,newName,sep) {
 	}
 	return [merge,name,[() => [],0],newName];
 }
-//we should later add gbMode (most occuring value), gbMedian (middle value)
+

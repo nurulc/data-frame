@@ -37,8 +37,9 @@ const  isString = (s) =>  (typeof s) === 'string';
 export function groupBy(groupColsOrig,aFrame, accumList) {
 	aFrame = haveFrame(aFrame);
 	accumList = accumList || [];
-	
-	let groupCols = groupColsOrig.map( (name,i) => isString(name)? name: genAccFunc(name,aFrame,i) );
+	let newNameMap = [];
+	let groupColsOrigNew = groupColsOrig.map(colTransform(newNameMap));
+	let groupCols = groupColsOrigNew.map( (name,i) => isString(name)? name: genAccFunc(name,aFrame,i) );
 	let change = genChange(groupCols,aFrame);
 	let plen = groupCols.length;
 	//groupCols = groupCols.filter(v => v);
@@ -71,10 +72,24 @@ export function groupBy(groupColsOrig,aFrame, accumList) {
 		let prev = change([],-1)[1];
 		dataRes.push(crResult(prev));
 	}
-	return new aFrame.constructor(dataRes,colNames,aFrame.name+'grouped');
+	return new aFrame.constructor(dataRes,mapNames(colNames, newNameMap),aFrame.name+'grouped');
 }
 
+function colTransform(nameMap) {
+	return ( name => {
+		if(!isString(name) || (name.indexOf('=') === -1)) { // function or no name change
+			nameMap.push(undefined);
+			return  name;
+		}
+		let [oldName, newName] = name.split('=');
+		nameMap.push(newName);
+		return oldName;
+	});
+}
 
+function mapNames(colNames, newNameMap) {
+	return colNames.map( (n,i) => newNameMap[i] || n);
+}
 
 /*
 	 Adapter that take the groupby function sum(), count() ...
@@ -87,11 +102,10 @@ function genAccFunc([func,name,[init, countInit],newName],aFrame, newIx) {
 	let counter  = 0;
 	return function (transition,aRow) {
 		if(arguments.length === 0) return newName;
-		let res;
+		let res,r;
 		switch(transition) {
 		case 2: // finalize - when we come to the e
 			res = func(2,accum,counter);
-			//res[2] = newIx;
 			accum = init();
 			counter = countInit;                    
 			return res;
@@ -117,7 +131,7 @@ function genChange(cols,aFrame) {
 	aFrame = haveFrame(aFrame);
 	let changeSet = cols.map(() => undefined);
 	let cIx = genColIxFunc(aFrame);
-	let len = aFrame.columns.legth;
+	//let len = aFrame.columns.legth;
 	let ixList = cols.filter(name => isString(name)).map(name => cIx(name));
 	return function(row,ix) {
 		//console.log('trans',res,changeSet );
@@ -138,7 +152,7 @@ function genChange(cols,aFrame) {
 function fillResult(groupCols, compList) {
 	let names = groupCols.filter(name => isString(name));
 	//let index = groupCols.map( v => );
-	let ixL = groupCols.map((nameOrFunc,i) => {
+	let ixL = groupCols.map((nameOrFunc) => {
 		let ix = names.indexOf(nameOrFunc);
 		//console.log(ix, isString(nameOrFunc)?nameOrFunc:'Func()');
 		return ix !== -1 ?((row) => row[ix]):( (row) => nameOrFunc(2,row)[0]);  //name may be a string or mapping function

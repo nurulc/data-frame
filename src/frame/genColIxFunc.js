@@ -23,8 +23,9 @@ import haveFrame from './haveFrame';
  */
 export default  function genColIxFunc(aFrame) {
 	aFrame = haveFrame(aFrame);
-	return ((name) => { let ix = aFrame.colIx(name); 
-		if(ix < 0) {
+	return ((name) => { 
+		let ix = name !== undefined ?aFrame.colIx(name):0; 
+		if(ix < 0 && name !== undefined) {
 			//console.log('col: '+name+ ' does not Exist in Frame: '+aFrame.name, aFrame);
 			throw new Error('col: '+name+ ' does not Exist in Frame: '+aFrame.name);
 		}

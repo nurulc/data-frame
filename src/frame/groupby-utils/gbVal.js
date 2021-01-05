@@ -14,20 +14,19 @@ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
-import isEmpty from '../../utils/types/isEmpty';
-import {arrDedup } from '../../array';
-import accStr from './accStr';
-
 /**
- * gbVal merge the values grouped rows onto a single comma seperated value
+ * create a column with constant value
  * @param  {[type]} newName [description]
  * @param  {[type]} value     [description]
  * @return {[type]}         [description]
  */
 export default function gbVal(newName,value) {
 	newName = newName || '';
-	function getVal() {
-		return [value, 0];
+    let acc = [value,0];
+	function getVal(action,accum,count) {
+		if( accum === undefined ) accum = value;
+		if( action !== 1 ) return acc;
+		return acc;
 	}
 	return [getVal,undefined,[() => value,0],newName];
 }

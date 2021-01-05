@@ -40,6 +40,9 @@ export const gbVal = _gbVal;
 import _gbMergeU from './gbMergeU';
 export const gbMergeU = _gbMergeU;
 
+import _gbMake from './gbMake';
+export const gbMake = _gbMake;
+
 import _accStr from './accStr';
 export const accStr = _accStr;
 
