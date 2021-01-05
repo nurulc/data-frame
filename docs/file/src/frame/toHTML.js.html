@@ -156,6 +156,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbMerge">gbMerge</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbMergeU">gbMergeU</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbMin">gbMin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbSampleStdDiv">gbSampleStdDiv</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbStdDiv">gbStdDiv</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbSum">gbSum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbVal">gbVal</a></span></span></li>
@@ -168,6 +169,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbMerge">gbMerge</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbMergeU">gbMergeU</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbMin">gbMin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbSampleStdDiv">gbSampleStdDiv</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbStdDiv">gbStdDiv</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbSum">gbSum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbVal">gbVal</a></span></span></li>
@@ -351,7 +353,7 @@ export default function toHTML(aFrame, myStyle, rowColor=colorDefault) {
 	myStyle = myStyle || &apos;&apos;;
 	return (
 		myStyle +
-		&apos;&lt;table title=&quot;Frame rows: &apos;+rows+&apos; columns: &apos;+ncolumns+name+&apos;class=&quot;ftable&quot;&gt;&lt;thead&gt;&apos; +
+		&apos;&lt;table title=&quot;Frame rows: &apos;+rows+&apos; columns: &apos;+ncolumns+name+&apos;&quot; class=&quot;ftable&quot;&gt;&lt;thead&gt;&apos; +
 		&apos;&lt;tr&gt;&lt;th&gt;Ix&lt;/th&gt;&apos; + columns.map(c =&gt; &apos;&lt;th&gt;&apos; + c.replace(/_/g, &apos; &apos;) + &apos;&lt;/th&gt;&apos;).join(&apos;&apos;) + &apos;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&apos; +
 		aFrame.data.slice(0, Math.min(aFrame.length, (aFrame.showLen|| 200))).map(showRow).join(&apos;&apos;) +
 		&apos;&lt;/tbody&gt;&lt;/table&gt;&apos;

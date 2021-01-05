@@ -28,6 +28,9 @@ export const gbMax = _gbMax;
 import _gbMean from './gbMean';
 export const gbMean = _gbMean;
 
+import _gbSampleStdDiv from './gbSampleStdDiv';
+export const gbSampleStdDiv = _gbSampleStdDiv;
+
 import _gbStdDiv from './gbStdDiv';
 export const gbStdDiv = _gbStdDiv;
 

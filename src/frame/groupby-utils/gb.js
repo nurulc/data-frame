@@ -24,12 +24,9 @@ import gbMerge from './gbMerge';
 import gbVal from './gbVal';
 import gbMergeU from './gbMergeU';
 import gbMake from './gbMake';
-export default  { stdDiv: gbStdDiv, mean: gbMean, count: gbCount, 
+export default  { stdDiv: gbStdDiv, sampleStdDiv: gbSampleStdDiv, mean: gbMean, count: gbCount, 
 	sum: gbSum, min: gbMin, max: gbMax, 
 	merge: gbMerge, mergeU: gbMergeU, value: gbVal, make: gbMake };
-
-
-
 
 
 

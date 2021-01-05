@@ -744,6 +744,18 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "str-data-frame/src/frame/groupby-utils/gbsamplestddiv.js~gbsamplestddiv",
+    "function/index.html#static-function-gbSampleStdDiv",
+    "<span>gbSampleStdDiv</span> <span class=\"search-result-import-path\">str-data-frame/src/frame/groupby-utils/gbSampleStdDiv.js</span>",
+    "function"
+  ],
+  [
+    "str-data-frame/src/frame/groupby-utils/index.js~gbsamplestddiv",
+    "variable/index.html#static-variable-gbSampleStdDiv",
+    "<span>gbSampleStdDiv</span> <span class=\"search-result-import-path\">str-data-frame/src/frame/groupby-utils/index.js</span>",
+    "variable"
+  ],
+  [
     "str-data-frame/src/frame/groupby-utils/gbstddiv.js~gbstddiv",
     "function/index.html#static-function-gbStdDiv",
     "<span>gbStdDiv</span> <span class=\"search-result-import-path\">str-data-frame/src/frame/groupby-utils/gbStdDiv.js</span>",
@@ -2943,6 +2955,12 @@ window.esdocSearchIndex = [
     "src/frame/groupby-utils/gbmin.js",
     "file/src/frame/groupby-utils/gbMin.js.html",
     "src/frame/groupby-utils/gbMin.js",
+    "file"
+  ],
+  [
+    "src/frame/groupby-utils/gbsamplestddiv.js",
+    "file/src/frame/groupby-utils/gbSampleStdDiv.js.html",
+    "src/frame/groupby-utils/gbSampleStdDiv.js",
     "file"
   ],
   [

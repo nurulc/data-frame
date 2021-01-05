@@ -25,13 +25,13 @@ import {toNumber} from '../../utils/sort-helper';
 export default function gbStdDiv(name, newName) {
 	newName = newName || name;
 	function stdDiv(action,[accumSq,accum],count, val) {
-		if( action !== 1) {
-			if(count>1) return [Math.sqrt((count*accumSq-accum*accum)/count*(count-1.0)),count];
-			else return['', count]; 
+		if( accum === undefined ) accum = [0,0];
+		if( action === 1) {
+			if(count>1) return [Math.sqrt((count*accumSq-accum*accum)/(count*count)),count];
+			else return ['',0];
 		}
 		let v = toNumber(val);
 		return isEmpty(v) ?[[accumSq,accum],count]:[[accumSq+v*v,accum+v],count++];
 	}
 	return [stdDiv,name,[() => [0,0],0],newName];
 }
-

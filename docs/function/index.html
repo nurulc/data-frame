@@ -156,6 +156,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbMerge">gbMerge</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbMergeU">gbMergeU</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbMin">gbMin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbSampleStdDiv">gbSampleStdDiv</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbStdDiv">gbStdDiv</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbSum">gbSum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbVal">gbVal</a></span></span></li>
@@ -168,6 +169,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbMerge">gbMerge</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbMergeU">gbMergeU</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbMin">gbMin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbSampleStdDiv">gbSampleStdDiv</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbStdDiv">gbStdDiv</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbSum">gbSum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbVal">gbVal</a></span></span></li>
@@ -1835,7 +1837,7 @@ return an array of 2 strings [oldName, newName]</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-gbMake">gbMake</a></span></span><span class="code" data-ice="signature">(fn: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>, initFn: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>, initVal: <span>[type]</span>): <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-gbMake">gbMake</a></span></span><span class="code" data-ice="signature">(fn: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>, initFn: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>, iniCount: <span>integer</span>): <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1988,6 +1990,35 @@ an example of the function is as follows (counts the number of non-emply cells i
         
         
         <div data-ice="description"><p>gbMin  minimum elemnts value (non empty) in a group, bases on sql group by operation<br>e.g.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-gbSampleStdDiv">gbSampleStdDiv</a></span></span><span class="code" data-ice="signature">(name: <span>[type]</span>, newName: <span>[type]</span>): <span>[type]</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>gbStdDiv standard deviation - see gbMin</p>
 </div>
       </div>
     </td>
@@ -8238,28 +8269,27 @@ each row is split into column elements (each a string) using a splitter function
     
     
     
-    <span class="code" data-ice="name">gbMake</span><span class="code" data-ice="signature">(fn: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>, initFn: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>, initVal: <span>[type]</span>): <span>*</span></span>
+    <span class="code" data-ice="name">gbMake</span><span class="code" data-ice="signature">(fn: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>, initFn: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>, iniCount: <span>integer</span>): <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/groupby-utils/gbMake.js.html#lineNumber44">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/groupby-utils/gbMake.js.html#lineNumber43">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import gbMake from &apos;<span><a href="file/src/frame/groupby-utils/gbMake.js.html#lineNumber44">str-data-frame/src/frame/groupby-utils/gbMake.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import gbMake from &apos;<span><a href="file/src/frame/groupby-utils/gbMake.js.html#lineNumber43">str-data-frame/src/frame/groupby-utils/gbMake.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Create a groupBy accumulator function, 
 an example of the function is as follows (counts the number of non-emply cells is agroup) </p>
-<pre><code><code class="source-code prettyprint"> function fn(action,accum,count, val) { // example of a grouping function
-  if( accum === undefined ) accum = 0;  // initialization of accumulator
+<pre><code><code class="source-code prettyprint"> function countAll(action,accum,count, val) { // example of a grouping function
   if( action !==1 ) return [count,count]; // compute final value for the accumulator
   return isEmpty(val)    ?
-          [accum,count] :                    // no change sine vale of cell is empty
-          [accum+1,count+1];                // count the number of non-empty values 
+          [accum,count+1] :                // count the empty values also (we don&apos;t use the accumulator)
+          [accum,count+1];                // count the number of non-empty values 
  }
 
-const gbCount = 
+const gbCount = gb.make(fn);
 </code>
 </code></pre></div>
 
@@ -8277,21 +8307,21 @@ const gbCount =
       <td data-ice="name" class="code" data-depth="0">fn</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>an accumolation function</p>
+      <td data-ice="description"><p>an accumilation function</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">initFn</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>optional initialization function</p>
+      <td data-ice="description"><p>optional initialization function Default:  () =&gt; undefined</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">initVal</td>
-      <td data-ice="type" class="code"><span>[type]</span></td>
+      <td data-ice="name" class="code" data-depth="0">iniCount</td>
+      <td data-ice="type" class="code"><span>integer</span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>[description]</p>
+      <td data-ice="description"><p>initial value of count Deaualt: 0</p>
 </td>
     </tr>
 </tbody>
@@ -8731,6 +8761,87 @@ const gbCount =
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" class="code" data-depth="0">fn</td>
       <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>[description]</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>[type]</span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>[description]</p>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-function-gbSampleStdDiv">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">gbSampleStdDiv</span><span class="code" data-ice="signature">(name: <span>[type]</span>, newName: <span>[type]</span>): <span>[type]</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/frame/groupby-utils/gbSampleStdDiv.js.html#lineNumber25">source</a></span></span>
+    </span>
+  </h3>
+
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import gbSampleStdDiv from &apos;<span><a href="file/src/frame/groupby-utils/gbSampleStdDiv.js.html#lineNumber25">str-data-frame/src/frame/groupby-utils/gbSampleStdDiv.js</a></span>&apos;</code></pre></div>
+  
+  
+  <div data-ice="description"><p>gbStdDiv standard deviation - see gbMin</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">name</td>
+      <td data-ice="type" class="code"><span>[type]</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>[description]</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">newName</td>
+      <td data-ice="type" class="code"><span>[type]</span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"><p>[description]</p>
 </td>
@@ -9854,11 +9965,11 @@ the name of the Frameis the value of the grouping</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/frame/haveFrame.js.html#lineNumber20">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/frame/haveFrame.js.html#lineNumber24">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import haveFrame from &apos;<span><a href="file/src/frame/haveFrame.js.html#lineNumber20">str-data-frame/src/frame/haveFrame.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import haveFrame from &apos;<span><a href="file/src/frame/haveFrame.js.html#lineNumber24">str-data-frame/src/frame/haveFrame.js</a></span>&apos;</code></pre></div>
   
   
   

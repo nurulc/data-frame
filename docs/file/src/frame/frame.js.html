@@ -156,6 +156,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbMerge">gbMerge</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbMergeU">gbMergeU</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbMin">gbMin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbSampleStdDiv">gbSampleStdDiv</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbStdDiv">gbStdDiv</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbSum">gbSum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbVal">gbVal</a></span></span></li>
@@ -168,6 +169,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbMerge">gbMerge</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbMergeU">gbMergeU</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbMin">gbMin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbSampleStdDiv">gbSampleStdDiv</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbStdDiv">gbStdDiv</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbSum">gbSum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbVal">gbVal</a></span></span></li>
@@ -318,7 +320,7 @@ import frameWithIndex from &apos;./frame-utils/frameWithIndex&apos;;
 import frameToString from &apos;./frame-utils/frameToString&apos;;
 import frameFromString from &apos;./frame-utils/coreFrameFromBuffer&apos;;
 import unionFrame from &apos;./frame-utils/unionFrame&apos;;
-import { arrRemove, arrDedup, newArray } from &apos;../array&apos;;
+import { arrRemove, arrDedup, arrConcat, newArray } from &apos;../array&apos;;
 import {EMPTY_ARRAY} from &apos;../utils/constants&apos;;
 import {K,isA, isEmpty} from &apos;../utils&apos;;
 import {toNumber} from &apos;../utils/sort-helper&apos;;
@@ -341,16 +343,10 @@ function isNum(v) {return v !== &apos;&apos; &amp;&amp; !isNaN(+v); }
 function Identity(x) { return x; }
 
 
-
-// function objName(o) {
-// 	if(typeof o === &apos;object&apos; ) return o.constructor.name;
-// 	return typeof o;
+// function eqaulRow(row1, row2) {
+// 	if( row1 === row2 ) return true;
+// 	return ( row1.length === row2.length &amp;&amp; arrEqual(row1, row2));
 // }
-
-function eqaulRow(row1, row2) {
-	if( row1 === row2 ) return true;
-	return ( row1.length === row2.length &amp;&amp; arrEqual(row1, row2));
-}
 
 
 /**
@@ -980,7 +976,7 @@ export class Frame extends BaseFrame {
 	 * @return {Frame}           [description]
 	 */
 	innerJoin(rightFrame, colsToMap, joinOn, filter) {
-		return innerJoin(this,rightFrame, colsToMap, joinOn, this._genAuxJoinFilter(filter,rightFrame));
+		return innerJoin(this,rightFrame, getJoinCols(this, rightFrame, colsToMap), joinOn, this._genAuxJoinFilter(filter,rightFrame));
 	}
 
 
@@ -993,7 +989,7 @@ export class Frame extends BaseFrame {
 	 * @return {Frame}           [description]
 	 */
 	leftJoin(rightFrame, colsToMap, joinOn, filter) {
-		return leftJoin(this,rightFrame, colsToMap, joinOn, this._genAuxJoinFilter(filter,rightFrame));
+		return leftJoin(this,rightFrame, getJoinCols(this, rightFrame, colsToMap), joinOn, this._genAuxJoinFilter(filter,rightFrame));
 	}
 
 	/**
@@ -1005,7 +1001,7 @@ export class Frame extends BaseFrame {
 	 * @return {Frame}           [description]
 	 */
 	outerJoin(rightFrame, colsToMap, joinOn, filter) {
-		return outerJoin(this,rightFrame, colsToMap, joinOn, this._genAuxJoinFilter(filter,rightFrame));
+		return outerJoin(this,rightFrame, getJoinCols(this, rightFrame, colsToMap), joinOn, this._genAuxJoinFilter(filter,rightFrame));
 	}
 
 
@@ -1025,7 +1021,7 @@ export class Frame extends BaseFrame {
 		let aFrame = this;
 		if(toSort === undefined || toSort === true) {
 			aFrame.sorted = undefined;
-			aFrame = aFrame.sort(groupCols.filter(name =&gt; isString(name)));
+			aFrame = aFrame.sort(groupCols.filter(name =&gt; isString(name)).map(name =&gt; name.split(&apos;=&apos;)[0]));
 		}
 		return groupBy(groupCols, aFrame, listOfAccumulatorFunctions);
 	}
@@ -1162,6 +1158,21 @@ Frame.frameFromString = function(buffer,splitter,options) {
 	return frameFromString(buffer,splitter,Object.assign({Fr: Frame},options||{}));
 };
 Frame.union = unionFrame;
+
+/**
+ * get the default columns for a join operation
+ * @param  {Frame} frame1 [description]
+ * @param  {Frame} frame2 [description]
+ * @param  {string[]} cols   array of columns, or undefined, or the string &apos;*&apos;
+ * @return {string[]}        a column list for the join operation
+ */
+function getJoinCols(frame1, frame2, cols) {
+	if(Array.isArray(cols)) return cols;
+	if(typeof cols === &apos;function&apos;) return cols(frame1,frame2);
+	if(cols !== undefined &amp;&amp; cols !== &apos;*&apos;) throw new Error(&apos;Column list must be an array of column names&apos;);
+	let fc2 = arrRemove(frame2.columns, frame1.columns).map(n =&gt; &apos;2.&apos;+n);
+	return arrConcat(frame1.columns.map(n =&gt; &apos;1.&apos;+n), fc2);
+}
 </code></pre>
 
 </div>

@@ -156,6 +156,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbMerge">gbMerge</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbMergeU">gbMergeU</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbMin">gbMin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbSampleStdDiv">gbSampleStdDiv</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbStdDiv">gbStdDiv</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbSum">gbSum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbVal">gbVal</a></span></span></li>
@@ -168,6 +169,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbMerge">gbMerge</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbMergeU">gbMergeU</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbMin">gbMin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbSampleStdDiv">gbSampleStdDiv</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbStdDiv">gbStdDiv</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbSum">gbSum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbVal">gbVal</a></span></span></li>
@@ -318,22 +320,21 @@ function UNDEFINED() { return undefined; }
  * an example of the function is as follows (counts the number of non-emply cells is agroup) 
  *
  * ```
- *  function fn(action,accum,count, val) { // example of a grouping function
- *   if( accum === undefined ) accum = 0;  // initialization of accumulator
+ *  function countAll(action,accum,count, val) { // example of a grouping function
  *   if( action !==1 ) return [count,count]; // compute final value for the accumulator
  *   return isEmpty(val)	?
- *   		[accum,count] :    				// no change sine vale of cell is empty
- *   		[accum+1,count+1];				// count the number of non-empty values 
+ *   		[accum,count+1] :    			// count the empty values also (we don&apos;t use the accumulator)
+ *   		[accum,count+1];				// count the number of non-empty values 
  *  }
  *
- * const gbCount = 
+ * const gbCount = gb.make(fn);
  *
  * ```
  *
  * 
- * @param  {Function} fn      an accumolation function
- * @param  {Function} initFn  optional initialization function
- * @param  {[type]}   initVal [description]
+ * @param  {Function} fn      an accumilation function
+ * @param  {Function} initFn  optional initialization function Default:  () =&gt; undefined
+ * @param  {integer}   iniCount initial value of count Deaualt: 0
  */
 export default function gbMake(fn, initFn=UNDEFINED, iniCount=0) {
   return (name,newName) =&gt; {

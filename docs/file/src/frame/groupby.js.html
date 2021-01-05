@@ -156,6 +156,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbMerge">gbMerge</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbMergeU">gbMergeU</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbMin">gbMin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbSampleStdDiv">gbSampleStdDiv</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbStdDiv">gbStdDiv</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbSum">gbSum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-gbVal">gbVal</a></span></span></li>
@@ -168,6 +169,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbMerge">gbMerge</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbMergeU">gbMergeU</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbMin">gbMin</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbSampleStdDiv">gbSampleStdDiv</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbStdDiv">gbStdDiv</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbSum">gbSum</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-gbVal">gbVal</a></span></span></li>
@@ -331,8 +333,9 @@ const  isString = (s) =&gt;  (typeof s) === &apos;string&apos;;
 export function groupBy(groupColsOrig,aFrame, accumList) {
 	aFrame = haveFrame(aFrame);
 	accumList = accumList || [];
-	
-	let groupCols = groupColsOrig.map( (name,i) =&gt; isString(name)? name: genAccFunc(name,aFrame,i) );
+	let newNameMap = [];
+	let groupColsOrigNew = groupColsOrig.map(colTransform(newNameMap));
+	let groupCols = groupColsOrigNew.map( (name,i) =&gt; isString(name)? name: genAccFunc(name,aFrame,i) );
 	let change = genChange(groupCols,aFrame);
 	let plen = groupCols.length;
 	//groupCols = groupCols.filter(v =&gt; v);
@@ -365,10 +368,24 @@ export function groupBy(groupColsOrig,aFrame, accumList) {
 		let prev = change([],-1)[1];
 		dataRes.push(crResult(prev));
 	}
-	return new aFrame.constructor(dataRes,colNames,aFrame.name+&apos;grouped&apos;);
+	return new aFrame.constructor(dataRes,mapNames(colNames, newNameMap),aFrame.name+&apos;grouped&apos;);
 }
 
+function colTransform(nameMap) {
+	return ( name =&gt; {
+		if(!isString(name) || (name.indexOf(&apos;=&apos;) === -1)) { // function or no name change
+			nameMap.push(undefined);
+			return  name;
+		}
+		let [oldName, newName] = name.split(&apos;=&apos;);
+		nameMap.push(newName);
+		return oldName;
+	});
+}
 
+function mapNames(colNames, newNameMap) {
+	return colNames.map( (n,i) =&gt; newNameMap[i] || n);
+}
 
 /*
 	 Adapter that take the groupby function sum(), count() ...
@@ -381,11 +398,10 @@ function genAccFunc([func,name,[init, countInit],newName],aFrame, newIx) {
 	let counter  = 0;
 	return function (transition,aRow) {
 		if(arguments.length === 0) return newName;
-		let res;
+		let res,r;
 		switch(transition) {
 		case 2: // finalize - when we come to the e
 			res = func(2,accum,counter);
-			//res[2] = newIx;
 			accum = init();
 			counter = countInit;                    
 			return res;
@@ -411,7 +427,7 @@ function genChange(cols,aFrame) {
 	aFrame = haveFrame(aFrame);
 	let changeSet = cols.map(() =&gt; undefined);
 	let cIx = genColIxFunc(aFrame);
-	let len = aFrame.columns.legth;
+	//let len = aFrame.columns.legth;
 	let ixList = cols.filter(name =&gt; isString(name)).map(name =&gt; cIx(name));
 	return function(row,ix) {
 		//console.log(&apos;trans&apos;,res,changeSet );
@@ -432,7 +448,7 @@ function genChange(cols,aFrame) {
 function fillResult(groupCols, compList) {
 	let names = groupCols.filter(name =&gt; isString(name));
 	//let index = groupCols.map( v =&gt; );
-	let ixL = groupCols.map((nameOrFunc,i) =&gt; {
+	let ixL = groupCols.map((nameOrFunc) =&gt; {
 		let ix = names.indexOf(nameOrFunc);
 		//console.log(ix, isString(nameOrFunc)?nameOrFunc:&apos;Func()&apos;);
 		return ix !== -1 ?((row) =&gt; row[ix]):( (row) =&gt; nameOrFunc(2,row)[0]);  //name may be a string or mapping function

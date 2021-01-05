@@ -263,22 +263,21 @@ function UNDEFINED() { return undefined; }
  * an example of the function is as follows (counts the number of non-emply cells is agroup) 
  *
  * ```
- *  function fn(action,accum,count, val) { // example of a grouping function
- *   if( accum === undefined ) accum = 0;  // initialization of accumulator
+ *  function countAll(action,accum,count, val) { // example of a grouping function
  *   if( action !==1 ) return [count,count]; // compute final value for the accumulator
  *   return isEmpty(val)	?
- *   		[accum,count] :    				// no change sine vale of cell is empty
- *   		[accum+1,count+1];				// count the number of non-empty values 
+ *   		[accum,count+1] :    			// count the empty values also (we don't use the accumulator)
+ *   		[accum,count+1];				// count the number of non-empty values 
  *  }
  *
- * const gbCount = 
+ * const gbCount = gb.make(fn);
  *
  * ```
  *
  * 
- * @param  {Function} fn      an accumolation function
- * @param  {Function} initFn  optional initialization function
- * @param  {[type]}   initVal [description]
+ * @param  {Function} fn      an accumilation function
+ * @param  {Function} initFn  optional initialization function Default:  () => undefined
+ * @param  {integer}   iniCount initial value of count Deaualt: 0
  */
 export default function gbMake(fn, initFn=UNDEFINED, iniCount=0) {
   return (name,newName) => {

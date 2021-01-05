@@ -1,7 +1,7 @@
 {
-  "coverage": "42.09%",
-  "expectCount": 449,
-  "actualCount": 189,
+  "coverage": "42.07%",
+  "expectCount": 454,
+  "actualCount": 191,
   "files": {
     "src/array/arrayutils/arrConcat.js": {
       "expectCount": 1,
@@ -447,26 +447,25 @@
     },
     "src/frame/frame.js": {
       "expectCount": 49,
-      "actualCount": 31,
+      "actualCount": 32,
       "undocumentLines": [
         43,
         44,
         45,
         46,
         47,
-        56,
-        87,
-        88,
-        89,
-        90,
-        91,
-        92,
-        111,
-        749,
-        756,
-        830,
-        843,
-        850
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        105,
+        743,
+        750,
+        824,
+        837,
+        844
       ]
     },
     "src/frame/frame_element.js": {
@@ -541,6 +540,11 @@
         43
       ]
     },
+    "src/frame/groupby-utils/gbSampleStdDiv.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
     "src/frame/groupby-utils/gbStdDiv.js": {
       "expectCount": 1,
       "actualCount": 1,
@@ -557,7 +561,7 @@
       "undocumentLines": []
     },
     "src/frame/groupby-utils/index.js": {
-      "expectCount": 12,
+      "expectCount": 13,
       "actualCount": 0,
       "undocumentLines": [
         17,
@@ -571,27 +575,31 @@
         41,
         44,
         47,
-        50
+        50,
+        53
       ]
     },
     "src/frame/groupby.js": {
-      "expectCount": 8,
+      "expectCount": 10,
       "actualCount": 1,
       "undocumentLines": [
         22,
-        84,
-        109,
-        110,
-        116,
-        138,
-        155
+        78,
+        90,
+        99,
+        123,
+        124,
+        130,
+        152,
+        169
       ]
     },
     "src/frame/haveFrame.js": {
-      "expectCount": 1,
+      "expectCount": 2,
       "actualCount": 0,
       "undocumentLines": [
-        20
+        19,
+        24
       ]
     },
     "src/frame/index.js": {
