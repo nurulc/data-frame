@@ -178,7 +178,10 @@ export default function gbStdDiv(name, newName) {
 	function stdDiv(action,[accumSq,accum],count, val) {
 		if( accum === undefined ) accum = [0,0];
 		if( action === 1) {
-			if(count>1) return [Math.sqrt((count*accumSq-accum*accum)/(count*count)),count];
+			if(count>1) {
+			    //console.log([Math.sqrt((count*accumSq-accum*accum)/(count*count)),count, accumSq, accum]);
+				return [Math.sqrt((count*accumSq-accum*accum)/(count*count)),count];
+			}
 			else return ['',0];
 		}
 		let v = toNumber(val);
