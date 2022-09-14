@@ -1,6 +1,6 @@
 {
   "name": "str-data-frame",
-  "version": "0.2.35",
+  "version": "0.2.36",
   "description": "Utiltities to handle pandas like data frames",
   "main": "lib/index.js",
   "unpkg": "dist/",
@@ -46,7 +46,11 @@
     "plotly": "^1.0.6",
     "request": "^2.88.2",
     "rollup": "^2.23.1",
-    "rollup-plugin-terser": "^7.0.0"
+    "rollup-plugin-terser": "^7.0.0",
+    "edit-json-file": "^1.5.0",
+    "edit-package-json": "^0.2.3",
+    "esprima": "^4.0.1",
+    "json-to-ast": "^2.1.0"
   },
   "repository": {
     "type": "git",
@@ -62,9 +66,5 @@
     }
   },
   "dependencies": {
-    "edit-json-file": "^1.5.0",
-    "edit-package-json": "^0.2.3",
-    "esprima": "^4.0.1",
-    "json-to-ast": "^2.1.0"
   }
 }

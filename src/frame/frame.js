@@ -18,7 +18,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 //import { getFreq } from './frequency';
 import BaseFrame from './BaseFrame';
 import { createAccesClass } from './frame_element';
-import sortFrameBy from './sortframe';
+import sortFrameBy from './sortFrame';
 import {groupBy} from './groupby';
 import frameWithIndex from './frame-utils/frameWithIndex';
 import frameToString from './frame-utils/frameToString';
