@@ -61,3 +61,25 @@ export default function isString(str) {
 	return (typeof str === 'string')?str:null;
 }
 
+//@ 
+/**
+ * is str a boolean string
+ * @param  {String} str
+ * @return {boolean} - true if str is a string
+ */
+export default function isBooleanStr(str) {
+	if(typeof str !== 'string') return false;
+	return str.match(/^(?true|false|T|F)$/i);
+}
+
+//@ 
+/**
+ * convert a boolean string ('true'|'T') is true -note we ignore case
+ * @param  {String} str
+ * @return {boolean} - true if str is a string
+ */
+export default function toBoolean(str) {
+	if(typeof str !== 'string') return str;
+	return str.match(/^(?true|T|F)$/i);
+}
+

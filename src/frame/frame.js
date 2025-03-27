@@ -26,7 +26,7 @@ import frameFromString from './frame-utils/coreFrameFromBuffer';
 import unionFrame from './frame-utils/unionFrame';
 import { arrRemove, arrDedup, arrConcat, newArray } from '../array';
 import {EMPTY_ARRAY} from '../utils/constants';
-import {K,isA, isEmpty} from '../utils';
+import {K,isA, isEmpty, isBooleanStr, toBoolean} from '../utils';
 import {toNumber} from '../utils/sort-helper';
 import {innerJoin, leftJoin, outerJoin} from './join-utils';
 //import {combineCmp, cmpNumOrStrBy, toNumber, revCmp} from '../utils/sort-helper';
@@ -506,7 +506,7 @@ export class Frame extends BaseFrame {
 	 *  Example of setting columns
 	 *   [  'oldColumn', 
 	 *   	'oldColumn=newColumnName', 
-	 *   	['oldCol1=newColName1', (v,ro) => some-operation],
+	 *   	['oldCol1=newColName1', (v,ro) => some-operation], where v is the value of 'oldCol1', ro is the row object
 	 *   	['oldCol1=newColName1', someValue],
 	 *   	['newCol', someValue],
 	 *   	['newCol2', (v,ro) => someComputedValue]
@@ -732,9 +732,9 @@ export class Frame extends BaseFrame {
 
 	/**
 	 * [sort description]
-	 * @param  {[type]} colNames [description]
-	 * @param  {[type]} cmpFn    [description]
-	 * @return {[type]}          [description]
+	 * @param  {[string]} colNames list of column name by priority ["col2,"-col4" ...] the "-colname" means higest to lowest, the sort function undestands the numeric string are treated as numbers 
+	 * @param  {function} cmpFn    function(row1,row2) return -1, 0, 1 , row1 and row2 are row objects 
+	 * @return {Frame}          Returns a sorted frame
 	 */
 	sort(colNames,cmpFn) { // the cmpFn is optional
 		return sortFrameBy(colNames,this,cmpFn);
@@ -766,6 +766,13 @@ export class Frame extends BaseFrame {
 	 * for each cell we apply the testFunc if false then try the next testFunc in the list
 	 * if the testFunc return true, the apply the convertFn to the cell value to the new value
 	 * if non of the testFn succeeds then the cell remains unchanged
+	 *
+	 * e.g. (note to not use this code - without the convList argument the code does a better job than this)
+	 * frame.convertData([  
+	 *	  [v => !isNaN(v), v => parseFloat(v)], // Numbers  
+	 *	  [v => v === "true" || v === "false", v => v === "true"], // Booleans  
+	 *	  [v => Date.parse(v), v => new Date(v)] // Dates  
+	 *	])  
 	 * 
 	 * @param  {[[testFn, convertFn]...} convList this parameter is optional 
 	 * @return {Frame}          returns a new Frame with the converted values
@@ -773,43 +780,57 @@ export class Frame extends BaseFrame {
 	convertData(convList) {
 		let _data = newArray(this.length, []);
 		if(convList === undefined || convList.length === 0) {
-			let len = this.length;
-			let data = this.data;
-			for(let i = 0; i<len; i++) {
-				let row = data[i];
-				if( row.some(x => typeof x === 'string' && isNum(x)) ) {
-					row = row.map(v => isNum(v) ?toNumber(v): v);
-				}
-				_data[i] = row;
-			}
-		} else {
+			convList = [
+				        [ isBooleanStr, toBoolean], 
+			            [x => typeof x === 'string' && isNum(x), toNumber],
+			            [x => typeof x === 'string' && Date.parse(x), x => Date.parse(x)]
+			];
+		}
+			// let len = this.length;
+			// let data = this.data;
+			// for(let i = 0; i<len; i++) {
+			// 	let row = data[i];
+			// 	if(row.some(isBooleanStr) ) {
+			// 		row = row.map(v =>  isBooleanStr(v)? toBoolean(v) : v);
+			// 	}
+			// 	if( row.some(x => typeof x === 'string' && isNum(x)) ) {
+			// 		row = row.map(v => isNum(v) ?toNumber(v): v);
+			// 	}
+			// 	if(row.some(x => typeof x === 'string' && Date.parse(x)){
+			// 		row = row.map(v => isNum(v) ?toNumber(v): v);
+			// 	}  
+			// 	_data[i] = row;
+			// }
+		
 			//throw new Error('custom conversion is not supported');
 			
-			let len = this.length;
-			let data = this.data;
-			let dummy = data.length?data[0].slice(0):[];
-			let rlen = this.columns.length;
+		let len = this.length;
+		let data = this.data;
+		let dummy = data.length?data[0].slice(0):[];
+		let rlen = this.columns.length;
+		let anyRowChanged = false;
 
-			let cLen = convList.length;
-			for(let i = 0; i<len; i++) {
-				let row = data[i];
-				let changed = false;
-				for(let col=0; col<rlen; col++) {
-					dummy[col] = row[col];
-					for(let k=0; k<cLen; k++) {
-						if(convList[k][0](row[col])) {
-							dummy[col] = convList[k][1](row[col]);
-							changed = true;
-							break;	
-						} 
-					}
+		let cLen = convList.length;
+		for(let i = 0; i<len; i++) {
+			let row = data[i];
+			let changed = false;
+			for(let col=0; col<rlen; col++) {
+				dummy[col] = row[col];
+				for(let k=0; k<cLen; k++) {
+					if(convList[k][0](row[col])) {
+						dummy[col] = convList[k][1](row[col]);
+						changed = true;
+						anyRowChanged = true;
+						break;	
+					} 
 				}
-				if(changed) _data[i] = dummy.slice(0);
-				else _data[i] = row;
 			}
-
+			if(changed) _data[i] = dummy.slice(0);
+			else _data[i] = row;
 		}
-		if(arrEqual(this.data,_data)) {
+
+		// check if anything has changed
+		if(!anyRowChanged && arrEqual(this.data,_data)) {
 			// nothing changed
 			return this;
 		}
@@ -842,6 +863,7 @@ export class Frame extends BaseFrame {
 }
 
 function toString(x) {
+	if(x === null || x === undefined) return '';
 	return x.toString();
 }
 

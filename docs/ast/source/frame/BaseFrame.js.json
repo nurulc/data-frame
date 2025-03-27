@@ -1,7 +1,7 @@
 {
   "type": "File",
   "start": 0,
-  "end": 7593,
+  "end": 7609,
   "loc": {
     "start": {
       "line": 1,
@@ -15,7 +15,7 @@
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 7593,
+    "end": 7609,
     "loc": {
       "start": {
         "line": 1,
@@ -371,7 +371,7 @@
       {
         "type": "ExportDefaultDeclaration",
         "start": 1212,
-        "end": 7593,
+        "end": 7609,
         "loc": {
           "start": {
             "line": 28,
@@ -385,7 +385,7 @@
         "declaration": {
           "type": "ClassDeclaration",
           "start": 1227,
-          "end": 7593,
+          "end": 7609,
           "loc": {
             "start": {
               "line": 28,
@@ -418,7 +418,7 @@
           "body": {
             "type": "ClassBody",
             "start": 1243,
-            "end": 7593,
+            "end": 7609,
             "loc": {
               "start": {
                 "line": 28,
@@ -13280,9 +13280,9 @@
                 "trailingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\r\n\t * Basically this is the equivelat to reduce performed on the data array, this is an array of rows as the elemnt passed to reduc\r\n\t * @param  {Function} fn   [description]\r\n\t * @param  {any}   ini  the starting value for reduce\r\n\t * @return {any}        the type is the return type of the fuction 'fn'\r\n\t ",
+                    "value": "*\r\n\t * Basically this is the equivelat to reduce performed on the data array, this is an array of rows as the elemnt passed to reduc\r\n\t * @param  {Function} fn   function to apply on each row\r\n\t * @param  {any}   ini  the starting value for reduce\r\n\t * @return {any}        the type is the return type of the fuction 'fn'\r\n\t ",
                     "start": 7217,
-                    "end": 7530,
+                    "end": 7546,
                     "loc": {
                       "start": {
                         "line": 219,
@@ -13298,8 +13298,8 @@
               },
               {
                 "type": "ClassMethod",
-                "start": 7533,
-                "end": 7590,
+                "start": 7549,
+                "end": 7606,
                 "loc": {
                   "start": {
                     "line": 225,
@@ -13314,8 +13314,8 @@
                 "computed": false,
                 "key": {
                   "type": "Identifier",
-                  "start": 7533,
-                  "end": 7542,
+                  "start": 7549,
+                  "end": 7558,
                   "loc": {
                     "start": {
                       "line": 225,
@@ -13338,8 +13338,8 @@
                 "params": [
                   {
                     "type": "Identifier",
-                    "start": 7543,
-                    "end": 7545,
+                    "start": 7559,
+                    "end": 7561,
                     "loc": {
                       "start": {
                         "line": 225,
@@ -13355,8 +13355,8 @@
                   },
                   {
                     "type": "Identifier",
-                    "start": 7547,
-                    "end": 7550,
+                    "start": 7563,
+                    "end": 7566,
                     "loc": {
                       "start": {
                         "line": 225,
@@ -13373,8 +13373,8 @@
                 ],
                 "body": {
                   "type": "BlockStatement",
-                  "start": 7552,
-                  "end": 7590,
+                  "start": 7568,
+                  "end": 7606,
                   "loc": {
                     "start": {
                       "line": 225,
@@ -13388,8 +13388,8 @@
                   "body": [
                     {
                       "type": "ReturnStatement",
-                      "start": 7554,
-                      "end": 7588,
+                      "start": 7570,
+                      "end": 7604,
                       "loc": {
                         "start": {
                           "line": 225,
@@ -13402,8 +13402,8 @@
                       },
                       "argument": {
                         "type": "CallExpression",
-                        "start": 7561,
-                        "end": 7587,
+                        "start": 7577,
+                        "end": 7603,
                         "loc": {
                           "start": {
                             "line": 225,
@@ -13416,8 +13416,8 @@
                         },
                         "callee": {
                           "type": "MemberExpression",
-                          "start": 7561,
-                          "end": 7577,
+                          "start": 7577,
+                          "end": 7593,
                           "loc": {
                             "start": {
                               "line": 225,
@@ -13430,8 +13430,8 @@
                           },
                           "object": {
                             "type": "MemberExpression",
-                            "start": 7561,
-                            "end": 7570,
+                            "start": 7577,
+                            "end": 7586,
                             "loc": {
                               "start": {
                                 "line": 225,
@@ -13444,8 +13444,8 @@
                             },
                             "object": {
                               "type": "ThisExpression",
-                              "start": 7561,
-                              "end": 7565,
+                              "start": 7577,
+                              "end": 7581,
                               "loc": {
                                 "start": {
                                   "line": 225,
@@ -13459,8 +13459,8 @@
                             },
                             "property": {
                               "type": "Identifier",
-                              "start": 7566,
-                              "end": 7570,
+                              "start": 7582,
+                              "end": 7586,
                               "loc": {
                                 "start": {
                                   "line": 225,
@@ -13478,8 +13478,8 @@
                           },
                           "property": {
                             "type": "Identifier",
-                            "start": 7571,
-                            "end": 7577,
+                            "start": 7587,
+                            "end": 7593,
                             "loc": {
                               "start": {
                                 "line": 225,
@@ -13498,8 +13498,8 @@
                         "arguments": [
                           {
                             "type": "Identifier",
-                            "start": 7579,
-                            "end": 7581,
+                            "start": 7595,
+                            "end": 7597,
                             "loc": {
                               "start": {
                                 "line": 225,
@@ -13515,8 +13515,8 @@
                           },
                           {
                             "type": "Identifier",
-                            "start": 7583,
-                            "end": 7586,
+                            "start": 7599,
+                            "end": 7602,
                             "loc": {
                               "start": {
                                 "line": 225,
@@ -13539,9 +13539,9 @@
                 "leadingComments": [
                   {
                     "type": "CommentBlock",
-                    "value": "*\r\n\t * Basically this is the equivelat to reduce performed on the data array, this is an array of rows as the elemnt passed to reduc\r\n\t * @param  {Function} fn   [description]\r\n\t * @param  {any}   ini  the starting value for reduce\r\n\t * @return {any}        the type is the return type of the fuction 'fn'\r\n\t ",
+                    "value": "*\r\n\t * Basically this is the equivelat to reduce performed on the data array, this is an array of rows as the elemnt passed to reduc\r\n\t * @param  {Function} fn   function to apply on each row\r\n\t * @param  {any}   ini  the starting value for reduce\r\n\t * @return {any}        the type is the return type of the fuction 'fn'\r\n\t ",
                     "start": 7217,
-                    "end": 7530,
+                    "end": 7546,
                     "loc": {
                       "start": {
                         "line": 219,
@@ -13890,9 +13890,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\r\n\t * Basically this is the equivelat to reduce performed on the data array, this is an array of rows as the elemnt passed to reduc\r\n\t * @param  {Function} fn   [description]\r\n\t * @param  {any}   ini  the starting value for reduce\r\n\t * @return {any}        the type is the return type of the fuction 'fn'\r\n\t ",
+      "value": "*\r\n\t * Basically this is the equivelat to reduce performed on the data array, this is an array of rows as the elemnt passed to reduc\r\n\t * @param  {Function} fn   function to apply on each row\r\n\t * @param  {any}   ini  the starting value for reduce\r\n\t * @return {any}        the type is the return type of the fuction 'fn'\r\n\t ",
       "start": 7217,
-      "end": 7530,
+      "end": 7546,
       "loc": {
         "start": {
           "line": 219,
@@ -40811,9 +40811,9 @@
     },
     {
       "type": "CommentBlock",
-      "value": "*\r\n\t * Basically this is the equivelat to reduce performed on the data array, this is an array of rows as the elemnt passed to reduc\r\n\t * @param  {Function} fn   [description]\r\n\t * @param  {any}   ini  the starting value for reduce\r\n\t * @return {any}        the type is the return type of the fuction 'fn'\r\n\t ",
+      "value": "*\r\n\t * Basically this is the equivelat to reduce performed on the data array, this is an array of rows as the elemnt passed to reduc\r\n\t * @param  {Function} fn   function to apply on each row\r\n\t * @param  {any}   ini  the starting value for reduce\r\n\t * @return {any}        the type is the return type of the fuction 'fn'\r\n\t ",
       "start": 7217,
-      "end": 7530,
+      "end": 7546,
       "loc": {
         "start": {
           "line": 219,
@@ -40838,8 +40838,8 @@
         "binop": null
       },
       "value": "reduceRaw",
-      "start": 7533,
-      "end": 7542,
+      "start": 7549,
+      "end": 7558,
       "loc": {
         "start": {
           "line": 225,
@@ -40863,8 +40863,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 7542,
-      "end": 7543,
+      "start": 7558,
+      "end": 7559,
       "loc": {
         "start": {
           "line": 225,
@@ -40889,8 +40889,8 @@
         "binop": null
       },
       "value": "fn",
-      "start": 7543,
-      "end": 7545,
+      "start": 7559,
+      "end": 7561,
       "loc": {
         "start": {
           "line": 225,
@@ -40915,8 +40915,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 7545,
-      "end": 7546,
+      "start": 7561,
+      "end": 7562,
       "loc": {
         "start": {
           "line": 225,
@@ -40941,8 +40941,8 @@
         "binop": null
       },
       "value": "ini",
-      "start": 7547,
-      "end": 7550,
+      "start": 7563,
+      "end": 7566,
       "loc": {
         "start": {
           "line": 225,
@@ -40966,8 +40966,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 7550,
-      "end": 7551,
+      "start": 7566,
+      "end": 7567,
       "loc": {
         "start": {
           "line": 225,
@@ -40991,8 +40991,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 7552,
-      "end": 7553,
+      "start": 7568,
+      "end": 7569,
       "loc": {
         "start": {
           "line": 225,
@@ -41019,8 +41019,8 @@
         "updateContext": null
       },
       "value": "return",
-      "start": 7554,
-      "end": 7560,
+      "start": 7570,
+      "end": 7576,
       "loc": {
         "start": {
           "line": 225,
@@ -41047,8 +41047,8 @@
         "updateContext": null
       },
       "value": "this",
-      "start": 7561,
-      "end": 7565,
+      "start": 7577,
+      "end": 7581,
       "loc": {
         "start": {
           "line": 225,
@@ -41073,8 +41073,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 7565,
-      "end": 7566,
+      "start": 7581,
+      "end": 7582,
       "loc": {
         "start": {
           "line": 225,
@@ -41099,8 +41099,8 @@
         "binop": null
       },
       "value": "data",
-      "start": 7566,
-      "end": 7570,
+      "start": 7582,
+      "end": 7586,
       "loc": {
         "start": {
           "line": 225,
@@ -41125,8 +41125,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 7570,
-      "end": 7571,
+      "start": 7586,
+      "end": 7587,
       "loc": {
         "start": {
           "line": 225,
@@ -41151,8 +41151,8 @@
         "binop": null
       },
       "value": "reduce",
-      "start": 7571,
-      "end": 7577,
+      "start": 7587,
+      "end": 7593,
       "loc": {
         "start": {
           "line": 225,
@@ -41176,8 +41176,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 7577,
-      "end": 7578,
+      "start": 7593,
+      "end": 7594,
       "loc": {
         "start": {
           "line": 225,
@@ -41202,8 +41202,8 @@
         "binop": null
       },
       "value": "fn",
-      "start": 7579,
-      "end": 7581,
+      "start": 7595,
+      "end": 7597,
       "loc": {
         "start": {
           "line": 225,
@@ -41228,8 +41228,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 7581,
-      "end": 7582,
+      "start": 7597,
+      "end": 7598,
       "loc": {
         "start": {
           "line": 225,
@@ -41254,8 +41254,8 @@
         "binop": null
       },
       "value": "ini",
-      "start": 7583,
-      "end": 7586,
+      "start": 7599,
+      "end": 7602,
       "loc": {
         "start": {
           "line": 225,
@@ -41279,8 +41279,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 7586,
-      "end": 7587,
+      "start": 7602,
+      "end": 7603,
       "loc": {
         "start": {
           "line": 225,
@@ -41305,8 +41305,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 7587,
-      "end": 7588,
+      "start": 7603,
+      "end": 7604,
       "loc": {
         "start": {
           "line": 225,
@@ -41330,8 +41330,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 7589,
-      "end": 7590,
+      "start": 7605,
+      "end": 7606,
       "loc": {
         "start": {
           "line": 225,
@@ -41355,8 +41355,8 @@
         "postfix": false,
         "binop": null
       },
-      "start": 7592,
-      "end": 7593,
+      "start": 7608,
+      "end": 7609,
       "loc": {
         "start": {
           "line": 226,
@@ -41381,8 +41381,8 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 7593,
-      "end": 7593,
+      "start": 7609,
+      "end": 7609,
       "loc": {
         "start": {
           "line": 226,

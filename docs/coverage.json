@@ -1,8 +1,20 @@
 {
-  "coverage": "42.07%",
+  "coverage": "47.57%",
   "expectCount": 454,
-  "actualCount": 191,
+  "actualCount": 216,
   "files": {
+    "src/array/arrCMP.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/array/arrEQ.js": {
+      "expectCount": 2,
+      "actualCount": 1,
+      "undocumentLines": [
+        46
+      ]
+    },
     "src/array/arrayutils/arrConcat.js": {
       "expectCount": 1,
       "actualCount": 1,
@@ -17,7 +29,7 @@
       "expectCount": 3,
       "actualCount": 2,
       "undocumentLines": [
-        56
+        97
       ]
     },
     "src/array/arrayutils/arrDiff.js": {
@@ -31,13 +43,6 @@
       "undocumentLines": []
     },
     "src/array/arrayutils/arrHash.js": {
-      "expectCount": 1,
-      "actualCount": 0,
-      "undocumentLines": [
-        19
-      ]
-    },
-    "src/array/arrayutils/arrIntersect.js": {
       "expectCount": 1,
       "actualCount": 1,
       "undocumentLines": []
@@ -58,6 +63,11 @@
       "undocumentLines": []
     },
     "src/array/arrayutils/arrUnion.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/array/arrayutils/arrUnion2.js": {
       "expectCount": 1,
       "actualCount": 1,
       "undocumentLines": []
@@ -137,31 +147,13 @@
     },
     "src/array/arrayutils/zipToDict.js": {
       "expectCount": 3,
-      "actualCount": 1,
-      "undocumentLines": [
-        29,
-        32
-      ]
-    },
-    "src/array/arrCMP.js": {
-      "expectCount": 1,
-      "actualCount": 1,
+      "actualCount": 3,
       "undocumentLines": []
-    },
-    "src/array/arrEQ.js": {
-      "expectCount": 2,
-      "actualCount": 1,
-      "undocumentLines": [
-        46
-      ]
     },
     "src/array/flatten.js": {
       "expectCount": 4,
-      "actualCount": 2,
-      "undocumentLines": [
-        27,
-        39
-      ]
+      "actualCount": 4,
+      "undocumentLines": []
     },
     "src/array/index.js": {
       "expectCount": 2,
@@ -295,25 +287,6 @@
         42
       ]
     },
-    "src/dict/utils/groupByToDict.js": {
-      "expectCount": 1,
-      "actualCount": 1,
-      "undocumentLines": []
-    },
-    "src/dict/utils/groupToDict.js": {
-      "expectCount": 1,
-      "actualCount": 1,
-      "undocumentLines": []
-    },
-    "src/dict/utils/index.js": {
-      "expectCount": 3,
-      "actualCount": 0,
-      "undocumentLines": [
-        19,
-        24,
-        27
-      ]
-    },
     "src/dict/utils/MultiDict.js": {
       "expectCount": 13,
       "actualCount": 7,
@@ -349,17 +322,31 @@
         87
       ]
     },
+    "src/dict/utils/groupByToDict.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/dict/utils/groupToDict.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/dict/utils/index.js": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        19,
+        24,
+        27
+      ]
+    },
     "src/dict/utils/zipTo.js": {
       "expectCount": 1,
       "actualCount": 0,
       "undocumentLines": [
         17
       ]
-    },
-    "src/frame/arrToCol.js": {
-      "expectCount": 1,
-      "actualCount": 1,
-      "undocumentLines": []
     },
     "src/frame/BaseFrame.js": {
       "expectCount": 32,
@@ -382,6 +369,11 @@
         101,
         106
       ]
+    },
+    "src/frame/arrToCol.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
     },
     "src/frame/frame-utils/coreFrameFromBuffer.js": {
       "expectCount": 5,
@@ -726,8 +718,8 @@
       "undocumentLines": [
         17,
         24,
-        50,
-        84
+        58,
+        93
       ]
     },
     "src/string/csv/csvLine.js": {
@@ -777,22 +769,21 @@
         18
       ]
     },
+    "src/string/strdict/StrDict.js": {
+      "expectCount": 10,
+      "actualCount": 7,
+      "undocumentLines": [
+        38,
+        39,
+        40
+      ]
+    },
     "src/string/strdict/index.js": {
       "expectCount": 2,
       "actualCount": 0,
       "undocumentLines": [
         17,
         20
-      ]
-    },
-    "src/string/strdict/StrDict.js": {
-      "expectCount": 10,
-      "actualCount": 6,
-      "undocumentLines": [
-        34,
-        35,
-        36,
-        94
       ]
     },
     "src/string/strdict/strEq.js": {
@@ -861,20 +852,8 @@
     },
     "src/utils/constants.js": {
       "expectCount": 11,
-      "actualCount": 0,
-      "undocumentLines": [
-        17,
-        18,
-        19,
-        20,
-        21,
-        25,
-        26,
-        27,
-        29,
-        30,
-        31
-      ]
+      "actualCount": 11,
+      "undocumentLines": []
     },
     "src/utils/index.js": {
       "expectCount": 2,
@@ -930,17 +909,9 @@
     },
     "src/utils/objutils/isA.js": {
       "expectCount": 11,
-      "actualCount": 2,
+      "actualCount": 10,
       "undocumentLines": [
-        17,
-        41,
-        42,
-        43,
-        44,
-        45,
-        46,
-        47,
-        48
+        17
       ]
     },
     "src/utils/objutils/keys.js": {

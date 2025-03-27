@@ -1,6 +1,6 @@
 {
   "name": "str-data-frame",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "Utiltities to handle pandas like data frames",
   "main": "lib/index.js",
   "unpkg": "dist/",
