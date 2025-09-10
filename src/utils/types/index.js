@@ -25,3 +25,9 @@ export const isFunction = _isFunction;
 import _isString from './isString';
 export const isString = _isString;
 
+import _isBooleanStr from './isBooleanStr';
+export const isBooleanStr = _isBooleanStr;
+
+import _toBoolean from './toBoolean';
+export const toBoolean = _toBoolean;
+

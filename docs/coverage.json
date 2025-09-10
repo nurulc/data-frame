@@ -1,7 +1,7 @@
 {
-  "coverage": "47.57%",
-  "expectCount": 454,
-  "actualCount": 216,
+  "coverage": "47.59%",
+  "expectCount": 458,
+  "actualCount": 218,
   "files": {
     "src/array/arrCMP.js": {
       "expectCount": 1,
@@ -455,9 +455,9 @@
         105,
         743,
         750,
-        824,
-        837,
-        844
+        845,
+        858,
+        865
       ]
     },
     "src/frame/frame_element.js": {
@@ -1009,16 +1009,23 @@
       "undocumentLines": []
     },
     "src/utils/types/index.js": {
-      "expectCount": 4,
+      "expectCount": 6,
       "actualCount": 0,
       "undocumentLines": [
         17,
         20,
         23,
-        26
+        26,
+        29,
+        32
       ]
     },
     "src/utils/types/isArray.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/utils/types/isBooleanStr.js": {
       "expectCount": 1,
       "actualCount": 1,
       "undocumentLines": []
@@ -1034,6 +1041,11 @@
       "undocumentLines": []
     },
     "src/utils/types/isString.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/utils/types/toBoolean.js": {
       "expectCount": 1,
       "actualCount": 1,
       "undocumentLines": []

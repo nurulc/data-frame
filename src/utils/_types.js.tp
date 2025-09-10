@@ -69,7 +69,7 @@ export default function isString(str) {
  */
 export default function isBooleanStr(str) {
 	if(typeof str !== 'string') return false;
-	return str.match(/^(?true|false|T|F)$/i);
+	return str.match(/^(?:true|false|T|F)$/i);
 }
 
 //@ 
@@ -80,6 +80,6 @@ export default function isBooleanStr(str) {
  */
 export default function toBoolean(str) {
 	if(typeof str !== 'string') return str;
-	return str.match(/^(?true|T|F)$/i);
+	return str.match(/^(?:true|T|F)$/i);
 }
 
