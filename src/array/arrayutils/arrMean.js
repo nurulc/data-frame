@@ -17,10 +17,28 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 import arrCurry from './arrCurry';
 
 /**
- * [description]
- * @param  {Function} fn   [description]
- * @param  {[type]}   arr  [description]
- * @return {[type]}        [description]
+ * Computes the mean (average) value of the results of applying a transformation function to each element of an array.
+ * The function is curried, allowing flexible invocation patterns.
+ *
+ * @param {Function} fn - A transformation function that takes an element of the array and returns a number.
+ * @param {Array} arr - The array of elements to be processed. Can also be supplied via currying.
+ * 
+ * @returns {number} - The mean of the transformed elements. If no valid numbers are found, returns `NaN`.
+ *
+ * @throws {TypeError} - Throws an error if `fn` is not a function or `arr` is not an array.
+ *
+ * @example
+ * // Direct invocation
+ * const result = arrMean(x => x * 2, [1, 2, 3, 4]);
+ * console.log(result); // 5 (mean of [2, 4, 6, 8])
+ *
+ * // Curried invocation
+ * const meanDouble = arrMean(x => x * 2);
+ * console.log(meanDouble([1, 2, 3, 4])); // 5
+ *
+ * @example
+ * const result = arrMean(x => typeof x === 'number' ? x : 0, [10, 20, 'a', 40]);
+ * console.log(result); // 23.333333333333332
  */
 export default  arrCurry(function(fn,arr) {
 	let cnt = 0, result = 0.0, len = arr.length;

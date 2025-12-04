@@ -17,10 +17,29 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 import arrCurry from './arrCurry';
 
 /**
- * [description]
- * @param  {Function} fn   [description]
- * @param  {[type]}   arr  [description]
- * @return {[type]}        [description]
+ * Computes the minimum value of the results of applying a transformation function to each element of an array.
+ * The function is curried, allowing flexible invocation patterns.
+ *
+ * @param {Function} fn - A transformation function that takes an element of the array and returns a number.
+ * @param {Array} arr - The array of elements to be processed. Can also be supplied via currying.
+ * 
+ * @returns {number} - The minimum value among the transformed elements.
+ *
+ * @throws {TypeError} - Throws an error if `fn` is not a function or `arr` is not an array.
+ * @throws {Error} - Throws an error if the array is empty.
+ *
+ * @example
+ * // Direct invocation
+ * const result = arrMin(x => x * 2, [3, 1, 4]);
+ * console.log(result); // 2 (1 * 2 is the minimum)
+ *
+ * // Curried invocation
+ * const minDouble = arrMin(x => x * 2);
+ * console.log(minDouble([3, 1, 4])); // 2
+ *
+ * @example
+ * const result = arrMin(x => x, [7, 2, 8, 5]);
+ * console.log(result); // 2
  */
 export default  arrCurry(function(fn,arr) {
 	var min = fn(arr[0]);

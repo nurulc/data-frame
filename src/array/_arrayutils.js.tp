@@ -53,7 +53,20 @@ export default function arrOf(aVal,n) {
 
 //@@
 //##import {strHash} from '../string/strdict';
-
+/**
+ * Generates a hash value for an array by combining the hash values of its elements.
+ *
+ * @param {Array} arr - The input array for which the hash value is calculated. 
+ * Each element of the array should be compatible with the `strHash` function.
+ * 
+ * @returns {number} - A numeric hash value for the input array.
+ *
+ * @example
+ * const hash = arrHash(['apple', 'banana', 'cherry']);
+ * console.log(hash); // Example output: 123456
+ *
+ * @requires strHash - This function depends on the `strHash` function to compute hash values for individual elements of the array.
+ */
 export default  function arrHash(arr) {
 	let len = arr.length;
 	let hash = 0;
@@ -169,7 +182,7 @@ export default  function arrDiff(arr1, arr2) {
  * @param  {Array} arr2 [description]
  * @return {Array}      [description]
  */
-export default  function arrUnion(arr1, arr2) {
+export default  function arrUnion2(arr1, arr2) {
 
 	if(!arr1|| arr1.length === 0) return arr2 || [];
 	if(!arr2|| arr2.length === 0) return arr1 || [];
@@ -202,32 +215,36 @@ export default  function arrUnion(arr1, arr2) {
 //##import isArray from '../utils/types/isArray';
 
 /**
- * return the intersection of two arrays
- * @param  {Array} arr1 [description]
- * @param  {Array} arr2 [description]
- * @return {Array}      [description]
+ * Computes the union of multiple arrays, ensuring unique elements in the result.
+ *
+ * @param {...Array} arrays - The arrays to compute the union from. Each argument should be a valid array.
+ * 
+ * @returns {Array} - An array containing the union of all input arrays with unique elements.
+ *
+ * @throws {TypeError} - Throws an error if any argument is not a valid array.
+ *
+ * @example
+ * const result = arrUnion([1, 2, 3], [2, 3, 4], [4, 5]);
+ * console.log(result); // [1, 2, 3, 4, 5]
  */
-export default  function arrIntersect(arr1, arr2) {
-	var array = {};
-	if (!isArray(arr1) || !isArray(arr2)) {
-		throw new TypeError('Invalid argument, Please pass proper array argument');
-	}
+export default function arrUnion(...arrays) {
+    if (!arrays.every(isArray)) {
+        throw new TypeError('Invalid argument, Please pass proper array arguments');
+    }
 
-	var result = [];
-	for (var i = 0; i < arr1.length; i++) {
+    const uniqueElements = new Map();
+    const result = [];
 
-		if (array[arr1[i]] === undefined)
-			array[arr1[i]] = arr1[i];
-	}
+    for (const arr of arrays) {
+        for (const element of arr) {
+            if (!uniqueElements.has(element)) {
+                uniqueElements.set(element, true);
+                result.push(element);
+            }
+        }
+    }
 
-	for ( i = 0; i < arr2.length; i++) {
-		if (array[arr2[i]] !== undefined) {
-
-			result.push(arr2[i]);
-			array[arr2[i]] = undefined;
-		}
-	}
-	return result;
+    return result;
 }
 
 
@@ -269,9 +286,23 @@ export default  function xor(array1, array2) {
 //##import newArray from './newArray';
 
 /**
- * @param  {[any]} arr
- * @param  {number} n
- * @return {[type]}
+ * Splits an array into smaller arrays of specified size, filling extra slots with a default value if necessary.
+ *
+ * @param {Array} arr - The input array to be split into smaller arrays.
+ * @param {number} n - The desired size of each sub-array. If the remaining elements are fewer than `n`, 
+ * the sub-array is padded with the first element of the input array or truncated to the remaining size.
+ *
+ * @returns {Array<Array>} - An array of sub-arrays, each with a maximum length of `n`. 
+ * The last sub-array may be smaller if the remaining elements in the input array are insufficient to fill `n`.
+ *
+ * @throws {TypeError} - Throws an error if `arr` is not an array or `n` is not a positive integer.
+ *
+ * @example
+ * const result = redim([1, 2, 3, 4, 5], 2);
+ * console.log(result); // [[1, 2], [3, 4], [5]]
+ *
+ * const resultWithPadding = redim([1, 2, 3], 4);
+ * console.log(resultWithPadding); // [[1, 2, 3, 1]]
  */
 export default  function redim(arr, n) {
 	let result = [];
@@ -294,53 +325,131 @@ export default  function redim(arr, n) {
 //##import isArray from '../utils/types/isArray';
 
 /**
- * Add two vectors
- * @param  {[number]} a1
- * @param  {[number]} a2
- * @return {[number]}
+ * Adds two vectors (arrays) element-wise, handling cases where one or both vectors may be undefined.
+ * If one vector is undefined, the other is returned as a shallow copy.
+ * If vectors are of different lengths, missing elements are treated as 0.
+ *
+ * @param {Array<number>} [a1] - The first vector. Can be undefined.
+ * @param {Array<number>} [a2] - The second vector. Can be undefined.
+ * 
+ * @returns {Array<number>|undefined} - The element-wise sum of the two vectors.
+ * If both vectors are undefined, returns `undefined`.
+ * If only one vector is defined, returns a shallow copy of that vector.
+ *
+ * @throws {TypeError} - Throws an error if either argument is defined but not an array of numbers.
+ *
+ * @example
+ * const result = vecAdd([1, 2, 3], [4, 5]);
+ * console.log(result); // [5, 7, 3]
+ *
+ * const resultWithOneVector = vecAdd(undefined, [4, 5, 6]);
+ * console.log(resultWithOneVector); // [4, 5, 6]
+ *
+ * const resultWithNoVectors = vecAdd(undefined, undefined);
+ * console.log(resultWithNoVectors); // undefined
  */
-export default  function vecAdd(a1,a2) {
-	if(a1 === undefined ){
-		if(Array.isArray(a2)) return a2.slice();
-		else return undefined;
-	} else  if(a2 === undefined ){
-		if(Array.isArray(a1)) return a1.slice();
-		else return undefined;
-	} else if(a1.length < a2.length) {
-		return a2.map((v,i) => v+(a1[i]||0));
-	} else return a1.map((v,i) => v+(a2[i]||0));
+export default function vecAdd(a1, a2) {
+    // Validate inputs if defined
+    if (a1 !== undefined && (!Array.isArray(a1) || !a1.every(num => typeof num === 'number'))) {
+        throw new TypeError('Invalid argument: a1 must be an array of numbers or undefined.');
+    }
+    if (a2 !== undefined && (!Array.isArray(a2) || !a2.every(num => typeof num === 'number'))) {
+        throw new TypeError('Invalid argument: a2 must be an array of numbers or undefined.');
+    }
+
+    // Handle undefined cases
+    if (a1 === undefined) {
+        return a2 ? a2.slice() : undefined;
+    }
+    if (a2 === undefined) {
+        return a1 ? a1.slice() : undefined;
+    }
+
+    // Ensure element-wise addition with handling for different lengths
+    const maxLength = Math.max(a1.length, a2.length);
+    const result = new Array(maxLength);
+
+    for (let i = 0; i < maxLength; i++) {
+        const value1 = a1[i] || 0;
+        const value2 = a2[i] || 0;
+        result[i] = value1 + value2;
+    }
+
+    return result;
 }
+
 
 //@@
 //##import isArray from '../utils/types/isArray';
 
 /**
- * THis decorates and array function so that it can have one of two forms
- * 1. arrayFunction(mappingFunction, array)
- * 2. arrayFunction(array)
- * 3. arrayFunction(mappingFunction) - return a new function that takes just an arra
+ * Decorates an array function to support multiple invocation patterns:
+ * 
+ * 1. `arrayFunction(mappingFunction, array)` - Applies `mappingFunction` to each element in `array`.
+ * 2. `arrayFunction(array)` - Uses an identity function (`ID`) to return the array as-is.
+ * 3. `arrayFunction(mappingFunction)` - Returns a new function that accepts an array and applies `mappingFunction` to it.
  *
- * the originam
- * performs checks and currying for the functions below    
- * acts on a function of the form arrFunc(transFormFunction, arr)
- * @param  {Function} functionToDecorate [description]
- * @return {Function}        [description]
+ * This function performs validation on inputs, supports currying, and ensures type safety.
+ *
+ * @param {Function} functionToDecorate - The original array function to decorate.
+ * The function should take two arguments: a transformation function and an array.
+ *
+ * @returns {Function} - A decorated function that supports the described invocation patterns.
+ *
+ * @throws {TypeError} - Throws an error if the provided arguments are invalid:
+ * - If `functionToDecorate` is not a function.
+ * - If invalid arguments are passed during invocation.
+ *
+ * @example
+ * // Example function to be decorated
+ * const mapFunction = (fn, arr) => arr.map(fn);
+ *
+ * // Create the decorated function
+ * const decoratedFunction = arrCurry(mapFunction);
+ *
+ * // Usage
+ * console.log(decoratedFunction(x => x * 2, [1, 2, 3])); // [2, 4, 6]
+ * console.log(decoratedFunction([1, 2, 3])); // [1, 2, 3]
+ * const curried = decoratedFunction(x => x * 2);
+ * console.log(curried([1, 2, 3])); // [2, 4, 6]
  */
 export default function arrCurry(functionToDecorate) {
-	return function (transformElement,arr) {
-		if( isFunction(transformElement) ) {
-			if( arr === undefined ) return (array) => functionToDecorate(transformElement, array);
-			else if(isArray(arr)) return functionToDecorate(transformElement,arr);		
-		}
-		if( isArray(transformElement) ) {
-			if( arr === undefined) {
-				arr = transformElement;
-				return functionToDecorate(ID,arr);
-			}
-		}
-		throw new TypeError('Invalid argument, Please pass proper array argument');
-	};
+    if (typeof functionToDecorate !== 'function') {
+        throw new TypeError('Invalid argument: functionToDecorate must be a function.');
+    }
+
+    return function (transformElement, arr) {
+        // If transformElement is a function
+        if (typeof transformElement === 'function') {
+            if (arr === undefined) {
+                // Currying: return a function that takes an array
+                return (array) => {
+                    if (!Array.isArray(array)) {
+                        throw new TypeError('Invalid argument: Expected an array as input.');
+                    }
+                    return functionToDecorate(transformElement, array);
+                };
+            } else if (Array.isArray(arr)) {
+                // Direct application
+                return functionToDecorate(transformElement, arr);
+            }
+        }
+
+        // If transformElement is an array
+        if (Array.isArray(transformElement)) {
+            if (arr === undefined) {
+                // Use identity function and apply the array directly
+                return functionToDecorate((x) => x, transformElement);
+            }
+        }
+
+        // Invalid input
+        throw new TypeError(
+            'Invalid arguments: Expected (function, array), (array), or (function).'
+        );
+    };
 }
+
 
 /**
  * is obj a function
@@ -381,29 +490,68 @@ export default const arrDedup = arrCurry(function(fn,arr) {
 
 //@@
 /**
- * [safeDedup description]
- * @param  {Array} list [description]
- * @return {Array}      [description]
+ * Removes duplicate values from an array, preserving the original order of elements.
+ *
+ * @param {Array} list - The input array from which duplicates will be removed.
+ * 
+ * @returns {Array} - A new array containing unique elements from the input array.
+ *
+ * @throws {TypeError} - Throws an error if the input is not an array.
+ *
+ * @example
+ * const result = safeDedup([1, 2, 2, 3, 4, 4]);
+ * console.log(result); // [1, 2, 3, 4]
+ *
+ * @example
+ * const result = safeDedup(['a', 'b', 'a', 'c']);
+ * console.log(result); // ['a', 'b', 'c']
  */
-export default  function safeDedup(list) {
-	let len = list.length;
-	let res = [];
-	for(let i=0; i<len; i++){
-		let v = list[i];
-		if(res.indexOf(v) === -1) res.push(v);
-	}
-	return res;
+export default function safeDedup(list) {
+    if (!Array.isArray(list)) {
+        throw new TypeError('Invalid argument: Input must be an array.');
+    }
+
+    const seen = new Set();
+    const result = [];
+
+    for (const item of list) {
+        if (!seen.has(item)) {
+            seen.add(item);
+            result.push(item);
+        }
+    }
+
+    return result;
 }
+
 
 
 //@@
 //##import arrCurry from './arrCurry';
 
 /**
- * Add all elements of an array, optionall apply a transform function fn to each element
- * @param  {Function} fn   [description]
- * @param  {[type]}   arr  [description]
- * @return {[type]}        [description]
+ * Computes the sum of the results of applying a transformation function to each element of an array.
+ * The function is curried, allowing flexible invocation patterns.
+ *
+ * @param {Function} fn - A transformation function that takes an element of the array and returns a number.
+ * @param {Array} arr - The array of elements to be processed. Can also be supplied via currying.
+ * 
+ * @returns {number} - The sum of the transformed elements. Returns 0 if the array is empty.
+ *
+ * @throws {TypeError} - Throws an error if `fn` is not a function or `arr` is not an array.
+ *
+ * @example
+ * // Direct invocation
+ * const result = arrSum(x => x * 2, [1, 2, 3]);
+ * console.log(result); // 12 (1*2 + 2*2 + 3*2)
+ *
+ * // Curried invocation
+ * const sumDouble = arrSum(x => x * 2);
+ * console.log(sumDouble([1, 2, 3])); // 12
+ *
+ * @example
+ * const result = arrSum(x => x, [5, 10, 15]);
+ * console.log(result); // 30 (5 + 10 + 15)
  */
 export default const arrSum = arrCurry(function(fn,arr) {
 	if (arr.length === 0)
@@ -418,10 +566,29 @@ export default const arrSum = arrCurry(function(fn,arr) {
 //##import arrCurry from './arrCurry';
 
 /**
- * [description]
- * @param  {Function} fn   [description]
- * @param  {[type]}   arr  [description]
- * @return {[type]}        [description]
+ * Computes the minimum value of the results of applying a transformation function to each element of an array.
+ * The function is curried, allowing flexible invocation patterns.
+ *
+ * @param {Function} fn - A transformation function that takes an element of the array and returns a number.
+ * @param {Array} arr - The array of elements to be processed. Can also be supplied via currying.
+ * 
+ * @returns {number} - The minimum value among the transformed elements.
+ *
+ * @throws {TypeError} - Throws an error if `fn` is not a function or `arr` is not an array.
+ * @throws {Error} - Throws an error if the array is empty.
+ *
+ * @example
+ * // Direct invocation
+ * const result = arrMin(x => x * 2, [3, 1, 4]);
+ * console.log(result); // 2 (1 * 2 is the minimum)
+ *
+ * // Curried invocation
+ * const minDouble = arrMin(x => x * 2);
+ * console.log(minDouble([3, 1, 4])); // 2
+ *
+ * @example
+ * const result = arrMin(x => x, [7, 2, 8, 5]);
+ * console.log(result); // 2
  */
 export default const arrMin = arrCurry(function(fn,arr) {
 	var min = fn(arr[0]);
@@ -436,11 +603,31 @@ export default const arrMin = arrCurry(function(fn,arr) {
 //##import arrCurry from './arrCurry';
 
 /**
- * [description]
- * @param  {Function} fn   [description]
- * @param  {[type]}   arr  [description]
- * @return {[type]}        [description]
+ * Computes the maximum value of the results of applying a transformation function to each element of an array.
+ * The function is curried, allowing flexible invocation patterns.
+ *
+ * @param {Function} fn - A transformation function that takes an element of the array and returns a number.
+ * @param {Array} arr - The array of elements to be processed. Can also be supplied via currying.
+ * 
+ * @returns {number} - The maximum value among the transformed elements.
+ *
+ * @throws {TypeError} - Throws an error if `fn` is not a function or `arr` is not an array.
+ * @throws {Error} - Throws an error if the array is empty.
+ *
+ * @example
+ * // Direct invocation
+ * const result = arrMax(x => x * 2, [3, 1, 4]);
+ * console.log(result); // 8 (4 * 2 is the maximum)
+ *
+ * // Curried invocation
+ * const maxDouble = arrMax(x => x * 2);
+ * console.log(maxDouble([3, 1, 4])); // 8
+ *
+ * @example
+ * const result = arrMax(x => x, [7, 2, 8, 5]);
+ * console.log(result); // 8
  */
+
 export default const arrMax = arrCurry(function(fn,arr) {
 	var min = fn(arr[0]);
 	for (var i = 0; i < arr.length; i++) {
@@ -454,10 +641,29 @@ export default const arrMax = arrCurry(function(fn,arr) {
 //##import arrCurry from './arrCurry';
 
 /**
- * [description]
- * @param  {[type]} testFn [description]
- * @param  {[type]} arr   
- * @return {[type]}        [description]
+ * Counts the number of elements in an array that satisfy a given test function.
+ * The function is curried, allowing flexible invocation patterns.
+ *
+ * @param {Function} testFn - A predicate function that takes an element of the array and returns `true` if the element satisfies the condition, otherwise `false`.
+ * @param {Array} arr - The array of elements to be tested. Can also be supplied via currying.
+ * 
+ * @returns {number} - The count of elements that satisfy the test function.
+ *
+ * @throws {TypeError} - Throws an error if `testFn` is not a function or `arr` is not an array.
+ *
+ * @example
+ * // Direct invocation
+ * const result = arrCount(x => x > 2, [1, 3, 5, 2]);
+ * console.log(result); // 2 (elements 3 and 5 satisfy the condition)
+ *
+ * // Curried invocation
+ * const countGreaterThanTwo = arrCount(x => x > 2);
+ * console.log(countGreaterThanTwo([1, 3, 5, 2])); // 2
+ *
+ * @example
+ * const result = arrCount(x => typeof x === 'string', [1, 'hello', 3, 'world']);
+ * console.log(result); // 2
+ * The above looks even better as: arrCount(isString, [1, 'hello', 3, 'world']) // 2
  */
 export default const arrCount = arrCurry(
 	function(testFn,arr) {
@@ -466,17 +672,34 @@ export default const arrCount = arrCurry(
 		for(let i=0; i<len; i++) {
 			if(testFn(arr[i])) count++;
 		}
-		return count; //list.reduce((cnt,e) => (e || '').trim() == v ? cnt+1 : cnt, 0);
-	});
-
+		return count;
+});
 //@@
 //##import arrCurry from './arrCurry';
 
 /**
- * [description]
- * @param  {Function} fn   [description]
- * @param  {[type]}   arr  [description]
- * @return {[type]}        [description]
+ * Computes the mean (average) value of the results of applying a transformation function to each element of an array.
+ * The function is curried, allowing flexible invocation patterns.
+ *
+ * @param {Function} fn - A transformation function that takes an element of the array and returns a number.
+ * @param {Array} arr - The array of elements to be processed. Can also be supplied via currying.
+ * 
+ * @returns {number} - The mean of the transformed elements. If no valid numbers are found, returns `NaN`.
+ *
+ * @throws {TypeError} - Throws an error if `fn` is not a function or `arr` is not an array.
+ *
+ * @example
+ * // Direct invocation
+ * const result = arrMean(x => x * 2, [1, 2, 3, 4]);
+ * console.log(result); // 5 (mean of [2, 4, 6, 8])
+ *
+ * // Curried invocation
+ * const meanDouble = arrMean(x => x * 2);
+ * console.log(meanDouble([1, 2, 3, 4])); // 5
+ *
+ * @example
+ * const result = arrMean(x => typeof x === 'number' ? x : 0, [10, 20, 'a', 40]);
+ * console.log(result); // 23.333333333333332
  */
 export default const arrMean = arrCurry(function(fn,arr) {
 	let cnt = 0, result = 0.0, len = arr.length;
@@ -517,10 +740,10 @@ function isString(str) {
 	return (typeof str === 'string')?str:null;
 }
 /**
- * [arrCountVal description]
- * @param  {[type]} list [description]
- * @param  {[type]} v    [description]
- * @return {[type]}      [description]
+ * count occurences of a value in array
+ * @param  {Array} list array of values
+ * @param  {any} v    occurences of the value to count
+ * @return {number}      The number of occurence of the value
  */
 export function arrCountVal(list,v) {
 	v = isString(v) ? (v?v.trim():''):v;
@@ -536,8 +759,8 @@ export function arrCountVal(list,v) {
 //@@
 /**
  * function to take the hash of an array of integers
- * @param {[int]} arrOfInt array of integers
- * @return {[type]}      [description]
+ * @param {Array<int>} arrOfInt array of integers
+ * @return {number}      the hash value
  */
 export function setHash(arrOfInt) {
 	var hash = 5381,
@@ -556,23 +779,67 @@ export function setHash(arrOfInt) {
 
 //@@
 /**
- * @param  {[[string, any]]} aListOfPairs list of key value pairs
- * @return {[type]}
+ * Converts a list of key-value pairs into an object (dictionary).
+ * Ensures that there are no duplicate keys in the input.
+ *
+ * @param {Array<[string, any]>} aListOfPairs - An array of key-value pairs, where each pair is an array [key, value].
+ * 
+ * @returns {Object} - An object constructed from the key-value pairs.
+ *
+ * @throws {Error} - Throws an error if there are duplicate keys in the input.
+ *
+ * @example
+ * const pairs = [['a', 1], ['b', 2]];
+ * const result = zipToDict(pairs);
+ * console.log(result); // { a: 1, b: 2 }
+ *
+ * @example
+ * const pairs = [['a', 1], ['b', 2], ['a', 3]];
+ * zipToDict(pairs); // Throws Error: duplicate key: a
  */
 export function zipToDict(aListOfPairs) {
-	return aListOfPairs.reduce( (dict, [k,v]) => { 
-		if(dict[k] !== undefined) throw new Error('duplicate key: '+k);
-		dict[k] = v; 
-		return dict;
-	}, {});
+    const dict = {};
+    for (const [k, v] of aListOfPairs) {
+        if (dict[k] !== undefined) {
+            throw new Error(`duplicate key: ${k}`);
+        }
+        dict[k] = v;
+    }
+    return dict;
 }
 
+/**
+ * Converts an object (dictionary) into an array of key-value pairs, without sorting the keys.
+ *
+ * @param {Object} aDict - The object to be converted.
+ * 
+ * @returns {Array<[string, any]>} - An array of key-value pairs, where each pair is an array [key, value].
+ *
+ * @example
+ * const dict = { a: 1, b: 2 };
+ * const result = dictToZipB(dict);
+ * console.log(result); // [['a', 1], ['b', 2]]
+ */
 export function dictToZipB(aDict) {
-	return Object.keys(aDict).map( k => [k, aDict[k]]);
+    return Object.entries(aDict);
 }
+
+/**
+ * Converts an object (dictionary) into a sorted array of key-value pairs, sorted by keys in ascending order.
+ *
+ * @param {Object} aDict - The object to be converted.
+ * 
+ * @returns {Array<[string, any]>} - A sorted array of key-value pairs, where each pair is an array [key, value].
+ *
+ * @example
+ * const dict = { b: 2, a: 1 };
+ * const result = dictToZip(dict);
+ * console.log(result); // [['a', 1], ['b', 2]]
+ */
 export function dictToZip(aDict) {
-	return dictToZipB(aDict).sort( (a,b) => a[0] < b[0]?-1:1);
+    return Object.entries(aDict).sort(([keyA], [keyB]) => keyA.localeCompare(keyB));
 }
+
 
 //@@
 //##import newArray from './newArray';

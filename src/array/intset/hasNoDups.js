@@ -18,7 +18,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 /**
  * checks if sorted array has no dups, pure function - does not modify the input
  * @param  {[Array]}  arr - sorted set of values
- * @return {[Boolean]}     - true if the sorted array has no diplicated, false otherwise (undefined is not a sorted set)
+ * @return {Array}     - arr if the sorted array has no diplicated, undefined otherwise (undefined is not a sorted set)
  */
 export default function hasNoDups(arr /*sorted*/) {
 	if( !arr ) return false

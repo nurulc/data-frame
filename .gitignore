@@ -15,3 +15,4 @@ ddocs
 .esdoc_bak.json
 data-frame.sublime-project
 data-frame.sublime-workspace
+.DS_Store

@@ -16,8 +16,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 /**
  * Intersects two sorted array sets (array that issorted and has no duplicates)
- * @param  {[Array]} sortedA sorted array representing a set (no duplicated)
- * @param  {[Array]} sortedB sorted array representing a set (no duplicated)
+ * @param {Array<any>} sortedA - The first sorted array.
+ * @param {Array<any>} sortedB - The second sorted array.
  * @return {[Array]}         sorted array with no duplicates (a set)
  */
 function _intersect2(sortedA, sortedB) {

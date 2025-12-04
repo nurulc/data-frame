@@ -15,7 +15,20 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
 import {strHash} from '../../string/strdict';
-
+/**
+ * Generates a hash value for an array by combining the hash values of its elements.
+ *
+ * @param {Array} arr - The input array for which the hash value is calculated. 
+ * Each element of the array should be compatible with the `strHash` function.
+ * 
+ * @returns {number} - A numeric hash value for the input array.
+ *
+ * @example
+ * const hash = arrHash(['apple', 'banana', 'cherry']);
+ * console.log(hash); // Example output: 123456
+ *
+ * @requires strHash - This function depends on the `strHash` function to compute hash values for individual elements of the array.
+ */
 export default  function arrHash(arr) {
 	let len = arr.length;
 	let hash = 0;

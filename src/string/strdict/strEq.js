@@ -15,7 +15,10 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
 /**
- * strEq str.substring(strStart,strEnd) === otherStr
+ * Match a substring of a `str` with another string(`anotherStr`)
+ * Namely, it checks if `str.substring(strStart,strEnd) === otherStr`
+ * 
+ * 
  * @param  {string} str      str take str.substring(strStart,strEnd)
  * @param  {int32} strStart start index for `str`
  * @param  {int32} strEnd   end index for `str`

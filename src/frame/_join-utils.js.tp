@@ -417,11 +417,12 @@ export function leftJoin(frame1, frame2, projectList, joinOn,filter) {
 	frame2 = haveFrame(frame2);
 
 	let {transform, newColNames, mapping} = getTransform(projectList, frame1.columns, frame2.columns);
+	let [col1, col2] = changeNameTo(joinOn, '==');
 	let pL = reverseProjectList1(projectList, col1,col2, frame1.columns, frame2.columns);
 	let transformR = getTransform(pL, frame1.columns, frame2.columns).transform;  // if( 1.5*frame1.length < frame2.length) {
 	//   console.log(`Warning: fastJoin - frame1(${frame1.length}) should be longer that frame2(${frame2.length})`);
 	// } 
-	let [col1, col2] = changeNameTo(joinOn, '==');
+
 	let cmp = joinOp(frame1,frame2, col1, col2,filter);
 	let [ix1,ix2] = [frame1.colIx(col1), frame2.colIx(col2)];
 	//let transform = project(mapping);         // reansform function
@@ -498,13 +499,14 @@ export function outerJoin(frame1, frame2, projectList, joinOn,filter) {
 	frame2 = haveFrame(frame2);
 	//console.log("projectList1:", projectList);
 	let {transform, newColNames, mapping} = getTransform(projectList, frame1.columns, frame2.columns);
+	let [col1, col2] = changeNameTo(joinOn, '==');
 	let pL = reverseProjectList1(projectList, col1,col2, frame1.columns, frame2.columns);
 	//    console.log("projectList3:", pL);
 	let transformR = getTransform(pL, frame1.columns, frame2.columns).transform;
 	// if( 1.5*frame1.length < frame2.length) {
 	//   console.log(`Warning: fastJoin - frame1(${frame1.length}) should be longer that frame2(${frame2.length})`);
 	// } 
-	let [col1, col2] = changeNameTo(joinOn, '==');
+	
 	let cmp = joinOp(frame1,frame2, col1, col2,filter);
 	let [ix1,ix2] = [frame1.colIx(col1), frame2.colIx(col2)];
 	//let transform = project(mapping);         // reansform function

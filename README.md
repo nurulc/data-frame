@@ -12,6 +12,49 @@ npm install --save str-data-frame
 ## In your code import or require the package
 const ff = require("str-data-frame")
 
+# Code Mirror Auto complete
+
+```html
+<link rel="stylesheet" href="https://codemirror.net/addon/hint/show-hint.css">
+<script src="https://codemirror.net/addon/hint/show-hint.js"></script>
+```
+## The javascript code
+
+```js
+const editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+  mode: "javascript",
+  lineNumbers: true,
+  extraKeys: { "Ctrl-Space": "autocomplete" },
+});
+
+// Custom autocomplete function
+function customHint(editor) {
+  const cursor = editor.getCursor();
+  const token = editor.getTokenAt(cursor);
+  const start = token.start;
+  const end = cursor.ch;
+  const word = token.string;
+  
+  // Define your custom completion options
+  const list = ["function", "const", "let", "var", "console.log"].filter(item =>
+    item.startsWith(word)
+  );
+
+  return {
+    list: list,
+    from: CodeMirror.Pos(cursor.line, start),
+    to: CodeMirror.Pos(cursor.line, end)
+  };
+}
+
+// Attach custom hinting function
+editor.on("inputRead", function(cm, change) {
+  if (change.text[0].match(/\w/)) {
+    cm.showHint({ hint: customHint });
+  }
+});
+```
+
 
 
 

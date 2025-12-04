@@ -17,9 +17,23 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 import newArray from './newArray';
 
 /**
- * @param  {[any]} arr
- * @param  {number} n
- * @return {[type]}
+ * Splits an array into smaller arrays of specified size, filling extra slots with a default value if necessary.
+ *
+ * @param {Array} arr - The input array to be split into smaller arrays.
+ * @param {number} n - The desired size of each sub-array. If the remaining elements are fewer than `n`, 
+ * the sub-array is padded with the first element of the input array or truncated to the remaining size.
+ *
+ * @returns {Array<Array>} - An array of sub-arrays, each with a maximum length of `n`. 
+ * The last sub-array may be smaller if the remaining elements in the input array are insufficient to fill `n`.
+ *
+ * @throws {TypeError} - Throws an error if `arr` is not an array or `n` is not a positive integer.
+ *
+ * @example
+ * const result = redim([1, 2, 3, 4, 5], 2);
+ * console.log(result); // [[1, 2], [3, 4], [5]]
+ *
+ * const resultWithPadding = redim([1, 2, 3], 4);
+ * console.log(resultWithPadding); // [[1, 2, 3, 1]]
  */
 export default  function redim(arr, n) {
 	let result = [];

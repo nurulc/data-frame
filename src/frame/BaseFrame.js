@@ -218,7 +218,7 @@ export default class BaseFrame {
 
 	/**
 	 * Basically this is the equivelat to reduce performed on the data array, this is an array of rows as the elemnt passed to reduc
-	 * @param  {Function} fn   [description]
+	 * @param  {Function} fn   function to apply on each row
 	 * @param  {any}   ini  the starting value for reduce
 	 * @return {any}        the type is the return type of the fuction 'fn'
 	 */

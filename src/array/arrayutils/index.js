@@ -40,11 +40,11 @@ export const arrConcat = _arrConcat;
 import _arrDiff from './arrDiff';
 export const arrDiff = _arrDiff;
 
+import _arrUnion2 from './arrUnion2';
+export const arrUnion2 = _arrUnion2;
+
 import _arrUnion from './arrUnion';
 export const arrUnion = _arrUnion;
-
-import _arrIntersect from './arrIntersect';
-export const arrIntersect = _arrIntersect;
 
 import _xor from './xor';
 export const xor = _xor;

@@ -15,7 +15,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
 /**
- * Create a FUNCTION resturns  padded (default is '0') string rep of a number
+ * Create a FUNCTION returns  padded (default is '0') string rep of a number
  *
  *  usage: padTo(5)(66) => '00066';
  *   or

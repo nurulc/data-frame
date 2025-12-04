@@ -17,32 +17,73 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 import isArray from '../../utils/types/isArray';
 
 /**
- * THis decorates and array function so that it can have one of two forms
- * 1. arrayFunction(mappingFunction, array)
- * 2. arrayFunction(array)
- * 3. arrayFunction(mappingFunction) - return a new function that takes just an arra
+ * Decorates an array function to support multiple invocation patterns:
+ * 
+ * 1. `arrayFunction(mappingFunction, array)` - Applies `mappingFunction` to each element in `array`.
+ * 2. `arrayFunction(array)` - Uses an identity function (`ID`) to return the array as-is.
+ * 3. `arrayFunction(mappingFunction)` - Returns a new function that accepts an array and applies `mappingFunction` to it.
  *
- * the originam
- * performs checks and currying for the functions below    
- * acts on a function of the form arrFunc(transFormFunction, arr)
- * @param  {Function} functionToDecorate [description]
- * @return {Function}        [description]
+ * This function performs validation on inputs, supports currying, and ensures type safety.
+ *
+ * @param {Function} functionToDecorate - The original array function to decorate.
+ * The function should take two arguments: a transformation function and an array.
+ *
+ * @returns {Function} - A decorated function that supports the described invocation patterns.
+ *
+ * @throws {TypeError} - Throws an error if the provided arguments are invalid:
+ * - If `functionToDecorate` is not a function.
+ * - If invalid arguments are passed during invocation.
+ *
+ * @example
+ * // Example function to be decorated
+ * const mapFunction = (fn, arr) => arr.map(fn);
+ *
+ * // Create the decorated function
+ * const decoratedFunction = arrCurry(mapFunction);
+ *
+ * // Usage
+ * console.log(decoratedFunction(x => x * 2, [1, 2, 3])); // [2, 4, 6]
+ * console.log(decoratedFunction([1, 2, 3])); // [1, 2, 3]
+ * const curried = decoratedFunction(x => x * 2);
+ * console.log(curried([1, 2, 3])); // [2, 4, 6]
  */
 export default function arrCurry(functionToDecorate) {
-	return function (transformElement,arr) {
-		if( isFunction(transformElement) ) {
-			if( arr === undefined ) return (array) => functionToDecorate(transformElement, array);
-			else if(isArray(arr)) return functionToDecorate(transformElement,arr);		
-		}
-		if( isArray(transformElement) ) {
-			if( arr === undefined) {
-				arr = transformElement;
-				return functionToDecorate(ID,arr);
-			}
-		}
-		throw new TypeError('Invalid argument, Please pass proper array argument');
-	};
+    if (typeof functionToDecorate !== 'function') {
+        throw new TypeError('Invalid argument: functionToDecorate must be a function.');
+    }
+
+    return function (transformElement, arr) {
+        // If transformElement is a function
+        if (typeof transformElement === 'function') {
+            if (arr === undefined) {
+                // Currying: return a function that takes an array
+                return (array) => {
+                    if (!Array.isArray(array)) {
+                        throw new TypeError('Invalid argument: Expected an array as input.');
+                    }
+                    return functionToDecorate(transformElement, array);
+                };
+            } else if (Array.isArray(arr)) {
+                // Direct application
+                return functionToDecorate(transformElement, arr);
+            }
+        }
+
+        // If transformElement is an array
+        if (Array.isArray(transformElement)) {
+            if (arr === undefined) {
+                // Use identity function and apply the array directly
+                return functionToDecorate((x) => x, transformElement);
+            }
+        }
+
+        // Invalid input
+        throw new TypeError(
+            'Invalid arguments: Expected (function, array), (array), or (function).'
+        );
+    };
 }
+
 
 /**
  * is obj a function

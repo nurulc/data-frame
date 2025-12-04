@@ -16,37 +16,61 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 
 /**
- * find the index of an element is a sorted array representing a set, uses binary search
- * @param  {[Array]} aSet          Sorted array representing a set
- * @param  {[Any]} searchElement he item to search for within the array
- * @return {[Int]}               The index of the element which defaults to -1 when not found.
+ * Finds the index of a specified element in a sorted array using binary search.
+ *
+ * @param {Array<any>} aSet - A sorted array to search within. The array must be sorted in ascending order.
+ * @param {any} searchElement - The element to search for in the array.
+ * 
+ * @returns {number} - The index of `searchElement` in the array if found; otherwise, returns `-1`.
+ *
+ * @throws {TypeError} - Throws an error if `aSet` is not an array.
+ *
+ * @description
+ * This function uses the binary search algorithm, optimized for speed. It repeatedly divides the search range in half
+ * until the element is found or the range is empty. The time complexity of binary search is **O(log n)**, making it
+ * efficient for large sorted arrays.
+ *
+ * @example
+ * const sortedArray = [1, 3, 5, 7, 9];
+ * const index = findIndexOf(sortedArray, 5);
+ * console.log(index); // 2
+ *
+ * @example
+ * const sortedArray = [1, 3, 5, 7, 9];
+ * const index = findIndexOf(sortedArray, 2);
+ * console.log(index); // -1
+ *
+ * @example
+ * const sortedArray = [];
+ * const index = findIndexOf(sortedArray, 10);
+ * console.log(index); // -1
  */
-export default function findIndexOf(aSet, searchElement) { 
-	let minIndex = 0;
-	let maxIndex = aSet.length - 1;
-	let currentIndex;
-	let currentElement;
- 	
+export default function findIndexOf(aSet, searchElement) {
+    if (!Array.isArray(aSet)) {
+        throw new TypeError('Invalid argument: aSet must be an array.');
+    }
 
+    let minIndex = 0;
+    let maxIndex = aSet.length - 1;
 
-	while (minIndex <= maxIndex) {
+    while (minIndex <= maxIndex) {
+        // Optimized division by 2 using right shift
+        const currentIndex = (minIndex + maxIndex) >> 1; 
+        const currentElement = aSet[currentIndex];
 
-		currentIndex = (minIndex + maxIndex) >>> 1;
-		currentElement = aSet[currentIndex];
- 
-		if (currentElement < searchElement) {
-			minIndex = currentIndex + 1;
-		}
-		else if (currentElement > searchElement) {
-			maxIndex = currentIndex - 1;
-		}
-		else {
-			return currentIndex;
-		}
-	}
- 
-	return -1;
+        // Check for match, adjust range based on comparison
+        if (currentElement === searchElement) {
+            return currentIndex; // Element found
+        } else if (currentElement < searchElement) {
+            minIndex = currentIndex + 1;
+        } else {
+            maxIndex = currentIndex - 1;
+        }
+    }
+
+    return -1; // Element not found
 }
+
 
 
 

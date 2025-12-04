@@ -21,14 +21,18 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 const EMPTY_STR = '';
 
 /**
- * String Dictionary implememtation that minimizes the garbage created
- * 
+ * A custom string dictionary class optimized for storing and retrieving strings using hashing.
+ * This class maintains a dictionary of strings with a fixed maximum length and handles string collision
+ * and expansion of the dictionary as needed. It provides methods to retrieve, store, and expand the dictionary.
  */
 export class StrDict {
-	/**
-	 * [constructor description]
-	 * @param  {int32} maxLen [description]
-	 */
+    /**
+     * Initializes a new instance of the StrDict class with a specified maximum length.
+     * The dictionary is implemented using two parallel arrays: one for storing hash values and another for storing strings.
+     *
+     * @constructor
+     * @param {number} maxLen - The maximum length of the dictionary. Defaults to 1997 if not provided.
+     */
 	constructor(maxLen) {
 		let len = (maxLen || 1997)|0;
 		this.dictI = new Array(len);  
@@ -40,15 +44,20 @@ export class StrDict {
 		}
 		
 	}
-/**
- * [get description]
- * @param  {String} str    [description]
- * @param  {int32} start  [description]
- * @param  {int32} end    [description]
- * @param  {string/opt} valStr If this is set the value is used to populate the hsh table
- * @return {[type]}        [description]
- */
-	get(str, start, end, valStr) { // always return a string, if it is not in the dictionary then add it, valStr is only used during expand
+    /**
+     * Retrieves a substring from the dictionary or adds it if not found.
+     * This method checks if a substring (specified by `start` and `end` indices) exists in the dictionary.
+     * If found, it returns the stored string; if not, it adds the substring to the dictionary and returns it.
+     *
+     * @param {string} str - The input string from which a substring will be checked.
+     * @param {number} [start=0] - The starting index of the substring (inclusive).
+     * @param {number} [end=str.length] - The ending index of the substring (exclusive).
+     * @param {string} [valStr] - Optional. If provided, this value will be stored in the dictionary instead of the actual substring.
+     * @returns {string} The stored string if found, or the newly added string if not found.
+     * @throws {Error} Throws an error if the substring is not found in the dictionary.
+     */
+	get(str, start, end, valStr) { 
+		// always return a string, if it is not in the dictionary then add it, valStr is only used during expand
 		//throw new Error("not implementes");
 		
 		start = (start || 0) | 0;
@@ -90,7 +99,15 @@ export class StrDict {
 		} 
 		throw new Error("str: "+str.substring(start,end) + " not found");
 	}
-
+    /**
+     * Retrieves an entire string from the dictionary, or adds it if not found.
+     * This method checks if the input string exists in the dictionary.
+     * If found, it returns the stored string; if not, it adds the string to the dictionary and returns it.
+     *
+     * @param {string} str - The string to be retrieved or added to the dictionary.
+     * @returns {string} The stored string if found, or the newly added string if not found.
+     * @throws {Error} Throws an error if the string is not found in the dictionary.
+     */
 	getV(str) {
 		if(!str) return str;
 		let hx = strHash(str, 0,str.length);
@@ -114,10 +131,12 @@ export class StrDict {
 		throw new Error("str: "+str + " not found");
 	}
 
-/**
- * [expand description]
- * @return {[type]} [description]
- */
+    /**
+     * Expands the size of the dictionary when the current dictionary reaches its capacity.
+     * The method doubles the size of the current dictionary and rehashes all existing strings.
+     *
+     * @returns {void}
+     */
 	expand() {
 		let len = this.dictI.length;
 		let dictV = this.dictV;
@@ -130,10 +149,12 @@ export class StrDict {
 		this.dictV = newDict.dictV;
 		this.length = newDict.length;
 	}
-/**
- * [values description]
- * @return {[type]} [description]
- */
+    /**
+     * Retrieves all stored values in the dictionary.
+     * This method returns all the strings stored in the dictionary, excluding empty slots.
+     *
+     * @returns {Array<string>} An array of all strings stored in the dictionary.
+     */
 	values() {
 		return this.dictV.filter(x => x);
 	}

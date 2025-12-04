@@ -30,7 +30,10 @@ const defaultStyle = `<style>
 		border: 1px solid #000; 
 		font-size: 1rem;
 	} 
-	.ftable thead {
+	thead.fixed-thead {
+	   position: sticky !important;
+  	   top: 0 !important;
+       z-index: 100 !importnt; /* Keep it on top of other rows */
 	   text-align: left; 
 	   background-color: grey;
 	   border: 1px solid #000; 
@@ -42,6 +45,11 @@ const defaultStyle = `<style>
 		color: red !important;
 		background-color: grey;
 	} 
+	tbody.scroll-body {
+	     /*display: block;*/
+		 overflow-y: auto !important;
+		 max-height: 800px !important;
+	}
 	.ftable td { border: 1px solid #000000; text-align: left;  }
 	.ftable tbody > tr:nth-child(even) { background-color: #44dddd !important; }
 	.ftable tbody > tr:nth-child(odd) { background-color: white !important; }
@@ -55,18 +63,19 @@ export default function toHTML(aFrame, myStyle, rowColor=colorDefault) {
 	let name = aFrame.name?` Name: ${aFrame.name}`:'';
 	if(myStyle === '*') myStyle = defaultStyle;
 	myStyle = myStyle || '';
-	return (
-		myStyle +
-		'<table title="Frame rows: '+rows+' columns: '+ncolumns+name+'" class="ftable"><thead>' +
-		'<tr><th>Ix</th>' + columns.map(c => '<th>' + c.replace(/_/g, ' ') + '</th>').join('') + '</tr></thead><tbody>' +
-		aFrame.data.slice(0, Math.min(aFrame.length, (aFrame.showLen|| 200))).map(showRow).join('') +
-		'</tbody></table>'
-	);
 	function showRow(r, i) {
 		let rowColorV = rowColor(aFrame._rowObj(r),i); 
 		let style = rowColorV ? 'style="background-color: ' + rowColorV + '"' : ''; 
 		return ('<tr'+style+'><td>' + i + '</td>' + r.map((c,j) => '<td>' + (ns(c,j)) + '</td>').join('') + '</tr>');
 	}
+	return (
+		myStyle +
+		'<table title="Frame rows: '+rows+' columns: '+ncolumns+name+'" class="ftable"><thead class="fixed-thead">' +
+		'<tr><th>Ix</th>' + columns.map(c => '<th>' + c.replace(/_/g, ' ') + '</th>').join('') + '</tr></thead><tbody class="scroll-body">' +
+		aFrame.data.slice(0, Math.min(aFrame.length, (aFrame.showLen|| 200))).map(showRow).join('') +
+		'</tbody></table>'
+	);
+	
 	function ns(s,i) {
 		if (typeof s !== 'string') return (s === undefined ? '' : render(s,i)) || '';
 	

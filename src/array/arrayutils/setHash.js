@@ -16,8 +16,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 /**
  * function to take the hash of an array of integers
- * @param {[int]} arrOfInt array of integers
- * @return {[type]}      [description]
+ * @param {Array<int>} arrOfInt array of integers
+ * @return {number}      the hash value
  */
 export function setHash(arrOfInt) {
 	var hash = 5381,

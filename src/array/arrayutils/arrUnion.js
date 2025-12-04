@@ -17,37 +17,36 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 import isArray from '../../utils/types/isArray';
 
 /**
- * return the union of two arrays
- * @param  {Array} arr1 [description]
- * @param  {Array} arr2 [description]
- * @return {Array}      [description]
+ * Computes the union of multiple arrays, ensuring unique elements in the result.
+ *
+ * @param {...Array} arrays - The arrays to compute the union from. Each argument should be a valid array.
+ * 
+ * @returns {Array} - An array containing the union of all input arrays with unique elements.
+ *
+ * @throws {TypeError} - Throws an error if any argument is not a valid array.
+ *
+ * @example
+ * const result = arrUnion([1, 2, 3], [2, 3, 4], [4, 5]);
+ * console.log(result); // [1, 2, 3, 4, 5]
  */
-export default  function arrUnion(arr1, arr2) {
+export default function arrUnion(...arrays) {
+    if (!arrays.every(isArray)) {
+        throw new TypeError('Invalid argument, Please pass proper array arguments');
+    }
 
-	if(!arr1|| arr1.length === 0) return arr2 || [];
-	if(!arr2|| arr2.length === 0) return arr1 || [];
+    const uniqueElements = new Map();
+    const result = [];
 
-	var aSet = new Map();
-	if (!isArray(arr1) || !isArray(arr2)) {
-		throw new TypeError('Invalid argument, Please pass proper array argument');
-	}
+    for (const arr of arrays) {
+        for (const element of arr) {
+            if (!uniqueElements.has(element)) {
+                uniqueElements.set(element, true);
+                result.push(element);
+            }
+        }
+    }
 
-	let result = [];
-	for (let i = 0; i < arr1.length; i++) {
-
-		if (aSet.get(arr1[i]) === undefined) {
-			aSet.set(arr1[i],arr1[i]);
-			result.push(arr1[i]);
-		}
-	}
-
-	for (let i = 0; i < arr2.length; i++) {
-
-		if (aSet.get(arr2[i]) === undefined) {
-			result.push(arr2[i]);
-			aSet.set(arr2[i], arr2[i]);
-		}
-	}
-	return result;
+    return result;
 }
+
 

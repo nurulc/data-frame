@@ -24,10 +24,10 @@ function isString(str) {
 	return (typeof str === 'string')?str:null;
 }
 /**
- * [arrCountVal description]
- * @param  {[type]} list [description]
- * @param  {[type]} v    [description]
- * @return {[type]}      [description]
+ * count occurences of a value in array
+ * @param  {Array} list array of values
+ * @param  {any} v    occurences of the value to count
+ * @return {number}      The number of occurence of the value
  */
 export function arrCountVal(list,v) {
 	v = isString(v) ? (v?v.trim():''):v;

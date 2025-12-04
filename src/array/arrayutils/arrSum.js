@@ -17,10 +17,28 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 import arrCurry from './arrCurry';
 
 /**
- * Add all elements of an array, optionall apply a transform function fn to each element
- * @param  {Function} fn   [description]
- * @param  {[type]}   arr  [description]
- * @return {[type]}        [description]
+ * Computes the sum of the results of applying a transformation function to each element of an array.
+ * The function is curried, allowing flexible invocation patterns.
+ *
+ * @param {Function} fn - A transformation function that takes an element of the array and returns a number.
+ * @param {Array} arr - The array of elements to be processed. Can also be supplied via currying.
+ * 
+ * @returns {number} - The sum of the transformed elements. Returns 0 if the array is empty.
+ *
+ * @throws {TypeError} - Throws an error if `fn` is not a function or `arr` is not an array.
+ *
+ * @example
+ * // Direct invocation
+ * const result = arrSum(x => x * 2, [1, 2, 3]);
+ * console.log(result); // 12 (1*2 + 2*2 + 3*2)
+ *
+ * // Curried invocation
+ * const sumDouble = arrSum(x => x * 2);
+ * console.log(sumDouble([1, 2, 3])); // 12
+ *
+ * @example
+ * const result = arrSum(x => x, [5, 10, 15]);
+ * console.log(result); // 30 (5 + 10 + 15)
  */
 export default  arrCurry(function(fn,arr) {
 	if (arr.length === 0)

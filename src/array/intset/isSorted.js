@@ -15,9 +15,9 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
 /**
- * checks if array is sorted, pure function - does not modify the input
- * @param  {[type]}  arr - Array of values (string|number)
- * @return {[boolean]}     - true if the array is sorted, false otherwise (undefined is not a sorted set)
+ * checks if array is sorted in ascending order, pure function - does not modify the input
+ * @param  {[string|number]}  arr - Array of values (string|number)
+ * @return {boolean}     - true if the array is sorted, false otherwise (is not a sorted set)
  */
 export default function isSorted(arr /* may not be sorted sorted*/) {
 	let len=arr.length-1;

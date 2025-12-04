@@ -15,29 +15,68 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
 /**
- * Set subtraction:  fromSet - elementsToRemove, assumes both sets are are represented by sorted array, and as per set definition there are no dups 
- * @param {[Array]} fromSet array - array(set) of sorted elements (ascending order) and no duplicated
- * @param {[Array]} elementsToRemove array(set) - array of sorted elements (ascending order) and no duplicated
- * @return {[Array]} a new set, where (∀ x ∈ fromSet), then  (x ∈ result), if and only if (x ∉ elementsToRemove).
+ * Computes the set difference between two sorted arrays (sets), `fromSet` and `elementsToRemove`.
+ * Assumes both inputs are sorted in ascending order and contain no duplicate elements (i.e., they are valid sets).
+ *
+ * @param {Array<any>} fromSet - The sorted array representing the set to subtract from.
+ * @param {Array<any>} elementsToRemove - The sorted array representing the set of elements to remove.
+ * 
+ * @returns {Array<any>} - A new sorted array representing the set difference: all elements in `fromSet` 
+ * that are not in `elementsToRemove`.
+ *
+ * @throws {TypeError} - Throws an error if either `fromSet` or `elementsToRemove` is not an array.
+ *
+ * @description
+ * This function performs a set subtraction (`fromSet - elementsToRemove`) using a two-pointer approach for efficiency.
+ * The time complexity is **O(n + m)**, where `n` is the size of `fromSet` and `m` is the size of `elementsToRemove`.
+ *
+ * @example
+ * const result = subtract([1, 2, 3, 4], [2, 4]);
+ * console.log(result); // [1, 3]
+ *
+ * @example
+ * const result = subtract([1, 3, 5, 7], [2, 4, 6]);
+ * console.log(result); // [1, 3, 5, 7]
+ *
+ * @example
+ * const result = subtract([1, 2, 3], []);
+ * console.log(result); // [1, 2, 3]
+ *
+ * @example
+ * const result = subtract([], [1, 2, 3]);
+ * console.log(result); // []
  */
-export default function subtract(fromSet,elementsToRemove) {
-	let res = [];
-	let j=0;
-	const f_len=fromSet.length | 0;
-	const r_len = elementsToRemove.length | 0;
-	for(let i =0; i<f_len ;i++) {
-		//console.log(i,j, ";",fromSet[i], elementsToRemove[j])
-		if( j>= r_len || fromSet[i] < elementsToRemove[j]) {
-			res.push(fromSet[i]);
-		} else {
-			while(j<r_len && fromSet[i] > elementsToRemove[j]) j++;
-				
-			if( j>=r_len || fromSet[i] != elementsToRemove[j] ) res.push(fromSet[i]);
-			else j++;
-		}
-	}
-	return res;   
+export default function subtract(fromSet, elementsToRemove) {
+    if (!Array.isArray(fromSet) || !Array.isArray(elementsToRemove)) {
+        throw new TypeError('Both arguments must be arrays.');
+    }
+
+    const result = [];
+    let i = 0, j = 0;
+    const fromLen = fromSet.length;
+    const removeLen = elementsToRemove.length;
+
+    while (i < fromLen) {
+        const fromElement = fromSet[i];
+        const removeElement = elementsToRemove[j];
+
+        if (j >= removeLen || fromElement < removeElement) {
+            // Add element if it's not in `elementsToRemove`
+            result.push(fromElement);
+            i++;
+        } else if (fromElement > removeElement) {
+            // Move the `elementsToRemove` pointer forward
+            j++;
+        } else {
+            // Element matches; skip it
+            i++;
+            j++;
+        }
+    }
+
+    return result;
 }
+
 
 
 //subtract([1,2,3,4],[2,3,9])  -> [1,4]  

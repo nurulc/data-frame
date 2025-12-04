@@ -15,29 +15,35 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
 /**
- * count the number of occurences of char in the string
- * @param  {string} data  [description]
- * @param  {char} char  [description]
+ * count the number of occurences of char in the string and 
+ * optionally return the index of the char in the string
+ * @param  {string} data  source string 
+ * @param  {char} char  character to count
  * @param  {[int32]} arr   optional array to place the index of char in string
  * @param  {int32} start optional start start index of the string
  * @param  {int32} end   optional last index of the string
  * @return {int32}       number of occurences of the char in the string
  */
 export default  function countCh(data, char, arr, start, end) {
+	if( data === undefined || data === null) return 0;
 	let i = Math.min(end || data.length, data.length);
 	start = start || 0;
 	let ch = char.charCodeAt(0)|0;   
 	let ix = 1;
-	if( arr !== undefined) {
+	if( arr !== undefined || arr !== null) {
 		let end = i;
 		i = start;
-		arr[0] = i;
+
 		while(i < end) 
-			if(data.charCodeAt(i++) === ch) arr[ix++] = i;
+			if(data.charCodeAt(i++) === ch) {
+				if( ix < arr.length)
+				 arr[ix++] = i-1;
+				else ix++;
+			}
 	}
 	else {
 		while(i > start) 
 			if(data.charCodeAt(--i) === ch) ix++;
 	}
-	return ix;
+	return ix-1;
 }

@@ -22,6 +22,6 @@ import prefixLen from './prefixLen';
  * @return {string}   the common prefix of both a and b
  */
 export default  function prefixHead(a,b) {
-	return a.substr(0,prefixLen(a,b));
+	return a.substring(0,prefixLen(a,b));
 }
 

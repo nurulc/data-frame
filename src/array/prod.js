@@ -2,12 +2,12 @@ import {flatten} from './flatten';
 
 /**
  * array cross product in n dimension, where n ils the number of arguments (length of list)
- * Note: this can produce enormous amounts of data for n > 1, for esample n = 2, list[0].length = x ,and list[1].length = y
+ * Note: this can produce enormous amounts of data for n > 1, for example n = 2, list[0].length = x ,and list[1].length = y
  * the resultant array contains x*y values, x = 100, y=200 we produce 20,000 values;
  *
- * for diremsion n=3, z = 50
+ * for dime5sion n=3, z = 50
  * 
- * @param  {[type]} list [description]
+ * @param  {[any]} list [description]
  * @return {[type]}         [description]
  */
 export default function arrProd(...list) { 

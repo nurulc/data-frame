@@ -181,7 +181,7 @@ export class Frame extends BaseFrame {
 	}
 
 	/**
-	 * withIndex add an index column to the befining of the frame or at the end of the frame
+	 * withIndex add an index column to the begining of the frame or at the end of the frame
 	 * @param  {boolean} indexName Name of the index defaults to _INDEX
 	 * @param  {boolean} atEnd if true the index is placed on the last column, otherwise it is the first column
 	 * @return {Frame} [description]
@@ -391,7 +391,7 @@ export class Frame extends BaseFrame {
 	 * @param  {selected_columns}  colsMapping array of strings
 	 * @param  {Object}  mappingObj  a mapping object with { newColumnNam: mappingFunction(oldCellValue, rowObj, rowNumber, rawRowArray)}
 	 * @param  {function}  filter    a filter function applied to the original row to determine if the row should be included
-	 * @param  {function}  tester    if a function to test if a column/row should have a mapping applied
+	 * @param  {function}  tester    is a function to test if a column/row should have a mapping applied
 	 * @return {Frame}              a new Frame with the selected columns, mappings, and filters applied 
 	 */
 	project(colsMapping,mappingObj,filter=undefined, tester=undefined) {
@@ -512,7 +512,7 @@ export class Frame extends BaseFrame {
 	 *   	['newCol2', (v,ro) => someComputedValue]
 	 *   ]
 	 * 
-	 * @param  {[col_desciptor]} columns [description]
+	 * @param  {[col_desciptor]} columns an array of column names, or column name with new column name or column name with a function to compute the new value
 	 * @param  {function?} where   this is a filter function similar to SQL select ... from table where expr
 	 * @return {Frame}         new Frame
 	 */
@@ -547,7 +547,7 @@ export class Frame extends BaseFrame {
 	}
 	/**
      * Rename columns, format for which [ 'oldColumnName=newColumnName' ...]
-     * @param  {[string]} list Array of strings
+     * @param  {[string]} list Array of strings of the form [ 'oldColumnName=newColumnName' ...]
      * @return {Frame}      A new Frame with the renamed columns, since these are immutable data structures all unmodified data are shared with the original frame
      */
 	rename(list) {
@@ -676,8 +676,8 @@ export class Frame extends BaseFrame {
 	 * @param  {Frame} rightFrame    the frame to join against
 	 * @param  {Array} colsToMap array of array of (strings) representing column names '1.colName' or '2.colName' 
 	 * @param  {string} joinOn    'colFromThis==colFrom_aFrame'
-	 * @param  {Function} filter    filter(rowObjectFronLeftFtame, rowObjectFromRightFlame) if true the join is possible
-	 * @return {Frame}           [description]
+	 * @param  {Function} filter    filter(rowObjectFronLeftFrame, rowObjectFromRightFrame) if true the join is possible
+	 * @return {Frame}           resutant fame
 	 */
 	innerJoin(rightFrame, colsToMap, joinOn, filter) {
 		return innerJoin(this,rightFrame, getJoinCols(this, rightFrame, colsToMap), joinOn, this._genAuxJoinFilter(filter,rightFrame));
@@ -755,8 +755,8 @@ export class Frame extends BaseFrame {
 		return this.columns.map((c, i) => ((sums[i] > threshold) ? c : undefined)).filter(Identity);
 	}
 	/**
-	 * The default behavior of this method is to convert numeric strings into and return
-	 * a new frame will the converted data. It tries to reuse as much of the data as possible
+	 * The default behavior of this method is to convert numeric strings into number and return
+	 * a new frame with the converted data. It tries to reuse as much of the data as possible
 	 * 
 	 * If a conversion list is supplied, each element of the list consists of the following
 	 *    [ 
@@ -813,7 +813,7 @@ export class Frame extends BaseFrame {
 			// nothing changed
 			return this;
 		}
-		return this.constructor(_data,this.columns,this.name,this._keyFunc);
+		return new this.constructor(_data,this.columns,this.name,this._keyFunc);
 	}
 
 	

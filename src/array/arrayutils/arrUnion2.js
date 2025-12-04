@@ -17,32 +17,37 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 import isArray from '../../utils/types/isArray';
 
 /**
- * return the intersection of two arrays
+ * return the union of two arrays
  * @param  {Array} arr1 [description]
  * @param  {Array} arr2 [description]
  * @return {Array}      [description]
  */
-export default  function arrIntersect(arr1, arr2) {
-	var array = {};
+export default  function arrUnion2(arr1, arr2) {
+
+	if(!arr1|| arr1.length === 0) return arr2 || [];
+	if(!arr2|| arr2.length === 0) return arr1 || [];
+
+	var aSet = new Map();
 	if (!isArray(arr1) || !isArray(arr2)) {
 		throw new TypeError('Invalid argument, Please pass proper array argument');
 	}
 
-	var result = [];
-	for (var i = 0; i < arr1.length; i++) {
+	let result = [];
+	for (let i = 0; i < arr1.length; i++) {
 
-		if (array[arr1[i]] === undefined)
-			array[arr1[i]] = arr1[i];
+		if (aSet.get(arr1[i]) === undefined) {
+			aSet.set(arr1[i],arr1[i]);
+			result.push(arr1[i]);
+		}
 	}
 
-	for ( i = 0; i < arr2.length; i++) {
-		if (array[arr2[i]] !== undefined) {
+	for (let i = 0; i < arr2.length; i++) {
 
+		if (aSet.get(arr2[i]) === undefined) {
 			result.push(arr2[i]);
-			array[arr2[i]] = undefined;
+			aSet.set(arr2[i], arr2[i]);
 		}
 	}
 	return result;
 }
-
 

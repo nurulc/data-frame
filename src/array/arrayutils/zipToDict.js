@@ -15,21 +15,65 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
 /**
- * @param  {[[string, any]]} aListOfPairs list of key value pairs
- * @return {[type]}
+ * Converts a list of key-value pairs into an object (dictionary).
+ * Ensures that there are no duplicate keys in the input.
+ *
+ * @param {Array<[string, any]>} aListOfPairs - An array of key-value pairs, where each pair is an array [key, value].
+ * 
+ * @returns {Object} - An object constructed from the key-value pairs.
+ *
+ * @throws {Error} - Throws an error if there are duplicate keys in the input.
+ *
+ * @example
+ * const pairs = [['a', 1], ['b', 2]];
+ * const result = zipToDict(pairs);
+ * console.log(result); // { a: 1, b: 2 }
+ *
+ * @example
+ * const pairs = [['a', 1], ['b', 2], ['a', 3]];
+ * zipToDict(pairs); // Throws Error: duplicate key: a
  */
 export function zipToDict(aListOfPairs) {
-	return aListOfPairs.reduce( (dict, [k,v]) => { 
-		if(dict[k] !== undefined) throw new Error('duplicate key: '+k);
-		dict[k] = v; 
-		return dict;
-	}, {});
+    const dict = {};
+    for (const [k, v] of aListOfPairs) {
+        if (dict[k] !== undefined) {
+            throw new Error(`duplicate key: ${k}`);
+        }
+        dict[k] = v;
+    }
+    return dict;
 }
 
+/**
+ * Converts an object (dictionary) into an array of key-value pairs, without sorting the keys.
+ *
+ * @param {Object} aDict - The object to be converted.
+ * 
+ * @returns {Array<[string, any]>} - An array of key-value pairs, where each pair is an array [key, value].
+ *
+ * @example
+ * const dict = { a: 1, b: 2 };
+ * const result = dictToZipB(dict);
+ * console.log(result); // [['a', 1], ['b', 2]]
+ */
 export function dictToZipB(aDict) {
-	return Object.keys(aDict).map( k => [k, aDict[k]]);
+    return Object.entries(aDict);
 }
+
+/**
+ * Converts an object (dictionary) into a sorted array of key-value pairs, sorted by keys in ascending order.
+ *
+ * @param {Object} aDict - The object to be converted.
+ * 
+ * @returns {Array<[string, any]>} - A sorted array of key-value pairs, where each pair is an array [key, value].
+ *
+ * @example
+ * const dict = { b: 2, a: 1 };
+ * const result = dictToZip(dict);
+ * console.log(result); // [['a', 1], ['b', 2]]
+ */
 export function dictToZip(aDict) {
-	return dictToZipB(aDict).sort( (a,b) => a[0] < b[0]?-1:1);
+    return Object.entries(aDict).sort(([keyA], [keyB]) => keyA.localeCompare(keyB));
 }
+
 
